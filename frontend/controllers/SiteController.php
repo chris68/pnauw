@@ -160,9 +160,9 @@ class SiteController extends Controller
 		$user->password_reset_token = Security::generateRandomKey();
 		if ($user->save(false)) {
 			return \Yii::$app->mail->compose('passwordResetToken', ['user' => $user])
-				->from([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
-				->to($email)
-				->subject(\Yii::t('base','Password reset for ') . \Yii::$app->name)
+				->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+				->setTo($email)
+				->setSubject(\Yii::t('base','Password reset for ') . \Yii::$app->name)
 				->send();
 		}
 
