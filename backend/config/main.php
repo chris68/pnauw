@@ -11,7 +11,7 @@ $params = array_merge(
 return [
 	'id' => 'app-backend',
 	'basePath' => dirname(__DIR__),
-        'language' => 'en-US',
+	'language' => 'en-US',
 	'vendorPath' => $rootDir . '/vendor',
 	'preload' => ['log'],
 	'controllerNamespace' => 'backend\controllers',
@@ -36,26 +36,26 @@ return [
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
-                'i18n' => [
-                    'translations' => [
-                        'yii' => [
-                            'class' => 'yii\i18n\PhpMessageSource',
-                            //'basePath' => $rootDir . '/vendor/yiisoft/yii2/yii/messages', // would actually be the correct base path - but yiisoft did not incorporate translations yet!
-                            'basePath' => '@common/messages', // the yii translation are currently in the common section of the application template
-                            'sourceLanguage' => 'en-US',
-                        ],
-                        'common' => [
-                            'class' => 'yii\i18n\PhpMessageSource',
-                            'basePath' => '@common/messages',
-                            'sourceLanguage' => 'en-US',
-                        ],
-                        'base' => [
-                            'class' => 'yii\i18n\PhpMessageSource',
-                            'basePath' => '@app/messages',
-                            'sourceLanguage' => 'en-US',
-                        ],
-                    ],
-               ],
+		'i18n' => [
+			'translations' => [
+				'yii' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					//'basePath' => $rootDir . '/vendor/yiisoft/yii2/yii/messages', // would actually be the correct base path - but yiisoft did not incorporate translations yet!
+					'basePath' => '@common/messages', // the yii translations are currently in the common section of the application template
+					'sourceLanguage' => 'en-US',
+				],
+				'common' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => '@common/messages',
+					'sourceLanguage' => 'en-US',
+				],
+				'base' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => '@app/messages',
+					'sourceLanguage' => 'en-US',
+				],
+			],
+		],
 	],
 	'params' => $params,
 ];
