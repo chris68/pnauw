@@ -6,3 +6,6 @@
 
 #Main Yii File
 /yii
+
+#Private Net Beans Project properties
+/nbproject/private/
