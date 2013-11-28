@@ -24,7 +24,7 @@ AppAsset::register($this);
 	<?php $this->beginBody() ?>
 	<?php
 		NavBar::begin([
-			'brandLabel' => 'My Company',
+			'brandLabel' => 'Parke nicht auf unseren Wegen',
 			'brandUrl' => Yii::$app->homeUrl,
 			'options' => [
 				'class' => 'navbar-inverse navbar-fixed-top',
@@ -32,6 +32,13 @@ AppAsset::register($this);
 		]);
 		$menuItems = [
 			['label' => \Yii::t('base','Home'), 'url' => ['/site/index']],
+			[
+				'label' => 'Bilder', 
+				'items' => [
+					['label' => 'Hochladen', 'url' => ['/picture/upload']],
+					['label' => 'Bearbeiten', 'url' => ['/picture']],
+				],
+			],
 			['label' => \Yii::t('base','About'), 'url' => ['/site/about']],
 			['label' => \Yii::t('base','Contact'), 'url' => ['/site/contact']],
 		];
