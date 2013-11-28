@@ -41,8 +41,8 @@ class User extends ActiveRecord implements IdentityInterface
 					ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
 					ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
 				],
-				// all dbs other than mysql rather use real timestamps instead of the unix time saved as int
-				'timestamp' => ($this->db->driverName == 'mysql') ? NULL : $timestamp_handler = new \yii\db\Expression ('NOW()'),
+				// use real timestamps instead of the unix time saved as int
+				'timestamp' => new \yii\db\Expression ('NOW()'),
 			],
 		];
 	}
