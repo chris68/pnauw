@@ -4,11 +4,17 @@ General Structure
 Remotes
 -------
 
-###The github repository where the project is hosted
+###Origin
+
+The github repository where the project is hosted
+
  * origin	https://github.com/chris68/pnauw (fetch)
  * origin	https://github.com/chris68/pnauw (push)
 
-###The gibhub repository where the yii2-app-advanced template is hosted; this is needed to merge in changes via cherry pick
+###yii2-app-advanced
+
+The gibhub repository where the yii2-app-advanced template is hosted; this is needed to merge in changes via cherry pick
+
  * yii2-app-advanced	https://github.com/yiisoft/yii2-app-advanced (fetch)
  * yii2-app-advanced	https://github.com/yiisoft/yii2-app-advanced (push)
 
