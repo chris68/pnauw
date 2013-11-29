@@ -26,4 +26,11 @@ return [
 		'password' => 'mailwitch',
 		'charset' => 'utf8',
 	],
+	'components.auth' => [
+		'class' => 'common\components\RBACPhpManager',
+		// @Todo: Fix after the bugfix for issue https://github.com/yiisoft/yii2/issues/1356 in Yii is done
+		//'authFile' => '@common/data/rbac.php',
+		'authFile' => realpath(__DIR__ . '/../').'/data/rbac.php',
+		'defaultRoles' => ['guest'],
+	],
 ];

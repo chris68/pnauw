@@ -28,9 +28,13 @@ class User extends ActiveRecord implements IdentityInterface
 	public $password;
 
 	const STATUS_DELETED = 0;
+	const STATUS_BLOCKED = 5;
 	const STATUS_ACTIVE = 10;
 
+	// @Todo: Change the role to a string
 	const ROLE_USER = 10;
+	const ROLE_MODERATOR = 30;
+	const ROLE_ADMIN = 99;
 
 	public function behaviors() 
 	{

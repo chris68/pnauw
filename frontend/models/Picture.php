@@ -326,11 +326,9 @@ class Picture extends \yii\db\ActiveRecord
 
 		if (!
 			(
-			//@Todo: Introduce improved access control
-			(\Yii::$app->user->id == $this->owner_id) || 
+			$this->visibility_id == 'public' ||
 			\Yii::$app->user->checkAccess('isObjectOwner', array('model' => $this)) ||
-			\Yii::$app->user->checkAccess('moderator') ||
-			$this->visibility_id == 'public'
+			\Yii::$app->user->checkAccess('moderator')
 			)
 		) {
 			$this->original_image_id = null;

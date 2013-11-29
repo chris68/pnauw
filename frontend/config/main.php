@@ -22,6 +22,7 @@ return [
 		'db' => $params['components.db'],
 		'cache' => $params['components.cache'],
 		'mail' => $params['components.mail'],
+		'authManager' => $params['components.auth'],
 		'user' => [
 			'identityClass' => 'common\models\User',
 		],
