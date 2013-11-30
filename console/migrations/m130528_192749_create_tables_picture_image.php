@@ -171,10 +171,10 @@ CREATE TABLE {{%picture}}
   
   taken timestamp NOT NULL,
 
-  org_loc_lat real,
-  org_loc_lng real,
-  loc_lat real,
-  loc_lng real,
+  org_loc_lat real NOT NULL,
+  org_loc_lng real NOT NULL,
+  loc_lat real NOT NULL,
+  loc_lng real NOT NULL,
   loc_path ltree, -- not used yet
   loc_formatted_addr text, -- the formatted address from google
   
