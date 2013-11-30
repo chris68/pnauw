@@ -317,6 +317,20 @@ class Picture extends \yii\db\ActiveRecord
 		return $this->hasOne(Campaign::className(), ['id' => 'campaign_id']);
 	}
 
+    /**
+     * @return string The current LatLng values separated with a comma (for immediate use in google)
+     */
+    public function getLatLng() {
+		return $this->loc_lat . ',' . $this->loc_lng;
+    }
+
+    /**
+     * @return string The orginal LatLng values separated with a comma (for immediate use in google)
+     */
+    public function getOrgLatLng() {
+		return $this->org_loc_lat . ',' . $this->org_loc_lng;
+    }
+
 	/**
 	 * If the review is not yet done, the pictures are emptied
 	 */

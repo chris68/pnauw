@@ -7,16 +7,14 @@ use yii\helpers\Html;
  * @var frontend\models\Picture $model
  */
 
-$this->title = 'Bearbeiten von Bild: ' . $model->name;
+$this->title = 'Bearbeiten von Bild: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Bearbeiten';
 ?>
 <div class="picture-update">
 
-	<h1><?= Html::encode($this->title) ?></h1>
-
-	<?php echo $this->render('_form', [
+	<?php echo $this->render('_formtabbed', [
 		'model' => $model,
 	]); ?>
 

@@ -12,13 +12,14 @@ use yii\widgets\ActiveForm;
 
 <div class="picture-form">
 
-	<?php $form = ActiveForm::begin(); ?>
-
+	<div class ="col-lg-4">
+		<?php $form = ActiveForm::begin(); ?>
+		
 		<?= $form->field($model, 'owner_id')->textInput() ?>
 
-		<?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'name')->textInput() ?>
 
-		<?= $form->field($model, 'taken')->textInput() ?>
+		<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
 		<?= $form->field($model, 'clip_x')->textInput() ?>
 
@@ -26,7 +27,7 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'clip_size')->textInput() ?>
 
-		<?= $form->field($model, 'visibility_id')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'visibility_id')->dropDownList(frontend\models\Visibility::dropDownList()) ?>
 
 		<?= $form->field($model, 'original_image_id')->textInput() ?>
 
@@ -42,15 +43,15 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'blurred_thumbnail_image_id')->textInput() ?>
 
-		<?= $form->field($model, 'action_id')->textInput() ?>
+		<?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
 
-		<?= $form->field($model, 'incident_id')->textInput() ?>
+		<?= $form->field($model, 'incident_id')->dropDownList(frontend\models\Incident::dropDownList()) ?>
 
-		<?= $form->field($model, 'citation_id')->textInput() ?>
+		<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
 
-		<?= $form->field($model, 'campaign_id')->textInput() ?>
+		<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
 
-		<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 
 		<?= $form->field($model, 'org_loc_lat')->textInput() ?>
 
@@ -62,11 +63,11 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'loc_path')->textInput() ?>
 
-		<?= $form->field($model, 'loc_formatted_addr')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'loc_formatted_addr')->textarea(['rows' => 3]) ?>
 
-		<?= $form->field($model, 'vehicle_country_code')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
 
-		<?= $form->field($model, 'vehicle_reg_plate')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
 
 		<?= $form->field($model, 'citation_affix')->textarea(['rows' => 6]) ?>
 
@@ -78,8 +79,9 @@ use yii\widgets\ActiveForm;
 
 		<div class="form-group">
 			<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+			<?= Html::button('Abbrechen', ['class' => 'btn btn-secondary', 'type' => 'reset']) ?>
 		</div>
 
-	<?php ActiveForm::end(); ?>
-
+		<?php ActiveForm::end(); ?>
+	</div>
 </div>

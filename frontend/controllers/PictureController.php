@@ -160,6 +160,10 @@ class PictureController extends Controller
 								if (isset($props['GPSLatitude']) && isset($props['GPSLatitudeRef']) && isset($props['GPSLongitude']) && isset($props['GPSLongitudeRef'])) {
 									$picmodel->org_loc_lat = $picmodel->loc_lat = $this->getGPS($props['GPSLatitude'], $props['GPSLatitudeRef']);
 									$picmodel->org_loc_lng = $picmodel->loc_lng = $this->getGPS($props['GPSLongitude'], $props['GPSLongitudeRef']);
+								} else {
+									// If now coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
+									$picmodel->org_loc_lat = $picmodel->loc_lat = 0;  
+									$picmodel->org_loc_lng = $picmodel->loc_lng = 0; 
 								}
 
 								if (isset($props['DateTimeOriginal'])) {
