@@ -147,7 +147,6 @@ class PictureController extends Controller
 						$picmodel->taken = new \yii\db\Expression('NOW()');
 						$picmodel->visibility_id = 'private';
 						$picmodel->vehicle_country_code = 'D';
-						$picmodel->action_id = 1; // 'keine'
 						$picmodel->clip_x = 50;
 						$picmodel->clip_y = 50;
 						$picmodel->clip_size = 25;
