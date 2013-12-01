@@ -25,7 +25,8 @@ AppAsset::register($this);
 	<?php $this->beginBody() ?>
 	<?php
 		NavBar::begin([
-			'brandLabel' => 'Parke nicht auf unseren Wegen',
+			// Label should small; otherwise on mobile phone the navbar blows up to two lines!
+			'brandLabel' => '<small>Parke nicht auf unseren Wegen</small>',
 			'brandUrl' => Yii::$app->homeUrl,
 			'options' => [
 				'class' => 'navbar-inverse navbar-fixed-top',
