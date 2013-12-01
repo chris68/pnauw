@@ -23,6 +23,10 @@ return [
 		'cache' => $params['components.cache'],
 		'mail' => $params['components.mail'],
 		'authManager' => $params['components.auth'],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
 		'user' => [
 			'identityClass' => 'common\models\User',
 		],
