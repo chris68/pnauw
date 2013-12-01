@@ -66,7 +66,7 @@ class Action extends \yii\db\ActiveRecord
 	 */
 	public static function dropDownList()
 	{
-		return array_merge(['' => '(nicht gesetzt)'],\yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name'));
+		return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name');
 	}
 	
 	
