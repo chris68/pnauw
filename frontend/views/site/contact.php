@@ -12,7 +12,7 @@ $this->title = \Yii::t('base','Contact');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
 	<p>
 		<?= \Yii::t('base','If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.')?>
