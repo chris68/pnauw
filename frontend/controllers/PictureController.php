@@ -30,10 +30,8 @@ class PictureController extends Controller
 			],
 			'access' => [
 				'class' => \yii\web\AccessControl::className(),
-				'only' => ['index', 'upload'],
 				'rules' => [
 					[
-						'actions' => ['upload', 'index'],
 						'allow' => true,
 						'roles' => ['@'],
 					],
