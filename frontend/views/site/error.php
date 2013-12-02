@@ -9,7 +9,7 @@ use yii\helpers\Html;
  * @var Exception $exception
  */
 
-$this->title = $name;
+$this->title = Html::encode($name);
 ?>
 <div class="site-error">
 

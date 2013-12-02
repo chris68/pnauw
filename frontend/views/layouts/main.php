@@ -17,8 +17,8 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
 	<meta charset="<?= Yii::$app->charset ?>"/>
-	<title><?= Html::encode($this->title) ?></title>
-	<?php $this->head(); ?>
+	<title><?= $this->title ?></title>
+        <?php $this->head() ?>
 </head>
 <body>
 	<?php $this->beginBody(); ?>
