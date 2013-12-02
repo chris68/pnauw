@@ -27,7 +27,8 @@ class SiteController extends Controller
 					[
 						'actions' => ['logout'],
 						'allow' => true,
-						'roles' => ['@'],
+					// @todo: Logout actually should be possible all the time! Needs further checking
+					//	'roles' => ['@'],
 					],
 				],
 			],
