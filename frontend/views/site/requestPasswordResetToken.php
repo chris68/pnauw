@@ -11,7 +11,7 @@ $this->title = \Yii::t('base','Request password reset');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-request-password-reset">
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
 	<p><?= \Yii::t('base','Please fill out your email. A link to reset password will be sent there.') ?></p>
 
