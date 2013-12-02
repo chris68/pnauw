@@ -8,13 +8,13 @@ use yii\widgets\DetailView;
  * @var frontend\models\Picture $model
  */
 
-$this->title = $model->name;
+$this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="picture-view">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
 	<p>
 		<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

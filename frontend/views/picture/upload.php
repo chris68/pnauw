@@ -17,9 +17,8 @@ $this->params['breadcrumbs'][] = 'Hochladen';
 
 
 <div class="picture-upload">
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
-	<?php // @Todo: Check the display width options like class="col-lg-5" ?>
 	<?php $form = ActiveForm::begin(['id' => 'picture-upload-form', 'options' => ['enctype' => 'multipart/form-data'], ]); ?>
 		<?= $form->errorSummary([$formmodel,$picmodel],['class' => "alert alert-danger"]) ?>
 		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => 'multiple', ]) ?>
