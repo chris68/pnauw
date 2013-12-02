@@ -36,7 +36,7 @@ return array (
   'Please fill out the following fields to login:' => 'Bitte füllen Sie die folgenden Felder für die Anmeldung aus:',
   'Please fill out the following fields to signup:' => 'Bitte füllen Sie die folgenden Felder für die Registrierung aus:',
   'Please fill out your email. A link to reset password will be sent there.' => 'Bitte geben Sie ihre hinterlegte Emailadresse an. Eine Mail zum Zurücksetzen des Passwort wird dann an diese Emailadresse verschickt.',
-  'Request password reset' => 'Anfordern einer Passwortzurücksetzung',
+  'Request password reset' => 'Anfordern einer Passwort&shy;rücksetzung',
   'Reset password' => 'Zurücksetzen des Passworts',
   'Save' => 'Speichern',
   'Send' => 'Verschicken',
@@ -46,6 +46,6 @@ return array (
   'Thank you for contacting us. We will respond to you as soon as possible.' => 'Vielen Dank für Ihre Kontaktaufnahme. Wir werden so schnell wie möglich antworten.',
   'There was an error sending email.' => 'Es gab beim Versenden der Email leider einen Fehler.',
   'Verification Code' => 'Prüfcode',
-  'Wrong password reset token.' => 'Falsches Token für die Passwortrücksetzung',
+  'Wrong password reset token.' => 'Falsches Token für die Passwort&shy;rücksetzung',
   'reset it' => 'es zurücksetzen',
 );
