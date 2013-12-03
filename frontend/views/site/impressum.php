@@ -22,6 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h4>Kontakt bei Problemen und Gesetzverstößen</h4>
 	<p>
-		Bei Probleme mit Inhalten kontaktieren Sie bitte primär die entsprechenden Nutzer selbst über die Kommentarfunktion und melden Sie dem Betreiber bitte nur absolut unpassende Inhalte, Gesetzesverstöße, etc.
+		Bei Problemen mit Inhalten kontaktieren Sie bitte primär die entsprechenden Nutzer selbst über die Kommentarfunktion und melden Sie dem Betreiber bitte nur absolut unpassende Inhalte, Gesetzesverstöße, etc.
 	</p>
 </div>

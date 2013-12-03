@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h4>Datensicherheit</h4>
 	<p>
-		Wir sind bestrebt, Ihre Daten sehr gut zu schützen, können aber leider nicht garantieren, dass uns das in jedem Fall gelingen wird. Sobald wir jeodch ein Sicherheitsproblem in Erfahrung bringen, werden wir im Zweifel den Service bis zum Schließen der Sicherheitslücke vom Netz nehmen.
+		Wir sind bestrebt, Ihre Daten sehr gut zu schützen, können aber leider nicht garantieren, dass uns das in jedem Fall gelingen wird. Sobald wir jedoch ein Sicherheitsproblem in Erfahrung bringen, werden wir im Zweifel den Service bis zum Schließen der Sicherheitslücke vom Netz nehmen.
 	</p>
 	
 	<h4>Verletzung von Datenschutzrechten</h4>
