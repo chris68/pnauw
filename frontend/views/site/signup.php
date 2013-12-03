@@ -21,6 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= $form->field($model, 'username') ?>
 				<?= $form->field($model, 'email') ?>
 				<?= $form->field($model, 'password')->passwordInput() ?>
+				<p>
+					Ich habe die <?= Html::a('Nutzungsbedingungen','site/terms') ?> <b>und</b> <?= Html::a('Datenschutzregeln','site/privacy') ?> gelesen und akzeptiere <b>beide</b>.
+				</p>
+				<?= 
+				$form->field($model, 'acceptTerms')->checkbox() ?>
 				<div class="form-group">
 					<?= Html::submitButton(\Yii::t('base','Signup'), ['class' => 'btn btn-primary']) ?>
 				</div>

@@ -1,0 +1,13 @@
+User-agent: *
+# Link to login/logout should be blocked
+Disallow: /site/login
+Disallow: /site/logout
+#  Disallow all system folders
+Disallow: /css
+Disallow: /assets
+# Disallow spam affected pages
+Disallow: site/donations
+Disallow: site/contact
+Disallow: site/impressum
+Disallow: site/privacy
+Disallow: site/terms

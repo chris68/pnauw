@@ -27,6 +27,11 @@ class User extends ActiveRecord implements IdentityInterface
 	 */
 	public $password;
 
+	/**
+	 * @var boolean the term acceptance. Used to check whether user accepted the termns and isn't saved in database
+	 */
+	public $acceptTerms = false;
+
 	const STATUS_DELETED = 0;
 	const STATUS_BLOCKED = 5;
 	const STATUS_ACTIVE = 10;
@@ -121,6 +126,8 @@ class User extends ActiveRecord implements IdentityInterface
 			['email', 'unique', 'message' => \Yii::t('common','This email address has already been taken.'), 'on' => 'signup'],
 			['email', 'exist', 'message' => \Yii::t('common','There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
+			['acceptTerms', 'required', 'message' => \Yii::t('common','You need to accept the terms.'), 'on' => 'signup'],
+			
 			['password', 'required'],
 			['password', 'string', 'min' => 6],
 		];
@@ -135,13 +142,14 @@ class User extends ActiveRecord implements IdentityInterface
 			'username' => \Yii::t('common','Username'),
 			'email' => \Yii::t('common','Email'),
 			'password' => \Yii::t('common','Password'),
+			'acceptTerms' => \Yii::t('common','Terms accepted'),
 		];
 	}
 
 	public function scenarios()
 	{
 		return [
-			'signup' => ['username', 'email', 'password'],
+			'signup' => ['username', 'email', 'password', 'acceptTerms'],
 			'resetPassword' => ['password'],
 			'requestPasswordResetToken' => ['email'],
 		];

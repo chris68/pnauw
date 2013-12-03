@@ -68,8 +68,19 @@ AppAsset::register($this);
 
 	<footer class="footer">
 		<div class="container">
-		<p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-		<p class="pull-right"><?= Yii::powered() ?></p>
+			<div class="row">
+				<div class="col-md-6">
+					<?= Html::a('Nutzungsbedingungen','site/terms') ?> |
+					<?= Html::a('Impressum','site/impressum') ?> |
+					<?= Html::a('Datenschutz','site/privacy') ?>
+				</div>
+				<div class="col-md-2">
+					<hr class ="visible-xs visible-sm">
+				</div>
+				<div class="col-md-4">
+					<p class ="pull-right"><?= Yii::powered() ?></p>
+				</div>
+			</div>
 		</div>
 	</footer>
 

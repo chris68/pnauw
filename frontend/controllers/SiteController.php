@@ -93,6 +93,21 @@ class SiteController extends Controller
 		return $this->render('about');
 	}
 
+	public function actionTerms()
+	{
+		return $this->render('terms');
+	}
+
+	public function actionPrivacy()
+	{
+		return $this->render('privacy');
+	}
+
+	public function actionImpressum()
+	{
+		return $this->render('impressum');
+	}
+
 	public function actionSignup()
 	{
 		$model = new User();
