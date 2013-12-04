@@ -129,18 +129,14 @@ class PictureController extends Controller
 
 		if (isset($_POST['PictureUploadForm'])) {
 			$formmodel->attributes = $_POST['PictureUploadForm'];
+			$formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
 
 			if ($formmodel->validate()) {
-				$file_count = count(UploadedFile::getInstances($formmodel, 'file_names'));
-				if ($file_count > ini_get('max_file_uploads')) {
-					$formmodel->addError('file_names', 'Sie können maximal ' . ini_get('max_file_uploads') . ' Dateien in einem Vorgang hochladen.');
-				} else {
-
-					$success = true;
-					foreach (UploadedFile::getInstances($formmodel, 'file_names') as $file) {
+				$success = true;
+				$transaction = \Yii::$app->db->beginTransaction();
+				try {
+					foreach ($formmodel->file_handles as $file) {
 						$picmodel = new Picture();
-						$picmodel->upload__file_name = $file->name;
-						$picmodel->upload__file_handle = $file;
 						$picmodel->name = $file->name;
 						$picmodel->taken = new \yii\db\Expression('NOW()');
 						$picmodel->visibility_id = 'private';
@@ -151,100 +147,96 @@ class PictureController extends Controller
 
 
 						if ($picmodel->validate()) {
-							$transaction = \Yii::$app->db->beginTransaction();
-							try {
-								$props = exif_read_data($file->tempName);
-								if (isset($props['GPSLatitude']) && isset($props['GPSLatitudeRef']) && isset($props['GPSLongitude']) && isset($props['GPSLongitudeRef'])) {
-									$picmodel->org_loc_lat = $picmodel->loc_lat = $this->getGPS($props['GPSLatitude'], $props['GPSLatitudeRef']);
-									$picmodel->org_loc_lng = $picmodel->loc_lng = $this->getGPS($props['GPSLongitude'], $props['GPSLongitudeRef']);
-								} else {
-									// If now coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
-									$picmodel->org_loc_lat = $picmodel->loc_lat = 0;  
-									$picmodel->org_loc_lng = $picmodel->loc_lng = 0; 
-								}
+							$props = exif_read_data($file->tempName);
+							if (isset($props['GPSLatitude']) && isset($props['GPSLatitudeRef']) && isset($props['GPSLongitude']) && isset($props['GPSLongitudeRef'])) {
+								$picmodel->org_loc_lat = $picmodel->loc_lat = $this->getGPS($props['GPSLatitude'], $props['GPSLatitudeRef']);
+								$picmodel->org_loc_lng = $picmodel->loc_lng = $this->getGPS($props['GPSLongitude'], $props['GPSLongitudeRef']);
+							} else {
+								// If now coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
+								$picmodel->org_loc_lat = $picmodel->loc_lat = 0;  
+								$picmodel->org_loc_lng = $picmodel->loc_lng = 0; 
+							}
 
-								if (isset($props['DateTimeOriginal'])) {
-									list($date, $time) = explode(' ', $props['DateTimeOriginal']); // 2011:09:17 10:36:00'
-									$date = str_replace(':', '-', $date);
-									$picmodel->taken = $date . ' ' . $time;
-								} else {
-									$picmodel->taken = NULL; // will result in an error!
-								}
+							if (isset($props['DateTimeOriginal'])) {
+								list($date, $time) = explode(' ', $props['DateTimeOriginal']); // 2011:09:17 10:36:00'
+								$date = str_replace(':', '-', $date);
+								$picmodel->taken = $date . ' ' . $time;
+							} else {
+								$picmodel->taken = NULL; // will result in an error!
+							}
 
-								$image = new Image;
-								$rawdata = new Imagick($file->tempName);
-								$this->autoRotateImage($rawdata);
-								$image->rawdata = bin2hex($rawdata->getimageblob());
-								$image->save(false);
-								$picmodel->original_image_id = $image->id;
+							$image = new Image;
+							$rawdata = new Imagick($file->tempName);
+							$this->autoRotateImage($rawdata);
+							$image->rawdata = bin2hex($rawdata->getimageblob());
+							$image->save(false);
+							$picmodel->original_image_id = $image->id;
 
-								$rawdata = new Imagick($file->tempName);
-								$this->autoRotateImage($rawdata);
-								$rawdata->profileimage('*', NULL); // Remove profile information
-								$rawdata->scaleimage(75, 100);
-								$image = new Image;
-								$image->rawdata = bin2hex($rawdata->getimageblob());
-								$image->save(false);
-								$picmodel->thumbnail_image_id = $image->id;
+							$rawdata = new Imagick($file->tempName);
+							$this->autoRotateImage($rawdata);
+							$rawdata->profileimage('*', NULL); // Remove profile information
+							$rawdata->scaleimage(75, 100);
+							$image = new Image;
+							$image->rawdata = bin2hex($rawdata->getimageblob());
+							$image->save(false);
+							$picmodel->thumbnail_image_id = $image->id;
 
-								$rawdata->blurimage(3, 2);
-								$image = new Image;
-								$image->rawdata = bin2hex($rawdata->getimageblob());
-								$image->save(false);
-								$picmodel->blurred_thumbnail_image_id = $image->id;
+							$rawdata->blurimage(3, 2);
+							$image = new Image;
+							$image->rawdata = bin2hex($rawdata->getimageblob());
+							$image->save(false);
+							$picmodel->blurred_thumbnail_image_id = $image->id;
 
-								$rawdata = new Imagick($file->tempName);
-								$this->autoRotateImage($rawdata);
-								$rawdata->profileimage('*', NULL); // Remove profile information
-								$rawdata->scaleimage(180, 240);
-								$image = new Image;
-								$image->rawdata = bin2hex($rawdata->getimageblob());
-								$image->save(false);
-								$picmodel->small_image_id = $image->id;
+							$rawdata = new Imagick($file->tempName);
+							$this->autoRotateImage($rawdata);
+							$rawdata->profileimage('*', NULL); // Remove profile information
+							$rawdata->scaleimage(180, 240);
+							$image = new Image;
+							$image->rawdata = bin2hex($rawdata->getimageblob());
+							$image->save(false);
+							$picmodel->small_image_id = $image->id;
 
-								$rawdata->blurimage(3, 2);
-								$image = new Image;
-								$image->rawdata = bin2hex($rawdata->getimageblob());
-								$image->save(false);
-								$picmodel->blurred_small_image_id = $image->id;
+							$rawdata->blurimage(3, 2);
+							$image = new Image;
+							$image->rawdata = bin2hex($rawdata->getimageblob());
+							$image->save(false);
+							$picmodel->blurred_small_image_id = $image->id;
 
-								$rawdata = new Imagick($file->tempName);
-								$this->autoRotateImage($rawdata);
-								$rawdata->profileimage('*', NULL); // Remove profile information
-								$rawdata->scaleimage(375, 500);
-								$image = new Image;
-								$image->rawdata = bin2hex($rawdata->getimageblob());
-								$image->save(false);
-								$picmodel->medium_image_id = $image->id;
+							$rawdata = new Imagick($file->tempName);
+							$this->autoRotateImage($rawdata);
+							$rawdata->profileimage('*', NULL); // Remove profile information
+							$rawdata->scaleimage(375, 500);
+							$image = new Image;
+							$image->rawdata = bin2hex($rawdata->getimageblob());
+							$image->save(false);
+							$picmodel->medium_image_id = $image->id;
 
-								$rawdata->blurimage(5, 3);
-								$image = new Image;
-								$image->rawdata = bin2hex($rawdata->getimageblob());
-								$image->save(false);
-								$picmodel->blurred_medium_image_id = $image->id;
+							$rawdata->blurimage(5, 3);
+							$image = new Image;
+							$image->rawdata = bin2hex($rawdata->getimageblob());
+							$image->save(false);
+							$picmodel->blurred_medium_image_id = $image->id;
 
-								if (!$picmodel->save()) {
-									$success = false;
-									break;
-								}
-
-								$transaction->commit();
-							} catch (Exception $ex) {
-								$transaction->rollback();
+							if (!$picmodel->save()) {
 								$success = false;
-								throw($ex);
+								break;
 							}
 						} else {
 							$success = false;
 						}
 					}
+					$transaction->commit();
+				} catch (Exception $ex) {
+					$transaction->rollback();
+					$success = false;
+					throw($ex);
 				}
 			}
 		}
 
 		if ($success) {
 			// @Todo: Hier als link einfügen
-			Yii::$app->session->setFlash('success', "<strong>Wunderbar</strong>, die {$file_count} Bilder wurden problemlos eingelesen und Sie können diese nun weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.");
+			Yii::$app->session->setFlash('success', "<strong>Wunderbar</strong>, die ".count($formmodel->file_handles)." Bilder wurden problemlos eingelesen und Sie können diese nun weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.");
 			return $this->refresh();
 		}
 

@@ -59,16 +59,6 @@ class Picture extends \yii\db\ActiveRecord
 {
 
 	/**
-	 * @var string The name of the file to be uploaded
-	 */
-	public $upload__file_name;
-
-	/**
-	 * @var file The file handle of the file to be uploaded
-	 */
-	public $upload__file_handle;
-
-	/**
 	 * {@inheritdoc}
 	 */
 	public static function tableName()
@@ -126,8 +116,6 @@ class Picture extends \yii\db\ActiveRecord
 			[['loc_lat', 'loc_lng',], 'double'],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 			['vehicle_country_code', 'checkVehiclePlateConsistency', 'skipOnEmpty' => false,],
-			//@Todo: Check how one can limit the file types, etc.
-			//array('upload__file_handle', 'file', 'allowEmpty' => FALSE, 'types' => 'jpg', 'on' => 'insert'),
 		];
 	}
 
@@ -180,11 +168,6 @@ class Picture extends \yii\db\ActiveRecord
 			'incident___name' => 'Vorfall',
 			'citation__name' => 'Anzeige',
 			'action__name' => 'Maßnahme',
-
-			// @Todo: Check whether still needed
-			'upload__file_name' => 'Dateiname',
-			'upload__file_handle' => 'Datei',
-			
 		];
 	}
 
@@ -193,8 +176,7 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public static function ownerScope($query)
 	{
-		$t = $this->getTableAlias();
-		$query->andWhere("t.owner = :owner", [':owner' => \Yii::$app->user->id]);
+		$query->andWhere("owner_id = :owner", [':owner' => \Yii::$app->user->id]);
 	}
 
 	/**
@@ -202,7 +184,7 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public static function publicScope($query)
 	{
-		$query->andWhere("t.visibility_id = 'public'");
+		$query->andWhere("visibility_id = 'public'");
 	}
 
 	/**
