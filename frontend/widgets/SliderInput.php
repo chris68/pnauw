@@ -48,9 +48,7 @@ class SliderInput extends InputWidget
 			}';
 		}
 
-		// $this->registerWidget('slider', \yii\jui\SliderAsset::className());
-		// See https://github.com/yiisoft/yii2/issues/1377
-		$this->registerWidget('slider', SliderAsset::className());
+		$this->registerWidget('slider', \yii\jui\SliderAsset::className());
 		$this->getView()->registerJs('$("#'.$inputId.'").val($("#'.$this->id.'").slider("value"));');
 	}
 }
