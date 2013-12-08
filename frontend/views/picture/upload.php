@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = 'Hochladen';
 		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => 'multiple', ]) ?>
 		<div class="form-group">
 			<?= Html::submitButton('Hochladen', ['class' => 'btn btn-primary']) ?>
-			<?= Html::button('Abbrechen', ['class' => 'btn btn-secondary', 'type' => 'reset']) ?>
+			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
 		</div>
 	<?php ActiveForm::end(); ?>
 

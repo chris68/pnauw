@@ -20,7 +20,7 @@ use frontend\widgets\Alert;
 
 	<div class="form-group">
 		<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-		<?= Html::button('Abbrechen', ['class' => 'btn btn-secondary', 'type' => 'reset']) ?>
+		<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
 	</div>
 
 	<div>
