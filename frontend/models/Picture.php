@@ -3,6 +3,8 @@
 namespace frontend\models;
 
 use yii\db\ActiveQuery;
+use frontend\models\Image;
+use Imagick;
 
 /**
  * This is the model class for table "tbl_picture".
@@ -65,6 +67,18 @@ class Picture extends \yii\db\ActiveRecord
 	{
 		return '{{%picture}}';
 	}
+	
+	/**
+	 * Set the default values of some attributes
+	 */
+	public function setDefaults() {
+		$this->visibility_id = 'private';
+		$this->vehicle_country_code = 'D';
+		$this->clip_x = 50;
+		$this->clip_y = 50;
+		$this->clip_size = 25;
+	}
+		
 
 	/**
 	 * {@inheritdoc}
@@ -110,7 +124,8 @@ class Picture extends \yii\db\ActiveRecord
 			['incident_id', 'default', 'value' => NULL],
 			['citation_id', 'default', 'value' => NULL],
 			['campaign_id', 'default', 'value' => NULL],
-			[['name', 'clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
+			['visibility_id', 'default', 'value' => NULL],
+			[['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
 			[['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', 'campaign_id'], 'integer'],
 			[['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 			[['loc_lat', 'loc_lng',], 'double'],
@@ -314,7 +329,8 @@ class Picture extends \yii\db\ActiveRecord
     }
 
 	/**
-	 * If the review is not yet done, the pictures are emptied
+	 * @todo: Use a view and a separate class PicturePublicAccess instead!!!
+	 * If the review is not yet done, the pictures and some texts are emptied
 	 */
 	public function afterFind()
 	{
@@ -327,6 +343,8 @@ class Picture extends \yii\db\ActiveRecord
 			\Yii::$app->user->checkAccess('moderator')
 			)
 		) {
+			$this->description = empty($this->description)?'':'<Beschreibung leider noch nicht freigebeben>';
+			$this->name = empty($this->name)?'':'<Bildname leider noch nicht freigebeben>';
 			$this->original_image_id = null;
 			$this->small_image_id = null;
 			$this->medium_image_id = null;
@@ -337,4 +355,144 @@ class Picture extends \yii\db\ActiveRecord
 		}
 	}
 
+	/**
+	 * Fill the data from the file input and saves the data; best encapsule in transaction for atomic behavior
+	 * @param file $file The image
+	 */
+	public function fillFromFile($file) {
+		$this->setDefaults();
+
+		$props = exif_read_data($file->tempName);
+		if (isset($props['GPSLatitude']) && isset($props['GPSLatitudeRef']) && isset($props['GPSLongitude']) && isset($props['GPSLongitudeRef'])) {
+			$this->org_loc_lat = $this->loc_lat = $this->getGPS($props['GPSLatitude'], $props['GPSLatitudeRef']);
+			$this->org_loc_lng = $this->loc_lng = $this->getGPS($props['GPSLongitude'], $props['GPSLongitudeRef']);
+		} else {
+			// If no coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
+			$this->org_loc_lat = $this->loc_lat = 0;  
+			$this->org_loc_lng = $this->loc_lng = 0; 
+		}
+
+		if (isset($props['DateTimeOriginal'])) {
+			list($date, $time) = explode(' ', $props['DateTimeOriginal']); // 2011:09:17 10:36:00'
+			$date = str_replace(':', '-', $date);
+			$this->taken = $date . ' ' . $time;
+		} else {
+			$this->taken = '1970-01-01 00:00:00.0000';
+			$this->description = 'FEHLER: KEIN GÜLTIGES AUFNAHMEDATUM!';
+		}
+
+		$image = new Image;
+		$rawdata = new Imagick($file->tempName);
+		$this->autoRotateImage($rawdata);
+		$image->rawdata = bin2hex($rawdata->getimageblob());
+		$image->save(false);
+		$this->original_image_id = $image->id;
+
+		$rawdata = new Imagick($file->tempName);
+		$this->autoRotateImage($rawdata);
+		$rawdata->profileimage('*', NULL); // Remove profile information
+		$rawdata->scaleimage(75, 100);
+		$image = new Image;
+		$image->rawdata = bin2hex($rawdata->getimageblob());
+		$image->save(false);
+		$this->thumbnail_image_id = $image->id;
+
+		$rawdata->blurimage(3, 2);
+		$image = new Image;
+		$image->rawdata = bin2hex($rawdata->getimageblob());
+		$image->save(false);
+		$this->blurred_thumbnail_image_id = $image->id;
+
+		$rawdata = new Imagick($file->tempName);
+		$this->autoRotateImage($rawdata);
+		$rawdata->profileimage('*', NULL); // Remove profile information
+		$rawdata->scaleimage(180, 240);
+		$image = new Image;
+		$image->rawdata = bin2hex($rawdata->getimageblob());
+		$image->save(false);
+		$this->small_image_id = $image->id;
+
+		$rawdata->blurimage(3, 2);
+		$image = new Image;
+		$image->rawdata = bin2hex($rawdata->getimageblob());
+		$image->save(false);
+		$this->blurred_small_image_id = $image->id;
+
+		$rawdata = new Imagick($file->tempName);
+		$this->autoRotateImage($rawdata);
+		$rawdata->profileimage('*', NULL); // Remove profile information
+		$rawdata->scaleimage(375, 500);
+		$image = new Image;
+		$image->rawdata = bin2hex($rawdata->getimageblob());
+		$image->save(false);
+		$this->medium_image_id = $image->id;
+
+		$rawdata->blurimage(5, 3);
+		$image = new Image;
+		$image->rawdata = bin2hex($rawdata->getimageblob());
+		$image->save(false);
+		$this->blurred_medium_image_id = $image->id;
+
+		$this->save(false);
+	}
+
+	/**
+	 * Resolve the rationale in the EXIF style GPS coordinate
+	 * @param string $coordPart Exif Degree/Minute/Second
+	 * @return float The respective float value 
+	 * @link http://stackoverflow.com/questions/2526304/php-extract-gps-exif-data/2526412#2526412 Source
+	 */
+	private function gps2Num($coordPart)
+	{
+		$parts = explode('/', $coordPart);
+
+		if (count($parts) <= 0)
+			return 0;
+
+		if (count($parts) == 1)
+			return $parts[0];
+
+		return floatval($parts[0]) / floatval($parts[1]);
+	}
+
+	/**
+	 * Get the float representation of EXIF style GPS coordinates
+	 * @param string $exifCoord Exif Longitude/Latitude
+	 * @param array $hemi Exif LongitudeRef/LatitudeRef
+	 * @return float The respective float value 
+	 * @link http://stackoverflow.com/questions/2526304/php-extract-gps-exif-data/2526412#2526412 Source
+	 */
+	private function getGps($exifCoord, $hemi)
+	{
+		$degrees = count($exifCoord) > 0 ? $this->gps2Num($exifCoord[0]) : 0;
+		$minutes = count($exifCoord) > 1 ? $this->gps2Num($exifCoord[1]) : 0;
+		$seconds = count($exifCoord) > 2 ? $this->gps2Num($exifCoord[2]) : 0;
+
+		$flip = ($hemi == 'W' or $hemi == 'S') ? -1 : 1;
+
+		return $flip * ($degrees + $minutes / 60 + $seconds / 3600);
+	}
+
+
+	private function autoRotateImage($image)
+	{
+		$orientation = $image->getImageOrientation();
+
+		switch ($orientation) {
+			case imagick::ORIENTATION_BOTTOMRIGHT:
+				$image->rotateimage("#000", 180); // rotate 180 degrees
+				break;
+
+			case imagick::ORIENTATION_RIGHTTOP:
+				$image->rotateimage("#000", 90); // rotate 90 degrees CW
+				break;
+
+			case imagick::ORIENTATION_LEFTBOTTOM:
+				$image->rotateimage("#000", -90); // rotate 90 degrees CCW
+				break;
+		}
+
+		// Now that it's auto-rotated, make sure the EXIF data is correct in case the EXIF gets saved with the image!
+		$image->setImageOrientation(imagick::ORIENTATION_TOPLEFT);
+	}
 }

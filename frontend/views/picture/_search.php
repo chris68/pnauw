@@ -1,91 +1,62 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $model frontend\models\PictureSearch */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\PictureSearch $model
- * @var yii\widgets\ActiveForm $form
- */
 ?>
 
 <div class="picture-search">
 
-	<?php $form = ActiveForm::begin([
-		'action' => ['index'],
+	<div class ="col-md-4">
+	<?php 
+		/** @var yii\widgets\ActiveForm $form */
+		$form = ActiveForm::begin([
 		'method' => 'get',
 	]); ?>
-
+	
 		<?= $form->field($model, 'id') ?>
 
-		<?= $form->field($model, 'owner_id') ?>
+		<?= $model->scenario == 'admin'?$form->field($model, 'owner_id'):'' ?>
 
 		<?= $form->field($model, 'name') ?>
 
 		<?= $form->field($model, 'description') ?>
 
-		<?= $form->field($model, 'taken') ?>
+		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
+			<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
-		<?php // echo $form->field($model, 'org_loc_lat') ?>
+			<?= $form->field($model, 'loc_formatted_addr') ?>
+		
+			<?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
-		<?php // echo $form->field($model, 'org_loc_lng') ?>
+			<?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
-		<?php // echo $form->field($model, 'loc_lat') ?>
+			<?= $form->field($model, 'visibility_id')->dropDownList(['' => '(nicht gesetzt)'] + frontend\models\Visibility::dropDownList()) ?>
 
-		<?php // echo $form->field($model, 'loc_lng') ?>
+			<?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
 
-		<?php // echo $form->field($model, 'loc_path') ?>
+			<?= $form->field($model, 'incident_id')->dropDownList(frontend\models\Incident::dropDownList()) ?>
 
-		<?php // echo $form->field($model, 'loc_formatted_addr') ?>
+			<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
 
-		<?php // echo $form->field($model, 'original_image_id') ?>
+			<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
 
-		<?php // echo $form->field($model, 'small_image_id') ?>
+			<?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
 
-		<?php // echo $form->field($model, 'medium_image_id') ?>
-
-		<?php // echo $form->field($model, 'thumbnail_image_id') ?>
-
-		<?php // echo $form->field($model, 'blurred_small_image_id') ?>
-
-		<?php // echo $form->field($model, 'blurred_medium_image_id') ?>
-
-		<?php // echo $form->field($model, 'blurred_thumbnail_image_id') ?>
-
-		<?php // echo $form->field($model, 'clip_x') ?>
-
-		<?php // echo $form->field($model, 'clip_y') ?>
-
-		<?php // echo $form->field($model, 'clip_size') ?>
-
-		<?php // echo $form->field($model, 'visibility_id') ?>
-
-		<?php // echo $form->field($model, 'vehicle_country_code') ?>
-
-		<?php // echo $form->field($model, 'vehicle_reg_plate') ?>
-
-		<?php // echo $form->field($model, 'citation_affix') ?>
-
-		<?php // echo $form->field($model, 'action_id') ?>
-
-		<?php // echo $form->field($model, 'incident_id') ?>
-
-		<?php // echo $form->field($model, 'citation_id') ?>
-
-		<?php // echo $form->field($model, 'campaign_id') ?>
-
-		<?php // echo $form->field($model, 'created_ts') ?>
-
-		<?php // echo $form->field($model, 'modified_ts') ?>
-
-		<?php // echo $form->field($model, 'deleted_ts') ?>
+			<?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
+		<?php endif; ?>
 
 		<div class="form-group">
-			<?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-			<?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+			<?= Html::submitButton('Suchen', ['class' => 'btn btn-primary']) ?>
+			<?= ''// @Todo: Implement reset of search Html::resetButton('Suche zurücksetzen', ['class' => 'btn btn-default']) ?>
 		</div>
+		
+		<p class="help-block">
+			Die Suche ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird.<br>Eine Suche nach <em>straße</em> findet also <em>Kriegsstraße</em>, aber nicht <em>Straße des 17.Juni</em>
+		</p>
 
 	<?php ActiveForm::end(); ?>
-
+	</div>
 </div>

@@ -4,16 +4,13 @@
 
 use yii\helpers\Html;
 
-
-$this->title = 'Create Picture';
-$this->params['breadcrumbs'][] = ['label' => 'Pictures', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Neuanlage' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['index']];
+$this->params['breadcrumbs'][] = 'Neuanlage';
 ?>
 <div class="picture-create">
 
-	<h1><?= $this->title ?></h1>
-
-	<?php echo $this->render('_form', [
+	<?php echo $this->render('_formtabbed', [
 		'model' => $model,
 	]); ?>
 

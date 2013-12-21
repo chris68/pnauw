@@ -21,38 +21,17 @@ use \yii\helpers\Html;
 		<div class ="form-group">
 			<div>
 				<?= Html::label('Bildausschnitt (Nummernschild)','picture-clip-canvas') ?>
-				<canvas id="picture-clip-canvas" class="img-responsive">
+				<canvas id="picture-clip-canvas" class="img-responsive" style = "margin-bottom: 7px;">
 				<?php
 					$this->registerJs("updatePictureClipCanvas();", \yii\web\View::POS_READY);
 				?>
 			</div>
-			<?= Html::label('Zoom','picture-clip-size_slider') ?>
 			<!-- Hidden fields are not reset upon a form reset; therefore, we need to use normal fields which we hide -->
 			<?= Html::activeInput('text', $model, 'clip_x', ['id'=>'picture-clip-x', 'style' => 'display:none', ]) ?>
 			<?= Html::activeInput('text', $model, 'clip_y', ['id'=>'picture-clip-y', 'style' => 'display:none', ]) ?>
-			<?php
-				// @Todo: See whether Yii fixes it
-				// See https://github.com/yiisoft/yii2/pull/1213. https://github.com/yiisoft/yii2/issues/735
-				//$form->field($model,'clip_x')->hiddenInput(['id'=>'picture-clip-x', ]) 
-				//$form->field($model,'clip_y')->hiddenInput(['id'=>'picture-clip-y', ]) 
-			?>
-			<?=	\frontend\widgets\SliderInput::widget( 
-					[
-						'model'=> $model,
-						'attribute' => 'clip_size',
-						'id'=>'picture-clip-size',
-						// additional javascript options for the slider plugin
-						'clientOptions'=> [
-							'orientation'=>"horizontal",
-							'min'=>5,
-							'max'=>70,
-							'value'=>$model->clip_size,
-						],
-						'options'=> [
-						]
-					]
-				);
-			?>
+			<?= Html::label('Zoom') ?>
+			<!-- A range field seems not to be reset upon a form reset; but what can we do? -->
+			<?= Html::activeInput('range', $model, 'clip_size', ['id'=>'picture-clip-size', 'min' => 5, 'max' => 70, ]) ?>
 			<?= $form->field($model,'citation_affix')->textarea(['rows' => 5, 'placeholder' => 'Hier können sie weitere Angaben für eine potentielle Anzeige machen (nicht öffentlich, sondern nur für den Empfänger der Anzeige)']) ?>
 		</div>
 	</div>

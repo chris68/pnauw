@@ -8,7 +8,7 @@ function updatePictureClipCanvas() {
     var c=$("#picture-clip-canvas")[0];
     var ctx=c.getContext("2d");
     var img=$("#picture-image")[0];
-    var size_x = $('#picture-clip-size-input').val()/100*img.naturalWidth;
+    var size_x = $('#picture-clip-size').val()/100*img.naturalWidth;
     var size_y = size_x /2;
     var x = Math.max($('#picture-clip-x').val()/100*img.naturalWidth-size_x/2,0);
     var y = Math.max($('#picture-clip-y').val()/100*img.naturalHeight-size_y/2,0);
@@ -44,7 +44,7 @@ $('#picture-image').click(function (e) {
     updatePictureClipCanvas();
 });
 
-$("#picture-clip-size").on( "slide", function( event, ui ) { 
+$("#picture-clip-size").on( "change", function( event, ui ) { 
 	updatePictureClipCanvas(); return true; 
 } );
 
@@ -188,8 +188,7 @@ $("form").bind("reset", function() {
 		marker.setPosition(getlatLng());
 		adjustPosition();
 		
-		// Set the slider and then update the clipping
-		$('#picture-clip-size').slider("value",$('#picture-clip-size-input').val());
+		// Update the clipping
 		updatePictureClipCanvas();
 	},'100');
 });

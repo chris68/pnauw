@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 
 /**
- * PictureUploadForm is the model behind the contact form.
+ * PictureUploadForm is the model behind the upload form.
  */
 class PictureUploadForm extends Model
 {
@@ -26,9 +26,6 @@ class PictureUploadForm extends Model
 	 */
     public function rules() {
         return [
-            ['file_names', 'required'],
- 			['file_handles', 'required'],
-			// @todo: Fix after fix of https://github.com/yiisoft/yii2/issues/1426
  			['file_handles', 'file', 'maxFiles' => 50, 'maxSize' => 1048576, 'types' => 'jpg'],
        ];
     }

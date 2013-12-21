@@ -37,8 +37,9 @@ AppAsset::register($this);
 			[
 				'label' => 'Bilder', 
 				'items' => [
+					['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
 					['label' => 'Hochladen', 'url' => ['/picture/upload']],
-					['label' => 'Bearbeiten', 'url' => ['/picture']],
+					['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
 				],
 			],
 			['label' => \Yii::t('base','About'), 'url' => ['/site/about']],

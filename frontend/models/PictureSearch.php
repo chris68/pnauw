@@ -47,11 +47,39 @@ class PictureSearch extends Model
 	public function rules()
 	{
 		return [
-			[['id', 'owner_id', 'original_image_id', 'small_image_id', 'medium_image_id', 'thumbnail_image_id', 'blurred_small_image_id', 'blurred_medium_image_id', 'blurred_thumbnail_image_id', 'clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', 'campaign_id'], 'integer'],
-			[['name', 'description', 'taken', 'org_loc_lat', 'org_loc_lng', 'loc_lat', 'loc_lng', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix', 'created_ts', 'modified_ts', 'deleted_ts'], 'safe'],
+			[
+				['id', 'owner_id', 'original_image_id', 'small_image_id', 'medium_image_id', 'thumbnail_image_id', 'blurred_small_image_id', 'blurred_medium_image_id', 'blurred_thumbnail_image_id', 'clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', 'campaign_id'],
+				'integer'
+			],
+			[
+				['name', 'description', 'org_loc_lat', 'org_loc_lng', 'loc_lat', 'loc_lng', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix', ], 
+				'safe'
+			],
+			[
+				['taken', 'created_ts', 'modified_ts', 'deleted_ts' ], 
+				'date',
+			],
+			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 		];
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function scenarios()
+	{
+		return [
+			'public' => ['id','taken','name','description', ],
+			'private' => [
+				'id','taken','name','description', 
+				'created_ts', 'modified_ts', 'deleted_ts', 
+				'action_id', 'incident_id', 'citation_id', 'campaign_id' , 'visibility_id', 
+				'vehicle_country_code', 'vehicle_reg_plate', 'loc_formatted_addr'],
+			'admin' => parent::scenarios(), // admin may do everthing
+		];
+	}
+
+	
 	/**
 	 * {@inheritdoc}
 	 */
@@ -103,42 +131,30 @@ class PictureSearch extends Model
 			'query' => $query,
 		]);
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
+		$this->load($params);
+		if (!$this->validate()) {
+			// Ensure we find nothing!
+			$query->where('1=0');
+		} else
+		{
+			$this->addCondition($query, 'id');
+			$this->addCondition($query, 'owner_id');
+			$this->addCondition($query, 'name', true);
+			$this->addCondition($query, 'description', true);
+			$this->addCondition2($query, 'taken', 'DATE');
+			$this->addCondition($query, 'loc_formatted_addr', true);
+			$this->addCondition($query, 'visibility_id');
+			$this->addCondition($query, 'vehicle_country_code');
+			$this->addCondition($query, 'vehicle_reg_plate', true);
+			$this->addCondition($query, 'citation_affix', true);
+			$this->addCondition($query, 'action_id');
+			$this->addCondition($query, 'incident_id');
+			$this->addCondition($query, 'citation_id');
+			$this->addCondition($query, 'campaign_id');
+			$this->addCondition2($query, 'created_ts', 'DATE');
+			$this->addCondition2($query, 'modified_ts', 'DATE');
+			$this->addCondition2($query, 'deleted_ts', 'DATE');
 		}
-
-		$this->addCondition($query, 'id');
-		$this->addCondition($query, 'owner_id');
-		$this->addCondition($query, 'name', true);
-		$this->addCondition($query, 'description', true);
-		$this->addCondition($query, 'taken', true);
-		$this->addCondition($query, 'org_loc_lat', true);
-		$this->addCondition($query, 'org_loc_lng', true);
-		$this->addCondition($query, 'loc_lat', true);
-		$this->addCondition($query, 'loc_lng', true);
-		$this->addCondition($query, 'loc_path', true);
-		$this->addCondition($query, 'loc_formatted_addr', true);
-		$this->addCondition($query, 'original_image_id');
-		$this->addCondition($query, 'small_image_id');
-		$this->addCondition($query, 'medium_image_id');
-		$this->addCondition($query, 'thumbnail_image_id');
-		$this->addCondition($query, 'blurred_small_image_id');
-		$this->addCondition($query, 'blurred_medium_image_id');
-		$this->addCondition($query, 'blurred_thumbnail_image_id');
-		$this->addCondition($query, 'clip_x');
-		$this->addCondition($query, 'clip_y');
-		$this->addCondition($query, 'clip_size');
-		$this->addCondition($query, 'visibility_id', true);
-		$this->addCondition($query, 'vehicle_country_code', true);
-		$this->addCondition($query, 'vehicle_reg_plate', true);
-		$this->addCondition($query, 'citation_affix', true);
-		$this->addCondition($query, 'action_id');
-		$this->addCondition($query, 'incident_id');
-		$this->addCondition($query, 'citation_id');
-		$this->addCondition($query, 'campaign_id');
-		$this->addCondition($query, 'created_ts', true);
-		$this->addCondition($query, 'modified_ts', true);
-		$this->addCondition($query, 'deleted_ts', true);
 		return $dataProvider;
 	}
 
@@ -153,6 +169,20 @@ class PictureSearch extends Model
 			$query->andWhere(['like', $attribute, $value]);
 		} else {
 			$query->andWhere([$attribute => $value]);
+		}
+	}
+
+	// @todo: Complete rewrite the routine an define it as behavior!
+	protected function addCondition2($query, $attribute, $type)
+	{
+		$value = $this->$attribute;
+		if (trim($value) === '') {
+			return;
+		}
+		switch ($type) {
+			case 'DATE':
+				$query->andWhere(["date($attribute)" => $value]);
+				break;
 		}
 	}
 }

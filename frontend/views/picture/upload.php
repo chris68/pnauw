@@ -1,7 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $formmodel frontend\models\PictureForm */
-/* @var $picmodel frontend\models\Picture */
+/* @var $formmodel frontend\models\PictureUploadForm */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -17,8 +16,8 @@ $this->params['breadcrumbs'][] = 'Hochladen';
 	<h1><?= $this->title ?></h1>
 
 	<?php $form = ActiveForm::begin(['id' => 'picture-upload-form', 'options' => ['enctype' => 'multipart/form-data'], ]); ?>
-		<?= $form->errorSummary([$formmodel,$picmodel],['class' => "alert alert-danger"]) ?>
-		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => 'multiple', ]) ?>
+		<?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>
+		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => 'multiple', 'accept' => 'image/*', ]) ?>
 		<div class="form-group">
 			<?= Html::submitButton('Hochladen', ['class' => 'btn btn-primary']) ?>
 			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>

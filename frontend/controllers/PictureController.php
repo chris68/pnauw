@@ -5,13 +5,12 @@ namespace frontend\controllers;
 use frontend\models\Picture;
 use frontend\models\PictureSearch;
 use frontend\models\PictureUploadForm;
-use frontend\models\Image;
+use frontend\models\PictureCaptureForm;
 use yii;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\VerbFilter;
 use yii\web\UploadedFile;
-use Imagick;
 
 /**
  * PictureController implements the CRUD actions for Picture model.
@@ -46,10 +45,29 @@ class PictureController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new PictureSearch;
+		throw new HttpException(404, 'Sorry - aber derzeit ist es leider noch nicht möglich, die Bilder öffentlich anzuschauen!');
+		$searchModel = new PictureSearch(['scenario'=>'public']);
 		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->pagination->pageSize = 20;
 
 		return $this->render('index', [
+				'dataProvider' => $dataProvider,
+				'searchModel' => $searchModel,
+		]);
+	}
+
+	/**
+	 * Manage your own Picture models.
+	 * @return mixed
+	 */
+	public function actionManage()
+	{
+		$searchModel = new PictureSearch(['scenario'=>'private']);
+		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->query->ownerScope();
+		$dataProvider->pagination->pageSize = 20;
+
+		return $this->render('manage', [
 				'dataProvider' => $dataProvider,
 				'searchModel' => $searchModel,
 		]);
@@ -62,32 +80,47 @@ class PictureController extends Controller
 	 */
 	public function actionView($id)
 	{
+		throw new HttpException(404, 'Sorry - aber derzeit ist es leider noch nicht möglich, die Bilder öffentlich anzuschauen!');
 		return $this->render('view', [
-				'model' => $this->findModel($id),
+				'model' => $this->findPublicModel($id),
 		]);
 	}
 
 	/**
 	 * Creates a new Picture model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * If creation is successful, the browser will be redirected to the 'home' page.
 	 * @return mixed
 	 */
 	public function actionCreate()
 	{
 		$model = new Picture;
-
-		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('create', [
-					'model' => $model,
-			]);
+		if (!$model->load($_POST)) {
+			// If it is the beginning of a create, set the default values
+			$model->setDefaults();
+			// If no coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
+			$model->org_loc_lat = $model->loc_lat = 0;  
+			$model->org_loc_lng = $model->loc_lng = 0; 
 		}
+		
+		// We assume that the event was at the very time of the creation of the "picture"!
+		$model->taken = new \yii\db\Expression('NOW()');
+		// Need to set the org_loc_lat another time!
+		$model->org_loc_lat = 0;  
+		$model->org_loc_lng = 0; 
+
+		if ($model->save()) {
+			Yii::$app->session->setFlash('success', "Bild wurde angelegt");
+			return $this->redirect(['/']);
+		}
+		
+		return $this->render('create', [
+				'model' => $model,
+		]);
 	}
 
 	/**
 	 * Updates an existing Picture model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * Success is shown via a flash message
 	 * @param integer $id
 	 * @return mixed
 	 */
@@ -96,24 +129,84 @@ class PictureController extends Controller
 		$model = $this->findModel($id);
 
 		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('update', [
-					'model' => $model,
-			]);
+			Yii::$app->session->setFlash('success', "Änderung wurde übernommen");
 		}
+		
+		return $this->render('update', [
+				'model' => $model,
+		]);
 	}
 
 	/**
 	 * Deletes an existing Picture model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 * If deletion is successful, the browser will be redirected to the 'manage' page.
 	 * @param integer $id
 	 * @return mixed
 	 */
 	public function actionDelete($id)
 	{
 		$this->findModel($id)->delete();
-		return $this->redirect(['index']);
+		return $this->redirect(['manage']);
+	}
+
+	/**
+	 * Massupdate all Picture models.
+	 * @return mixed
+	 */
+	public function actionMassupdate()
+	{
+		if (isset($_POST['Picture'])) {
+			$model = $this->findModel($_POST['Picture']['id']);
+
+			if ($model->load($_POST) && $model->save()) {
+				// Model has been saved => we can reload!
+				$model = NULL;
+			}
+			
+		} else {
+			$model = NULL;
+		}
+		
+		$searchModel = new PictureSearch(['scenario'=>'private']);
+		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->pagination->pageSize = 1;
+		$dataProvider->query->ownerScope();
+
+		return $this->render('massupdate', [
+				'dataProvider' => $dataProvider,
+				'searchModel' => $searchModel,
+				'updatedmodel' => $model,
+		]);
+	}
+
+	/**
+	  Capture Picture model.
+	 * @return mixed
+	 */
+	public function actionCapture() {
+		$formmodel = new PictureCaptureForm();
+		
+		if ($formmodel->load($_POST)) {
+			$formmodel->file_handle = UploadedFile::getInstance($formmodel, 'file_name');
+			if ($formmodel->validate()) {
+				$transaction = \Yii::$app->db->beginTransaction();
+				try {
+					$picmodel = new Picture;
+					$picmodel->fillFromFile($formmodel->file_handle);
+					$transaction->commit();
+				} catch (Exception $ex) {
+					$transaction->rollback();
+					throw($ex);
+				}
+				
+				Yii::$app->session->setFlash('success', "Sie können das Bild nun bearbeiten");
+				return $this->redirect(['update', 'id' => $picmodel->id]);
+			}
+		}
+		
+		return $this->render('capture', [
+				'formmodel' => $formmodel,
+		]);
 	}
 
 	/**
@@ -123,137 +216,64 @@ class PictureController extends Controller
 	public function actionUpload()
 	{
 		$formmodel = new PictureUploadForm();
-		$success = false;
-		$formmodel = new PictureUploadForm();
-		$picmodel = new Picture();
 
-		if (isset($_POST['PictureUploadForm'])) {
-			$formmodel->attributes = $_POST['PictureUploadForm'];
+		if ($formmodel->load($_POST)) {
 			$formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
 
 			if ($formmodel->validate()) {
-				$success = true;
 				$transaction = \Yii::$app->db->beginTransaction();
 				try {
 					foreach ($formmodel->file_handles as $file) {
-						$picmodel = new Picture();
-						$picmodel->name = $file->name;
-						$picmodel->taken = new \yii\db\Expression('NOW()');
-						$picmodel->visibility_id = 'private';
-						$picmodel->vehicle_country_code = 'D';
-						$picmodel->clip_x = 50;
-						$picmodel->clip_y = 50;
-						$picmodel->clip_size = 25;
-
-
-						if ($picmodel->validate()) {
-							$props = exif_read_data($file->tempName);
-							if (isset($props['GPSLatitude']) && isset($props['GPSLatitudeRef']) && isset($props['GPSLongitude']) && isset($props['GPSLongitudeRef'])) {
-								$picmodel->org_loc_lat = $picmodel->loc_lat = $this->getGPS($props['GPSLatitude'], $props['GPSLatitudeRef']);
-								$picmodel->org_loc_lng = $picmodel->loc_lng = $this->getGPS($props['GPSLongitude'], $props['GPSLongitudeRef']);
-							} else {
-								// If now coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
-								$picmodel->org_loc_lat = $picmodel->loc_lat = 0;  
-								$picmodel->org_loc_lng = $picmodel->loc_lng = 0; 
-							}
-
-							if (isset($props['DateTimeOriginal'])) {
-								list($date, $time) = explode(' ', $props['DateTimeOriginal']); // 2011:09:17 10:36:00'
-								$date = str_replace(':', '-', $date);
-								$picmodel->taken = $date . ' ' . $time;
-							} else {
-								$picmodel->taken = NULL; // will result in an error!
-							}
-
-							$image = new Image;
-							$rawdata = new Imagick($file->tempName);
-							$this->autoRotateImage($rawdata);
-							$image->rawdata = bin2hex($rawdata->getimageblob());
-							$image->save(false);
-							$picmodel->original_image_id = $image->id;
-
-							$rawdata = new Imagick($file->tempName);
-							$this->autoRotateImage($rawdata);
-							$rawdata->profileimage('*', NULL); // Remove profile information
-							$rawdata->scaleimage(75, 100);
-							$image = new Image;
-							$image->rawdata = bin2hex($rawdata->getimageblob());
-							$image->save(false);
-							$picmodel->thumbnail_image_id = $image->id;
-
-							$rawdata->blurimage(3, 2);
-							$image = new Image;
-							$image->rawdata = bin2hex($rawdata->getimageblob());
-							$image->save(false);
-							$picmodel->blurred_thumbnail_image_id = $image->id;
-
-							$rawdata = new Imagick($file->tempName);
-							$this->autoRotateImage($rawdata);
-							$rawdata->profileimage('*', NULL); // Remove profile information
-							$rawdata->scaleimage(180, 240);
-							$image = new Image;
-							$image->rawdata = bin2hex($rawdata->getimageblob());
-							$image->save(false);
-							$picmodel->small_image_id = $image->id;
-
-							$rawdata->blurimage(3, 2);
-							$image = new Image;
-							$image->rawdata = bin2hex($rawdata->getimageblob());
-							$image->save(false);
-							$picmodel->blurred_small_image_id = $image->id;
-
-							$rawdata = new Imagick($file->tempName);
-							$this->autoRotateImage($rawdata);
-							$rawdata->profileimage('*', NULL); // Remove profile information
-							$rawdata->scaleimage(375, 500);
-							$image = new Image;
-							$image->rawdata = bin2hex($rawdata->getimageblob());
-							$image->save(false);
-							$picmodel->medium_image_id = $image->id;
-
-							$rawdata->blurimage(5, 3);
-							$image = new Image;
-							$image->rawdata = bin2hex($rawdata->getimageblob());
-							$image->save(false);
-							$picmodel->blurred_medium_image_id = $image->id;
-
-							if (!$picmodel->save()) {
-								$success = false;
-								break;
-							}
-						} else {
-							$success = false;
-						}
+						$picmodel = new Picture;
+						$picmodel->fillFromFile($file);
 					}
 					$transaction->commit();
 				} catch (Exception $ex) {
 					$transaction->rollback();
-					$success = false;
 					throw($ex);
 				}
+				
+				// @Todo: Insert a link to manage to uploads (basically created date less than an hour...
+				Yii::$app->session->setFlash('success', "<strong>Wunderbar</strong>, die ".count($formmodel->file_handles)." Bilder wurden problemlos eingelesen und Sie können diese nun weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.");
+				return $this->refresh();
 			}
-		}
-
-		if ($success) {
-			// @Todo: Hier als link einfügen
-			Yii::$app->session->setFlash('success', "<strong>Wunderbar</strong>, die ".count($formmodel->file_handles)." Bilder wurden problemlos eingelesen und Sie können diese nun weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.");
-			return $this->refresh();
 		}
 
 		return $this->render('upload', [
 				'formmodel' => $formmodel,
-				'picmodel' => $picmodel,
 		]);
 	}
 
 	/**
 	 * Finds the Picture model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
+	 * If the model is not owned by the user, a exception will be thrown
 	 * @param integer $id
 	 * @return Picture the loaded model
 	 * @throws HttpException if the model cannot be found
 	 */
 	protected function findModel($id)
+	{
+		if (($model = Picture::find($id)) !== null) {
+			if (Yii::$app->user->checkAccess('isObjectOwner', array('model' => $model))) {
+				return $model;
+			} else {
+                throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
+			}
+		} else {
+			throw new HttpException(404, 'The requested page does not exist.');
+		}
+	}
+
+	/**
+	 * Finds the Picture model based on its primary key value.
+	 * If the model is not found, a 404 HTTP exception will be thrown.
+	 * All models regardless of the ownership are found
+	 * @param integer $id
+	 * @return Picture the loaded model
+	 * @throws HttpException if the model cannot be found
+	 */
+	protected function findPublicModel($id)
 	{
 		if (($model = Picture::find($id)) !== null) {
 			return $model;
@@ -262,63 +282,4 @@ class PictureController extends Controller
 		}
 	}
 
-	/**
-	 * Resolve the rationale in the EXIF style GPS coordinate
-	 * @param string $coordPart Exif Degree/Minute/Second
-	 * @return float The respective float value 
-	 * @link http://stackoverflow.com/questions/2526304/php-extract-gps-exif-data/2526412#2526412 Source
-	 */
-	private function gps2Num($coordPart)
-	{
-		$parts = explode('/', $coordPart);
-
-		if (count($parts) <= 0)
-			return 0;
-
-		if (count($parts) == 1)
-			return $parts[0];
-
-		return floatval($parts[0]) / floatval($parts[1]);
-	}
-
-	/**
-	 * Get the float representation of EXIF style GPS coordinates
-	 * @param string $exifCoord Exif Longitude/Latitude
-	 * @param array $hemi Exif LongitudeRef/LatitudeRef
-	 * @return float The respective float value 
-	 * @link http://stackoverflow.com/questions/2526304/php-extract-gps-exif-data/2526412#2526412 Source
-	 */
-	private function getGps($exifCoord, $hemi)
-	{
-		$degrees = count($exifCoord) > 0 ? $this->gps2Num($exifCoord[0]) : 0;
-		$minutes = count($exifCoord) > 1 ? $this->gps2Num($exifCoord[1]) : 0;
-		$seconds = count($exifCoord) > 2 ? $this->gps2Num($exifCoord[2]) : 0;
-
-		$flip = ($hemi == 'W' or $hemi == 'S') ? -1 : 1;
-
-		return $flip * ($degrees + $minutes / 60 + $seconds / 3600);
-	}
-
-
-	private function autoRotateImage($image)
-	{
-		$orientation = $image->getImageOrientation();
-
-		switch ($orientation) {
-			case imagick::ORIENTATION_BOTTOMRIGHT:
-				$image->rotateimage("#000", 180); // rotate 180 degrees
-				break;
-
-			case imagick::ORIENTATION_RIGHTTOP:
-				$image->rotateimage("#000", 90); // rotate 90 degrees CW
-				break;
-
-			case imagick::ORIENTATION_LEFTBOTTOM:
-				$image->rotateimage("#000", -90); // rotate 90 degrees CCW
-				break;
-		}
-
-		// Now that it's auto-rotated, make sure the EXIF data is correct in case the EXIF gets saved with the image!
-		$image->setImageOrientation(imagick::ORIENTATION_TOPLEFT);
-	}
 }
