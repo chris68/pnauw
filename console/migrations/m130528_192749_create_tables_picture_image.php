@@ -165,8 +165,8 @@ CREATE TABLE {{%picture}}
   id serial NOT NULL PRIMARY KEY,
   owner_id int NOT NULL references {{%user}}(id),
   
-  -- Internal name and description (never public)
-  name text NOT NULL,
+  -- Name and description
+  name text NOT NULL DEFAULT '',
   description text NOT NULL DEFAULT '',
   
   taken timestamp NOT NULL,
