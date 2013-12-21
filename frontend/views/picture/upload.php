@@ -1,13 +1,10 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $formmodel frontend\models\PictureForm */
+/* @var $picmodel frontend\models\Picture */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/**
- * @var yii\web\View $this
- * @var frontend\models\PictureForm $formmodel
- * @var frontend\models\Picture $picmodel
- */
 
 $this->title = 'Bilder hochladen';
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];

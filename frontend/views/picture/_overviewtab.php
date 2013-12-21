@@ -1,14 +1,7 @@
 <?php
-
-/**
- * @var yii\web\View $this
- * @var frontend\models\Picture $model
- * @var yii\widgets\ActiveForm $form
- */
-if (0) {	
-	$form = new yii\widgets\ActiveForm();
-	$model = new frontend\models\Picture();
-}
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Picture */
+/* @var $form yii\widgets\ActiveForm */
 
 use yii\widgets\DetailView;
 

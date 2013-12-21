@@ -1,11 +1,8 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Picture */
 
 use yii\helpers\Html;
-
-/**
- * @var yii\web\View $this
- * @var frontend\models\Picture $model
- */
 
 $this->title = 'Bearbeiten von Bild: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['index']];

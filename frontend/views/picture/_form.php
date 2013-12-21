@@ -1,19 +1,19 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Picture */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Picture $model
- * @var yii\widgets\ActiveForm $form
- */
 ?>
 
 <div class="picture-form">
 
-	<div class ="col-lg-4">
-		<?php $form = ActiveForm::begin(); ?>
+	<div class ="col-md-4">
+		<?php 
+			/* @var $form yii\widgets\ActiveForm */
+			$form = ActiveForm::begin(); 
+		?>
 		
 		<?= $form->field($model, 'owner_id')->textInput() ?>
 

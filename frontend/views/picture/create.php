@@ -1,11 +1,9 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Picture */
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Picture $model
- */
 
 $this->title = 'Create Picture';
 $this->params['breadcrumbs'][] = ['label' => 'Pictures', 'url' => ['index']];

@@ -1,12 +1,11 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $form yii\widgets\ActiveForm */
+/* @var $model common\models\User */
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var yii\widgets\ActiveForm $form
- * @var common\models\User $model
- */
 $this->title = \Yii::t('base','Reset password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>

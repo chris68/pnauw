@@ -1,20 +1,19 @@
 <?php
+/* @var $this \yii\web\View */
+/* @var $model frontend\models\Picture */
+/* @var $form yii\widgets\ActiveForm */
 
 use yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Tabs;
 use frontend\widgets\Alert;
-
-/**
- * @var \yii\web\View $this
- * @var frontend\models\Picture $model
- * @var yii\widgets\ActiveForm $form
- */
 ?>
 
 <div class="picture-form">
 	<?php $form = ActiveForm::begin(); ?>
+	
+	<?= Html::activeHiddenInput($model, 'id' ) ?>
 
 	<?= $form->errorSummary($model,['class' => "alert alert-danger"]);?>
 
