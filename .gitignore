@@ -1,9 +1,6 @@
 # Backup files
 *~
 
-#Composer files
-/composer.lock
-
 #Main Yii File
 /yii
 
