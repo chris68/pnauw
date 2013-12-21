@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
+/* @todo: FORM IS CURRENTLY NOT USED */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -78,7 +79,7 @@ use yii\widgets\ActiveForm;
 		<?= $form->field($model, 'deleted_ts')->textInput() ?>
 
 		<div class="form-group">
-			<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+			<?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
 		</div>
 
