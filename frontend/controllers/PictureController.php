@@ -94,7 +94,9 @@ class PictureController extends Controller
 	public function actionCreate()
 	{
 		$model = new Picture;
-		if (!$model->load($_POST)) {
+		$post_request = $model->load($_POST);
+		
+		if (!$post_request) {
 			// If it is the beginning of a create, set the default values
 			$model->setDefaults();
 			// If no coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
@@ -102,15 +104,16 @@ class PictureController extends Controller
 			$model->org_loc_lng = $model->loc_lng = 0; 
 		}
 		
-		// We assume that the event was at the very time of the creation of the "picture"!
-		$model->taken = new \yii\db\Expression('NOW()');
+		// We assume that the event was at the time of the creation of the "picture"!
+		// However, we limit the accuracy to midnight of the day
+		$model->taken = date('Y-m-d').' 00:00:00';
 		// Need to set the org_loc_lat another time!
 		$model->org_loc_lat = 0;  
 		$model->org_loc_lng = 0; 
 
-		if ($model->save()) {
+		if ($post_request && $model->save()) {
 			Yii::$app->session->setFlash('success', "Bild wurde angelegt");
-			return $this->redirect(['/']);
+			return $this->redirect(['update', 'id' => $model->id]);
 		}
 		
 		return $this->render('create', [

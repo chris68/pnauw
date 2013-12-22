@@ -39,6 +39,7 @@ AppAsset::register($this);
 				'items' => [
 					['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
 					['label' => 'Hochladen', 'url' => ['/picture/upload']],
+					['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
 					['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
 				],
 			],
