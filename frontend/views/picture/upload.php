@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Bilder hochladen';
-$this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
 $this->params['breadcrumbs'][] = 'Hochladen';
 ?>
 

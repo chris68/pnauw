@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 
 $this->title = 'Neuanlage' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
 $this->params['breadcrumbs'][] = 'Neuanlage';
 ?>
 <div class="picture-create">

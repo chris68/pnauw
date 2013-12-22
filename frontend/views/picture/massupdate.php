@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
 
 $this->title = 'Massenbearbeitung';
-$this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage', 'sort'=>'modified_ts-desc']];
+$this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="picture-massupdate">
