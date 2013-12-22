@@ -48,6 +48,7 @@ AppAsset::register($this);
 					['label' => 'Hochladen', 'url' => ['/picture/upload']],
 					['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
 					['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
+					['label' => 'Veröffentlichen', 'url' => ['/picture/publish','sort'=>'modified_ts-desc']],
 				],
 			],
 			['label' => \Yii::t('base','About'), 'url' => ['/site/about']],

@@ -39,11 +39,10 @@ class EnsureOwnership extends Behavior {
 	}
 
     /**
-     * Responds to {@link CModel::onBeforeSave} event.
      * Set the owner id to the current user upon object creation
      * Checks if owner id fits to current user upon object update
      *
-     * @param CModelEvent $event event parameter
+     * @param yii\base\Event $event event parameter
      */
     public function beforeSave($event) {
         if ($this->owner->getIsNewRecord()) {
@@ -56,10 +55,9 @@ class EnsureOwnership extends Behavior {
     }
 
     /**
-     * Responds to {@link CModel::onBeforeDelete} event.
      * Checks if owner id fits to current user upon object deletion
      *
-     * @param CModelEvent $event event parameter
+     * @param yii\base\Event $event event parameter
      */
     public function beforeDelete($event) {
         if ($this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId())
@@ -67,10 +65,9 @@ class EnsureOwnership extends Behavior {
     }
     
     /**
-     * Responds to {@link CModel::onAfterFind} event.
      * Checks if owner id fits to current user after the objects has been found
      *
-     * @param CModelEvent $event event parameter
+     * @param yii\base\Event $event event parameter
      */
     public function afterFind($event) {
         if ($this->ensureOnFind && $this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId())

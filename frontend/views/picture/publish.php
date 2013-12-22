@@ -10,10 +10,10 @@ use yii\bootstrap\Collapse;
 use yii\widgets\ActiveForm;
 
 
-$this->title = 'Bilder moderieren';
+$this->title = 'Bilder veröffentlichen';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="picture-moderate">
+<div class="picture-publish">
 
 	<h1><?= Html::encode($this->title) ?></h1>
 
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					function($data, $row) {
 						return frontend\widgets\ImageRenderer::widget(
 							[
-								'image' => $data->blurredSmallImage,
+								'image' => $data->SmallImage,
 								'size' => 'small',
 								'options' => ['id' => 'picture-image', 'class' => 'img-responsive'],
 							]
@@ -59,8 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
 					 */
 					function($data, $row) {
 						return 
-							Html::hiddenInput("PictureModerateForm[$row][id]",$data->id).
-							Html::dropDownList("PictureModerateForm[$row][visibility_id]", 'public', frontend\models\Visibility::dropDownList());
+							Html::hiddenInput("PicturePublishForm[$row][id]",$data->id).
+							Html::dropDownList("PicturePublishForm[$row][visibility_id]", Yii::$app->user->checkAccess('trusted')?'public':'public_approval_pending', frontend\models\Visibility::dropDownList());
 					},
 			],        
 		],

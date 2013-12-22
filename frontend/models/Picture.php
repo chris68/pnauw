@@ -95,7 +95,7 @@ class Picture extends \yii\db\ActiveRecord
 				'timestamp' => new \yii\db\Expression('NOW()'),
 			],
 			'EnsureOwnership' => [
-				'class' => 'common\behaviors\EnsureOwnership',
+				'class' => 'common\behaviors\EnsureOwnershipWithModeration',
 				'ownerAttribute' => 'owner_id',
 				'ensureOnFind' => false,
 			],

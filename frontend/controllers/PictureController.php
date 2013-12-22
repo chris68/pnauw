@@ -7,6 +7,7 @@ use frontend\models\PictureSearch;
 use frontend\models\PictureUploadForm;
 use frontend\models\PictureCaptureForm;
 use frontend\models\PictureModerateForm;
+use frontend\models\PicturePublishForm;
 use yii;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -33,7 +34,7 @@ class PictureController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'capture',],
+						'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'capture', 'publish'],
 						'roles' => ['@'],
 					],
 					[
@@ -165,7 +166,7 @@ class PictureController extends Controller
 	 */
 	public function actionModerate()
 	{
-        if (\Yii::$app->request->isPost) {
+        if (\Yii::$app->request->isPost && isset($_POST['PictureModerateForm'])) {
 			$pics = [];
 			$picCount = count($_POST['PictureModerateForm']);
 			while ($picCount-- > 0) {
@@ -189,6 +190,42 @@ class PictureController extends Controller
 		$dataProvider->query->where(['visibility_id'=>'public_approval_pending']);
 
 		return $this->render('moderate', [
+				'dataProvider' => $dataProvider,
+				'searchModel' => $searchModel,
+		]);
+	}
+
+	/**
+	 * Publish all Picture models.
+	 * @return mixed
+	 */
+	public function actionPublish()
+	{
+        if (\Yii::$app->request->isPost && isset($_POST['PicturePublishForm'])) {
+			$pics = [];
+			$picCount = count($_POST['PicturePublishForm']);
+			while ($picCount-- > 0) {
+				$pics[] = new PicturePublishForm();
+			}
+			\yii\base\Model::loadMultiple($pics, $_POST);
+			if (!\yii\base\Model::validateMultiple($pics)) {
+				throw new HttpException(400, 'Incorrect input.');
+			}
+		
+			foreach ($pics as $pic) {
+				$p = Picture::find($pic->id);
+				$p->visibility_id = $pic->visibility_id;
+				$p->save();
+			}
+        }
+		
+		$searchModel = new PictureSearch(['scenario'=>'private']);
+		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->pagination->pageSize = 50;
+		$dataProvider->query->ownerScope();
+		$dataProvider->query->andWhere(['visibility_id'=>['private','limited']]);
+
+		return $this->render('publish', [
 				'dataProvider' => $dataProvider,
 				'searchModel' => $searchModel,
 		]);
