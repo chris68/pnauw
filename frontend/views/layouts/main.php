@@ -35,6 +35,13 @@ AppAsset::register($this);
 		$menuItems = [
 			['label' => \Yii::t('base','Home'), 'url' => ['/site/index']],
 			[
+				'label' => 'Moderieren', 
+				'visible' => Yii::$app->user->checkAccess('moderator'),
+				'items' => [
+					['label' => 'Bilder', 'url' => ['/picture/moderate','sort'=>'modified_ts-desc']],
+				],
+			],
+			[
 				'label' => 'Bilder', 
 				'items' => [
 					['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
