@@ -14,6 +14,12 @@ class ImageRenderer extends \yii\base\Widget
      */
     public $image;
  
+    /**
+     *
+     * @var string The size of the image: 'thumbnail', 'small', 'medium' or 'large'
+     */
+    public $size = 'small';
+ 
 	/**
 	 * @var array the HTML attributes for the container tag of this widget. The "tag" option specifies
 	 * what container tag should be used. It defaults to "table" if not set.
@@ -29,15 +35,35 @@ class ImageRenderer extends \yii\base\Widget
         } else {
 			// If no image is available construct one!
 			$image = new \Imagick();
-			$image->newImage(600, 900, new \ImagickPixel('gray'));
-
 			$draw = new \ImagickDraw();
-			/* Font properties */
 			$draw->setFont('Bookman-DemiItalic');
-			$draw->setFontSize( 35 );
+			switch ($this->size) {
+				// According to: http://flickrj.sourceforge.net/api/com/aetrion/flickr/photos/Size.html
+				case 'thumbnail':
+					$image->newImage(75, 100, new \ImagickPixel('gray'));
+					$draw->setFontSize(11);
+					$offset = 20;
+					break;
+				case 'small':
+					$image->newImage(180, 240, new \ImagickPixel('gray'));
+					$draw->setFontSize(30);
+					$offset = 60;
+					break;
+				case 'medium':
+					$image->newImage(375, 500, new \ImagickPixel('gray'));
+					$draw->setFontSize(65);
+					$offset = 120;
+					break;
+				case 'large':
+					$image->newImage(768, 1024, new \ImagickPixel('gray'));
+					$draw->setFontSize(130);
+					$offset = 250;
+					break;
+			}
+
 
 			/* Create text */
-			$image->annotateImage($draw, 10, 20, 60, 'Es liegt kein Bild vor oder das Bild ist noch im Review');
+			$image->annotateImage($draw, 10, $offset, 0, "Es liegt\nkein Bild\nvor oder\ndas Bild\nist noch\nim Review");
 			$image->setImageFormat('jpg');
 			$rawdata = bin2hex($image->getimageblob());
 			

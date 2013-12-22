@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					frontend\widgets\ImageRenderer::widget(
 						[
 							'image' => $model->blurredSmallImage,
+							'size' => 'small',
 							'options' => ['class' => 'img-responsive'],
 						]
 					)

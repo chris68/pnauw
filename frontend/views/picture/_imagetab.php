@@ -41,6 +41,7 @@ use \yii\helpers\Html;
 		frontend\widgets\ImageRenderer::widget(
 			[
 				'image' => $model->originalImage,
+				'size' => 'medium',
 				'options' => ['id' => 'picture-image', 'class' => 'img-responsive'],
 			]
 		);

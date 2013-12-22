@@ -87,6 +87,7 @@ EOT;
 					return frontend\widgets\ImageRenderer::widget(
 						[
 							'image' => $data->SmallImage,
+							'size' => 'small',
 							'options' => ['id' => 'picture-image', 'class' => 'img-responsive'],
 						]
 					);
