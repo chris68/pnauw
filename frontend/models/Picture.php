@@ -103,12 +103,38 @@ class Picture extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * check if country is filled if reg_plate is filled 
+	 * Validator to check if country is filled if reg_plate is filled 
 	 */
-	public function checkVehiclePlateConsistency($attribute, $params)
+	public function validateVehiclePlateConsistency($attribute, $params)
 	{
 		if (!empty($this->vehicle_reg_plate) and empty($this->vehicle_country_code))
 			$this->addError('vehicle_country_code', 'Das Land des eingetragenen Kfz-Kennzeichens muss angegeben werden.');
+	}
+
+	/**
+	 * Validator to check if the user may set the visibility to public
+	 */
+	public function validateVisibilityConsistency($attribute, $params)
+	{
+		if ($this->visibility_id == 'public' && !\Yii::$app->user->checkAccess('trusted')) {
+			if (!$this->getIsNewRecord()) {
+				/* @var $old frontend\models\Picture */
+				$old = Picture::find($this->id);
+				
+				// Check whether it was already public before AND the user did not change any relevant information!
+				if ($old->visibility_id == 'public') {
+					if ($old->name == $this->name && $old->description == $this->description) {
+						// Ok. Already reviewed and no relevant changes!
+						return;
+					}
+				}
+			}
+			
+			// Request to approval
+			$this->visibility_id = 'public_approval_pending';
+			
+			$this->addError('visibility_id', 'Sie dürfen mit ihren Rechten leider keine Bilder oder Texte direkt veröffentlichen, sondern müssen die Freigabe anfordern. Die Sichtbarkeit wurde entsprechend angepasst. Bitte speichern Sie nun erneut.');
+		}
 	}
 
 	/**
@@ -129,8 +155,9 @@ class Picture extends \yii\db\ActiveRecord
 			[['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', 'campaign_id'], 'integer'],
 			[['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 			[['loc_lat', 'loc_lng',], 'double'],
+			['visibility_id',  'validateVisibilityConsistency', ],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
-			['vehicle_country_code', 'checkVehiclePlateConsistency', 'skipOnEmpty' => false,],
+			['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
 		];
 	}
 

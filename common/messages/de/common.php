@@ -27,6 +27,7 @@ return array (
   'Terms accepted' => 'Bedingungen anerkannt',
   'There is no user with such email.' => 'Es gibt keinen Nutzer mit dieser Emailadresse',
   'This email address has already been taken.' => 'Diese Emailadresse ist bereits in Verwendung',
+  'Trusted User' => 'Vertrauenswürdiger Nutzer',
   'User' => 'Nutzer',
   'Username' => 'Benutzername',
   'You are not authorized to perform this action' => 'Sie sind für die Operation nicht berechtigt.',

@@ -38,6 +38,7 @@ class User extends ActiveRecord implements IdentityInterface
 
 	// @Todo: Change the role to a string
 	const ROLE_USER = 10;
+	const ROLE_TRUSTED = 20;
 	const ROLE_MODERATOR = 30;
 	const ROLE_ADMIN = 99;
 

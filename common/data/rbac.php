@@ -29,13 +29,22 @@ return [
 			'isObjectOwner'
 		],
 	],
+	'trusted' => [
+		'type' => Item::TYPE_ROLE,
+		'description' => \Yii::t('common', 'Trusted User'),
+		'bizRule' => NULL,
+		'data' => NULL,
+		'children' => [
+			'user',
+		],
+	],
 	'moderator' => [
 		'type' => Item::TYPE_ROLE,
 		'description' => \Yii::t('common', 'Moderator'),
 		'bizRule' => NULL,
 		'data' => NULL,
 		'children' => [
-			'user',
+			'trusted',
 		],
 	],
 	'admin' => [
@@ -56,6 +65,15 @@ return [
 		'data' => NULL,
 		'children' => [
 			'user',
+		],
+	],
+	User::ROLE_TRUSTED => [
+		'type' => Item::TYPE_ROLE,
+		'description' => 'Trusted User (db)',
+		'bizRule' => NULL,
+		'data' => NULL,
+		'children' => [
+			'trusted',
 		],
 	],
 	User::ROLE_MODERATOR => [
