@@ -43,6 +43,7 @@ AppAsset::register($this);
 			],
 			[
 				'label' => 'Bilder', 
+				'visible' => !Yii::$app->user->isGuest,
 				'items' => [
 					['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
 					['label' => 'Hochladen', 'url' => ['/picture/upload']],
