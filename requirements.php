@@ -7,11 +7,15 @@
  *
  * In order to run this script from the web, you should copy it to the web root.
  * If you are using Linux you can create a hard link instead, using the following command:
- * ln requirements.php ../requirements.php
+ * ln ../../requirements.php requirements.php 
  */
 
 // you may need to adjust this path to the correct Yii framework path
 $frameworkPath = dirname(__FILE__) . '/vendor/yiisoft/yii2/yii';
+if (!is_dir($frameworkPath)) {
+	// situation where the script is called from within the web root; so fix it to support both locations
+	$frameworkPath = dirname(__FILE__) . '/../../vendor/yiisoft/yii2/yii';
+}
 
 if (!is_dir($frameworkPath)) {
 	echo '<h1>Error</h1>';
@@ -35,18 +39,11 @@ $requirements = [
 		'by' => 'All <a href="http://www.yiiframework.com/doc/api/#system.db">DB-related classes</a>',
 	],
 	[
-		'name' => 'PDO SQLite extension',
-		'mandatory' => false,
-		'condition' => extension_loaded('pdo_sqlite'),
+		'name' => 'PDO PgSQL extension',
+		'mandatory' => true,
+		'condition' => extension_loaded('pdo_pgsql'),
 		'by' => 'All <a href="http://www.yiiframework.com/doc/api/#system.db">DB-related classes</a>',
-		'memo' => 'Required for SQLite database.',
-	],
-	[
-		'name' => 'PDO MySQL extension',
-		'mandatory' => false,
-		'condition' => extension_loaded('pdo_mysql'),
-		'by' => 'All <a href="http://www.yiiframework.com/doc/api/#system.db">DB-related classes</a>',
-		'memo' => 'Required for MySQL database.',
+		'memo' => 'Required for Postgres SQL database.',
 	],
 	// Cache :
 	[
@@ -99,5 +96,42 @@ $requirements = [
 		'by' => 'Email sending',
 		'memo' => 'PHP mail SMTP server required',
 	],
+	// Pnauw specific
+	'phpFileUploadAllowed' => [
+		'name' => 'PHP file upload allowed',
+		'mandatory' => true,
+		'condition' => $requirementsChecker->checkPhpIniOn('file_uploads'),
+		'by' => 'Uploading pictures',
+		'memo' => 'File uploads must be allowed',
+	],
+	'phpFileUploadSize' => [
+		'name' => 'PHP file upload size',
+		'mandatory' => true,
+		'condition' => $requirementsChecker->compareByteSize(ini_get('upload_max_filesize'),'1mb','>='),
+		'by' => 'Uploading pictures',
+		'memo' => 'Maximum allowed filesize (upload_max_filesize) must be at least 1M; current value:'.ini_get('upload_max_filesize'),
+	],
+	'phpFileUploadNumber' => [
+		'name' => 'PHP file upload number',
+		'mandatory' => true,
+		'condition' => ini_get('max_file_uploads') >= 50,
+		'by' => 'Uploading pictures',
+		'memo' => 'Maximum allowed number of file upload (max_file_uploads) must be at least 50; current value:'.ini_get('max_file_uploads'),
+	],
+	'phpFileUploadPostSize' => [
+		'name' => 'Post size',
+		'mandatory' => true,
+		'condition' => $requirementsChecker->getByteSize(ini_get('post_max_size')) >= 50 * $requirementsChecker->getByteSize('1mb')+$requirementsChecker->getByteSize('5mb'),
+		'by' => 'Uploading pictures',
+		'memo' => 'Maximum postsize (post_max_size) must fit to the file upload requirements (i.e. max files * max size + buffer); current value:'.ini_get('post_max_size'),
+	],
+	'phpFileUploadMemoryLimit' => [
+		'name' => 'Memory limit',
+		'mandatory' => true,
+		'condition' => ini_get('memory_limit') == -1 || $requirementsChecker->getByteSize(ini_get('memory_limit')) > 50 * $requirementsChecker->getByteSize('1mb')+$requirementsChecker->getByteSize('10mb'),
+		'by' => 'Uploading pictures',
+		'memo' => 'Memory limit (memory_limit) must fit to the file upload requirements (i.e. max files * max size + buffer); current value:'.ini_get('memory_limit'),
+	],
 ];
 $requirementsChecker->checkYii()->check($requirements)->render();
+
