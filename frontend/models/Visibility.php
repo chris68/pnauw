@@ -8,6 +8,7 @@ namespace frontend\models;
  * @property string $id
  * @property string $sortkey
  * @property string $name
+ * @property string $category
  * @property string $description
  * @property string $created_ts
  * @property string $modified_ts
@@ -32,7 +33,7 @@ class Visibility extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'sortkey', 'name', 'description'], 'required'],
+			[['id', 'sortkey', 'name', 'category', 'description'], 'required'],
 			[['id', 'sortkey', 'name', 'description', 'created_ts', 'modified_ts', 'deleted_ts'], 'string']
 		];
 	}
@@ -47,6 +48,7 @@ class Visibility extends \yii\db\ActiveRecord
 			'sortkey' => 'Sortkey',
 			'name' => 'Name',
 			'description' => 'Description',
+			'category' => 'Category',
 			'created_ts' => 'Created Ts',
 			'modified_ts' => 'Modified Ts',
 			'deleted_ts' => 'Deleted Ts',
@@ -75,7 +77,7 @@ class Visibility extends \yii\db\ActiveRecord
 	 */
 	public static function dropDownList()
 	{
-		return \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name');
+		return ['' => ['' => '(nicht gesetzt)']] + \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name','category');
 	}
 	
 }

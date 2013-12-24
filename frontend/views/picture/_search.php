@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
 
 			<?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
-			<?= $form->field($model, 'visibility_id')->dropDownList(['' => '(nicht gesetzt)'] + frontend\models\Visibility::dropDownList()) ?>
+			<?= $form->field($model, 'visibility_id')->dropDownList(frontend\models\Visibility::dropDownList()) ?>
 
 			<?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
 

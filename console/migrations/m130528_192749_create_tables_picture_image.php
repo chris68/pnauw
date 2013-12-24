@@ -41,6 +41,7 @@ CREATE TABLE {{%visibility}}
   id text NOT NULL PRIMARY KEY,
   sortkey real not null unique,
   name text NOT NULL unique,
+  category text not null,
   description text not null,
   created_ts timestamp not null default current_timestamp,
   modified_ts timestamp not null default current_timestamp,
@@ -49,10 +50,12 @@ CREATE TABLE {{%visibility}}
 EOT;
 $this->execute($sql);
 
-$this->insert('{{%visibility}}',array('sortkey' => 1, 'id'=>'private','name'=>'Nicht öffentlich','description'=>'Sichtbar nur für mich selbst'));
-$this->insert('{{%visibility}}',array('sortkey' => 2, 'id'=>'limited','name'=>'Teilweise öffentlich','description'=>'Sichtbar für mich und meine Freunde'));
-$this->insert('{{%visibility}}',array('sortkey' => 3, 'id'=>'public_approval_pending','name'=>'Öffentlich (nach Freigabe)','description'=>'Sichtbar für alle (nach Freigabe)'));
-$this->insert('{{%visibility}}',array('sortkey' => 4, 'id'=>'public','name'=>'Öffentlich','description'=>'Sichtbar für alle'));
+$this->insert('{{%visibility}}',array('sortkey' => 100, 'id'=>'private', 'category'=>'Nicht öffentlich', 'name'=>'Noch nicht öffentlich','description'=>'Derzeit nur sichtbar für mich selbst'));
+$this->insert('{{%visibility}}',array('sortkey' => 200, 'id'=>'private_hidden', 'category'=>'Nicht öffentlich', 'name'=>'Veröffentlichung geblockt','description'=>'Sichtbar nur für mich selbst und auch nicht für eine Veröffentlichung vergesehen'));
+$this->insert('{{%visibility}}',array('sortkey' => 300, 'id'=>'public_approval_pending', 'category'=>'Veröffentlichen', 'name'=>'Veröffentlichung beantragt','description'=>'Antrag auf Veröffentlichung und Review durch einen Moderator'));
+$this->insert('{{%visibility}}',array('sortkey' => 400, 'id'=>'public', 'category'=>'Veröffentlichen', 'name'=>'Öffentlich','description'=>'Öffentlich und sichtbar für alle'));
+$this->insert('{{%visibility}}',array('sortkey' => 500, 'id'=>'public_approval_rejected', 'category'=>'Moderiert', 'name'=>'Veröffentlichung abgelehnt','description'=>'Die Veröffentlichung wurde von einem Moderator abgelehnt'));
+$this->insert('{{%visibility}}',array('sortkey' => 600, 'id'=>'public_approval_withdrawn', 'category'=>'Moderiert', 'name'=>'Veröffentlichung widerrufen','description'=>'Die Veröffentlichung wurde von einem Moderator widerrufen'));
 
 $sql = <<<'EOT'
 CREATE TABLE {{%incident}}
@@ -70,15 +73,21 @@ CREATE TABLE {{%incident}}
 EOT;
 $this->execute($sql);
 
-$this->insert('{{%incident}}',array('sortkey' => 1, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken', 'description'=>'Auto parkt auf dem Gehweg', 'severity'=>1));
-$this->insert('{{%incident}}',array('sortkey' => 2, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (behindernd)', 'description'=>'Auto parkt behindernd auf dem Gehweg', 'severity'=>3));
-$this->insert('{{%incident}}',array('sortkey' => 3, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (total behindernd)', 'description'=>'Auto parkt total behindernd auf dem Gehweg', 'severity'=>4));
-$this->insert('{{%incident}}',array('sortkey' => 4, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (> 1h)', 'description'=>'Auto parkt länger als eine Stunde auf dem Gehweg', 'severity'=>2));
-$this->insert('{{%incident}}',array('sortkey' => 5, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde behindernd auf dem Gehweg', 'severity'=>4));
-$this->insert('{{%incident}}',array('sortkey' => 6, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (total behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde total behindernd auf dem Gehweg', 'severity'=>4));
-$this->insert('{{%incident}}',array('sortkey' => 7, 'category'=>'Nachweis Standzeit', 'name'=>'Parken (Nachweis Standzeit)', 'description'=>'Auto parkt bereits zu der Zeit', 'severity'=>-1));
-$this->insert('{{%incident}}',array('sortkey' => 8, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken auf der Straße', 'description'=>'Auto parkt korrekt auf der Straße', 'severity'=>0));
-$this->insert('{{%incident}}',array('sortkey' => 9, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken in Parkbucht', 'description'=>'Auto parkt korrekt in einer Parkbucht', 'severity'=>0));
+$this->insert('{{%incident}}',array('sortkey' => 100, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken', 'description'=>'Auto parkt auf dem Gehweg', 'severity'=>1));
+$this->insert('{{%incident}}',array('sortkey' => 200, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (behindernd)', 'description'=>'Auto parkt behindernd auf dem Gehweg', 'severity'=>3));
+$this->insert('{{%incident}}',array('sortkey' => 300, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (total behindernd)', 'description'=>'Auto parkt total behindernd auf dem Gehweg', 'severity'=>4));
+$this->insert('{{%incident}}',array('sortkey' => 400, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (auf dem Boardstein)', 'description'=>'Auto parkt ganz wenig auf dem Gehweg bzw. nur auf dem Boardstein', 'severity'=>1));
+$this->insert('{{%incident}}',array('sortkey' => 500, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (> 1h)', 'description'=>'Auto parkt länger als eine Stunde auf dem Gehweg', 'severity'=>2));
+$this->insert('{{%incident}}',array('sortkey' => 600, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde behindernd auf dem Gehweg', 'severity'=>4));
+$this->insert('{{%incident}}',array('sortkey' => 700, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (total behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde total behindernd auf dem Gehweg', 'severity'=>4));
+$this->insert('{{%incident}}',array('sortkey' => 800, 'category'=>'Nachweis Standzeit', 'name'=>'Parken (Nachweis Standzeit)', 'description'=>'Auto parkt bereits zu der Zeit', 'severity'=>-1));
+$this->insert('{{%incident}}',array('sortkey' => 900, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken auf der Straße', 'description'=>'Auto parkt korrekt auf der Straße', 'severity'=>0));
+$this->insert('{{%incident}}',array('sortkey' => 1000, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken in Parkbucht', 'description'=>'Auto parkt korrekt in einer Parkbucht', 'severity'=>0));
+$this->insert('{{%incident}}',array('sortkey' => 1100, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Korrektes Parken auf der Straße/Parkbuchten', 'description'=>'Autos parken korrekt auf der Straße/Parkbuchten', 'severity'=>0));
+$this->insert('{{%incident}}',array('sortkey' => 1200, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Unnötiges Gehwegparken trotz breiter Straße', 'description'=>'Autos parken auf dem Gehweg, obwohl dies hier nicht notwendig wäre', 'severity'=>2));
+$this->insert('{{%incident}}',array('sortkey' => 1300, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Unnötiges beidseitiges Gehwegparken', 'description'=>'Autos parken beidseitig, obwohl einseitig der Platz reichen würde', 'severity'=>2));
+$this->insert('{{%incident}}',array('sortkey' => 1400, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Gehwegparken ohne erforderliche Restbreite', 'description'=>'Autos parken mit weniger als die mindestens erforderlichen 1,20 m Restbreite', 'severity'=>3));
+$this->insert('{{%incident}}',array('sortkey' => 1500, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Gehwege komplett zugeparkt', 'description'=>'Die Gehwege sind komplett zugeparkt und man muss die Straße nutzen', 'severity'=>4));
 
 $sql = <<<'EOT'
 CREATE TABLE {{%campaign}}
@@ -112,11 +121,11 @@ CREATE TABLE {{%action}}
 );
 EOT;
 $this->execute($sql);
-$this->insert('{{%action}}',array('sortkey' => 1, 'name'=>'Keine', 'description'=>'Nichts gemacht'));
-$this->insert('{{%action}}',array('sortkey' => 2, 'name'=>'Zettel', 'description'=>'Zettel angebracht'));
-$this->insert('{{%action}}',array('sortkey' => 3, 'name'=>'Angesprochen', 'description'=>'Fahrer angesprochen'));
-$this->insert('{{%action}}',array('sortkey' => 4, 'name'=>'Polizei gerufen', 'description'=>'Die Polizei gerufen'));
-$this->insert('{{%action}}',array('sortkey' => 5, 'name'=>'Anzeige', 'description'=>'Anzeige gestellt'));
+$this->insert('{{%action}}',array('sortkey' => 100, 'name'=>'Keine', 'description'=>'Nichts gemacht'));
+$this->insert('{{%action}}',array('sortkey' => 200, 'name'=>'Zettel', 'description'=>'Zettel angebracht'));
+$this->insert('{{%action}}',array('sortkey' => 300, 'name'=>'Angesprochen', 'description'=>'Fahrer angesprochen'));
+$this->insert('{{%action}}',array('sortkey' => 400, 'name'=>'Polizei gerufen', 'description'=>'Die Polizei gerufen'));
+$this->insert('{{%action}}',array('sortkey' => 500, 'name'=>'Anzeige', 'description'=>'Anzeige gestellt'));
 
 $sql = <<<'EOT'
 CREATE TABLE {{%citation}}
@@ -148,16 +157,16 @@ CREATE TABLE {{%vehicle_country}}
 );
 EOT;
 $this->execute($sql);
-$this->insert('{{%vehicle_country}}',array('sortkey' => 1, 'category'=>'D-A-CH', 'code'=>'D', 'name'=>'Deutschland', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 2, 'category'=>'D-A-CH', 'code'=>'A', 'name'=>'Österreich', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 3, 'category'=>'D-A-CH', 'code'=>'CH', 'name'=>'Schweiz', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 4, 'category'=>'EU', 'code'=>'I', 'name'=>'Italien', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 5, 'category'=>'EU', 'code'=>'F', 'name'=>'Frankreich', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 6, 'category'=>'EU', 'code'=>'E', 'name'=>'Spanien', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 7, 'category'=>'EU', 'code'=>'B', 'name'=>'Belgien', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 8, 'category'=>'EU', 'code'=>'NL', 'name'=>'Niederlande', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 9, 'category'=>'EU', 'code'=>'DK', 'name'=>'Dänemark', 'description'=>''));
-$this->insert('{{%vehicle_country}}',array('sortkey' => 10, 'category'=>'Sonstige Länder', 'code'=>'XX', 'name'=>'Unbekanntes Land', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 100, 'category'=>'D-A-CH', 'code'=>'D', 'name'=>'Deutschland', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 200, 'category'=>'D-A-CH', 'code'=>'A', 'name'=>'Österreich', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 300, 'category'=>'D-A-CH', 'code'=>'CH', 'name'=>'Schweiz', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 400, 'category'=>'EU', 'code'=>'I', 'name'=>'Italien', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 500, 'category'=>'EU', 'code'=>'F', 'name'=>'Frankreich', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 600, 'category'=>'EU', 'code'=>'E', 'name'=>'Spanien', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 700, 'category'=>'EU', 'code'=>'B', 'name'=>'Belgien', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 800, 'category'=>'EU', 'code'=>'NL', 'name'=>'Niederlande', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 900, 'category'=>'EU', 'code'=>'DK', 'name'=>'Dänemark', 'description'=>''));
+$this->insert('{{%vehicle_country}}',array('sortkey' => 1000, 'category'=>'Sonstige Länder', 'code'=>'XX', 'name'=>'Unbekanntes Land', 'description'=>''));
 
 $sql = <<<'EOT'
 CREATE TABLE {{%picture}}
