@@ -140,6 +140,8 @@ class PictureController extends Controller
 		$model = $this->findModel($id);
 
 		if ($model->load($_POST) && $model->save()) {
+			// Reload after save to make sure that all changes triggered in the db are incorporated
+			$model = $this->findModel($id);
 			Yii::$app->session->setFlash('success', "Änderung wurde übernommen");
 		}
 		
@@ -187,7 +189,7 @@ class PictureController extends Controller
 		$searchModel = new PictureSearch(['scenario'=>'public']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->pagination->pageSize = 50;
-		$dataProvider->query->where(['visibility_id'=>'public_approval_pending']);
+		$dataProvider->query->andWhere(['visibility_id'=>'public_approval_pending']);
 
 		return $this->render('moderate', [
 				'dataProvider' => $dataProvider,
@@ -223,7 +225,7 @@ class PictureController extends Controller
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->pagination->pageSize = 50;
 		$dataProvider->query->ownerScope();
-		$dataProvider->query->andWhere(['visibility_id'=>['private','limited']]);
+		$dataProvider->query->andWhere(['visibility_id'=>['private']]);
 
 		return $this->render('publish', [
 				'dataProvider' => $dataProvider,
