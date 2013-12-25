@@ -13,6 +13,7 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\VerbFilter;
 use yii\web\UploadedFile;
+use yii\helpers\Html;
 
 /**
  * PictureController implements the CRUD actions for Picture model.
@@ -70,8 +71,6 @@ class PictureController extends Controller
 	 */
 	public function actionManage()
 	{
-		// @todo: Rewrite the other mass update handlers accordingly!
-		
 		if (\Yii::$app->request->isPost && isset($_POST['Picture'])) {
 			$pics = [];
 			foreach ($_POST['Picture'] as $id => $post_pic) {
@@ -211,19 +210,19 @@ class PictureController extends Controller
 	{
 		if (\Yii::$app->request->isPost && isset($_POST['PictureModerateForm'])) {
 			$pics = [];
-			$picCount = count($_POST['PictureModerateForm']);
-			while ($picCount-- > 0) {
-				$pics[] = new PictureModerateForm();
+			foreach ($_POST['PictureModerateForm'] as $id => $post_pic) {
+				$pics[$id] = new PictureModerateForm();
 			}
+
 			\yii\base\Model::loadMultiple($pics, $_POST);
 			if (!\yii\base\Model::validateMultiple($pics)) {
 				throw new HttpException(400, 'Incorrect input.');
 			}
 
-			foreach ($pics as $pic) {
-				$p = Picture::find($pic->id);
-				$p->visibility_id = $pic->visibility_id;
-				$p->save();
+			foreach ($pics as $id => $form_pic) {
+				$model = Picture::find((int) $id);
+				$model->visibility_id = $form_pic->visibility_id;
+				$model->save();
 			}
 		}
 
@@ -246,19 +245,19 @@ class PictureController extends Controller
 	{
 		if (\Yii::$app->request->isPost && isset($_POST['PicturePublishForm'])) {
 			$pics = [];
-			$picCount = count($_POST['PicturePublishForm']);
-			while ($picCount-- > 0) {
-				$pics[] = new PicturePublishForm();
+			foreach ($_POST['PicturePublishForm'] as $id => $post_pic) {
+				$pics[$id] = new PicturePublishForm();
 			}
+
 			\yii\base\Model::loadMultiple($pics, $_POST);
 			if (!\yii\base\Model::validateMultiple($pics)) {
 				throw new HttpException(400, 'Incorrect input.');
 			}
 
-			foreach ($pics as $pic) {
-				$p = Picture::find($pic->id);
-				$p->visibility_id = $pic->visibility_id;
-				$p->save();
+			foreach ($pics as $id => $form_pic) {
+				$model = Picture::find((int) $id);
+				$model->visibility_id = $form_pic->visibility_id;
+				$model->save();
 			}
 		}
 
@@ -358,8 +357,11 @@ class PictureController extends Controller
 					throw($ex);
 				}
 
-				// @Todo: Insert a link to manage to uploads (basically created date less than an hour...
-				Yii::$app->session->setFlash('success', "<strong>Wunderbar</strong>, die " . count($formmodel->file_handles) . " Bilder wurden problemlos eingelesen und Sie können diese nun weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.");
+				Yii::$app->session->setFlash('success', 
+					'<strong>Wunderbar</strong>, die ' . count($formmodel->file_handles) . 
+					' Bilder wurden problemlos eingelesen und Sie können diese nun '.
+					Html::a('hier', ['manage', 'PictureSearch[created_ts]'=> date("Y-m-d")]).
+					' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
 				return $this->refresh();
 			}
 		}

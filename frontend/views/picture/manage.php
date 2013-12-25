@@ -4,7 +4,6 @@
 /* @var $searchModel frontend\models\PictureSearch */
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
 use yii\widgets\ActiveForm;
@@ -20,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suche' => [
+				'Suchen und Filtern' => [
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 				'Karte' => [
@@ -42,7 +41,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		unset($params[$dataProvider->getSort()->sortVar]);
 		$params[$dataProvider->getSort()->sortVar] = 'id';
 		$route = Yii::$app->controller->getRoute();
-		echo Html::a('Massenbearbeiten (alle)', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
+		echo Html::a('Bilder einzeln bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
+		echo ' | ';
+		echo Html::a('Bilder veröffentlichen', Yii::$app->getUrlManager()->createUrl('picture/publish', $params), ['target' => '_blank']);
 	}
 ?>
 </div>
@@ -83,7 +84,9 @@ EOT;
 		'id' => 'picture-list',
 		'itemView' => function ($model, $key, $index, $widget) use ($form) {
 			return
-			'<div class="row form-group" style="margin:10px">
+			'<hr>'
+			.
+			'<div class="row form-group">
 				<div class="col-sm-4 col-md-4 col-lg-4">
 					<div class="form-inline">
 						<div class="form-group">'

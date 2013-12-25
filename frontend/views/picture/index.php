@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suche' => [
+				'Suchen und Filtern' => [
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 				'Karte' => [

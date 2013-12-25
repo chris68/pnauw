@@ -4,7 +4,6 @@
 /* @var $searchModel frontend\models\PictureSearch */
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
 use yii\widgets\ActiveForm;
@@ -22,48 +21,49 @@ $this->params['breadcrumbs'][] = $this->title;
 		$form = ActiveForm::begin(); 
 	?>
 	
-	<?= GridView::widget([
+	<?= ListView::widget([
 		'dataProvider' => $dataProvider,
 		'layout' => "{pager}\n{summary}\n{items}\n{pager}",
-		'id' => 'picture-grid',
-		// 'filterModel' => $searchModel,
-		'columns' => [
-			['class' => 'yii\grid\CheckboxColumn'],
-			[            
-				'label'=>'Bild',
-				'filter'=>false,
-				'format'=>'raw',
-				'value'=>
-					/**
-					 * @param frontend\models\Picture $data The displayed row
-					 */
-					function($data, $row) {
-						return frontend\widgets\ImageRenderer::widget(
-							[
-								'image' => $data->smallImage,
-								'size' => 'small',
-								'options' => ['id' => 'picture-image', 'class' => 'img-responsive'],
-							]
-						);
-					},
-			],        
-			'name:ntext',
-			'description:ntext',
-			[            
-				'label'=>'Sichtbarkeit',
-				'filter'=>false,
-				'format'=>'raw',
-				'value'=>
-					/**
-					 * @param frontend\models\Picture $data The displayed row
-					 */
-					function($data, $row) {
-						return 
-							Html::hiddenInput("PicturePublishForm[$row][id]",$data->id).
-							Html::dropDownList("PicturePublishForm[$row][visibility_id]", Yii::$app->user->checkAccess('trusted')?'public':'public_approval_pending', frontend\models\Visibility::dropDownList());
-					},
-			],        
-		],
+		'itemView' => function ($model, $key, $index, $widget) use ($form) {
+			return
+			'<hr>'
+			.
+			'<div class="row">
+				<div class="col-sm-4 col-md-4 col-lg-4">'
+			.
+				'<p><b>'
+			.
+				Html::encode($model->name)
+			.
+				'</p></b>'
+			.
+					frontend\widgets\ImageRenderer::widget(
+						[
+							'image' => $model->blurredSmallImage,
+							'size' => 'small',
+							'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:10px'],
+						]
+					)
+			.
+				'<p>'
+			.
+				Html::encode($model->description)
+			.
+				'</p>'
+			.
+				'<p class="form-group">'
+			.
+					Html::dropDownList("PicturePublishForm[$key][visibility_id]", Yii::$app->user->checkAccess('trusted')?'public':'public_approval_pending', frontend\models\Visibility::dropDownList())
+			.
+				'</p>'
+			.
+			'	</div>
+			</div>
+			'
+			.
+			'<hr>'
+			;
+		},
 	]); ?>
 	
 	<div class="form-group">
