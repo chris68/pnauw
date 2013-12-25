@@ -61,6 +61,16 @@ class Picture extends \yii\db\ActiveRecord
 {
 
 	/**
+     * @var boolean Has the picture been selected in a view grid/list?
+     */
+    public $selected;
+
+	/**
+     * @var boolean Has the picture been marked for deletion in a view grid/list?
+     */
+    public $deleted;
+
+	/**
 	 * {@inheritdoc}
 	 */
 	public static function tableName()
@@ -151,6 +161,8 @@ class Picture extends \yii\db\ActiveRecord
 			['citation_id', 'default', 'value' => NULL],
 			['campaign_id', 'default', 'value' => NULL],
 			['visibility_id', 'default', 'value' => NULL],
+			['selected', 'default', 'value' => false],
+			['deleted', 'default', 'value' => false],
 			[['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
 			[['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', 'campaign_id'], 'integer'],
 			[['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
@@ -204,6 +216,8 @@ class Picture extends \yii\db\ActiveRecord
 			'created_ts' => 'Hochgeladen am',
 			'modified_ts' => 'Geändert am',
 			'deleted_ts' => 'Gelöscht am',
+			'selected' => 'Auswählen',
+			'deleted' => 'Löschen',
 			
 			// @Todo: Check whether still needed
 			'visibility___name' => 'Sichtbarkeit',

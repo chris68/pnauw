@@ -29,6 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
 	   ]);
  ?>
+	
+<div style="margin-top: 10px;">
 <?php
 	{
 		// Generate the massupdate link by changing the route and throwing out sort/pagination
@@ -43,6 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		echo Html::a('Massenbearbeiten (alle)',Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params));
 	}
 ?>
+</div>
+	
 <?php if(0) { // todo: Somehow enable the user to massupdate the selected objects ?>
 	<?php ActiveForm::begin(['id' => 'picture-action-form', 'action' => ['massedit'], ]); ?>
 		<?= Html::hiddenInput('selected_ids','',['id' => 'picture-action-selected-id', ]) ?>
@@ -68,65 +72,89 @@ EOT;
 	?>
 <?php }; ?>
 	
-<?= GridView::widget([
-	'dataProvider' => $dataProvider,
-	'layout' => "{pager}\n{summary}\n{items}\n{pager}",
-	'id' => 'picture-grid',
-	'filterModel' => $searchModel,
-	'columns' => [
-		['class' => 'yii\grid\CheckboxColumn'],
-		[            
-			'label'=>'Bild',
-			'filter'=>false, // if you do not want to filter, set it to false
-			'format'=>'raw',
-			'value'=>
-				/**
-				 * @param frontend\models\Picture $data The displayed row
-				 */
-				function($data, $row) {
-					return frontend\widgets\ImageRenderer::widget(
-						[
-							'image' => $data->SmallImage,
-							'size' => 'small',
-							'options' => ['id' => 'picture-image', 'class' => 'img-responsive'],
-						]
-					);
-				},
-		],        
-		'name:ntext',
-		'description:ntext',
-		'taken',
-		'loc_formatted_addr:ntext',
-		// 'vehicle_country_code:ntext',
-		'vehicle_reg_plate:ntext',
-		// 'org_loc_lat',
-		// 'org_loc_lng',
-		// 'loc_lat',
-		// 'loc_lng',
-		// 'loc_path',
-		// 'original_image_id',
-		// 'small_image_id',
-		// 'medium_image_id',
-		// 'thumbnail_image_id',
-		// 'blurred_small_image_id',
-		// 'blurred_medium_image_id',
-		// 'blurred_thumbnail_image_id',
-		// 'clip_x',
-		// 'clip_y',
-		// 'clip_size',
-		// 'visibility_id:ntext',
-		// 'citation_affix:ntext',
-		// 'action_id',
-		// 'incident_id',
-		// 'citation_id',
-		// 'campaign_id',
-		// 'created_ts',
-		// 'modified_ts',
-		// 'deleted_ts',
+	<?php 
+		/* @var $form yii\widgets\ActiveForm */
+		$form = ActiveForm::begin(); 
+	?>
 
-		['class' => 'yii\grid\ActionColumn'],
-	],
-]); ?>
+	<?= ListView::widget([
+		'dataProvider' => $dataProvider,
+		'layout' => "{pager}\n{summary}\n{items}\n{pager}",
+		'id' => 'picture-list',
+		'itemView' => function ($model, $key, $index, $widget) use ($form) {
+			return
+			'<div class="row form-group" style="margin:10px">
+				<div class="col-sm-4 col-md-4 col-lg-4">
+					<div class="form-inline">
+						<div class="form-group">'
+			.
+						$form->field($model, "[$model->id]selected")->checkbox().'   '
+			.
+						$form->field($model, "[$model->id]deleted")->checkbox()
+			.
+						'</div>
+					</div>'
+			.
+					frontend\widgets\ImageRenderer::widget(
+						[
+							'image' => $model->smallImage,
+							'size' => 'small',
+							'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:5px'],
+						]
+					)
+			.
+					Html::a('Bild im Detail bearbeiten',['picture/update','id'=>$model->id],['target' => '_blank'])
+			.
+					'<br>'
+			.
+					$model->taken
+			.
+					'<br>'
+			.
+					Html::encode($model->loc_formatted_addr)
+			.
+					'<br>'
+			.
+					'<b>'.Html::encode($model->vehicle_reg_plate).'</b>'
+			.
+
+			'	</div>
+				<div class="col-sm-4 col-md-4 col-lg-4">'
+			.
+					$form->field($model, "[$model->id]name")->textInput()
+			.
+					$form->field($model, "[$model->id]description")->textarea(['rows' => 3])
+			.
+					$form->field($model, "[$model->id]incident_id")->dropDownList(frontend\models\Incident::dropDownList())
+			.
+					$form->field($model, "[$model->id]action_id")->dropDownList(frontend\models\Action::dropDownList())
+			.
+			'	</div>
+				<div class="col-sm-4 col-md-4 col-lg-4">'
+			.
+					$form->field($model, "[$model->id]campaign_id")->dropDownList(frontend\models\Campaign::dropDownList())
+			.
+					$form->field($model, "[$model->id]citation_id")->dropDownList(frontend\models\Citation::dropDownList())
+			.
+					$form->field($model, "[$model->id]citation_affix")->textarea(['rows' => 3, ])
+			.
+					$form->field($model, "[$model->id]visibility_id")->dropDownList(frontend\models\Visibility::dropDownList())
+			.
+			'	</div>
+			</div>
+			'
+			.
+			'<hr>'
+			;
+		},
+	]); ?>
+	
+	<div class="form-group">
+		<?= Html::submitButton('Aktualisieren', ['class' => 'btn btn-primary']) ?>
+		<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
+	</div>
+
+	<?php ActiveForm::end(); ?>
 </div>
 
 

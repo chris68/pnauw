@@ -54,7 +54,7 @@ class PictureController extends Controller
 	public function actionIndex()
 	{
 		throw new HttpException(404, 'Sorry - aber derzeit ist es leider noch nicht möglich, die Bilder öffentlich anzuschauen!');
-		$searchModel = new PictureSearch(['scenario'=>'public']);
+		$searchModel = new PictureSearch(['scenario' => 'public']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->pagination->pageSize = 20;
 
@@ -70,7 +70,48 @@ class PictureController extends Controller
 	 */
 	public function actionManage()
 	{
-		$searchModel = new PictureSearch(['scenario'=>'private']);
+		// @todo: Rewrite the other mass update handlers accordingly!
+		
+		if (\Yii::$app->request->isPost && isset($_POST['Picture'])) {
+			$pics = [];
+			foreach ($_POST['Picture'] as $id => $post_pic) {
+				$pics[$id] = new Picture();
+			}
+			\yii\base\Model::loadMultiple($pics, $_POST);
+			foreach ($pics as $id => $form_pic) {
+				$model = $this->findModel((int) $id);
+				
+				if (!Yii::$app->user->checkAccess('isObjectOwner', array('model' => $model))) {
+					throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
+				}
+				
+				if ($form_pic->deleted) {
+					$model->delete();
+				} else
+				{
+					if (
+						$model->name <> $form_pic->name 
+						|| $model->description <> $form_pic->description
+						|| $model->incident_id <> $form_pic->incident_id
+						|| $model->action_id <> $form_pic->action_id
+						|| $model->campaign_id <> $form_pic->campaign_id
+						|| $model->citation_id <> $form_pic->citation_id
+						|| $model->visibility_id <> $form_pic->visibility_id
+					) {
+						$model->name = $form_pic->name;
+						$model->description = $form_pic->description;
+						$model->incident_id = $form_pic->incident_id;
+						$model->action_id = $form_pic->action_id;
+						$model->campaign_id = $form_pic->campaign_id;
+						$model->citation_id = $form_pic->citation_id;
+						$model->visibility_id = $form_pic->visibility_id;
+						$model->save();
+					}
+				}
+			}
+		}
+
+		$searchModel = new PictureSearch(['scenario' => 'private']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->query->ownerScope();
 		$dataProvider->pagination->pageSize = 20;
@@ -103,27 +144,27 @@ class PictureController extends Controller
 	{
 		$model = new Picture;
 		$post_request = $model->load($_POST);
-		
+
 		if (!$post_request) {
 			// If it is the beginning of a create, set the default values
 			$model->setDefaults();
 			// If no coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
-			$model->org_loc_lat = $model->loc_lat = 0;  
-			$model->org_loc_lng = $model->loc_lng = 0; 
+			$model->org_loc_lat = $model->loc_lat = 0;
+			$model->org_loc_lng = $model->loc_lng = 0;
 		}
-		
+
 		// We assume that the event was at the time of the creation of the "picture"!
 		// However, we limit the accuracy to midnight of the day
-		$model->taken = date('Y-m-d').' 00:00:00';
+		$model->taken = date('Y-m-d') . ' 00:00:00';
 		// Need to set the org_loc_lat another time!
-		$model->org_loc_lat = 0;  
-		$model->org_loc_lng = 0; 
+		$model->org_loc_lat = 0;
+		$model->org_loc_lng = 0;
 
 		if ($post_request && $model->save()) {
 			Yii::$app->session->setFlash('success', "Bild wurde angelegt");
 			return $this->redirect(['update', 'id' => $model->id]);
 		}
-		
+
 		return $this->render('create', [
 				'model' => $model,
 		]);
@@ -144,7 +185,7 @@ class PictureController extends Controller
 			$model = $this->findModel($id);
 			Yii::$app->session->setFlash('success', "Änderung wurde übernommen");
 		}
-		
+
 		return $this->render('update', [
 				'model' => $model,
 		]);
@@ -168,7 +209,7 @@ class PictureController extends Controller
 	 */
 	public function actionModerate()
 	{
-        if (\Yii::$app->request->isPost && isset($_POST['PictureModerateForm'])) {
+		if (\Yii::$app->request->isPost && isset($_POST['PictureModerateForm'])) {
 			$pics = [];
 			$picCount = count($_POST['PictureModerateForm']);
 			while ($picCount-- > 0) {
@@ -178,18 +219,18 @@ class PictureController extends Controller
 			if (!\yii\base\Model::validateMultiple($pics)) {
 				throw new HttpException(400, 'Incorrect input.');
 			}
-		
+
 			foreach ($pics as $pic) {
 				$p = Picture::find($pic->id);
 				$p->visibility_id = $pic->visibility_id;
 				$p->save();
 			}
-        }
-		
-		$searchModel = new PictureSearch(['scenario'=>'public']);
+		}
+
+		$searchModel = new PictureSearch(['scenario' => 'public']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->pagination->pageSize = 50;
-		$dataProvider->query->andWhere(['visibility_id'=>'public_approval_pending']);
+		$dataProvider->query->andWhere(['visibility_id' => 'public_approval_pending']);
 
 		return $this->render('moderate', [
 				'dataProvider' => $dataProvider,
@@ -203,7 +244,7 @@ class PictureController extends Controller
 	 */
 	public function actionPublish()
 	{
-        if (\Yii::$app->request->isPost && isset($_POST['PicturePublishForm'])) {
+		if (\Yii::$app->request->isPost && isset($_POST['PicturePublishForm'])) {
 			$pics = [];
 			$picCount = count($_POST['PicturePublishForm']);
 			while ($picCount-- > 0) {
@@ -213,19 +254,19 @@ class PictureController extends Controller
 			if (!\yii\base\Model::validateMultiple($pics)) {
 				throw new HttpException(400, 'Incorrect input.');
 			}
-		
+
 			foreach ($pics as $pic) {
 				$p = Picture::find($pic->id);
 				$p->visibility_id = $pic->visibility_id;
 				$p->save();
 			}
-        }
-		
-		$searchModel = new PictureSearch(['scenario'=>'private']);
+		}
+
+		$searchModel = new PictureSearch(['scenario' => 'private']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->pagination->pageSize = 50;
 		$dataProvider->query->ownerScope();
-		$dataProvider->query->andWhere(['visibility_id'=>['private']]);
+		$dataProvider->query->andWhere(['visibility_id' => ['private']]);
 
 		return $this->render('publish', [
 				'dataProvider' => $dataProvider,
@@ -239,19 +280,18 @@ class PictureController extends Controller
 	 */
 	public function actionMassupdate()
 	{
-		if (isset($_POST['Picture'])) {
+		if (\Yii::$app->request->isPost && isset($_POST['Picture'])) {
 			$model = $this->findModel($_POST['Picture']['id']);
 
 			if ($model->load($_POST) && $model->save()) {
 				// Model has been saved => we can reload!
 				$model = NULL;
 			}
-			
 		} else {
 			$model = NULL;
 		}
-		
-		$searchModel = new PictureSearch(['scenario'=>'private']);
+
+		$searchModel = new PictureSearch(['scenario' => 'private']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->pagination->pageSize = 1;
 		$dataProvider->query->ownerScope();
@@ -267,9 +307,10 @@ class PictureController extends Controller
 	  Capture Picture model.
 	 * @return mixed
 	 */
-	public function actionCapture() {
+	public function actionCapture()
+	{
 		$formmodel = new PictureCaptureForm();
-		
+
 		if ($formmodel->load($_POST)) {
 			$formmodel->file_handle = UploadedFile::getInstance($formmodel, 'file_name');
 			if ($formmodel->validate()) {
@@ -282,12 +323,12 @@ class PictureController extends Controller
 					$transaction->rollback();
 					throw($ex);
 				}
-				
+
 				Yii::$app->session->setFlash('success', "Sie können das Bild nun bearbeiten");
 				return $this->redirect(['update', 'id' => $picmodel->id]);
 			}
 		}
-		
+
 		return $this->render('capture', [
 				'formmodel' => $formmodel,
 		]);
@@ -316,9 +357,9 @@ class PictureController extends Controller
 					$transaction->rollback();
 					throw($ex);
 				}
-				
+
 				// @Todo: Insert a link to manage to uploads (basically created date less than an hour...
-				Yii::$app->session->setFlash('success', "<strong>Wunderbar</strong>, die ".count($formmodel->file_handles)." Bilder wurden problemlos eingelesen und Sie können diese nun weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.");
+				Yii::$app->session->setFlash('success', "<strong>Wunderbar</strong>, die " . count($formmodel->file_handles) . " Bilder wurden problemlos eingelesen und Sie können diese nun weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.");
 				return $this->refresh();
 			}
 		}
@@ -342,7 +383,7 @@ class PictureController extends Controller
 			if (Yii::$app->user->checkAccess('isObjectOwner', array('model' => $model))) {
 				return $model;
 			} else {
-                throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
+				throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
 			}
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');
