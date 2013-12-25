@@ -49,7 +49,7 @@ class PictureSearch extends Model
 		return [
 			[
 				['id', 'owner_id', 'original_image_id', 'small_image_id', 'medium_image_id', 'thumbnail_image_id', 'blurred_small_image_id', 'blurred_medium_image_id', 'blurred_thumbnail_image_id', 'clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', 'campaign_id'],
-				'integer'
+				'safe'
 			],
 			[
 				['name', 'description', 'org_loc_lat', 'org_loc_lng', 'loc_lat', 'loc_lng', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix', ], 
@@ -137,12 +137,12 @@ class PictureSearch extends Model
 			$this->addCondition($query, 'description', true);
 			$this->addCondition2($query, 'taken', 'DATE');
 			$this->addCondition($query, 'loc_formatted_addr', true);
-			$this->addCondition($query, 'visibility_id');
-			$this->addCondition($query, 'vehicle_country_code');
+			$this->addCondition2($query, 'visibility_id','ARRAY');
+			$this->addCondition2($query, 'vehicle_country_code','ARRAY');
 			$this->addCondition($query, 'vehicle_reg_plate', true);
 			$this->addCondition($query, 'citation_affix', true);
-			$this->addCondition($query, 'action_id');
-			$this->addCondition($query, 'incident_id');
+			$this->addCondition2($query, 'action_id', 'ARRAY');
+			$this->addCondition2($query, 'incident_id','ARRAY');
 			$this->addCondition($query, 'citation_id');
 			$this->addCondition($query, 'campaign_id');
 			$this->addCondition2($query, 'created_ts', 'DATE');
@@ -166,17 +166,21 @@ class PictureSearch extends Model
 		}
 	}
 
-	// @todo: Complete rewrite the routine an define it as behavior!
+	// @todo: Completely rewrite the routine and define it as behavior!
 	protected function addCondition2($query, $attribute, $type)
 	{
 		$value = $this->$attribute;
-		if (trim($value) === '') {
+		if (is_array($value) && count($value) == 0 || !is_array($value) && trim($value) === '') {
 			return;
 		}
 		switch ($type) {
 			case 'DATE':
 				$query->andWhere(["date($attribute)" => $value]);
 				break;
+			case 'ARRAY':
+				$query->andWhere([$attribute => $value]);
+				break;
 		}
 	}
+	
 }

@@ -73,6 +73,7 @@ CREATE TABLE {{%incident}}
 EOT;
 $this->execute($sql);
 
+$this->insert('{{%incident}}',array('id'=>-1,'sortkey' => 0, 'category'=>'', 'name'=>'(noch nicht gesetzt)', 'description'=>'Bild wurde noch nicht klassifiziert', 'severity'=>0));
 $this->insert('{{%incident}}',array('sortkey' => 100, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken', 'description'=>'Auto parkt auf dem Gehweg', 'severity'=>1));
 $this->insert('{{%incident}}',array('sortkey' => 200, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (behindernd)', 'description'=>'Auto parkt behindernd auf dem Gehweg', 'severity'=>3));
 $this->insert('{{%incident}}',array('sortkey' => 300, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (total behindernd)', 'description'=>'Auto parkt total behindernd auf dem Gehweg', 'severity'=>4));
@@ -121,6 +122,7 @@ CREATE TABLE {{%action}}
 );
 EOT;
 $this->execute($sql);
+$this->insert('{{%action}}',array('id'=>-1, 'sortkey' => 0, 'name'=>'(noch nicht gesetzt)', 'description'=>''));
 $this->insert('{{%action}}',array('sortkey' => 100, 'name'=>'Keine', 'description'=>'Nichts gemacht'));
 $this->insert('{{%action}}',array('sortkey' => 200, 'name'=>'Zettel', 'description'=>'Zettel angebracht'));
 $this->insert('{{%action}}',array('sortkey' => 300, 'name'=>'Angesprochen', 'description'=>'Fahrer angesprochen'));
@@ -157,6 +159,7 @@ CREATE TABLE {{%vehicle_country}}
 );
 EOT;
 $this->execute($sql);
+$this->insert('{{%vehicle_country}}',array('sortkey' => 0, 'category'=>'', 'code'=>'?', 'name'=>'(noch nicht gesetzt)', 'description'=>''));
 $this->insert('{{%vehicle_country}}',array('sortkey' => 100, 'category'=>'D-A-CH', 'code'=>'D', 'name'=>'Deutschland', 'description'=>''));
 $this->insert('{{%vehicle_country}}',array('sortkey' => 200, 'category'=>'D-A-CH', 'code'=>'A', 'name'=>'Österreich', 'description'=>''));
 $this->insert('{{%vehicle_country}}',array('sortkey' => 300, 'category'=>'D-A-CH', 'code'=>'CH', 'name'=>'Schweiz', 'description'=>''));
@@ -201,13 +204,14 @@ CREATE TABLE {{%picture}}
   
   visibility_id text not null references {{%visibility}}(id),
   
-  vehicle_country_code text references {{%vehicle_country}}(code), 
-  vehicle_reg_plate text, -- https://en.wikipedia.org/wiki/Vehicle_registration_plate
+  vehicle_country_code text not null references {{%vehicle_country}}(code), 
+  vehicle_reg_plate text not null default '', -- https://en.wikipedia.org/wiki/Vehicle_registration_plate
   
   citation_affix text NOT NULL DEFAULT '',
   
-  action_id int references {{%action}}(id),
-  incident_id int references {{%incident}}(id),
+  action_id int not null references {{%action}}(id),
+  incident_id int not null references {{%incident}}(id),
+  
   citation_id int references {{%citation}}(id) on delete set null,
   campaign_id int references {{%campaign}}(id) on delete set null,
   

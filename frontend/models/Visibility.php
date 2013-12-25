@@ -77,7 +77,7 @@ class Visibility extends \yii\db\ActiveRecord
 	 */
 	public static function dropDownList()
 	{
-		return ['' => ['' => '(nicht gesetzt)']] + \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name','category');
+		return \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name','category');
 	}
 	
 }

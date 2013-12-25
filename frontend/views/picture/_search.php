@@ -9,13 +9,50 @@ use yii\widgets\ActiveForm;
 
 <div class="picture-search">
 
-	<div class ="col-md-4">
+	<div class ="col-sm-4 col-md-4 form-group">
 	<?php 
 		/** @var yii\widgets\ActiveForm $form */
 		$form = ActiveForm::begin([
 		'method' => 'get',
 	]); ?>
-	
+		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
+			<fieldset>
+			<legend>Zeit &amp; Ort</legend>
+			<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
+
+			<?= $form->field($model, 'loc_formatted_addr') ?>
+			</fieldset>
+		
+			<fieldset>
+			<legend>Vorfall  &amp; Aktionen</legend>
+			<?= $form->field($model, 'incident_id')->listBox(frontend\models\Incident::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+
+			<?= $form->field($model, 'action_id')->listBox(frontend\models\Action::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+
+			<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
+
+			<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
+			</fieldset>
+
+			<fieldset>
+			<legend>Verarbeitung</legend>
+			<?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
+
+			<?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
+			
+			<?= $form->field($model, 'visibility_id')->listBox(frontend\models\Visibility::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+			</fieldset>
+
+			<fieldset>
+			<legend>Kfz</legend>
+			<?= $form->field($model, 'vehicle_country_code')->listBox(frontend\models\VehicleCountry::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+
+			<?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
+			</fieldset>
+		<?php endif; ?>
+
+		<fieldset>
+			<legend>Texte &amp; Referenzen</legend>
 		<?= $form->field($model, 'id') ?>
 
 		<?= $model->scenario == 'admin'?$form->field($model, 'owner_id'):'' ?>
@@ -23,30 +60,7 @@ use yii\widgets\ActiveForm;
 		<?= $form->field($model, 'name') ?>
 
 		<?= $form->field($model, 'description') ?>
-
-		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
-			<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
-
-			<?= $form->field($model, 'loc_formatted_addr') ?>
-		
-			<?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
-
-			<?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
-
-			<?= $form->field($model, 'visibility_id')->dropDownList(frontend\models\Visibility::dropDownList()) ?>
-
-			<?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
-
-			<?= $form->field($model, 'incident_id')->dropDownList(frontend\models\Incident::dropDownList()) ?>
-
-			<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
-
-			<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
-
-			<?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
-
-			<?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
-		<?php endif; ?>
+		</fieldset>
 
 		<div class="form-group">
 			<?= Html::submitButton('Suchen', ['class' => 'btn btn-primary']) ?>
@@ -54,7 +68,7 @@ use yii\widgets\ActiveForm;
 		</div>
 		
 		<p class="help-block">
-			Die Suche ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird.<br>Eine Suche nach <em>straße</em> findet also <em>Kriegsstraße</em>, aber nicht <em>Straße des 17.Juni</em>
+			Die Suche in den Textfeldern ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird.<br>Eine Suche nach <em>straße</em> findet also <em>Kriegsstraße</em>, aber nicht <em>Straße des 17.Juni</em>
 		</p>
 
 	<?php ActiveForm::end(); ?>

@@ -84,6 +84,8 @@ class Picture extends \yii\db\ActiveRecord
 	public function setDefaults() {
 		$this->visibility_id = 'private';
 		$this->vehicle_country_code = 'D';
+		$this->incident_id = -1;
+		$this->action_id = -1;
 		$this->clip_x = 50;
 		$this->clip_y = 50;
 		$this->clip_size = 25;
@@ -117,7 +119,7 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public function validateVehiclePlateConsistency($attribute, $params)
 	{
-		if (!empty($this->vehicle_reg_plate) and empty($this->vehicle_country_code))
+		if (!empty($this->vehicle_reg_plate) and $this->vehicle_country_code=='?')
 			$this->addError('vehicle_country_code', 'Das Land des eingetragenen Kfz-Kennzeichens muss angegeben werden.');
 	}
 
@@ -155,12 +157,8 @@ class Picture extends \yii\db\ActiveRecord
 		// It is utmost important that only attributes which a safe to be mass assigned are listed here!
 		// owner_id and the whole image_ids certainly should not be changed by the user!
 		return [
-			['vehicle_country_code', 'default', 'value' => NULL],
-			['action_id', 'default', 'value' => NULL],
-			['incident_id', 'default', 'value' => NULL],
 			['citation_id', 'default', 'value' => NULL],
 			['campaign_id', 'default', 'value' => NULL],
-			['visibility_id', 'default', 'value' => NULL],
 			['selected', 'default', 'value' => false],
 			['deleted', 'default', 'value' => false],
 			[['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
