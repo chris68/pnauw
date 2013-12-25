@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		unset($params[$dataProvider->getSort()->sortVar]);
 		$params[$dataProvider->getSort()->sortVar] = 'id';
 		$route = Yii::$app->controller->getRoute();
-		echo Html::a('Massenbearbeiten (alle)',Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params));
+		echo Html::a('Massenbearbeiten (alle)', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
 	}
 ?>
 </div>
@@ -103,7 +103,7 @@ EOT;
 						]
 					)
 			.
-					Html::a('Bild im Detail bearbeiten',['picture/update','id'=>$model->id],['target' => '_blank'])
+					Html::a('Bild im Detail bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])
 			.
 					'<br>'
 			.
