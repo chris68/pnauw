@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					function($data, $row) {
 						return frontend\widgets\ImageRenderer::widget(
 							[
-								'image' => $data->SmallImage,
+								'image' => $data->smallImage,
 								'size' => 'small',
 								'options' => ['id' => 'picture-image', 'class' => 'img-responsive'],
 							]
