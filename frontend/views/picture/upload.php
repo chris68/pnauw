@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = 'Hochladen';
 
 	<?php $form = ActiveForm::begin(['id' => 'picture-upload-form', 'options' => ['enctype' => 'multipart/form-data'], ]); ?>
 		<?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>
-		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => 'multiple', 'accept' => 'image/*', ]) ?>
+		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => true, 'accept' => 'image/*', ]) ?>
 		<div class="form-group">
 			<?= Html::submitButton('Hochladen', ['class' => 'btn btn-primary']) ?>
 			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>

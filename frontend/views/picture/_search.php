@@ -25,9 +25,9 @@ use yii\widgets\ActiveForm;
 		
 			<fieldset>
 			<legend>Vorfall  &amp; Aktionen</legend>
-			<?= $form->field($model, 'incident_id')->listBox(frontend\models\Incident::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+			<?= $form->field($model, 'incident_id')->listBox(frontend\models\Incident::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
-			<?= $form->field($model, 'action_id')->listBox(frontend\models\Action::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+			<?= $form->field($model, 'action_id')->listBox(frontend\models\Action::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
 			<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
 
@@ -40,12 +40,12 @@ use yii\widgets\ActiveForm;
 
 			<?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 			
-			<?= $form->field($model, 'visibility_id')->listBox(frontend\models\Visibility::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+			<?= $form->field($model, 'visibility_id')->listBox(frontend\models\Visibility::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 			</fieldset>
 
 			<fieldset>
 			<legend>Kfz</legend>
-			<?= $form->field($model, 'vehicle_country_code')->listBox(frontend\models\VehicleCountry::dropDownList(), ['multiple'=>'multiple', 'unselect' => '', ]) ?>
+			<?= $form->field($model, 'vehicle_country_code')->listBox(frontend\models\VehicleCountry::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
 			<?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
 			</fieldset>
