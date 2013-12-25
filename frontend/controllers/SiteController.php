@@ -78,7 +78,7 @@ class SiteController extends Controller
 	public function actionContact()
 	{
 		$model = new ContactForm;
-		if ($model->load($_POST) && $model->contact(Yii::$app->params['adminEmail'])) {
+		if ($model->load($_POST) && $model->contact()) {
 			Yii::$app->session->setFlash('success', \Yii::t('base','Thank you for contacting us. We will respond to you as soon as possible.'));
 			return $this->refresh();
 		} else {
@@ -176,7 +176,7 @@ class SiteController extends Controller
 		$user->password_reset_token = Security::generateRandomKey();
 		if ($user->save(false)) {
 			return \Yii::$app->mail->compose('passwordResetToken', ['user' => $user])
-				->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+				->setFrom([\Yii::$app->params['noreplyEmail'] => \Yii::$app->name . ' robot'])
 				->setTo($email)
 				->setSubject(\Yii::t('base','Password reset for ') . \Yii::$app->name)
 				->send();
