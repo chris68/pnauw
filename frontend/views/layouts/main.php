@@ -25,7 +25,7 @@ AppAsset::register($this);
 	<?php $this->beginBody() ?>
 	<?php
 		NavBar::begin([
-			// Label should small; otherwise on mobile phone the navbar blows up to two lines!
+			// Label should be small; otherwise on mobile phone the navbar blows up to two lines!
 			'brandLabel' => '<small>Parke nicht auf unseren Wegen</small>',
 			'brandUrl' => Yii::$app->homeUrl,
 			'options' => [
@@ -80,15 +80,20 @@ AppAsset::register($this);
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-sm-12 col-md-12 alert alert-warning">
+					Das System ist derzeit noch in Entwicklung und daher noch nicht für eine richtige Nutzung geeignet!
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-6">
 					<?= Html::a('Nutzungsbedingungen','site/terms') ?> |
 					<?= Html::a('Impressum','site/impressum') ?> |
 					<?= Html::a('Datenschutz','site/privacy') ?>
 				</div>
-				<div class="col-md-2">
+				<div class="col-sm-2 col-md-2">
 					<hr class ="visible-xs visible-sm">
 				</div>
-				<div class="col-md-4">
+				<div class="col-sm-4 col-md-4">
 					<p class ="pull-right"><?= Yii::powered() ?></p>
 				</div>
 			</div>
