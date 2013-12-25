@@ -43,9 +43,9 @@ return array (
   'Signup' => 'Registrieren',
   'Subject' => 'Betreff',
   'Submit' => 'Abschicken',
-  'Thank you for contacting us. We will respond to you as soon as possible.' => 'Vielen Dank für Ihre Kontaktaufnahme. Wir werden so schnell wie möglich antworten.',
+  'Thank you for contacting us. We will respond to you as soon as possible.' => 'Vielen Dank für Ihre Kontaktaufnahme. Wir werden so schnell wie möglich antworten und haben auch Ihnen die Mail für Ihre Unterlagen geschickt.',
   'There was an error sending email.' => 'Es gab beim Versenden der Email leider einen Fehler.',
   'Verification Code' => 'Prüfcode',
-  'Wrong password reset token.' => 'Falsches Token für die Passwort&shy;rücksetzung',
+  'Wrong password reset token.' => 'Falsches Token für die Passwortrücksetzung',
   'reset it' => 'es zurücksetzen',
 );
