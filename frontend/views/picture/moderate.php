@@ -26,10 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
 		'layout' => "{pager}\n{summary}\n{items}\n{pager}",
 		'itemView' => function ($model, $key, $index, $widget) use ($form) {
 			return
-			'<hr>'
-			.
 			'<div class="row">
 				<div class="col-sm-4 col-md-4 col-lg-4">'
+			.
+				'<hr>'
 			.
 				'<p><b>'
 			.
@@ -57,11 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			.
 				'</p>'
 			.
-			'	</div>
-			</div>
-			'
+				'<hr>'
 			.
-			'<hr>'
+			'	</div>
+			</div>'
 			;
 		},
 	]); ?>

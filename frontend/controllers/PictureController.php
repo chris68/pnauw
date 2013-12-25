@@ -35,6 +35,10 @@ class PictureController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
+						'actions' => ['index'],
+					],
+					[
+						'allow' => true,
 						'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'capture', 'publish'],
 						'roles' => ['@'],
 					],
@@ -54,9 +58,9 @@ class PictureController extends Controller
 	 */
 	public function actionIndex()
 	{
-		throw new HttpException(404, 'Sorry - aber derzeit ist es leider noch nicht möglich, die Bilder öffentlich anzuschauen!');
 		$searchModel = new PictureSearch(['scenario' => 'public']);
 		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->query->publicScope();
 		$dataProvider->pagination->pageSize = 20;
 
 		return $this->render('index', [

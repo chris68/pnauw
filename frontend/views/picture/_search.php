@@ -15,12 +15,11 @@ use yii\widgets\ActiveForm;
 		$form = ActiveForm::begin([
 		'method' => 'get',
 	]); ?>
-		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
 			<fieldset>
 			<legend>Zeit &amp; Ort</legend>
 			<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
-			<?= $form->field($model, 'loc_formatted_addr') ?>
+			<?= $form->field($model, 'loc_formatted_addr')->hint('Eine Suche nach der Adresse ist eher unzuverlässig, da die Adresse nur sporadisch ausgefüllt ist. Suchen Sie am besten über die Karte.') ?>
 			</fieldset>
 		
 			<fieldset>
@@ -29,11 +28,10 @@ use yii\widgets\ActiveForm;
 
 			<?= $form->field($model, 'action_id')->listBox(frontend\models\Action::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
-			<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
-
 			<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
 			</fieldset>
 
+		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
 			<fieldset>
 			<legend>Verarbeitung</legend>
 			<?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
@@ -44,10 +42,13 @@ use yii\widgets\ActiveForm;
 			</fieldset>
 
 			<fieldset>
-			<legend>Kfz</legend>
+			<legend>Kfz &amp; Anzeigen</legend>
 			<?= $form->field($model, 'vehicle_country_code')->listBox(frontend\models\VehicleCountry::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
 			<?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
+			
+			<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
+
 			</fieldset>
 		<?php endif; ?>
 

@@ -4,7 +4,6 @@
 /* @var $searchModel frontend\models\PictureSearch */
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
 use yii\widgets\ActiveForm;
@@ -33,34 +32,45 @@ $this->params['breadcrumbs'][] = $this->title;
 		'dataProvider' => $dataProvider,
 		'layout' => "{pager}\n{summary}\n{items}\n{pager}",
 		'id' => 'picture-list',
-		// 'itemOptions' => ['class' => 'item'],
 		'itemView' => function ($model, $key, $index, $widget) {
 			return
-			'<div class="row" style="margin:10px">
-				<div class="col-lg-3">
-			'
+			'<div class="row">
+				<div class="col-sm-4 col-md-4 col-lg-4">'
+			.
+				'<hr>'
+			.
+				'<p><b>'
+			.
+				Html::encode($model->name)
+			.
+				'</p></b>'
+			.
+				'<p>'
+			.
+				Html::encode($model->incident->name)
+			.
+				'</p>'
 			.
 					frontend\widgets\ImageRenderer::widget(
 						[
 							'image' => $model->blurredSmallImage,
 							'size' => 'small',
-							'options' => ['class' => 'img-responsive'],
+							'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:10px'],
 						]
 					)
 			.
-			'	</div>
-				<div class="col-lg-3">'
+				'<p>'
 			.
-					Html::encode($model->name)
+				Html::encode($model->description)
 			.
-			'<br>'
+				'</p>'
 			.
-					Html::encode($model->description)
+				'<hr>'
 			.
-			'	</div>
-			</div>
-			';
+				'</div>'
+			.
+			'</div>'
+			;
 		},
 	]); ?>
-	</div>
 </div>

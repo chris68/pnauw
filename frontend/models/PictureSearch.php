@@ -69,12 +69,15 @@ class PictureSearch extends Model
 	public function scenarios()
 	{
 		return [
-			'public' => ['id','taken','name','description', ],
+			'public' => [
+				'id','taken','name','description', 
+				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
+				],
 			'private' => [
 				'id','taken','name','description', 
-				'created_ts', 'modified_ts', 'deleted_ts', 
-				'action_id', 'incident_id', 'citation_id', 'campaign_id' , 'visibility_id', 
-				'vehicle_country_code', 'vehicle_reg_plate', 'loc_formatted_addr'],
+				'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
+				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
+				'vehicle_country_code', 'vehicle_reg_plate', 'citation_id', ],
 			'admin' => parent::scenarios(), // admin may do everthing
 		];
 	}

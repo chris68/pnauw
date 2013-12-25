@@ -50,6 +50,7 @@ AppAsset::register($this);
 					['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
 					['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
 					['label' => 'Veröffentlichen', 'url' => ['/picture/publish','sort'=>'modified_ts-desc']],
+					['label' => 'Anschauen', 'url' => ['/picture/index','sort'=>'taken-desc']],
 				],
 			],
 			['label' => \Yii::t('base','About'), 'url' => ['/site/about']],

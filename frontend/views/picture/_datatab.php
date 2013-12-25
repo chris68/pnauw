@@ -5,7 +5,7 @@
 ?>
 
 <div class=	"row">
-	<div class ="col-lg-6">
+	<div class ="col-sm-6 col-md-6">
 		<?= $form->field($model, 'name')->textInput() ?>
 		<?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 		<?= $form->field($model, 'visibility_id')->dropDownList(frontend\models\Visibility::dropDownList()) ?>
