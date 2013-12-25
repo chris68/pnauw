@@ -115,12 +115,6 @@ class PictureSearch extends Model
 			'created_ts' => 'Hochgeladen am',
 			'modified_ts' => 'Geändert am',
 			'deleted_ts' => 'Gelöscht am',
-			
-			// @Todo: Check whether still needed
-			'visibility___name' => 'Sichtbarkeit',
-			'incident___name' => 'Vorfall',
-			'citation__name' => 'Anzeige',
-			'action__name' => 'Maßnahme',
 		];
 	}
 

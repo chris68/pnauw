@@ -218,12 +218,6 @@ class Picture extends \yii\db\ActiveRecord
 			'deleted_ts' => 'Gelöscht am',
 			'selected' => 'Auswählen',
 			'deleted' => 'Löschen',
-			
-			// @Todo: Check whether still needed
-			'visibility___name' => 'Sichtbarkeit',
-			'incident___name' => 'Vorfall',
-			'citation__name' => 'Anzeige',
-			'action__name' => 'Maßnahme',
 		];
 	}
 
