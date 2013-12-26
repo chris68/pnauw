@@ -9,9 +9,9 @@ class PictureHeatmapAsset extends AssetBundle
 {
 	public $sourcePath = '@frontend/views/picture/assets';
 	public $js = [
-		// Heatmaps require '&libraries=visualization'
-		'http://maps.googleapis.com/maps/api/js?sensor=false&language=de&libraries=visualization',
-		//'http://maps.googleapis.com/maps/api/js?sensor=false&language=de&libraries=places',
+		// Heatmaps requires '&libraries=visualization'
+		// Geocoding requires ',places'
+		'http://maps.googleapis.com/maps/api/js?sensor=false&language=de&libraries=visualization,places',
 		'pnauw.picture.heatmap.js',
 	];
 	public $depends = [
