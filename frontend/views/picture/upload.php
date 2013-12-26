@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = 'Hochladen';
 <div class="picture-upload">
 	<h1><?= $this->title ?></h1>
 
-	<?php $form = ActiveForm::begin(['id' => 'picture-upload-form', 'options' => ['enctype' => 'multipart/form-data'], ]); ?>
+	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); ?>
 		<?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>
 		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => true, 'accept' => 'image/*', ]) ?>
 		<div class="form-group">

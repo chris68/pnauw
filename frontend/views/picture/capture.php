@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = 'Aufnehmen';
 
 	<?php 
 		/* @var $form yii\widgets\ActiveForm */
-		$form = ActiveForm::begin(['id' => 'picture-capture-form', 'options' => ['enctype' => 'multipart/form-data'], ]); 
+		$form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); 
 	?>
 		<?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>
 		<?= $form->field($formmodel, 'file_name')->fileInput(['accept' => 'image/*', 'capture' => 'camera', ]) ?>
