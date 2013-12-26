@@ -164,6 +164,7 @@ class PictureSearch extends Model
 		if (trim($value) === '') {
 			return;
 		}
+		$attribute = "{{%picture}}.".$attribute ;
 		if ($partialMatch) {
 			$value = '%' . strtr($value, ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\']) . '%';
 			$query->andWhere(['like', $attribute, $value]);
@@ -179,6 +180,7 @@ class PictureSearch extends Model
 		if (is_array($value) && count($value) == 0 || !is_array($value) && trim($value) === '') {
 			return;
 		}
+		$attribute = "{{%picture}}.".$attribute ;
 		switch ($type) {
 			case 'DATE':
 				$query->andWhere(["date($attribute)" => $value]);
