@@ -23,11 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 				'Karte' => [
-					'content' => 'Hier kommt dann bald die Heatmap',
+					'content' => '',
 				],
 			],
 	   ]);
- ?>
+	?>
+
+	<?= $this->render('_heatmap', ['dataProvider' => $dataProvider]) ?>
+	
 	<?= ListView::widget([
 		'dataProvider' => $dataProvider,
 		'layout' => "{pager}\n{summary}\n{items}\n{pager}",

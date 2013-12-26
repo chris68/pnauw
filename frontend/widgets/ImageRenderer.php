@@ -63,7 +63,7 @@ class ImageRenderer extends \yii\base\Widget
 
 
 			/* Create text */
-			$image->annotateImage($draw, 10, $offset, 0, "Es liegt\nkein Bild\nvor oder\ndas Bild\nist noch\nim Review");
+			$image->annotateImage($draw, 10, $offset, 0, "Ohne Bild");
 			$image->setImageFormat('jpg');
 			$rawdata = bin2hex($image->getimageblob());
 			

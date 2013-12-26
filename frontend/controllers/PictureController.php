@@ -16,7 +16,7 @@ use yii\web\UploadedFile;
 use yii\helpers\Html;
 
 /**
- * PictureController implements the CRUD actions for Picture model.
+ * PictureController implements CRUD actions and much more for Picture model.
  */
 class PictureController extends Controller
 {
@@ -35,7 +35,7 @@ class PictureController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'actions' => ['index'],
+						'actions' => ['index','geodata'],
 					],
 					[
 						'allow' => true,
@@ -67,6 +67,37 @@ class PictureController extends Controller
 				'dataProvider' => $dataProvider,
 				'searchModel' => $searchModel,
 		]);
+	}
+
+	/**
+	 * Returns the geodata for the current picture search.
+	 * @return array
+	 */
+	public function actionGeodata()
+	{
+		$searchModel = new PictureSearch(['scenario' => 'public']);
+		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->query->publicScope();
+		$dataProvider->pagination->pageSize = 0;
+		/*
+		 * @todo: See issue https://github.com/yiisoft/yii2/issues/1631
+		 * Currently not working. Need to patch Response prepare to added UTF as char set explicitly!
+				case self::FORMAT_JSON:
+					$this->getHeaders()->set('Content-Type', 'application/json; charset= UTF-8');
+					$this->content = Json::encode($this->data);
+					break;
+		 */
+		\Yii::$app->response->charset = 'UTF-8';
+		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		
+		$coords = [];
+		foreach ($dataProvider->getModels() as $pic) {
+			// Only return coordinates that have been fixed already and not (0,0)
+			if ($pic->loc_lat <> '0' && $pic->loc_lng <> '0' ) {
+				$coords[] = ['lat'=>$pic->loc_lat,'lng'=>$pic->loc_lng];
+			}
+		}
+		return $coords;
 	}
 
 	/**
