@@ -224,7 +224,7 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public static function ownerScope($query)
 	{
-		$query->andWhere("owner_id = :owner", [':owner' => \Yii::$app->user->id]);
+		$query->andWhere("tbl_picture.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
 	}
 
 	/**
@@ -232,7 +232,7 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public static function publicScope($query)
 	{
-		$query->andWhere("visibility_id = 'public'");
+		$query->andWhere("tbl_picture.visibility_id = 'public'");
 	}
 
 	/**
