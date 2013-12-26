@@ -378,7 +378,7 @@ class PictureController extends Controller
 	  Upload Picture model.
 	 * @return mixed
 	 */
-	public function actionUpload()
+	public function actionUpload($replicate=1)
 	{
 		$formmodel = new PictureUploadForm();
 
@@ -386,16 +386,20 @@ class PictureController extends Controller
 			$formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
 
 			if ($formmodel->validate()) {
+				for ($i=0;$i<(Yii::$app->user->checkAccess('admin')?((int)$replicate):1);$i++) {
+					
 				$transaction = \Yii::$app->db->beginTransaction();
 				try {
 					foreach ($formmodel->file_handles as $file) {
-						$picmodel = new Picture;
-						$picmodel->fillFromFile($file);
+							$picmodel = new Picture;
+							$picmodel->fillFromFile($file);
 					}
 					$transaction->commit();
 				} catch (Exception $ex) {
 					$transaction->rollback();
 					throw($ex);
+				}
+				
 				}
 
 				Yii::$app->session->setFlash('success', 
