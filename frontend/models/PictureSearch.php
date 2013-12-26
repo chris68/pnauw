@@ -121,9 +121,12 @@ class PictureSearch extends Model
 		];
 	}
 
-	public function search($params)
+	public function search($params, $query=NULL)
 	{
-		$query = Picture::find();
+		if ($query === NULL) {
+			$query = Picture::find();
+		} 
+			
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
 		]);
@@ -131,7 +134,7 @@ class PictureSearch extends Model
 		$this->load($params);
 		if (!$this->validate()) {
 			// Ensure we find nothing!
-			$query->where('1=0');
+			$query->andWhere('1=0');
 		} else
 		{
 			$this->addCondition($query, 'id');

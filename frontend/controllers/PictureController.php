@@ -75,19 +75,23 @@ class PictureController extends Controller
 	 */
 	public function actionGeodata($private=false)
 	{
-		$searchModel = new PictureSearch(['scenario' => 'public']);
-		$dataProvider = $searchModel->search($_GET);
-		
 		// Ultrafast and efficient data fetch!
-		$dataProvider->query->select('tbl_picture.id, tbl_picture.loc_lng, tbl_picture.loc_lat, tbl_incident.severity');
-		$dataProvider->query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
-		$dataProvider->query->asArray();
+		$query = Picture::find();
+		$query->select('tbl_picture.id, tbl_picture.loc_lng, tbl_picture.loc_lat, tbl_incident.severity');
+		$query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
+		//$query->andWhere(['taken' => '2013-01-01']);
+		$query->asArray();
 		
 		if ($private == false || Yii::$app->user->isGuest) {
-			$dataProvider->query->publicScope(); 
+			$query->publicScope(); 
+			$searchModel = new PictureSearch(['scenario' => 'public']);
 		} else {
-			$dataProvider->query->ownerScope();
+			$query->ownerScope();
+			$searchModel = new PictureSearch(['scenario' => 'private']);
 		}
+		
+		$dataProvider = $searchModel->search($_GET, $query);
+		
 		$dataProvider->pagination->pageSize = 1000; // maximum 1000 items
 		
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
