@@ -71,30 +71,32 @@ class PictureController extends Controller
 
 	/**
 	 * Returns the geodata for the current picture search.
-	 * @return array
+	 * @return mixed
 	 */
-	public function actionGeodata()
+	public function actionGeodata($private=false)
 	{
 		$searchModel = new PictureSearch(['scenario' => 'public']);
 		$dataProvider = $searchModel->search($_GET);
-		$dataProvider->query->publicScope();
-		$dataProvider->pagination->pageSize = 0;
-		/*
-		 * @todo: See issue https://github.com/yiisoft/yii2/issues/1631
-		 * Currently not working. Need to patch Response prepare to added UTF as char set explicitly!
-				case self::FORMAT_JSON:
-					$this->getHeaders()->set('Content-Type', 'application/json; charset= UTF-8');
-					$this->content = Json::encode($this->data);
-					break;
-		 */
-		\Yii::$app->response->charset = 'UTF-8';
-		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		
+		// Ultrafast and efficient data fetch!
+		$dataProvider->query->select('tbl_picture.id, tbl_picture.loc_lng, tbl_picture.loc_lat, tbl_incident.severity');
+		$dataProvider->query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
+		$dataProvider->query->asArray();
+		
+		if ($private == false || Yii::$app->user->isGuest) {
+			$dataProvider->query->publicScope(); 
+		} else {
+			$dataProvider->query->ownerScope();
+		}
+		$dataProvider->pagination->pageSize = 1000; // maximum 1000 items
+		
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		
 		$coords = [];
 		foreach ($dataProvider->getModels() as $pic) {
 			// Only return coordinates that have been fixed already and not (0,0)
-			if ($pic->loc_lat <> '0' && $pic->loc_lng <> '0' ) {
-				$coords[] = ['location'=>['lat'=>$pic->loc_lat,'lng'=>$pic->loc_lng],'severity'=>$pic->incident->severity];
+			if ($pic['loc_lat'] <> '0' && $pic['loc_lng'] <> '0' ) {
+				$coords[] = ['location'=>['lat'=>$pic['loc_lat'],'lng'=>$pic['loc_lng']],'severity'=>$pic['severity']];
 			}
 		}
 		return $coords;

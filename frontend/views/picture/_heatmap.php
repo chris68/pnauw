@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $private boolean */
 
 use yii;
 ?>
@@ -16,6 +16,7 @@ use yii;
 					{
 						$request = Yii::$app->getRequest();
 						$params = $request instanceof yii\web\Request ? $request->get() : [];
+						$params = ['private' => $private] + $params;
 						echo Yii::$app->getUrlManager()->createUrl('picture/geodata', $params);
 					}
 				  ?>";

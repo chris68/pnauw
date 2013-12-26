@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	   ]);
  ?>
 	
-<?= $this->render('_heatmap', ['dataProvider' => $dataProvider]) ?>
+<?= $this->render('_heatmap', ['private' => 1]) ?>
 	
 <div style="margin-top: 10px;">
 <?php
