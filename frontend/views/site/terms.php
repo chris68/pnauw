@@ -39,12 +39,20 @@ $this->params['breadcrumbs'][] = $this->title;
 		Alle Objekte (Bilder, Kampagnen, aber auch Nutzer) können JEDERZEIT und ohne Begründung und ohne Vorankündigung von dem Betreiber oder einem von Betrieber ernannten Moderator gelöscht werden. Dies wird vor allem dann geschehen, wenn die Nutzungsbedingungen verletzt wurden.
 	</p>
 	
+	<h4>Externe Nutzung der API/JSON-Funktionen verboten</h4>
+	<p>
+		Die Nutzung der API/JSON-Funktionen für externe Zwecke ist derzeit verboten. 
+	</p>
+	<p>
+		<i>Eventuell wird dies später freigeben, aber derzeit müssen wir schauen, wie sich die Last und Performance entwickelt.</i>
+	</p>
+	
 	<h4>Änderung der Nutzungsbedingung</h4>
 	<p>
 		Alle Änderungen dieser Nutzungsbedingungen werden hier veröffentlicht und mit dem in bei Veröffentlichung angegebenen Gültigkeitdatum gültig. Wir werden Ihnen eine Benachrichtigungsmail an Ihre Standard Emailadresse aus dem Nutzerprofil schicken und Sie zudem auf der Startseite auf die Änderungen hinweisen. Wenn Sie mit den Änderungen nicht einverstanden sind, dann dürfen Sie den Service nicht weiter nutzen.
 	</p>
 
 	<p>
-		(Stand 03.12.2013; gültig ab 03.12.2013)
+		(Stand 26.12.2013; gültig ab 26.12.2013)
 	</p>
 </div>
