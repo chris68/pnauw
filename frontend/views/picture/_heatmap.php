@@ -20,6 +20,9 @@ use yii;
 					}
 				  ?>";
 </script>
-
-<div id="picture-heatmap-map-canvas" style="margin-top: 10px; margin-bottom: 10px; border: 1px dashed #C0C0C0; width: 300px; height: 300px;"></div>
-
+<div class="row">
+	<div class="col-lg-4" style="margin-top: 10px; margin-bottom: 10px;">
+		<!-- The Google maps canvas needs absolute coordinates -->
+		<div id="picture-heatmap-map-canvas" style="width: 300px; height: 300px;"></div>
+	</div>
+</div>

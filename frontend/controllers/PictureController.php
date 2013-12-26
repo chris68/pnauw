@@ -94,7 +94,7 @@ class PictureController extends Controller
 		foreach ($dataProvider->getModels() as $pic) {
 			// Only return coordinates that have been fixed already and not (0,0)
 			if ($pic->loc_lat <> '0' && $pic->loc_lng <> '0' ) {
-				$coords[] = ['lat'=>$pic->loc_lat,'lng'=>$pic->loc_lng];
+				$coords[] = ['location'=>['lat'=>$pic->loc_lat,'lng'=>$pic->loc_lng],'severity'=>$pic->incident->severity];
 			}
 		}
 		return $coords;

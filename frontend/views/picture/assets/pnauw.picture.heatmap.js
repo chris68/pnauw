@@ -6,8 +6,9 @@ $(function() {
 		var bounds = new google.maps.LatLngBounds();
 
 		$.each( data, function( key, val ) {
-			var point = new google.maps.LatLng(val.lat,val.lng);
-			points.push(point);
+			var point = new google.maps.LatLng(val.location.lat, val.location.lng);
+			// Construct a weighted location
+			points.push({location:point, weight:val.severity+1});
 			bounds.extend(point);
 		});
 		

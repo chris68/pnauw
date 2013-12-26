@@ -22,9 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				'Suchen und Filtern' => [
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
-				'Karte' => [
-					'content' => '',
-				],
 			],
 	   ]);
 	?>

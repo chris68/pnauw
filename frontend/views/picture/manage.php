@@ -22,12 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				'Suchen und Filtern' => [
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
-				'Karte' => [
-					'content' => 'Hier kommt dann bald die Heatmap',
-				],
 			],
 	   ]);
  ?>
+	
+<?= $this->render('_heatmap', ['dataProvider' => $dataProvider]) ?>
 	
 <div style="margin-top: 10px;">
 <?php
