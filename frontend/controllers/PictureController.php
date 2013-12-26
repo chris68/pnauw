@@ -387,7 +387,7 @@ class PictureController extends Controller
 
 			if ($formmodel->validate()) {
 				for ($i=0;$i<(Yii::$app->user->checkAccess('admin')?((int)$replicate):1);$i++) {
-					
+				set_time_limit(30);
 				$transaction = \Yii::$app->db->beginTransaction();
 				try {
 					foreach ($formmodel->file_handles as $file) {
