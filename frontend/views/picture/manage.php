@@ -41,37 +41,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		unset($params[$dataProvider->getSort()->sortVar]);
 		$params[$dataProvider->getSort()->sortVar] = 'id';
 		$route = Yii::$app->controller->getRoute();
+		// todo: Somehow enable the user to massupdate the selected objects only
 		echo Html::a('Bilder einzeln bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
 		echo ' | ';
 		echo Html::a('Bilder veröffentlichen', Yii::$app->getUrlManager()->createUrl('picture/publish', $params), ['target' => '_blank']);
 	}
 ?>
 </div>
-	
-<?php if(0) { // todo: Somehow enable the user to massupdate the selected objects ?>
-	<?php ActiveForm::begin(['id' => 'picture-action-form', 'action' => ['massedit'], ]); ?>
-		<?= Html::hiddenInput('selected_ids','',['id' => 'picture-action-selected-id', ]) ?>
-		<div class="form-group">
-			<?= Html::submitButton('Bearbeiten', ['class' => 'btn btn-primary']) ?>
-			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
-		</div>
-	<?php ActiveForm::end(); ?>
-
-	
-	<?php
-	{
-$script = <<<'EOT'
-$('#picture-action-form').
-	submit(
-		function(event) {
-			$('#picture-action-selected-id').val($('#picture-grid').yiiGridView('getSelectedRows'));
-		}
-	);
-EOT;
-		$this->registerJs($script, \yii\web\View::POS_READY);
-	}
-	?>
-<?php }; ?>
 	
 	<?php 
 		/* @var $form yii\widgets\ActiveForm */
