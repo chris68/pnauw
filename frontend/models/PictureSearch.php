@@ -137,8 +137,8 @@ class PictureSearch extends Model
 			$query->andWhere('1=0');
 		} else
 		{
-			$this->addCondition($query, 'id');
-			$this->addCondition($query, 'owner_id');
+			$this->addCondition($query, 'id', 'ARRAY');
+			$this->addCondition($query, 'owner_id', 'ARRAY');
 			$this->addCondition($query, 'name', true);
 			$this->addCondition($query, 'description', true);
 			$this->addCondition2($query, 'taken', 'DATE');
