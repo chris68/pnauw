@@ -395,7 +395,7 @@ class PictureController extends Controller
 					throw($ex);
 				}
 
-				Yii::$app->session->setFlash('success', "Sie können das Bild nun bearbeiten");
+				Yii::$app->session->setFlash('success', "Sie können das Bild nun bearbeiten.");
 				return $this->redirect(['update', 'id' => $picmodel->id]);
 			}
 		}
