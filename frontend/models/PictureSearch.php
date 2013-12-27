@@ -48,6 +48,14 @@ class PictureSearch extends Model
 	public $map_bind = true;
 	public $map_limit_points = false;
 	
+	/**
+	 * {@inheritdoc}
+	 */
+	public function formName()
+	{
+		return 's';
+	}
+
 	public function rules()
 	{
 		return [
@@ -132,8 +140,8 @@ class PictureSearch extends Model
 			'deleted_ts' => 'Gelöscht am',
 			
 			'map_bounds' => 'Kartengrenzen',
-			'map_bind' => 'Suche an die Kartengrenzen binden',
-			'map_limit_points' => 'Punkteanzeige auf die derzeitige Kartengrenze beschränken', 
+			'map_bind' => 'Suche durch den Kartenbereich begrenzen',
+			'map_limit_points' => 'Auch Ermittlung der Heatmap auf den Kartenbereich beschränken', 
 		];
 	}
 

@@ -409,7 +409,7 @@ class PictureController extends Controller
 				Yii::$app->session->setFlash('success', 
 					'<strong>Wunderbar</strong>, die ' . count($formmodel->file_handles) . 
 					' Bilder wurden problemlos eingelesen und Sie können diese nun '.
-					Html::a('hier', ['manage', 'PictureSearch[created_ts]'=> date("Y-m-d")]).
+					Html::a('hier', ['manage', 's[created_ts]'=> date("Y-m-d")]).
 					' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
 				return $this->refresh();
 			}
