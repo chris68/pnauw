@@ -22,12 +22,13 @@ class SiteController extends Controller
 					[
 						'actions' => ['signup'],
 						'allow' => true,
-						'roles' => ['?'],
+					// Signup actually should be possible all the time!
+					//	'roles' => ['?'],
 					],
 					[
 						'actions' => ['logout'],
 						'allow' => true,
-					// @todo: Logout actually should be possible all the time! Needs further checking
+					// Logout actually should be possible all the time!
 					//	'roles' => ['@'],
 					],
 				],

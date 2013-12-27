@@ -8,6 +8,7 @@ use frontend\models\PictureUploadForm;
 use frontend\models\PictureCaptureForm;
 use frontend\models\PictureModerateForm;
 use frontend\models\PicturePublishForm;
+use common\models\User;
 use yii;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -35,7 +36,12 @@ class PictureController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'actions' => ['index','geodata'],
+						'actions' => ['index','geodata','instantcapture'],
+					],
+					[
+						'allow' => false,
+						'actions' => ['upload', ],
+						'roles' => ['anonymous'],
 					],
 					[
 						'allow' => true,
@@ -345,6 +351,27 @@ class PictureController extends Controller
 				'searchModel' => $searchModel,
 				'updatedmodel' => $model,
 		]);
+	}
+
+	/**
+	  Instant Capture Picture model (via anonymous user)
+	 * @return mixed
+	 */
+	public function actionInstantcapture()
+	{
+		$model = new User();
+		// Username and email blank will block login
+		$model->username = '';
+		$model->email = '';
+		$model->role = User::ROLE_ANONYMOUS;
+		// It will not be possible to log in another time - so the password does not matter...
+		$model->password = '*'; 
+		$model->setScenario('createAnonymous');
+		if ($model->save()) {
+			if (Yii::$app->getUser()->login($model)) {
+				return $this->redirect(['capture']);
+			}
+		}
 	}
 
 	/**

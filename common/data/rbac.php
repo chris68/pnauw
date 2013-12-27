@@ -18,7 +18,7 @@ return [
 		'bizRule' => 'return Yii::$app->user->id==$params["model"]->owner_id;',
 		'data' => NULL,
 	],
-	// User is somenbody who is logged in
+	// User is somebody who is logged in
 	'user' => [
 		'type' => Item::TYPE_ROLE,
 		'description' => \Yii::t('common', 'User'),
@@ -27,6 +27,16 @@ return [
 		'children' => [
 			'guest',
 			'isObjectOwner'
+		],
+	],
+	// Anonymous user - will not be able to login another time
+	'anonymous' => [
+		'type' => Item::TYPE_ROLE,
+		'description' => \Yii::t('common', 'Anonymous User'),
+		'bizRule' => NULL,
+		'data' => NULL,
+		'children' => [
+			'user',
 		],
 	],
 	'trusted' => [
@@ -65,6 +75,15 @@ return [
 		'data' => NULL,
 		'children' => [
 			'user',
+		],
+	],
+	User::ROLE_ANONYMOUS => [
+		'type' => Item::TYPE_ROLE,
+		'description' => 'Anonymous User (db)',
+		'bizRule' => NULL,
+		'data' => NULL,
+		'children' => [
+			'anonymous',
 		],
 	],
 	User::ROLE_TRUSTED => [

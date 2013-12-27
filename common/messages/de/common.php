@@ -18,8 +18,10 @@
  */
 return array (
   'Administrator' => 'Administrator',
+  'Anonymous User' => 'Anonymer Nutzer',
   'Email' => 'Email',
   'Guest' => 'Gast',
+  'Guest access' => 'Gastzugang',
   'Incorrect username or password.' => 'Falscher Benutzername oder falsches Passwort.',
   'Moderator' => 'Moderator',
   'Password' => 'Passwort',
@@ -27,6 +29,8 @@ return array (
   'Terms accepted' => 'Bedingungen anerkannt',
   'There is no user with such email.' => 'Es gibt keinen Nutzer mit dieser Emailadresse',
   'This email address has already been taken.' => 'Diese Emailadresse ist bereits in Verwendung',
+  'This user name has already been taken.' => 'Dieser Benutzername ist bereits in Verwendung',
+  'This user name is reserved.' => 'Dieser Benutzername ist reserviert',
   'Trusted User' => 'Vertrauenswürdiger Nutzer',
   'User' => 'Nutzer',
   'Username' => 'Benutzername',

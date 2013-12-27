@@ -46,7 +46,7 @@ AppAsset::register($this);
 				'visible' => !Yii::$app->user->isGuest,
 				'items' => [
 					['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
-					['label' => 'Hochladen', 'url' => ['/picture/upload']],
+					['label' => 'Hochladen', 'url' => ['/picture/upload'], 'visible' => !Yii::$app->user->checkAccess('anonymous'),],
 					['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
 					['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
 					['label' => 'Veröffentlichen', 'url' => ['/picture/publish','sort'=>'modified_ts-desc']],

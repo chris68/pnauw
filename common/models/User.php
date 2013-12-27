@@ -36,8 +36,8 @@ class User extends ActiveRecord implements IdentityInterface
 	const STATUS_BLOCKED = 5;
 	const STATUS_ACTIVE = 10;
 
-	// @Todo: Change the role to a string
 	const ROLE_USER = 10;
+	const ROLE_ANONYMOUS = 11;
 	const ROLE_TRUSTED = 20;
 	const ROLE_MODERATOR = 30;
 	const ROLE_ADMIN = 99;
@@ -119,7 +119,8 @@ class User extends ActiveRecord implements IdentityInterface
 			['username', 'filter', 'filter' => 'trim'],
 			['username', 'required'],
 			['username', 'string', 'min' => 2, 'max' => 255],
-			['username', 'unique', 'message' => \Yii::t('common','This email address has already been taken.'), 'on' => 'signup'],
+			['username', 'unique', 'message' => \Yii::t('common','This user name has already been taken.'), 'on' => 'signup'],
+			['username', 'compare', 'operator' => '!=', 'compareValue' => 'Guest access', 'message' => \Yii::t('common','This user name is reserved.'), 'on' => 'signup'],
 
 			['email', 'filter', 'filter' => 'trim'],
 			['email', 'required'],
@@ -153,9 +154,18 @@ class User extends ActiveRecord implements IdentityInterface
 			'signup' => ['username', 'email', 'password', 'acceptTerms'],
 			'resetPassword' => ['password'],
 			'requestPasswordResetToken' => ['email'],
+			'createAnonymous' => [], // no checking if we create an anonymous user
 		];
 	}
 
+	public function afterFind()
+	{
+		parent::afterFind();
+		if ($this->role == User::ROLE_ANONYMOUS) {
+			$this->username = \Yii::t('common','Guest access');
+		}
+	}
+	
 	public function beforeSave($insert)
 	{
 		if (parent::beforeSave($insert)) {
