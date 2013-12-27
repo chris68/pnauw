@@ -169,7 +169,7 @@ google.maps.event.addListener(searchBox, 'places_changed', function() {
 	}
 });
 
-google.maps.event.addListener(map, 'bounds_changed', function() {
+google.maps.event.addListener(map, 'idle', function() {
   var bounds = map.getBounds();
   searchBox.setBounds(bounds);
 });
