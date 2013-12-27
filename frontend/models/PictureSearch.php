@@ -44,6 +44,10 @@ class PictureSearch extends Model
 	public $modified_ts;
 	public $deleted_ts;
 
+	public $map_bounds;
+	public $map_bind = true;
+	public $map_limit_points = false;
+	
 	public function rules()
 	{
 		return [
@@ -59,6 +63,12 @@ class PictureSearch extends Model
 				['taken', 'created_ts', 'modified_ts', 'deleted_ts' ], 
 				'date',
 			],
+			[	['map_bind', 'map_limit_points', ],
+				'boolean',
+			],
+			[	['map_bounds'],
+				'string',
+			],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 		];
 	}
@@ -72,11 +82,13 @@ class PictureSearch extends Model
 			'public' => [
 				'id','taken','name','description', 
 				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
+				'map_bind', 'map_bounds', 'map_limit_points', 
 				],
 			'private' => [
 				'id','taken','name','description', 
-				'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
 				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
+				'map_bind', 'map_bounds', 'map_limit_points', 
+				'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
 				'vehicle_country_code', 'vehicle_reg_plate', 'citation_id', ],
 			'admin' => parent::scenarios(), // admin may do everthing
 		];
@@ -118,6 +130,10 @@ class PictureSearch extends Model
 			'created_ts' => 'Hochgeladen am',
 			'modified_ts' => 'Geändert am',
 			'deleted_ts' => 'Gelöscht am',
+			
+			'map_bounds' => 'Kartengrenzen',
+			'map_bind' => 'Suche an die Kartengrenzen binden',
+			'map_limit_points' => 'Punkteanzeige auf die derzeitige Kartengrenze beschränken', 
 		];
 	}
 
@@ -131,7 +147,10 @@ class PictureSearch extends Model
 			'query' => $query,
 		]);
 
-		$this->load($params);
+		if ($params !== NULL) {
+			$this->load($params);
+		}
+		
 		if (!$this->validate()) {
 			// Ensure we find nothing!
 			$query->andWhere('1=0');
@@ -154,6 +173,9 @@ class PictureSearch extends Model
 			$this->addCondition2($query, 'created_ts', 'DATE');
 			$this->addCondition2($query, 'modified_ts', 'DATE');
 			$this->addCondition2($query, 'deleted_ts', 'DATE');
+			if ($this->map_bind) {
+				$this->addCondition2($query, 'map_bounds', 'BOUNDS');
+			}
 		}
 		return $dataProvider;
 	}
@@ -184,6 +206,12 @@ class PictureSearch extends Model
 		switch ($type) {
 			case 'DATE':
 				$query->andWhere(["date($attribute)" => $value]);
+				break;
+			case 'BOUNDS':
+				$corners = explode(',',$value);
+				// Format: "lat_lo,lng_lo,lat_hi,lng_hi"
+				$query->andWhere(['between', 'loc_lat', $corners[0], $corners[2]]);
+				$query->andWhere(['between', 'loc_lng', $corners[1], $corners[3]]);
 				break;
 			case 'ARRAY':
 				$query->andWhere([$attribute => $value]);

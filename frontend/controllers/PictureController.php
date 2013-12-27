@@ -90,7 +90,11 @@ class PictureController extends Controller
 			$searchModel = new PictureSearch(['scenario' => 'private']);
 		}
 		
-		$dataProvider = $searchModel->search($_GET, $query);
+		$searchModel->load($_GET);
+		if (!$searchModel->map_limit_points) {
+			$searchModel->map_bounds = '';
+		}
+		$dataProvider = $searchModel->search(NULL, $query);
 		
 		$dataProvider->pagination->pageSize = 1000; // maximum 1000 items
 		

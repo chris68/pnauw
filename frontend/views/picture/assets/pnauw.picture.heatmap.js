@@ -34,9 +34,10 @@ $(function() {
 		}
 	});
 
-	google.maps.event.addListener(map, 'bounds_changed', function() {
-	  var bounds = map.getBounds();
-	  searchBox.setBounds(bounds);
+	google.maps.event.addListener(map, 'idle', function() {
+		var bounds = map.getBounds();
+		searchBox.setBounds(bounds);
+		$('#picture-search-map-bounds').val(bounds.toUrlValue());
 	});
 
 	$.getJSON( heatmapSource, function( data ) {
@@ -51,7 +52,15 @@ $(function() {
 			bounds.extend(point);
 		});
 		
-		map.fitBounds(bounds);
+		if ($('#picture-search-map-bounds').val() == '') {
+			map.fitBounds(bounds);
+		} else {
+			var corners = $('#picture-search-map-bounds').val().split(',',4);
+			var sw = new google.maps.LatLng(corners[0],corners[1]);
+			var ne = new google.maps.LatLng(corners[2],corners[3]);
+			map.fitBounds(new google.maps.LatLngBounds(sw,ne));
+		}
+		
 		var pointArray = new google.maps.MVCArray(points);
 
 		heatmap = new google.maps.visualization.HeatmapLayer({

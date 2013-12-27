@@ -16,10 +16,13 @@ use yii\widgets\ActiveForm;
 		'method' => 'get',
 	]); ?>
 			<fieldset>
-			<legend>Zeit &amp; Ort</legend>
+			<legend>Ort &amp; Zeit</legend>
+			<?= $form->field($model, 'map_bind')->checkBox(['id'=>'picture-search-map-bind', ]) ?>
+			<?= $form->field($model, 'map_limit_points')->checkBox() ?>
 			<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
 			<?= $form->field($model, 'loc_formatted_addr')->hint('Eine Suche nach der Adresse ist eher unzuverlässig, da die Adresse nur sporadisch ausgefüllt ist. Suchen Sie am besten über die Karte.') ?>
+			<?= Html::activeHiddenInput($model, 'map_bounds', ['id'=>'picture-search-map-bounds', ]) ?>
 			</fieldset>
 		
 			<fieldset>
