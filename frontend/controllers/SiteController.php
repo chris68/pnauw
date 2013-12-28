@@ -109,6 +109,11 @@ class SiteController extends Controller
 		return $this->render('impressum');
 	}
 
+	public function actionHelp()
+	{
+		return $this->render('help');
+	}
+
 	public function actionSignup()
 	{
 		$model = new User();

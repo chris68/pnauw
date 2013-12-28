@@ -54,6 +54,7 @@ AppAsset::register($this);
 					['label' => 'Anschauen', 'url' => ['/picture/index','sort'=>'taken-desc']],
 				],
 			],
+			['label' => 'Hilfe', 'url' => ['/site/help']],
 			['label' => \Yii::t('base','About'), 'url' => ['/site/about']],
 			['label' => \Yii::t('base','Contact'), 'url' => ['/site/contact']],
 		];
