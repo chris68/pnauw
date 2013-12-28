@@ -32,6 +32,7 @@ class ImageRenderer extends \yii\base\Widget
 
         if (isset($this->image)) {
             $this->options['src'] = 'data:image/jpg;base64,' . base64_encode(hex2bin(stream_get_contents($this->image->rawdata, -1, 0)));
+            $this->options['alt'] = 'Bild des Vorfalls';
         } else {
 			// If no image is available construct one!
 			$image = new \Imagick();
@@ -68,6 +69,7 @@ class ImageRenderer extends \yii\base\Widget
 			$rawdata = bin2hex($image->getimageblob());
 			
             $this->options['src'] = 'data:image/jpg;base64,' . base64_encode(hex2bin($rawdata));
+            $this->options['alt'] = 'Bild des Vorfalls';
 		}
 	
         echo \yii\helpers\Html::tag('img','',$this->options);
