@@ -74,7 +74,7 @@ $(function() {
 	$('#picture-heatmap-goto-current-geolocation').on( 'click', function( event ) {
 		function geolocation_initialize(position) {
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			map.setZoom(15);
+			map.setZoom(17);
 			map.setCenter(pos);
 		  }
 
