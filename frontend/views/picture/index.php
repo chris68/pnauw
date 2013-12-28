@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			.
 				Html::encode($model->name)
 			.
-				'</p></b>'
+				'</b></p>'
 			.
 				'<p>'
 			.
