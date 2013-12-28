@@ -76,6 +76,8 @@ $(function() {
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			map.setZoom(17);
 			map.setCenter(pos);
+			var bounds = map.getBounds();
+			$('#picture-search-map-bounds').val(bounds.toUrlValue());
 			$('#search-form').submit();
 		  }
 
