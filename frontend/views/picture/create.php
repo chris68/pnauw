@@ -4,9 +4,9 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Neuanlage' . $model->id;
+$this->title = 'Anlage ohne Bild'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
-$this->params['breadcrumbs'][] = 'Neuanlage';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="picture-create">
 

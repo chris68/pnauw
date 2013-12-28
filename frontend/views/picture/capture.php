@@ -2,12 +2,13 @@
 /* @var $this yii\web\View */
 /* @var $formmodel frontend\models\PictureCaptureForm */
 
+use yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Bild aufnehmen';
+$this->title = 'Bild aufnehmen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
-$this->params['breadcrumbs'][] = 'Aufnehmen';
+$this->params['breadcrumbs'][] = 'Aufnehmen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
 ?>
 
 
