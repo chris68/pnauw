@@ -1,13 +1,16 @@
 User-agent: *
-# Link to login/logout should be blocked
+# Link to signup/login/logout should be blocked
+Disallow: /site/signup
 Disallow: /site/login
 Disallow: /site/logout
 #  Disallow all system folders
 Disallow: /css
 Disallow: /assets
 # Disallow spam affected pages
-Disallow: site/donations
-Disallow: site/contact
-Disallow: site/impressum
-Disallow: site/privacy
-Disallow: site/terms
+Disallow: /site/donations
+Disallow: /site/contact
+Disallow: /site/impressum
+Disallow: /site/privacy
+Disallow: /site/terms
+# Disallow all referrals to actual content - most will not work anyway since it required login!
+Disallow: /picture
