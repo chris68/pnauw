@@ -70,4 +70,22 @@ $(function() {
 		   opacity: 0.6
 		});
 	});		
+	
+	$('#picture-heatmap-goto-current-geolocation').on( 'click', function( event ) {
+		function geolocation_initialize(position) {
+			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			map.setZoom(15);
+			map.setCenter(pos);
+		  }
+
+		function geolocation_fail(error){
+		}
+
+		event.preventDefault();
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(geolocation_initialize, geolocation_fail);
+		}
+		return false
+	});
 });
+

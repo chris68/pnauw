@@ -27,6 +27,7 @@ use yii\widgets\ActiveForm;
 <div class="row">
 	<div class="col-sm-4 col-md-4 col-lg-4 form-group" style="margin-top: 10px; margin-bottom: 10px;">
 			<input type="text" id="picture-heatmap-search-address" class="form-control" style="margin-bottom: 5px" autocomplete="off" placeholder="Kartensuche">
+			<p><a href="#goto_current_geolocation" id="picture-heatmap-goto-current-geolocation">Zum aktuellen GPS-Standort navigieren</a></p>
 			
 		<!-- The Google maps canvas needs absolute coordinates -->
 		<div id="picture-heatmap-map-canvas" style="width: 300px; height: 300px;"></div>
