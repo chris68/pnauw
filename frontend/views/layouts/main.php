@@ -82,11 +82,14 @@ AppAsset::register($this);
 
 	<footer class="footer">
 		<div class="container">
+			<?php if (!Yii::$app->user->isGuest) : ?>
 			<div class="row">
 				<div class="col-sm-12 col-md-12 alert alert-warning">
 					Das System ist derzeit noch in Entwicklung und daher noch nicht für eine richtige Nutzung geeignet!
 				</div>
 			</div>
+			<?php endif ?>
+			
 			<div class="row">
 				<div class="col-sm-6 col-md-6">
 					<?= Html::a('Nutzungsbedingungen','site/terms') ?> |
