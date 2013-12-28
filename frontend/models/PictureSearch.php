@@ -47,6 +47,7 @@ class PictureSearch extends Model
 	public $map_bounds;
 	public $map_bind = true;
 	public $map_limit_points = false;
+	public $time_range = '-365;0';
 	
 	/**
 	 * {@inheritdoc}
@@ -74,7 +75,7 @@ class PictureSearch extends Model
 			[	['map_bind', 'map_limit_points', ],
 				'boolean',
 			],
-			[	['map_bounds'],
+			[	['map_bounds', 'time_range'],
 				'string',
 			],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
@@ -90,12 +91,12 @@ class PictureSearch extends Model
 			'public' => [
 				'id','taken','name','description', 
 				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
-				'map_bind', 'map_bounds', 'map_limit_points', 
+				'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
 				],
 			'private' => [
 				'id','taken','name','description', 
 				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
-				'map_bind', 'map_bounds', 'map_limit_points', 
+				'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
 				'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
 				'vehicle_country_code', 'vehicle_reg_plate', 'citation_id', ],
 			'admin' => parent::scenarios(), // admin may do everthing
@@ -142,9 +143,34 @@ class PictureSearch extends Model
 			'map_bounds' => 'Kartengrenzen',
 			'map_bind' => 'Suche durch den Kartenbereich begrenzen',
 			'map_limit_points' => 'Auch Ermittlung der Heatmap auf den Kartenbereich beschränken', 
+			'time_range' => 'Zeitraum',
 		];
 	}
 
+	/**
+	 * Input for a standard dropdown list for all valid items of a time_range
+	 * @return array 
+	 */
+	public static function dropDownListTimeRanges()
+	{
+		return \yii\helpers\ArrayHelper::map(
+			[
+				['value'=>'', 'name' => 'Keine Einschränkung', 'category' => ''], 
+				['value'=>'0;0', 'name' => 'Heute', 'category' => 'Aktuell'], 
+				['value'=>'-1;0', 'name' => 'Gestern & heute', 'category' => 'Aktuell'], 
+				['value'=>'-7;0', 'name' => 'Eine Woche zurück', 'category' => 'Aktuell'], 
+				['value'=>'-30;0', 'name' => 'Einen Monat zurück', 'category' => 'Vergangenheit'], 
+				['value'=>'-365;0', 'name' => 'Ein Jahr zurück', 'category' => 'Vergangenheit'], 
+				['value'=>'-730;0', 'name' => 'Zwei Jahre zurück', 'category' => 'Vergangenheit'], 
+				['value'=>'2014;2014', 'name' => '2014', 'category' => 'Jahre'], 
+				['value'=>'2013;2013', 'name' => '2013', 'category' => 'Jahre'], 
+				['value'=>'2012;2012', 'name' => '2012', 'category' => 'Jahre'], 
+				['value'=>'2011;2011', 'name' => '2011', 'category' => 'Jahre'], 
+				['value'=>'2010;2010', 'name' => '2010', 'category' => 'Jahre'], 
+			],
+			'value','name','category');
+	}
+	
 	public function search($params, $query=NULL)
 	{
 		if ($query === NULL) {
@@ -181,8 +207,10 @@ class PictureSearch extends Model
 			$this->addCondition2($query, 'created_ts', 'DATE');
 			$this->addCondition2($query, 'modified_ts', 'DATE');
 			$this->addCondition2($query, 'deleted_ts', 'DATE');
+			
+			$this->addCondition2($query, 'time_range', 'TIMERANGE', ['attr' => 'taken']);
 			if ($this->map_bind) {
-				$this->addCondition2($query, 'map_bounds', 'BOUNDS');
+				$this->addCondition2($query, 'map_bounds', 'BOUNDS', ['attr_lat' => 'loc_lat', 'attr_lng' => 'loc_lng']);
 			}
 		}
 		return $dataProvider;
@@ -204,7 +232,7 @@ class PictureSearch extends Model
 	}
 
 	// @todo: Completely rewrite the routine and define it as behavior!
-	protected function addCondition2($query, $attribute, $type)
+	protected function addCondition2($query, $attribute, $type, $params = NULL)
 	{
 		$value = $this->$attribute;
 		if (is_array($value) && count($value) == 0 || !is_array($value) && trim($value) === '') {
@@ -218,8 +246,34 @@ class PictureSearch extends Model
 			case 'BOUNDS':
 				$corners = explode(',',$value);
 				// Format: "lat_lo,lng_lo,lat_hi,lng_hi"
-				$query->andWhere(['between', 'loc_lat', $corners[0], $corners[2]]);
-				$query->andWhere(['between', 'loc_lng', $corners[1], $corners[3]]);
+				$query->andWhere(['between', '{{%picture}}.'.$params['attr_lat'], $corners[0], $corners[2]]);
+				$query->andWhere(['between', '{{%picture}}.'.$params['attr_lng'], $corners[1], $corners[3]]);
+				break;
+			case 'TIMERANGE':
+				$range = explode(';',$value);
+				if ((substr_count($range[0], '-') == 2) && (substr_count($range[1], '-') == 2)) {
+					$low = date_format(date_create($range[0]),'Y-m-d');
+					$high = date_format(date_create($range[1]),'Y-m-d');
+					// absolute date; absolute date
+					$query->andWhere('date({{%picture}}.'.$params['attr'].') >= \''.$low.'\'');
+					$query->andWhere('date({{%picture}}.'.$params['attr'].') <= \''.$high.'\'');
+				} 
+				else {
+					$low = (int)$range[0];
+					$high = (int)$range[1];
+					if ($low > 0 || $high > 0) {
+						// year;year
+						$query->andWhere('extract( isoyear from {{%picture}}.'.$params['attr'].') between '.$low.' and '.$high);
+						// This does not work!
+						//$query->andWhere('between', 'year({{%picture}}.'.$params['attr'].')',$low, $high);
+					} 
+					else {
+						// relative days; relative days
+						$query->andWhere('date({{%picture}}.'.$params['attr'].') - current_date between '.$low.' and '.$high);
+						// This does not work!
+						//$query->andWhere('between', 'date({{%picture}}.'.$params['attr'].') - current_date', $low, $high);
+					}
+				}
 				break;
 			case 'ARRAY':
 				$query->andWhere([$attribute => $value]);

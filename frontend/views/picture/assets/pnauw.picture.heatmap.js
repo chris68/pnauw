@@ -37,7 +37,7 @@ $(function() {
 	google.maps.event.addListener(map, 'idle', function() {
 		var bounds = map.getBounds();
 		searchBox.setBounds(bounds);
-		$('#picture-search-map-bounds').val(bounds.toUrlValue());
+		$('#search-map-bounds').val(bounds.toUrlValue());
 	});
 
 	$.getJSON( heatmapSource, function( data ) {
@@ -52,10 +52,10 @@ $(function() {
 			bounds.extend(point);
 		});
 		
-		if ($('#picture-search-map-bounds').val() == '') {
+		if ($('#search-map-bounds').val() == '') {
 			map.fitBounds(bounds);
 		} else {
-			var corners = $('#picture-search-map-bounds').val().split(',',4);
+			var corners = $('#search-map-bounds').val().split(',',4);
 			var sw = new google.maps.LatLng(corners[0],corners[1]);
 			var ne = new google.maps.LatLng(corners[2],corners[3]);
 			map.fitBounds(new google.maps.LatLngBounds(sw,ne));
@@ -71,6 +71,11 @@ $(function() {
 		});
 	});		
 	
+	$("#search-time li").on ( 'click', function( event ) {
+		$('#search-time-range').val(event.target.title);
+		$('#search-form').submit();
+	});
+	
 	$('#search-refresh').on( 'click', function( event ) {
 		$('#search-form').submit();
 	});
@@ -81,7 +86,7 @@ $(function() {
 			map.setZoom(17);
 			map.setCenter(pos);
 			var bounds = map.getBounds();
-			$('#picture-search-map-bounds').val(bounds.toUrlValue());
+			$('#search-map-bounds').val(bounds.toUrlValue());
 			$('#search-form').submit();
 		  }
 
