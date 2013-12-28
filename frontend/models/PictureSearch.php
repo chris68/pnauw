@@ -44,6 +44,8 @@ class PictureSearch extends Model
 	public $modified_ts;
 	public $deleted_ts;
 
+	// @todo: Separate these attributes into a separate search class/form; and then the form name here will became ps instead of s.
+	// See https://github.com/chris68/pnauw/issues/22
 	public $map_bounds;
 	public $map_bind = true;
 	public $map_limit_points = false;
