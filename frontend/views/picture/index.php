@@ -26,6 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	   ]);
 	?>
 
+	<?= $this->render('_quicksearchbar') ?>
+	
 	<?= $this->render('_heatmap', ['private' => 0]) ?>
 	
 	<?= ListView::widget([

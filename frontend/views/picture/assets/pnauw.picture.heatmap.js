@@ -71,6 +71,10 @@ $(function() {
 		});
 	});		
 	
+	$('#search-refresh').on( 'click', function( event ) {
+		$('#search-form').submit();
+	});
+	
 	$('#picture-heatmap-goto-current-geolocation').on( 'click', function( event ) {
 		function geolocation_initialize(position) {
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

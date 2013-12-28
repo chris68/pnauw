@@ -11,6 +11,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Bilder bearbeiten';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="picture-manage">
 
@@ -19,12 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suchen und Filtern' => [
+				'Suchen und Filtern'  => [
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
 	   ]);
- ?>
+	?>
+	
+<?= $this->render('_quicksearchbar') ?>
 	
 <?= $this->render('_heatmap', ['private' => 1]) ?>
 	
