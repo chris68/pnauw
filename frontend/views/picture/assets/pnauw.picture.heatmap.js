@@ -76,7 +76,7 @@ $(function() {
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			map.setZoom(17);
 			map.setCenter(pos);
-			$('search-form').submit();
+			$('#search-form').submit();
 		  }
 
 		function geolocation_fail(error){
