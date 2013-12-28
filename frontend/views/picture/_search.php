@@ -14,6 +14,7 @@ use yii\widgets\ActiveForm;
 		/** @var yii\widgets\ActiveForm $form */
 		$form = ActiveForm::begin([
 		'method' => 'get',
+		'id' => 'search-form', 
 	]); ?>
 			<fieldset>
 			<legend>Ort &amp; Zeit</legend>
