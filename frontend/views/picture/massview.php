@@ -16,6 +16,10 @@ use yii\bootstrap\Collapse;
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
+			'options' => 
+			[
+				'style' => 'margin-bottom: 10px'
+			],
 	   ]);
 	?>
 

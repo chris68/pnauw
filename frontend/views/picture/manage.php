@@ -24,6 +24,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['man
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
+			'options' => 
+			[
+				'style' => 'margin-bottom: 10px'
+			],
 	   ]);
 	?>
 	

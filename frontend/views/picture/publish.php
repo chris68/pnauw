@@ -23,6 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
+			'options' => 
+			[
+				'style' => 'margin-bottom: 10px'
+			],
 	   ]);
 	?>
 	
