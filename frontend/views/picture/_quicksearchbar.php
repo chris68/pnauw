@@ -5,7 +5,7 @@
 <div class="btn-group" style="margin-top: 10px;">
 	<div class="btn-group">
 	<div class="btn-group">
-		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" style="margin-left:10px;">
+		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
 			Karte <span class="caret"></span>
 		</button>
 		  <ul class="dropdown-menu" id="search-map" role="menu">
@@ -15,7 +15,7 @@
 			  <li><a title="gps" href="#">Auschnitt auf <b>GPS-Standort</b> setzen</a></li>
 		  </ul>
 	</div>
-		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" style="margin-left:10px;">
 			Zeitraum <span class="caret"></span>
 		</button>
 		  <ul class="dropdown-menu" id="search-time" role="menu">
