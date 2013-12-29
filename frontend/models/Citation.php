@@ -55,9 +55,8 @@ class Citation extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['owner_id', 'name', 'description'], 'required'],
-			[['owner_id'], 'integer'],
-			[['name', 'description', 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'string']
+			[['name', 'description'], 'required'],
+			[['name', 'description', ], 'string']
 		];
 	}
 

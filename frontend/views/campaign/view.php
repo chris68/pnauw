@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
  */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Campaigns', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="campaign-view">
@@ -17,10 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h1><?= Html::encode($this->title) ?></h1>
 
 	<p>
-		<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-		<?php echo Html::a('Delete', ['delete', 'id' => $model->id], [
+		<?= Html::a('Bearbeiten', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+		<?php echo Html::a('Löschen', ['delete', 'id' => $model->id], [
 			'class' => 'btn btn-danger',
-			'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
+			'data-confirm' => 'Sind Sie sich mit dem Löschen sicher?',
 			'data-method' => 'post',
 		]); ?>
 	</p>
@@ -29,13 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
 		'model' => $model,
 		'attributes' => [
 			'id',
-			'owner_id',
 			'name:ntext',
 			'description:ntext',
 			'running_from',
 			'running_until',
-			'visibility_id:ntext',
-			'loc_path',
+			[
+				'label' => 'Sichtbarkeit',
+				'value' => $model->visibility->name,
+			],
+			/*'loc_path',*/
 			'created_ts',
 			'modified_ts',
 			'released_ts',

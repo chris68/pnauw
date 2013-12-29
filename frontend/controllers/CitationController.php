@@ -22,6 +22,16 @@ class CitationController extends Controller
 					'delete' => ['post'],
 				],
 			],
+			'access' => [
+				'class' => \yii\web\AccessControl::className(),
+				'rules' => [
+					[
+						'allow' => true,
+						'actions' => ['index', 'view', 'create', 'update', 'delete', ],
+						'roles' => ['@'],
+					],
+				],
+			],
 		];
 	}
 
@@ -33,6 +43,7 @@ class CitationController extends Controller
 	{
 		$searchModel = new CitationSearch;
 		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->query->ownerScope();
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,

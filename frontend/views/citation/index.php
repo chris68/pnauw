@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use yii\bootstrap\Collapse;
 
 /**
  * @var yii\web\View $this
@@ -9,17 +10,29 @@ use yii\widgets\ListView;
  * @var frontend\models\CitationSearch $searchModel
  */
 
-$this->title = 'Citations';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Anzeigen';
+$this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
 ?>
 <div class="citation-index">
 
 	<h1><?= Html::encode($this->title) ?></h1>
 
-	<?php echo $this->render('_search', ['model' => $searchModel]); ?>
+	<?=
+		Collapse::widget([
+			'items' => [
+				'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' => [
+					'content' => $this->render('_search', ['model' => $searchModel]),
+				],
+			],
+			'options' => 
+			[
+				'style' => 'margin-bottom: 10px'
+			],
+	   ]);
+	?>
 
 	<p>
-		<?= Html::a('Create Citation', ['create'], ['class' => 'btn btn-success']) ?>
+		<?= Html::a('Anzeige anlegen', ['create'], ['class' => 'btn btn-success']) ?>
 	</p>
 
 	<?php echo ListView::widget([

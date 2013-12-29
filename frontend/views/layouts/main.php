@@ -55,6 +55,14 @@ AppAsset::register($this);
 					['label' => 'Anschauen', 'url' => ['/picture/index','sort'=>'taken-desc']],
 				],
 			],
+			[
+				'label' => 'Verwalten', 
+				'visible' => !Yii::$app->user->isGuest,
+				'items' => [
+					['label' => 'Kampagnen', 'url' => ['/campaign/index','sort'=>'created_ts-desc']],
+					['label' => 'Anzeigen', 'url' => ['/citation/index','sort'=>'created_ts-desc']],
+				],
+			],
 			['label' => 'Hilfe', 'url' => ['/site/help']],
 			['label' => \Yii::t('base','About'), 'url' => ['/site/about']],
 			['label' => \Yii::t('base','Contact'), 'url' => ['/site/contact']],

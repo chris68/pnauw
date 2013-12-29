@@ -24,11 +24,13 @@ class CampaignSearch extends Model
 	public $released_ts;
 	public $deleted_ts;
 
+	protected $filter_count;
+	
 	public function rules()
 	{
 		return [
-			[['id', 'owner_id'], 'integer'],
-			[['name', 'description', 'running_from', 'running_until', 'visibility_id', 'loc_path', 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'safe'],
+			[['id', /*'owner_id'*/], 'integer'],
+			[['name', 'description', 'running_from', 'running_until', 'visibility_id', /*'loc_path', */ 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'safe'],
 		];
 	}
 
@@ -39,20 +41,31 @@ class CampaignSearch extends Model
 	{
 		return [
 			'id' => 'ID',
-			'owner_id' => 'Owner ID',
+			'owner_id' => 'Besitzer',
 			'name' => 'Name',
-			'description' => 'Description',
-			'running_from' => 'Running From',
-			'running_until' => 'Running Until',
-			'visibility_id' => 'Visibility ID',
-			'loc_path' => 'Loc Path',
-			'created_ts' => 'Created Ts',
-			'modified_ts' => 'Modified Ts',
-			'released_ts' => 'Released Ts',
-			'deleted_ts' => 'Deleted Ts',
+			'description' => 'Beschreibung',
+			'running_from' => 'Startdatum',
+			'running_until' => 'Enddatum',
+			'visibility_id' => 'Sichtbarkeit',
+			'loc_path' => 'Ort (Pfad)',
+			'created_ts' => 'Angelegt am',
+			'modified_ts' => 'Verändert am',
+			'released_ts' => 'Freigegeben am',
+			'deleted_ts' => 'Gelöscht am',
 		];
 	}
 
+	public function getFilterStatus() {
+		switch ($this->filter_count) {
+			case -1:
+				return 'Fehler im Filterausdruck';
+			case 0:
+				return 'Kein Filter gesetzt';
+			default:
+				return $this->filter_count.' Filter gesetzt';
+		}
+	}
+	
 	public function search($params)
 	{
 		$query = Campaign::find();
@@ -60,22 +73,28 @@ class CampaignSearch extends Model
 			'query' => $query,
 		]);
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
+		$this->load($params);
+		
+		if (!$this->validate()) {
+			$this->filter_count = -1;
+			$query->andWhere('1=0');
 		}
-
-		$this->addCondition($query, 'id');
-		$this->addCondition($query, 'owner_id');
-		$this->addCondition($query, 'name', true);
-		$this->addCondition($query, 'description', true);
-		$this->addCondition($query, 'running_from');
-		$this->addCondition($query, 'running_until');
-		$this->addCondition($query, 'visibility_id', true);
-		$this->addCondition($query, 'loc_path', true);
-		$this->addCondition($query, 'created_ts', true);
-		$this->addCondition($query, 'modified_ts', true);
-		$this->addCondition($query, 'released_ts', true);
-		$this->addCondition($query, 'deleted_ts', true);
+		else {
+			$this->filter_count = 0;
+			
+			$this->addCondition($query, 'id');
+			//$this->addCondition($query, 'owner_id');
+			$this->addCondition($query, 'name', true);
+			$this->addCondition($query, 'description', true);
+			$this->addCondition($query, 'running_from');
+			$this->addCondition($query, 'running_until');
+			$this->addCondition($query, 'visibility_id');
+			//$this->addCondition($query, 'loc_path', true);
+			$this->addCondition($query, 'created_ts');
+			$this->addCondition($query, 'modified_ts');
+			$this->addCondition($query, 'released_ts');
+			$this->addCondition($query, 'deleted_ts');
+		}
 		return $dataProvider;
 	}
 
@@ -85,6 +104,9 @@ class CampaignSearch extends Model
 		if (trim($value) === '') {
 			return;
 		}
+		
+		$this->filter_count++;
+		
 		if ($partialMatch) {
 			$value = '%' . strtr($value, ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\']) . '%';
 			$query->andWhere(['like', $attribute, $value]);

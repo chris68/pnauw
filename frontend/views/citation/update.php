@@ -7,8 +7,8 @@ use yii\helpers\Html;
  * @var frontend\models\Citation $model
  */
 
-$this->title = 'Update Citation: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Citations', 'url' => ['index']];
+$this->title = 'Anzeige bearbeiten: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

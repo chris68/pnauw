@@ -20,10 +20,12 @@ class CitationSearch extends Model
 	public $released_ts;
 	public $deleted_ts;
 
+	protected $filter_count;
+	
 	public function rules()
 	{
 		return [
-			[['id', 'owner_id'], 'integer'],
+			[['id', /*'owner_id'*/], 'integer'],
 			[['name', 'description', 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'safe'],
 		];
 	}
@@ -35,16 +37,27 @@ class CitationSearch extends Model
 	{
 		return [
 			'id' => 'ID',
-			'owner_id' => 'Owner ID',
+			'owner_id' => 'Besitzer',
 			'name' => 'Name',
-			'description' => 'Description',
-			'created_ts' => 'Created Ts',
-			'modified_ts' => 'Modified Ts',
-			'released_ts' => 'Released Ts',
-			'deleted_ts' => 'Deleted Ts',
+			'description' => 'Beschreibung',
+			'created_ts' => 'Angelegt am',
+			'modified_ts' => 'Verändert am',
+			'released_ts' => 'Freigegeben am',
+			'deleted_ts' => 'Gelöscht am',
 		];
 	}
 
+	public function getFilterStatus() {
+		switch ($this->filter_count) {
+			case -1:
+				return 'Fehler im Filterausdruck';
+			case 0:
+				return 'Kein Filter gesetzt';
+			default:
+				return $this->filter_count.' Filter gesetzt';
+		}
+	}
+	
 	public function search($params)
 	{
 		$query = Citation::find();
@@ -52,18 +65,25 @@ class CitationSearch extends Model
 			'query' => $query,
 		]);
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
+		$this->load($params);
+		
+		if (!$this->validate()) {
+			$this->filter_count = -1;
+			$query->andWhere('1=0');
+		}
+		else {
+			$this->filter_count = 0;
+			
+			$this->addCondition($query, 'id');
+			$this->addCondition($query, 'owner_id');
+			$this->addCondition($query, 'name', true);
+			$this->addCondition($query, 'description', true);
+			$this->addCondition($query, 'created_ts');
+			$this->addCondition($query, 'modified_ts');
+			$this->addCondition($query, 'released_ts');
+			$this->addCondition($query, 'deleted_ts');
 		}
 
-		$this->addCondition($query, 'id');
-		$this->addCondition($query, 'owner_id');
-		$this->addCondition($query, 'name', true);
-		$this->addCondition($query, 'description', true);
-		$this->addCondition($query, 'created_ts', true);
-		$this->addCondition($query, 'modified_ts', true);
-		$this->addCondition($query, 'released_ts', true);
-		$this->addCondition($query, 'deleted_ts', true);
 		return $dataProvider;
 	}
 
@@ -73,6 +93,9 @@ class CitationSearch extends Model
 		if (trim($value) === '') {
 			return;
 		}
+		
+		$this->filter_count++;
+		
 		if ($partialMatch) {
 			$value = '%' . strtr($value, ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\']) . '%';
 			$query->andWhere(['like', $attribute, $value]);

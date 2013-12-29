@@ -14,30 +14,20 @@ use yii\widgets\ActiveForm;
 
 	<?php $form = ActiveForm::begin(); ?>
 
-		<?= $form->field($model, 'owner_id')->textInput() ?>
-
-		<?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'name') ?>
 
 		<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-		<?= $form->field($model, 'visibility_id')->textarea(['rows' => 6]) ?>
+		<?= $form->field($model, 'visibility_id')->dropDownList(frontend\models\Visibility::dropDownList()) ?>
 
-		<?= $form->field($model, 'loc_path')->textInput() ?>
+		<?php /*$form->field($model, 'loc_path')->textInput() */ ?>
 
-		<?= $form->field($model, 'created_ts')->textInput() ?>
+		<?= $form->field($model, 'running_from')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
-		<?= $form->field($model, 'modified_ts')->textInput() ?>
-
-		<?= $form->field($model, 'released_ts')->textInput() ?>
-
-		<?= $form->field($model, 'deleted_ts')->textInput() ?>
-
-		<?= $form->field($model, 'running_from')->textInput() ?>
-
-		<?= $form->field($model, 'running_until')->textInput() ?>
+		<?= $form->field($model, 'running_until')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
 
 		<div class="form-group">
-			<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+			<?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>
 
 	<?php ActiveForm::end(); ?>

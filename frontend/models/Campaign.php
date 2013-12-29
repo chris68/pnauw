@@ -47,7 +47,9 @@ class Campaign extends \yii\db\ActiveRecord
 				'timestamp' => new \yii\db\Expression('NOW()'),
 			],
 			'EnsureOwnership' => [
-				'class' => 'common\behaviors\EnsureOwnershipWithModeration',
+				'class' => 'common\behaviors\EnsureOwnership',
+				// @todo: Enable here later the moderation
+				//'class' => 'common\behaviors\EnsureOwnershipWithModeration',
 				'ownerAttribute' => 'owner_id',
 				'ensureOnFind' => false,
 			],
@@ -59,8 +61,8 @@ class Campaign extends \yii\db\ActiveRecord
 	 */
 	public function validateVisibilityConsistency($attribute, $params)
 	{
-		if ($this->visibility_id == 'public') {
-			$this->addError('visibility_id', 'Sie dürfen mit ihren Rechten leider keine Kampagnen veröffentlichen.');
+		if (strpos($this->visibility_id,'public') !== false) {
+			$this->addError('visibility_id', 'Sie dürfen derzeit leider generell noch keine Kampagnen veröffentlichen!');
 		}
 	}
 
@@ -70,9 +72,8 @@ class Campaign extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['owner_id', 'name', 'description', 'visibility_id'], 'required'],
-			[['owner_id'], 'integer'],
-			[['name', 'description', 'visibility_id', 'loc_path', 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'string'],
+			[['name', 'description', 'visibility_id'], 'required'],
+			[['name', 'description', 'visibility_id', /*'loc_path',*/ ], 'string'],
 			['visibility_id',  'validateVisibilityConsistency', ],
 			[['running_from', 'running_until'], 'date']
 		];
@@ -88,8 +89,8 @@ class Campaign extends \yii\db\ActiveRecord
 			'owner_id' => 'Besitzer',
 			'name' => 'Name',
 			'description' => 'Beschreibung',
-			'running_from' => 'Running From',
-			'running_until' => 'Running Until',
+			'running_from' => 'Startdatum',
+			'running_until' => 'Enddatum',
 			'visibility_id' => 'Sichtbarkeit',
 			'loc_path' => 'Ort (Pfad)',
 			'created_ts' => 'Angelegt am',

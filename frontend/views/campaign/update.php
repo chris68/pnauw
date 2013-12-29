@@ -7,8 +7,8 @@ use yii\helpers\Html;
  * @var frontend\models\Campaign $model
  */
 
-$this->title = 'Update Campaign: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Campaigns', 'url' => ['index']];
+$this->title = 'Kampagne bearbeiten: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

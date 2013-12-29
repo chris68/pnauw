@@ -7,8 +7,8 @@ use yii\helpers\Html;
  * @var frontend\models\Citation $model
  */
 
-$this->title = 'Create Citation';
-$this->params['breadcrumbs'][] = ['label' => 'Citations', 'url' => ['index']];
+$this->title = 'Anzeige anlegen';
+$this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="citation-create">
