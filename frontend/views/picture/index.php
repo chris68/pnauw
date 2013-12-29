@@ -6,7 +6,6 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
-use yii\widgets\ActiveForm;
 
 
 $this->title = 'Bilder';
