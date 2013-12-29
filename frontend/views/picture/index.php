@@ -61,9 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			.
 				'</b></p>'
 			.
-				'<p>'
-			.
-				(($model->incident_id != -1)?Html::encode($model->incident->name):'Das Bild wurde leider nicht klassizifiert')
+				Html::encode($model->description)
 			.
 				'</p>'
 			.
@@ -77,13 +75,13 @@ $this->params['breadcrumbs'][] = $this->title;
 			.
 				Html::a('Bild im Detail anschauen', ['picture/view','id'=>$model->id], ['target' => '_blank'])
 			.
-				'<p>'
+				'<p><b>'
 			.
-					'Vorfall am '.date_format(date_create($model->taken),'d.m.Y')
+				(($model->incident_id != -1)?Html::encode($model->incident->name):'Das Bild wurde leider nicht klassizifiert')
 			.
-				'</p><p>'
+				'</b></p><p>'
 			.
-				Html::encode($model->description)
+					'Vorfall am <b>'.date_format(date_create($model->taken),'d.m.Y').'</b>'
 			.
 				'</p>'
 			.
