@@ -247,14 +247,21 @@ class PictureController extends Controller
 
 	/**
 	 * Deletes an existing Picture model.
-	 * If deletion is successful, the browser will be redirected to the 'manage' page.
+	 * If deletion is successful, the browser will be redirected to the 'manage' page, unless
+	 * returl indicates that we are in massupdate. Then it will be redirected returl
 	 * @param integer $id
+	 * @param string $returl
 	 * @return mixed
 	 */
-	public function actionDelete($id)
+	public function actionDelete($id, $returl)
 	{
 		$this->findModel($id)->delete();
-		return $this->redirect(['manage']);
+		if (strpos($returl,'/picture/massupdate') !== false) {
+			return $this->redirect($returl);
+		} 
+		else {
+			return $this->redirect(['manage']);
+		}
 	}
 
 	/**

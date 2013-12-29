@@ -20,6 +20,14 @@ use frontend\widgets\Alert;
 	<div class="form-group">
 		<?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
+		<button 
+			formaction="<?=Html::url(['delete', 'id' => $model->id, 'returl' => Yii::$app->getRequest()->getUrl()])?>"
+			formmethod="POST"
+			class="btn btn-danger"
+		>
+			Löschen
+		</button>
+		
 	</div>
 
 	<div>
