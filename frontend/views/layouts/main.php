@@ -94,7 +94,7 @@ AppAsset::register($this);
 			<?php if (!Yii::$app->user->isGuest) : ?>
 			<div class="row">
 				<div class="col-sm-12 col-md-12 alert alert-warning">
-					Das System ist derzeit noch in Entwicklung und daher noch nicht für eine richtige Nutzung geeignet!
+					Das System ist derzeit noch in Entwicklung und es wird daher noch gewisse Nutzungseinschränkungen geben!
 				</div>
 			</div>
 			<?php endif ?>
