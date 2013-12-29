@@ -21,15 +21,15 @@ use yii\widgets\DetailView;
 					'description',
 					[
 						'label' => 'Kennzeichen',
-						'value' => $model->vehicle_reg_plate . ($model->vehicleCountryCode ? (' [' . $model->vehicleCountryCode->name . ']') : ''),
+						'value' => $model->vehicle_reg_plate .' [' . $model->vehicleCountryCode->name . ']',
 					],
 					[
 						'label' => 'Vorfall',
-						'value' => ($model->incident)?$model->incident->name:'(nicht gesetzt)',
+						'value' => $model->incident->name,
 					],
 					[
 						'label' => 'Maßnahme',
-						'value' => ($model->action)?$model->action->name:'(nicht gesetzt)',
+						'value' => $model->action->name,
 					],
 					[
 						'label' => 'Kampagne',
@@ -51,7 +51,7 @@ use yii\widgets\DetailView;
 					],
 					[
 						'label' => 'Sichtbarkeit',
-						'value' => ($model->visibility)?$model->visibility->name:'(nicht gesetzt)',
+						'value' => $model->visibility->name,
 					],
 					'created_ts',
 					'modified_ts',
