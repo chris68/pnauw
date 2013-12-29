@@ -17,7 +17,14 @@ return [
 	'vendorPath' => $rootDir . '/vendor',
 	'controllerNamespace' => 'frontend\controllers',
 	'modules' => [
-		'gii' => 'yii\gii\Module'
+		'gii' => 'yii\gii\Module',
+		'markdown' => [
+			// the module class
+			'class' => 'kartik\markdown\Module',
+			// whether to use PHP SmartyPants to process Markdown output
+			'smartyPants' => true
+
+		],
 	],
 	'extensions' => require($rootDir . '/vendor/yiisoft/extensions.php'),
 	'components' => [

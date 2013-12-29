@@ -12,8 +12,31 @@ use yii\widgets\ActiveForm;
 
 <div class="campaign-form">
 
+<?php
+/* See https://github.com/chris68/pnauw/issues/34
+use kartik\markdown\MarkdownEditor;
+// Works
+$value1 = 'Hallo';
+echo MarkdownEditor::widget([
+	'name' => 'markdown1', 
+	'value' => $value1,
+]);
+*/
+?>
+
+	
 	<?php $form = ActiveForm::begin(); ?>
 
+<?php
+/* 
+// Does not work
+$value2 = 'Hallo';
+echo MarkdownEditor::widget([
+	'name' => 'markdown2', 
+	'value' => $value2,
+]);
+ */
+ ?>
 		<?= $form->field($model, 'name') ?>
 
 		<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>

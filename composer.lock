@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b2734b056cc566b92d05d7d231092d18",
+    "hash": "ea493d97a92f6842d705e12a8cfab3f9",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -49,6 +49,59 @@
                 "html"
             ],
             "time": "2013-02-18 00:04:08"
+        },
+        {
+            "name": "kartik-v/yii2-markdown",
+            "version": "dev-master",
+            "target-dir": "kartik",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-markdown.git",
+                "reference": "37af3bc178bd61a5599d53d75ac3e98d23411310"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-markdown/zipball/37af3bc178bd61a5599d53d75ac3e98d23411310",
+                "reference": "37af3bc178bd61a5599d53d75ac3e98d23411310",
+                "shasum": ""
+            },
+            "require": {
+                "michelf/php-smartypants": "*",
+                "yiisoft/yii2": "dev-master",
+                "yiisoft/yii2-bootstrap": "dev-master"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-0": {
+                    "kartik\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Advanced Markdown editing and conversion utilities for Yii Framework 2.0",
+            "homepage": "https://github.com/kartik-v/yii2-markdown",
+            "keywords": [
+                "bootstrap",
+                "converter",
+                "editor",
+                "extension",
+                "form",
+                "input",
+                "jquery",
+                "markdown",
+                "yii",
+                "yii2"
+            ],
+            "time": "2013-12-27 13:20:56"
         },
         {
             "name": "michelf/php-markdown",
@@ -100,6 +153,61 @@
                 "markdown"
             ],
             "time": "2013-04-11 18:53:11"
+        },
+        {
+            "name": "michelf/php-smartypants",
+            "version": "dev-lib",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michelf/php-smartypants.git",
+                "reference": "e4a873d4a4e0f3dd6fbf5b9e017362f174eb28df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michelf/php-smartypants/zipball/e4a873d4a4e0f3dd6fbf5b9e017362f174eb28df",
+                "reference": "e4a873d4a4e0f3dd6fbf5b9e017362f174eb28df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-lib": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Michelf": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Michel Fortin",
+                    "email": "michel.fortin@michelf.ca",
+                    "homepage": "http://michelf.ca/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "John Gruber",
+                    "homepage": "http://daringfireball.net/"
+                }
+            ],
+            "description": "PHP SmartyPants",
+            "homepage": "http://michelf.ca/projects/php-smartypants/",
+            "keywords": [
+                "dashes",
+                "quotes",
+                "spaces",
+                "typographer",
+                "typography"
+            ],
+            "time": "2013-08-02 10:48:47"
         },
         {
             "name": "phpspec/php-diff",
@@ -612,7 +720,8 @@
         "yiisoft/yii2-bootstrap": 20,
         "yiisoft/yii2-debug": 20,
         "yiisoft/yii2-gii": 20,
-        "yiisoft/yii2-jui": 20
+        "yiisoft/yii2-jui": 20,
+        "kartik-v/yii2-markdown": 20
     },
     "platform": {
         "php": ">=5.4.0"
