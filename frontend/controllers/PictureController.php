@@ -379,6 +379,8 @@ class PictureController extends Controller
 	public function actionGuestcapture()
 	{
 		if (!Yii::$app->user->checkAccess('anonymous')) {
+			// todo: Protocoll the ip address via Yii::$app->getRequest()->getUserIP()
+
 			$model = new User();
 			// Username and email blank will block login
 			$model->username = '';
