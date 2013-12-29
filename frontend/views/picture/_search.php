@@ -79,7 +79,7 @@ use yii\widgets\ActiveForm;
 
 		<div class="form-group">
 			<?= Html::submitButton('Suchen', ['class' => 'btn btn-primary']) ?>
-			<?= ''// @Todo: Implement reset of search Html::resetButton('Suche zurücksetzen', ['class' => 'btn btn-default']) ?>
+			<?= ''// @todo: Implement reset of search Html::resetButton('Suche zurücksetzen', ['class' => 'btn btn-default']) ?>
 		</div>
 		
 		<p class="help-block">
