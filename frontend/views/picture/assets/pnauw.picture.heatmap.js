@@ -72,42 +72,65 @@ $(function() {
 	});		
 	
 	$("#search-time li").on ( 'click', function( event ) {
+		event.preventDefault();
 		$('#search-time-range').val(event.target.title);
 		$('#search-form').submit();
 	});
 	
 	$("#search-map li").on ( 'click', function( event ) {
 		if (event.target.title == 'bind') {
+			event.preventDefault();
 			$('#search-map-bind').prop('checked',true);
+			$('#search-form').submit();
+			return false;
 		} 
-		else {
+		else if (event.target.title == 'dynamic') {
+			event.preventDefault();
 			$('#search-map-bind').prop('checked',false);
+			$('#search-form').submit();
+			return false;
 		}
-		$('#search-form').submit();
+		else if (event.target.title == 'gps') {
+			function geolocation_initialize(position) {
+				var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				map.setZoom(17);
+				map.setCenter(pos);
+				var bounds = map.getBounds();
+				$('#search-map-bounds').val(bounds.toUrlValue());
+				$('#search-map-bind').prop('checked',true);
+				$('#search-form').submit();
+			  }
+
+			function geolocation_fail(error){
+			}
+
+			if (navigator.geolocation) {
+				event.preventDefault();
+				navigator.geolocation.getCurrentPosition(geolocation_initialize, geolocation_fail);
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else {
+			// Uupps. That on we do'nt know
+		}
+		
 	});
 	
 	$('#search-refresh').on( 'click', function( event ) {
-		$('#search-form').submit();
-	});
-	
-	$('#picture-heatmap-goto-current-geolocation').on( 'click', function( event ) {
-		function geolocation_initialize(position) {
-			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			map.setZoom(17);
-			map.setCenter(pos);
-			var bounds = map.getBounds();
-			$('#search-map-bounds').val(bounds.toUrlValue());
-			$('#search-form').submit();
-		  }
-
-		function geolocation_fail(error){
-		}
-
 		event.preventDefault();
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(geolocation_initialize, geolocation_fail);
-		}
-		return false
+		$('#search-form').submit();
+		return false;
 	});
+
+	$('#search-cancel').on( 'click', function( event ) {
+		event.preventDefault();
+		document.location.href=event.target.title;
+		return false;
+	});
+
 });
 
