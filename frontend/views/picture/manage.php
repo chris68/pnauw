@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suchen und Filtern'  => [
+				'Suchen und Filtern  <span class="badge">'.$searchModel->getFilterStatus().'</span>'  => [
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		unset($params[$dataProvider->getSort()->sortVar]);
 		$params[$dataProvider->getSort()->sortVar] = 'id';
 		$route = Yii::$app->controller->getRoute();
-		// todo: Somehow enable the user to massupdate the selected objects only
+		// @todo: Somehow enable the user to massupdate the selected objects only
 		echo Html::a('Bilder einzeln bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
 		echo ' | ';
 		echo Html::a('Bilder veröffentlichen', Yii::$app->getUrlManager()->createUrl('picture/publish', $params), ['target' => '_blank']);

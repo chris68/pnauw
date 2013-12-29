@@ -16,6 +16,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<h1><?= Html::encode($this->title) ?></h1>
 
+	<?=
+		Collapse::widget([
+			'items' => [
+				'Suchen und Filtern  <span class="badge">'.$searchModel->getFilterStatus().'</span>'  => [
+					'content' => $this->render('_search', ['model' => $searchModel]),
+				],
+			],
+	   ]);
+	?>
+	
+	<?= $this->render('_quicksearchbar') ?>
+	
+	<?= $this->render('_heatmap', ['private' => 1]) ?>
+	
 	<?php 
 		/* @var $form yii\widgets\ActiveForm */
 		$form = ActiveForm::begin(); 

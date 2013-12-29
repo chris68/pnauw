@@ -36,7 +36,7 @@ class PictureController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'actions' => ['index','geodata','guestcapture'],
+						'actions' => ['index','geodata','guestcapture', 'view'],
 					],
 					[
 						'allow' => false,
@@ -85,11 +85,15 @@ class PictureController extends Controller
 		$query = Picture::find();
 		$query->select('tbl_picture.id, tbl_picture.loc_lng, tbl_picture.loc_lat, tbl_incident.severity');
 		$query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
-		//$query->andWhere(['taken' => '2013-01-01']);
 		$query->asArray();
 		
 		if ($private == false || Yii::$app->user->isGuest) {
-			$query->publicScope(); 
+			if (Yii::$app->user->checkAccess('moderator')) {
+				$query->moderatorScope(); 
+			}
+			else {
+				$query->publicScope(); 
+			}
 			$searchModel = new PictureSearch(['scenario' => 'public']);
 		} else {
 			$query->ownerScope();
@@ -103,6 +107,7 @@ class PictureController extends Controller
 		$dataProvider = $searchModel->search(NULL, $query);
 		
 		$dataProvider->pagination->pageSize = 1000; // maximum 1000 items
+		$dataProvider->sort = false; // no sorting - even if the URL requires it!
 		
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		
@@ -179,7 +184,6 @@ class PictureController extends Controller
 	 */
 	public function actionView($id)
 	{
-		throw new HttpException(404, 'Sorry - aber derzeit ist es leider noch nicht möglich, die Bilder öffentlich anzuschauen!');
 		return $this->render('view', [
 				'model' => $this->findPublicModel($id),
 		]);
@@ -278,9 +282,17 @@ class PictureController extends Controller
 		}
 
 		$searchModel = new PictureSearch(['scenario' => 'public']);
-		$dataProvider = $searchModel->search($_GET);
+		$searchModel->load($_GET);
+		// @todo: This is currently a hack since the user will not realize that a filter is set
+		// Besides the points on the map are initially slightly wrong!
+		// It should be a url parameter when calling the routine!
+		// See https://github.com/chris68/pnauw/issues/31
+		$searchModel->visibility_id = 'public_approval_pending';
+		$dataProvider = $searchModel->search(NULL);
+		
+		$dataProvider->query->scopeModerator();
+		
 		$dataProvider->pagination->pageSize = 50;
-		$dataProvider->query->andWhere(['visibility_id' => 'public_approval_pending']);
 
 		return $this->render('moderate', [
 				'dataProvider' => $dataProvider,
@@ -313,10 +325,17 @@ class PictureController extends Controller
 		}
 
 		$searchModel = new PictureSearch(['scenario' => 'private']);
-		$dataProvider = $searchModel->search($_GET);
-		$dataProvider->pagination->pageSize = 50;
+		$searchModel->load($_GET);
+		// @todo: This is currently a hack since the user will not realize that a filter is set
+		// Besides the points on the map are initially slightly wrong! 
+		// It should be a url parameter when calling the routine!
+		// See https://github.com/chris68/pnauw/issues/31
+		$searchModel->visibility_id = 'private';
+		$dataProvider = $searchModel->search(NULL);
+		
 		$dataProvider->query->ownerScope();
-		$dataProvider->query->andWhere(['visibility_id' => ['private']]);
+		
+		$dataProvider->pagination->pageSize = 50;
 
 		return $this->render('publish', [
 				'dataProvider' => $dataProvider,

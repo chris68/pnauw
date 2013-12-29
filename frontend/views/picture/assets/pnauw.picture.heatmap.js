@@ -76,6 +76,16 @@ $(function() {
 		$('#search-form').submit();
 	});
 	
+	$("#search-map li").on ( 'click', function( event ) {
+		if (event.target.title == 'bind') {
+			$('#search-map-bind').prop('checked',true);
+		} 
+		else {
+			$('#search-map-bind').prop('checked',false);
+		}
+		$('#search-form').submit();
+	});
+	
 	$('#search-refresh').on( 'click', function( event ) {
 		$('#search-form').submit();
 	});

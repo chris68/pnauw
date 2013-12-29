@@ -20,6 +20,8 @@ use yii\widgets\ActiveForm;
 			<?= Html::submitButton('Suchen', ['class' => 'btn btn-primary']) ?>
 		</div>
 		
+			<?= $form->errorSummary($model,['class' => "alert alert-danger"]);?>
+
 			<fieldset>
 			<legend>Generell</legend>
 			<?= $form->field($model, 'map_bind')->checkBox(['id'=>'search-map-bind', ]) ?>

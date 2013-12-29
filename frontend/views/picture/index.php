@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suchen und Filtern' => [
+				'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' => [
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			.
 				'<p>'
 			.
-				Html::encode($model->incident->name)
+				(($model->incident_id != -1)?Html::encode($model->incident->name):'Das Bild wurde leider nicht klassizifiert')
 			.
 				'</p>'
 			.
@@ -59,7 +59,13 @@ $this->params['breadcrumbs'][] = $this->title;
 						]
 					)
 			.
+				Html::a('Bild im Detail anschauen', ['picture/view','id'=>$model->id], ['target' => '_blank'])
+			.
 				'<p>'
+			.
+					'Vorfall am '.date_format(date_create($model->taken),'d.m.Y')
+			.
+				'</p><p>'
 			.
 				Html::encode($model->description)
 			.

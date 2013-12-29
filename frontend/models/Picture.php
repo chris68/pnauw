@@ -242,6 +242,14 @@ class Picture extends \yii\db\ActiveRecord
 	}
 
 	/**
+	 * @param ActiveQuery $query
+	 */
+	public static function moderatorScope($query)
+	{
+		$query->andWhere(["{{%picture}}.visibility_id" => ['public_approval_pending','public']]);
+	}
+
+	/**
 	 * @return \yii\db\ActiveRelation
 	 */
 	public function getOwner()

@@ -47,9 +47,11 @@ class PictureSearch extends Model
 	// @todo: Separate these attributes into a separate search class/form; and then the form name here will became ps instead of s.
 	// See https://github.com/chris68/pnauw/issues/22
 	public $map_bounds;
-	public $map_bind = true;
-	public $map_limit_points = false;
-	public $time_range = '-365;0';
+	public $map_bind=false;
+	public $map_limit_points=false;
+	public $time_range;
+	
+	protected $filter_count;
 	
 	/**
 	 * {@inheritdoc}
@@ -173,6 +175,17 @@ class PictureSearch extends Model
 			'value','name','category');
 	}
 	
+	public function getFilterStatus() {
+		switch ($this->filter_count) {
+			case -1:
+				return 'Fehler im Filterausdruck';
+			case 0:
+				return 'Kein Filter gesetzt';
+			default:
+				return $this->filter_count.' Filter gesetzt';
+		}
+	}
+	
 	public function search($params, $query=NULL)
 	{
 		if ($query === NULL) {
@@ -190,8 +203,10 @@ class PictureSearch extends Model
 		if (!$this->validate()) {
 			// Ensure we find nothing!
 			$query->andWhere('1=0');
-		} else
-		{
+			$this->filter_count = -1;
+		} 
+		else {
+			$this->filter_count = 0;
 			$this->addCondition($query, 'id', 'ARRAY');
 			$this->addCondition($query, 'owner_id', 'ARRAY');
 			$this->addCondition($query, 'name', true);
@@ -214,6 +229,10 @@ class PictureSearch extends Model
 			if ($this->map_bind) {
 				$this->addCondition2($query, 'map_bounds', 'BOUNDS', ['attr_lat' => 'loc_lat', 'attr_lng' => 'loc_lng']);
 			}
+			else {
+				// Clear the map bounds to retrigger the map boundary calculation
+				$this->map_bounds = '';
+			}
 		}
 		return $dataProvider;
 	}
@@ -224,6 +243,7 @@ class PictureSearch extends Model
 		if (trim($value) === '') {
 			return;
 		}
+		$this->filter_count++;
 		$attribute = "{{%picture}}.".$attribute ;
 		if ($partialMatch) {
 			$value = '%' . strtr($value, ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\']) . '%';
@@ -240,6 +260,7 @@ class PictureSearch extends Model
 		if (is_array($value) && count($value) == 0 || !is_array($value) && trim($value) === '') {
 			return;
 		}
+		$this->filter_count++;
 		$attribute = "{{%picture}}.".$attribute ;
 		switch ($type) {
 			case 'DATE':
