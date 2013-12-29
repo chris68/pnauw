@@ -37,5 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			'deleted_ts',
 		],
 	]); ?>
+	
+	<?=Html::a('Vorfälle der Anzeige bearbeiten',['picture/manage', 's[citation_id]' => $model->id,'sort' => 'vehicle_reg_plate'],['target' => '_blank']) ?>
+	 | <?=Html::a('Anzeige drucken (als Druckansicht darstellen)',['print', 'id' => $model->id, ],['target' => '_blank']) ?>
 
 </div>

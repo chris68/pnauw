@@ -27,7 +27,7 @@ class CitationController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'actions' => ['index', 'view', 'create', 'update', 'delete', ],
+						'actions' => ['index', 'view', 'create', 'update', 'delete', 'print'],
 						'roles' => ['@'],
 					],
 				],
@@ -59,6 +59,19 @@ class CitationController extends Controller
 	public function actionView($id)
 	{
 		return $this->render('view', [
+			'model' => $this->findModel($id),
+		]);
+	}
+
+	/**
+	 * Prints a single Citation model.
+	 * @param integer $id
+	 * @return mixed
+	 */
+	public function actionPrint($id)
+	{
+		$this->layout = 'print';
+		return $this->render('print', [
 			'model' => $this->findModel($id),
 		]);
 	}
