@@ -253,7 +253,7 @@ class PictureSearch extends Model
 		}
 	}
 
-	// @todo: Completely rewrite the routine and define it as behavior!
+	// @todo: Completely rewrite the routine and define it as behavior! And then roll it out to the other classes!
 	protected function addCondition2($query, $attribute, $type, $params = NULL)
 	{
 		$value = $this->$attribute;
