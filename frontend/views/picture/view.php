@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="row">
 		<div class="col-sm-4 col-md-4 col-lg-4">
 			<p><b><?=Html::encode($model->name)?></b></p>
-			<p><?=(($model->incident_id != -1)?Html::encode($model->incident->name):'Das Bild wurde leider nicht klassizifiert')?></p>
+			<p><?=Html::encode($model->description)?></p>
 			<?= frontend\widgets\ImageRenderer::widget(
 				[
 					'image' => $model->blurredMediumImage,
@@ -21,8 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
 					'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:10px'],
 				])
 			?>
-			<p>Vorfall am <?=date_format(date_create($model->taken),'d.m.Y')?></p>
-			<p><?=Html::encode($model->description)?></p>
+		</div>
+		<div class="col-sm-4 col-md-4 col-lg-4">
+			<p><b><?=(($model->incident_id != -1)?Html::encode($model->incident->name):'Das Bild wurde leider nicht klassizifiert')?></b></p>
+			<p>Vorfall am <b><?=date_format(date_create($model->taken),'d.m.Y')?></b></p>
+			<?php \frontend\views\picture\assets\PictureViewAsset::register($this); ?>
+			<?= Html::activeHiddenInput($model,'loc_lat', ['id'=>'picture-map-loc-lat', ]) ?>
+			<?= Html::activeHiddenInput($model,'loc_lng',['id'=>'picture-map-loc-lng', ]) ?>
+			<!-- The Google maps canvas needs absolute coordinates -->
+			<div style="width: 300px; height: 300px;" id="picture-map-canvas"></div>
 			<p><?=Html::encode($model->loc_formatted_addr)?></p>
 		</div>
 	</div>
