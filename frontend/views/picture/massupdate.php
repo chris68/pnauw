@@ -6,9 +6,20 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use yii\bootstrap\Collapse;
 
 ?>
 <div class="picture-massupdate">
+
+	<?=
+		Collapse::widget([
+			'items' => [
+				'Suchen und Filtern  <span class="badge">'.$searchModel->getFilterStatus().'</span>'  => [
+					'content' => $this->render('_search', ['model' => $searchModel]),
+				],
+			],
+	   ]);
+	?>
 
 	<?= ListView::widget([
 		'dataProvider' => $dataProvider,

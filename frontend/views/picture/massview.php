@@ -4,9 +4,20 @@
 /* @var $searchModel frontend\models\PictureSearch */
 
 use yii\widgets\ListView;
+use yii\bootstrap\Collapse;
 
 ?>
-<div class="picture-massupdate">
+<div class="picture-massview">
+
+	<?=
+		Collapse::widget([
+			'items' => [
+				'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' => [
+					'content' => $this->render('_search', ['model' => $searchModel]),
+				],
+			],
+	   ]);
+	?>
 
 	<?= ListView::widget([
 		'dataProvider' => $dataProvider,
