@@ -80,11 +80,11 @@ class User extends ActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * @return int|string current user ID
+	 * @return int|string|array current user ID
 	 */
 	public function getId()
 	{
-		return $this->id;
+		return $this->getPrimaryKey();
 	}
 
 	/**
@@ -116,6 +116,12 @@ class User extends ActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
+			['status', 'default', 'value' => self::STATUS_ACTIVE],
+			['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+
+			['role', 'default', 'value' => self::ROLE_USER],
+			['role', 'in', 'range' => [self::ROLE_USER]],
+
 			['username', 'filter', 'filter' => 'trim'],
 			['username', 'required'],
 			['username', 'string', 'min' => 2, 'max' => 255],
