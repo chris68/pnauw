@@ -78,7 +78,7 @@ class Citation extends \yii\db\ActiveRecord
 	 */
 	public static function dropDownList()
 	{
-		return \yii\helpers\ArrayHelper::map(self::find()->orderBy('created_ts')->all(),'id','name');
+		return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->orderBy('created_ts')->all(),'id','name');
 	}
 	
 }
