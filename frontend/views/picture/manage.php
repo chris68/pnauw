@@ -27,29 +27,28 @@ $this->params['breadcrumbs'][] = $this->title;
 	   ]);
 	?>
 	
-<?= $this->render('_quicksearchbar') ?>
+	<?= $this->render('_quicksearchbar') ?>
 	
-<?= $this->render('_heatmap', ['private' => 1]) ?>
+	<?= $this->render('_heatmap', ['private' => 1]) ?>
 	
-<div style="margin-top: 10px;">
-<?php
-	{
-		// Generate the massupdate link by changing the route and throwing out sort/pagination
-		
-		$request = Yii::$app->getRequest();
-		$params = $request instanceof yii\web\Request ? $request->get() : [];
+	<div style="margin-top: 10px;">
+	<?php
+		{
+			// Generate the massupdate link by changing the route and throwing out sort/pagination
 
-		unset($params[$dataProvider->getPagination()->pageVar]);
-		unset($params[$dataProvider->getSort()->sortVar]);
-		$params[$dataProvider->getSort()->sortVar] = 'id';
-		$route = Yii::$app->controller->getRoute();
-		// @todo: Somehow enable the user to massupdate the selected objects only
-		echo Html::a('Bilder einzeln bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
-		echo ' | ';
-		echo Html::a('Bilder veröffentlichen', Yii::$app->getUrlManager()->createUrl('picture/publish', $params), ['target' => '_blank']);
-	}
-?>
-</div>
+			$request = Yii::$app->getRequest();
+			$params = $request instanceof yii\web\Request ? $request->get() : [];
+
+			unset($params[$dataProvider->getPagination()->pageVar]);
+			unset($params[$dataProvider->getSort()->sortVar]);
+			$params[$dataProvider->getSort()->sortVar] = 'id';
+			$route = Yii::$app->controller->getRoute();
+			echo Html::a('Bilder detailliert bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
+			echo ' | ';
+			echo Html::a('Bilder veröffentlichen', Yii::$app->getUrlManager()->createUrl('picture/publish', $params), ['target' => '_blank']);
+		}
+	?>
+	</div>
 	
 	<?php 
 		/* @var $form yii\widgets\ActiveForm */

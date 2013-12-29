@@ -36,7 +36,7 @@ class PictureController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'actions' => ['index','geodata','guestcapture', 'view'],
+						'actions' => ['index','geodata','guestcapture', 'view', 'massview'],
 					],
 					[
 						'allow' => false,
@@ -59,7 +59,7 @@ class PictureController extends Controller
 	}
 
 	/**
-	 * Lists all Picture models.
+	 * Lists Picture models according to search.
 	 * @return mixed
 	 */
 	public function actionIndex()
@@ -76,7 +76,7 @@ class PictureController extends Controller
 	}
 
 	/**
-	 * Returns the geodata for the current picture search.
+	 * Returns the geodata according to search.
 	 * @return mixed
 	 */
 	public function actionGeodata($private=false)
@@ -122,7 +122,7 @@ class PictureController extends Controller
 	}
 
 	/**
-	 * Manage your own Picture models.
+	 * Manage your own Picture models according to search.
 	 * @return mixed
 	 */
 	public function actionManage()
@@ -258,7 +258,7 @@ class PictureController extends Controller
 	}
 
 	/**
-	 * Moderate all Picture models.
+	 * Moderate Picture models according to search.
 	 * @return mixed
 	 */
 	public function actionModerate()
@@ -301,7 +301,7 @@ class PictureController extends Controller
 	}
 
 	/**
-	 * Publish all Picture models.
+	 * Publish Picture models according to search.
 	 * @return mixed
 	 */
 	public function actionPublish()
@@ -344,7 +344,24 @@ class PictureController extends Controller
 	}
 
 	/**
-	 * Massupdate all Picture models.
+	 * Massview Picture models according to search.
+	 * @return mixed
+	 */
+	public function actionMassview()
+	{
+		$searchModel = new PictureSearch(['scenario' => 'public']);
+		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->pagination->pageSize = 1;
+		$dataProvider->query->publicScope();
+
+		return $this->render('massview', [
+				'dataProvider' => $dataProvider,
+				'searchModel' => $searchModel,
+		]);
+	}
+
+	/**
+	 * Massupdate Picture models according to search.
 	 * @return mixed
 	 */
 	public function actionMassupdate()

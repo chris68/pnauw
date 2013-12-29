@@ -28,6 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<?= $this->render('_heatmap', ['private' => 0]) ?>
 	
+	<div style="margin-top: 10px;">
+	<?php
+		{
+			// Generate the massview link by changing the route and throwing out sort/pagination
+
+			$request = Yii::$app->getRequest();
+			$params = $request instanceof yii\web\Request ? $request->get() : [];
+
+			unset($params[$dataProvider->getPagination()->pageVar]);
+			unset($params[$dataProvider->getSort()->sortVar]);
+			$params[$dataProvider->getSort()->sortVar] = 'id';
+			$route = Yii::$app->controller->getRoute();
+			echo Html::a('Bilder detailliert anschauen', Yii::$app->getUrlManager()->createUrl('picture/massview', $params), ['target' => '_blank']);
+		}
+	?>
+	</div>
 	<?= ListView::widget([
 		'dataProvider' => $dataProvider,
 		'layout' => "{pager}\n{summary}\n{items}\n{pager}",
