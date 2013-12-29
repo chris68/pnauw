@@ -57,6 +57,15 @@ class Citation extends \yii\db\ActiveRecord
 	}
 
 	/**
+	 * Scope for retrieving the dropdown list
+	 * @param ActiveQuery $query
+	 */
+	public static function dropdownScope($query)
+	{
+		$query->andWhere("{{%citation}}.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
+	}
+
+	/**
 	 * @return \yii\db\ActiveRelation
 	 */
 	public function getPictures()
@@ -78,7 +87,7 @@ class Citation extends \yii\db\ActiveRecord
 	 */
 	public static function dropDownList()
 	{
-		return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->orderBy('created_ts')->all(),'id','name');
+		return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->dropdownScope()->orderBy('created_ts')->all(),'id','name');
 	}
 	
 }

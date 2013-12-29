@@ -67,6 +67,15 @@ class Campaign extends \yii\db\ActiveRecord
 	}
 
 	/**
+	 * Scope for retrieving the dropdown list
+	 * @param ActiveQuery $query
+	 */
+	public static function dropdownScope($query)
+	{
+		$query->andWhere("({{%campaign}}.owner_id = :owner or {{%campaign}}.visibility_id = 'public')", [':owner' => \Yii::$app->user->id]);
+	}
+
+	/**
 	 * @return \yii\db\ActiveRelation
 	 */
 	public function getPictures()
@@ -96,7 +105,7 @@ class Campaign extends \yii\db\ActiveRecord
 	 */
 	public static function dropDownList()
 	{
-		return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->orderBy('created_ts')->all(),'id','name');
+		return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->dropdownScope()->orderBy('created_ts')->all(),'id','name');
 	}
 	
 	
