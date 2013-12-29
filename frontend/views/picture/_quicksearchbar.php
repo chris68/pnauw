@@ -4,6 +4,17 @@
 
 <div class="btn-group" style="margin-top: 10px;">
 	<div class="btn-group">
+	<div class="btn-group">
+		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" style="margin-left:10px;">
+			Karte <span class="caret"></span>
+		</button>
+		  <ul class="dropdown-menu" id="search-map" role="menu">
+			  <li><a title="bind" href="#">Ausschnitt <b>begrenzt</b> Suchergebnis</a></li>
+			  <li><a title="dynamic" href="#">Auschnitt <b>gemäß</b> Suchergebnisse</a></li>
+				<li class="divider"></li>
+			  <li><a title="gps" href="#">Auschnitt auf <b>GPS-Standort</b> setzen</a></li>
+		  </ul>
+	</div>
 		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
 			Zeitraum <span class="caret"></span>
 		</button>
@@ -16,17 +27,6 @@
 			<li><a title="-365;0" href="#">Ein Jahr zurück</a></li>
 			<li class="divider"></li>
 			<li><a title="-365;0" href="#">Keine Einschränkung</a></li>
-		  </ul>
-	</div>
-	<div class="btn-group">
-		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" style="margin-left:10px;">
-			Karte <span class="caret"></span>
-		</button>
-		  <ul class="dropdown-menu" id="search-map" role="menu">
-			  <li><a title="bind" href="#">Ausschnitt <b>begrenzt</b> Suchergebnis</a></li>
-			  <li><a title="dynamic" href="#">Auschnitt <b>gemäß</b> Suchergebnisse</a></li>
-				<li class="divider"></li>
-			  <li><a title="gps" href="#">Auschnitt auf <b>GPS-Standort</b> setzen</a></li>
 		  </ul>
 	</div>
 	<button type="button" title="<?=Yii::$app->getUrlManager()->createUrl(Yii::$app->controller->getRoute())?>" id="search-cancel" class="btn btn-xs" style="margin-left:10px;"><span class="glyphicon glyphicon-remove-circle"></span></button>
