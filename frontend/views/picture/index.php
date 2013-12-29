@@ -9,7 +9,7 @@ use yii\bootstrap\Collapse;
 
 
 $this->title = 'Bilder';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 ?>
 <div class="picture-index">
 

@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 
 $this->title = 'Bilder bearbeiten';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['manage', 'sort'=>'taken-desc', ]];
 
 ?>
 <div class="picture-manage">
