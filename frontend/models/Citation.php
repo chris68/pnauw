@@ -30,6 +30,28 @@ class Citation extends \yii\db\ActiveRecord
 	/**
 	 * {@inheritdoc}
 	 */
+	public function behaviors()
+	{
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\AutoTimestamp',
+				'attributes' => [
+					\yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_ts', 'modified_ts'],
+					\yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_ts',
+				],
+				'timestamp' => new \yii\db\Expression('NOW()'),
+			],
+			'EnsureOwnership' => [
+				'class' => 'common\behaviors\EnsureOwnership',
+				'ownerAttribute' => 'owner_id',
+				'ensureOnFind' => true,
+			],
+		];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function rules()
 	{
 		return [
@@ -46,14 +68,23 @@ class Citation extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'owner_id' => 'Owner ID',
+			'owner_id' => 'Besitzer',
 			'name' => 'Name',
-			'description' => 'Description',
-			'created_ts' => 'Created Ts',
-			'modified_ts' => 'Modified Ts',
-			'released_ts' => 'Released Ts',
-			'deleted_ts' => 'Deleted Ts',
+			'description' => 'Beschreibung',
+			'created_ts' => 'Angelegt am',
+			'modified_ts' => 'Verändert am',
+			'released_ts' => 'Freigegeben am',
+			'deleted_ts' => 'Gelöscht am',
 		];
+	}
+
+	/**
+	 * Scope for the owner 
+	 * @param ActiveQuery $query
+	 */
+	public static function ownerScope($query)
+	{
+		$query->andWhere("{{%citation}}.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
 	}
 
 	/**

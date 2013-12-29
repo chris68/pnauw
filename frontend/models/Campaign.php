@@ -35,13 +35,46 @@ class Campaign extends \yii\db\ActiveRecord
 	/**
 	 * {@inheritdoc}
 	 */
+	public function behaviors()
+	{
+		return [
+			'timestamp' => [
+				'class' => 'yii\behaviors\AutoTimestamp',
+				'attributes' => [
+					\yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_ts', 'modified_ts'],
+					\yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_ts',
+				],
+				'timestamp' => new \yii\db\Expression('NOW()'),
+			],
+			'EnsureOwnership' => [
+				'class' => 'common\behaviors\EnsureOwnershipWithModeration',
+				'ownerAttribute' => 'owner_id',
+				'ensureOnFind' => false,
+			],
+		];
+	}
+
+	/**
+	 * Validator to check if the user may set the visibility to public
+	 */
+	public function validateVisibilityConsistency($attribute, $params)
+	{
+		if ($this->visibility_id == 'public') {
+			$this->addError('visibility_id', 'Sie dürfen mit ihren Rechten leider keine Kampagnen veröffentlichen.');
+		}
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function rules()
 	{
 		return [
 			[['owner_id', 'name', 'description', 'visibility_id'], 'required'],
 			[['owner_id'], 'integer'],
 			[['name', 'description', 'visibility_id', 'loc_path', 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'string'],
-			[['running_from', 'running_until'], 'safe']
+			['visibility_id',  'validateVisibilityConsistency', ],
+			[['running_from', 'running_until'], 'date']
 		];
 	}
 
@@ -52,18 +85,27 @@ class Campaign extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'owner_id' => 'Owner ID',
+			'owner_id' => 'Besitzer',
 			'name' => 'Name',
-			'description' => 'Description',
+			'description' => 'Beschreibung',
 			'running_from' => 'Running From',
 			'running_until' => 'Running Until',
-			'visibility_id' => 'Visibility ID',
-			'loc_path' => 'Loc Path',
-			'created_ts' => 'Created Ts',
-			'modified_ts' => 'Modified Ts',
-			'released_ts' => 'Released Ts',
-			'deleted_ts' => 'Deleted Ts',
+			'visibility_id' => 'Sichtbarkeit',
+			'loc_path' => 'Ort (Pfad)',
+			'created_ts' => 'Angelegt am',
+			'modified_ts' => 'Verändert am',
+			'released_ts' => 'Freigegeben am',
+			'deleted_ts' => 'Gelöscht am',
 		];
+	}
+
+	/**
+	 * Scope for the owner 
+	 * @param ActiveQuery $query
+	 */
+	public static function ownerScope($query)
+	{
+		$query->andWhere("{{%campaign}}.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
 	}
 
 	/**
