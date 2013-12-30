@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['man
 			.
 					$form->field($model, "[$model->id]description")->textarea(['rows' => 3])
 			.
-					$form->field($model, "[$model->id]incident_id")->dropDownList(frontend\models\Incident::dropDownList())
+					$form->field($model, "[$model->id]incident_id")->dropDownList(frontend\models\Incident::dropDownList(), ['tabindex'=> $index*10+1])
 			.
 					$form->field($model, "[$model->id]action_id")->dropDownList(frontend\models\Action::dropDownList())
 			.
@@ -134,7 +134,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['man
 	]); ?>
 	
 	<div class="form-group">
-		<?= Html::submitButton('Aktualisieren', ['class' => 'btn btn-primary']) ?>
+		<?= Html::submitButton('Aktualisieren', ['class' => 'btn btn-primary', 'tabindex'=> 10000]) ?>
 		<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
 	</div>
 
