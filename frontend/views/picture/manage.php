@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel frontend\models\PictureSearch */
+/* @var $withPublish boolean */
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
@@ -63,7 +64,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['man
 		'dataProvider' => $dataProvider,
 		'layout' => "{pager}\n{summary}\n{items}\n{pager}",
 		'id' => 'picture-list',
-		'itemView' => function ($model, $key, $index, $widget) use ($form) {
+		'itemView' => function ($model, $key, $index, $widget) use ($form, $withPublish) {
+						
+			if ($withPublish) {
+				$model->visibility_id = Yii::$app->user->checkAccess('trusted')?'public':'public_approval_pending';
+			}
+
 			return
 			'<hr>'
 			.

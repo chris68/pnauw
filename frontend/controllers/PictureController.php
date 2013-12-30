@@ -123,9 +123,10 @@ class PictureController extends Controller
 
 	/**
 	 * Manage your own Picture models according to search.
+	 * @param boolean $withPublish Change the visibility_id exactly like in publish; this is to support faster processing
 	 * @return mixed
 	 */
-	public function actionManage()
+	public function actionManage($withPublish=false)
 	{
 		if (\Yii::$app->request->isPost && isset($_POST['Picture'])) {
 			$pics = [];
@@ -174,6 +175,7 @@ class PictureController extends Controller
 		return $this->render('manage', [
 				'dataProvider' => $dataProvider,
 				'searchModel' => $searchModel,
+				'withPublish' => $withPublish,
 		]);
 	}
 
