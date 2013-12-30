@@ -73,24 +73,24 @@ $(function() {
 	
 	$("#search-time li").on ( 'click', function( event ) {
 		event.preventDefault();
-		$('#search-time-range').val(event.target.title);
+		$('#search-time-range').val($(event.target).data('value'));
 		$('#search-form').submit();
 	});
 	
 	$("#search-map li").on ( 'click', function( event ) {
-		if (event.target.title == 'bind') {
+		if ($(event.target).data('value') == 'bind') {
 			event.preventDefault();
 			$('#search-map-bind').prop('checked',true);
 			$('#search-form').submit();
 			return false;
 		} 
-		else if (event.target.title == 'dynamic') {
+		else if ($(event.target).data('value') == 'dynamic') {
 			event.preventDefault();
 			$('#search-map-bind').prop('checked',false);
 			$('#search-form').submit();
 			return false;
 		}
-		else if (event.target.title == 'gps') {
+		else if ($(event.target).data('value') == 'gps') {
 			function geolocation_initialize(position) {
 				var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 				map.setZoom(17);
@@ -128,7 +128,7 @@ $(function() {
 
 	$('#search-cancel').on( 'click', function( event ) {
 		event.preventDefault();
-		document.location.href=event.target.title;
+		document.location.href=$(event.target).data('url');
 		return false;
 	});
 
