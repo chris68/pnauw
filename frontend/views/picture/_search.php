@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 	<?php 
 		/** @var yii\widgets\ActiveForm $form */
 		$form = ActiveForm::begin([
+		'action' => [Yii::$app->controller->getRoute()],
 		'method' => 'get',
 		'id' => 'search-form', 
 	]); ?>

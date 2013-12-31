@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
 <div class="citation-search">
 
 	<?php $form = ActiveForm::begin([
+		'action' => [Yii::$app->controller->getRoute()],
 		'method' => 'get',
 	]); ?>
 
