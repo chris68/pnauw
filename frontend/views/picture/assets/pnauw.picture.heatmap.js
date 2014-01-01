@@ -143,7 +143,7 @@ $(function() {
 
 	$('#search-cancel').on( 'click', function( event ) {
 		event.preventDefault();
-		document.location.href=$(event.target).data('url');
+		window.location.assign($(event.target).data('url'));
 		return false;
 	});
 
