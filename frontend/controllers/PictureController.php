@@ -80,6 +80,7 @@ class PictureController extends Controller
 	 * Only a limited number of points will be returned. 
 	 * search parameter map_bounds
 	 * The ones closest to the center of a map boundary (search parameter map_bounds) will be return first (i.e. the order is the distance to the center of the map
+	 * @param boolean $private Shall only the private data be returned? This is needed since currently it is still impossible to pass that property safely via the search parameter
 	 * @return mixed
 	 */
 	public function actionGeodata($private=false)
@@ -101,8 +102,8 @@ class PictureController extends Controller
 		// Retrieve the center of the current map bounds
 		if (!empty($searchModel->map_bounds)) {
 			$corners = explode(',',$searchModel->map_bounds); // Format: "lat_lo,lng_lo,lat_hi,lng_hi"
-			$lat = ((int)$corners[0]+(int)$corners[2])/2;
-			$lng = ((int)$corners[1]+(int)$corners[3])/2;
+			$lat = ((float)$corners[0]+(float)$corners[2])/2;
+			$lng = ((float)$corners[1]+(float)$corners[3])/2;
 		}
 		else
 		{
@@ -120,24 +121,21 @@ class PictureController extends Controller
 		// @todo: Track the outcome of https://github.com/yiisoft/yii2/issues/1730
 		//$query->orderBy("earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}}))");
 		//$query->addParams([':lat' => $lat, ':lng' => $lng]);
-		$query->orderBy('dist');
+		// First sort for the year to cluster the data and then according to the distance
+		// So it least for the most current year in the search we should see good data! 
+		$query->orderBy('extract(year from taken) desc,dist');
 		$query->asArray();
 
 		// Set the scope according to the mode/authorizations
 		if ($private == false || Yii::$app->user->isGuest) {
-			if (Yii::$app->user->checkAccess('moderator')) {
-				$query->moderatorScope(); 
-			}
-			else {
-				$query->publicScope(); 
-			}
+			$query->publicScope(); 
 		} else {
 			$query->ownerScope();
 		}
 		
 		$dataProvider = $searchModel->search(NULL, $query);
 		
-		$dataProvider->pagination->pageSize = 1000; // maximum 1000 items
+		$dataProvider->pagination->pageSize = 2000; // maximum 2000 items
 		$dataProvider->sort = false; // no sorting - even if the URL requires it!
 		
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

@@ -238,14 +238,6 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public static function publicScope($query)
 	{
-		$query->andWhere("{{%picture}}.visibility_id = 'public'");
-	}
-
-	/**
-	 * @param ActiveQuery $query
-	 */
-	public static function moderatorScope($query)
-	{
 		$query->andWhere(["{{%picture}}.visibility_id" => ['public_approval_pending','public']]);
 	}
 
@@ -390,8 +382,8 @@ class Picture extends \yii\db\ActiveRecord
 			\Yii::$app->user->checkAccess('moderator')
 			)
 		) {
-			$this->description = empty($this->description)?'':'<Beschreibung leider noch nicht freigebeben>';
-			$this->name = empty($this->name)?'':'<Bildname leider noch nicht freigebeben>';
+			$this->name = empty($this->name)?'':'[Der Titel wurde leider noch nicht von einem Moderator freigebeben]';
+			$this->description = empty($this->description)?'':'[Die Beschreibung leider noch nicht von Moderator freigebeben]';
 			$this->original_image_id = null;
 			$this->small_image_id = null;
 			$this->medium_image_id = null;
