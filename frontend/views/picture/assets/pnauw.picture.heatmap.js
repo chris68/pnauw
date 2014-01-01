@@ -36,8 +36,9 @@ $(function() {
 
 	google.maps.event.addListener(map, 'idle', function() {
 		var bounds = map.getBounds();
-		searchBox.setBounds(bounds);
+		// console.debug('Bounds updated ('+bounds.toUrlValue()+')');
 		$('#search-map-bounds').val(bounds.toUrlValue());
+		// searchBox.setBounds(bounds);
 	});
 
 	$.getJSON( heatmapSource, function( data ) {
@@ -54,11 +55,17 @@ $(function() {
 		
 		if ($('#search-map-bounds').val() == '') {
 			map.fitBounds(bounds);
+			// console.debug('Bounds calculated ('+bounds.toUrlValue()+')');
 		} else {
 			var corners = $('#search-map-bounds').val().split(',',4);
 			var sw = new google.maps.LatLng(corners[0],corners[1]);
 			var ne = new google.maps.LatLng(corners[2],corners[3]);
-			map.fitBounds(new google.maps.LatLngBounds(sw,ne));
+			bounds = new google.maps.LatLngBounds(sw,ne);
+			// console.debug('Bounds restored - Target ('+bounds.toUrlValue()+')');
+			map.fitBounds(bounds);
+			// Google zooms just one zoom level lower - so we need to zoom in again!
+			map.setZoom(map.getZoom()+1);
+			// console.debug('Bounds restored - Actual ('+map.getBounds().toUrlValue()+')');
 		}
 		
 		var pointArray = new google.maps.MVCArray(points);
