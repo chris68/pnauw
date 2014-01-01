@@ -37,9 +37,11 @@ $(function() {
 	// Idle is better than bounds_changed since fires only once at the end
 	google.maps.event.addListener(map, 'idle', function() {
 		var bounds = map.getBounds();
-		// console.debug('Bounds updated ('+bounds.toUrlValue()+')');
-		$('#search-map-bounds').val(bounds.toUrlValue());
-		searchBox.setBounds(bounds);
+		if (bounds) {
+			// console.debug('Bounds updated ('+bounds.toUrlValue()+')');
+			$('#search-map-bounds').val(bounds.toUrlValue());
+			searchBox.setBounds(bounds);
+		}
 	});
 
 	$.getJSON( heatmapSource, function( data ) {
