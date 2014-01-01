@@ -23,7 +23,7 @@ $this->title = \Yii::$app->name;
 				<p>Sie sind ein Autofahrer und hatten einen Zettel am Auto?</p>
 				<p>Dann schauen Sie doch einfach, was man zu Ihrem Parkverhalten sagt!</p>
 
-				<p><a class="btn btn-default" href="<?= Html::url(['picture/index', 's[time_range]' => '-30;0'])?>">Die aktuellen Vorfälle&raquo;</a></p>
+				<p><a class="btn btn-default" href="<?= Html::url(['picture/index', 's[time_range]' => '-30;0', 's[map_bind]' => '1'])?>">Die aktuellen Vorfälle&raquo;</a></p>
 			</div>
 			<div class="col-md-4">
 				<h2>Fußgänger</h2>
