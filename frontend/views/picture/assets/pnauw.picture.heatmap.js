@@ -34,11 +34,12 @@ $(function() {
 		}
 	});
 
+	// Idle is better than bounds_changed since fires only once at the end
 	google.maps.event.addListener(map, 'idle', function() {
 		var bounds = map.getBounds();
 		// console.debug('Bounds updated ('+bounds.toUrlValue()+')');
 		$('#search-map-bounds').val(bounds.toUrlValue());
-		// searchBox.setBounds(bounds);
+		searchBox.setBounds(bounds);
 	});
 
 	$.getJSON( heatmapSource, function( data ) {
@@ -99,25 +100,32 @@ $(function() {
 		}
 		else if ($(event.target).data('value') == 'gps') {
 			function geolocation_initialize(position) {
+				// console.debug('Geolocation: Got it');
 				var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-				map.setZoom(17);
 				map.setCenter(pos);
+				map.setZoom(17);
 				var bounds = map.getBounds();
 				$('#search-map-bounds').val(bounds.toUrlValue());
 				$('#search-map-bind').prop('checked',true);
-				$('#search-form').submit();
+				// $('#search-form').submit();
 			  }
 
-			function geolocation_fail(error){
+			function geolocation_fail(error) {
+				// console.debug('Geolocation: Failed');
 			}
 
+			// console.debug('Geolocation: Trigger');
+			
 			if (navigator.geolocation) {
 				event.preventDefault();
+				// console.debug('Geolocation: Yep');
 				navigator.geolocation.getCurrentPosition(geolocation_initialize, geolocation_fail);
 				return false;
 			}
 			else
 			{
+				// console.debug('Geolocation: Nope');
+			
 				return true;
 			}
 		}
