@@ -21,11 +21,22 @@ $sql = <<<'EOT'
 CREATE EXTENSION ltree; -- Extension for creating hierachies
 EOT;
 $this->execute($sql);
+
+$sql = <<<'EOT'
+create EXTENSION cube; -- Needed for function earthdistance 
+EOT;
+$this->execute($sql);
+
+$sql = <<<'EOT'
+CREATE EXTENSION earthdistance; -- See http://www.postgresql.org/docs/9.1/static/earthdistance.html
+EOT;
+$this->execute($sql);
+
 	}
 
 	public function safeDown()
 	{
-$sql = <<<'EOT'
+	$sql = <<<'EOT'
 DROP DATABASE gwvgw;
 EOT;
 // $this->execute($sql);

@@ -77,16 +77,53 @@ class PictureController extends Controller
 
 	/**
 	 * Returns the geodata according to search.
+	 * Only a limited number of points will be returned. 
+	 * search parameter map_bounds
+	 * The ones closest to the center of a map boundary (search parameter map_bounds) will be return first (i.e. the order is the distance to the center of the map
 	 * @return mixed
 	 */
 	public function actionGeodata($private=false)
 	{
+		// Differentiate whether we do a public or private search
+		if ($private == false || Yii::$app->user->isGuest) {
+			$searchModel = new PictureSearch(['scenario' => 'public']);
+		} else {
+			$searchModel = new PictureSearch(['scenario' => 'private']);
+		}
+		
+		$searchModel->load($_GET);
+		
+		// Do not bind the search to the map if the geodata search shall not be limited to the map bounds
+		if (!$searchModel->map_limit_points) {
+			$searchModel->map_bind = false;
+		}
+
+		// Retrieve the center of the current map bounds
+		if (!empty($searchModel->map_bounds)) {
+			$corners = explode(',',$searchModel->map_bounds); // Format: "lat_lo,lng_lo,lat_hi,lng_hi"
+			$lat = ((int)$corners[0]+(int)$corners[2])/2;
+			$lng = ((int)$corners[1]+(int)$corners[3])/2;
+		}
+		else
+		{
+			// If we do not have map bounds then Karlsruhe Palace is assumed to be the center of the world :=)
+			$lat = 49.0158491;
+			$lng = 8.4095339;
+			 
+		}
+		
 		// Ultrafast and efficient data fetch!
 		$query = Picture::find();
-		$query->select('tbl_picture.id, tbl_picture.loc_lng, tbl_picture.loc_lat, tbl_incident.severity');
+		$query->select("tbl_picture.id, tbl_picture.loc_lng, tbl_picture.loc_lat, tbl_incident.severity, earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) dist");
 		$query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
+		//$query->orderby('ST_Distance(ST_GeomFromText(\'POINT(-72.1235 42.3521)\'::text,(4326)),ST_GeomFromText(\'POINT(-72.1235 42.3521)\',(4326)))');
+		// @todo: Track the outcome of https://github.com/yiisoft/yii2/issues/1730
+		//$query->orderBy("earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}}))");
+		//$query->addParams([':lat' => $lat, ':lng' => $lng]);
+		$query->orderBy('dist');
 		$query->asArray();
-		
+
+		// Set the scope according to the mode/authorizations
 		if ($private == false || Yii::$app->user->isGuest) {
 			if (Yii::$app->user->checkAccess('moderator')) {
 				$query->moderatorScope(); 
@@ -94,16 +131,10 @@ class PictureController extends Controller
 			else {
 				$query->publicScope(); 
 			}
-			$searchModel = new PictureSearch(['scenario' => 'public']);
 		} else {
 			$query->ownerScope();
-			$searchModel = new PictureSearch(['scenario' => 'private']);
 		}
 		
-		$searchModel->load($_GET);
-		if (!$searchModel->map_limit_points) {
-			$searchModel->map_bounds = '';
-		}
 		$dataProvider = $searchModel->search(NULL, $query);
 		
 		$dataProvider->pagination->pageSize = 1000; // maximum 1000 items
@@ -115,7 +146,7 @@ class PictureController extends Controller
 		foreach ($dataProvider->getModels() as $pic) {
 			// Only return coordinates that have been fixed already and not (0,0)
 			if ($pic['loc_lat'] <> '0' && $pic['loc_lng'] <> '0' ) {
-				$coords[] = ['location'=>['lat'=>$pic['loc_lat'],'lng'=>$pic['loc_lng']],'severity'=>$pic['severity']];
+				$coords[] = ['location'=>['lat'=>$pic['loc_lat'],'lng'=>$pic['loc_lng'],],'severity'=>$pic['severity'],'dist'=>$pic['dist']];
 			}
 		}
 		return $coords;
