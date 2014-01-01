@@ -23,7 +23,7 @@ $this->title = \Yii::$app->name;
 				<p>Sie sind ein Autofahrer und hatten einen Zettel am Auto?</p>
 				<p>Dann schauen Sie doch einfach, was man zu Ihrem Parkverhalten sagt!</p>
 
-				<p><a class="btn btn-default" href="<?= Html::url(['picture/index', 's[time_range]' => '-30;0', 's[map_bind]' => '1'])?>">Die aktuellen Vorfälle&raquo;</a></p>
+				<p><a class="btn btn-default" href="<?= Html::url(['/picture/index', 's[time_range]' => '-30;0', 's[map_bind]' => '1'])?>">Die aktuellen Vorfälle&raquo;</a></p>
 			</div>
 			<div class="col-md-4">
 				<h2>Fußgänger</h2>
@@ -31,7 +31,7 @@ $this->title = \Yii::$app->name;
 				<p>Sie sind Fußgänger und finden es nicht lustig, wie ihre Gehwege zugeparkt sind?</p> 
 				<p>Dann melden Sie die Vorfälle doch einfach. Geht ganz schnell mit der Handykamera und Sie müssen sich dafür nicht einmal registrieren!</p>
 
-				<p><a class="btn btn-default" href="<?= Html::url(['picture/guestcapture'])?>">Vorfall als Gast melden&raquo;</a></p>
+				<p><a class="btn btn-default" href="<?= Html::url(['/picture/guestcapture'])?>">Vorfall als Gast melden&raquo;</a></p>
 			</div>
 			<div class="col-md-4">
 				<h2>Mitarbeit</h2>
