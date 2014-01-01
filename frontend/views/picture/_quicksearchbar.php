@@ -12,7 +12,7 @@
 			  <li><a data-value="bind" href="#">Ausschnitt <b>begrenzt</b> Suchergebnis</a></li>
 			  <li><a data-value="dynamic" href="#">Auschnitt <b>gemäß</b> Suchergebnisse</a></li>
 				<li class="divider"></li>
-			  <li><a data-value="gps" href="#">Auschnitt auf <b>GPS-Standort</b> setzen</a></li>
+			  <li><a data-value="gps" href="#">Ausschnitt auf <b>GPS-Standort</b> setzen</a></li>
 		  </ul>
 	</div>
 		<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" style="margin-left:10px;">
