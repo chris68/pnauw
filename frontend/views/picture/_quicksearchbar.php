@@ -10,7 +10,7 @@
 		</button>
 		  <ul class="dropdown-menu" id="search-map" role="menu">
 			  <li><a data-value="bind" href="#">Ausschnitt <b>begrenzt</b> Suchergebnis</a></li>
-			  <li><a data-value="dynamic" href="#">Auschnitt <b>gemäß</b> Suchergebnisse</a></li>
+			  <li><a data-value="dynamic" href="#">Ausschnitt <b>gemäß</b> Suchergebnisse</a></li>
 				<li class="divider"></li>
 			  <li><a data-value="gps" href="#">Ausschnitt auf <b>GPS-Standort</b> setzen</a></li>
 		  </ul>
