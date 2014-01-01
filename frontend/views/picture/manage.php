@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['man
 						]
 					)
 			.
-					Html::a('Bild im Detail bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])
+					Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])
 			.
 					'<br>'
 			.

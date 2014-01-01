@@ -3,6 +3,7 @@
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel frontend\models\PictureSearch */
 
+use yii;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
@@ -43,7 +44,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 			unset($params[$dataProvider->getSort()->sortVar]);
 			$params[$dataProvider->getSort()->sortVar] = 'id';
 			$route = Yii::$app->controller->getRoute();
-			echo Html::a('Bilder detailliert anschauen', Yii::$app->getUrlManager()->createUrl('picture/massview', $params), ['target' => '_blank']);
+			echo Html::a('Im Detail anschauen', Yii::$app->getUrlManager()->createUrl('picture/massview', $params), ['target' => '_blank']);
+			if (!Yii::$app->user->isGuest) {
+				echo ' | '.Html::a('Im Detail bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
+			}
 		}
 	?>
 	</div>
@@ -76,11 +80,13 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 						]
 					)
 			.
-				Html::a('Bild im Detail anschauen', ['picture/view','id'=>$model->id], ['target' => '_blank'])
+				Html::a('Detail', ['picture/view','id'=>$model->id], ['target' => '_blank'])
+			.
+				((yii::$app->user->checkAccess('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')
 			.
 				'<p><b>'
 			.
-				(($model->incident_id != -1)?Html::encode($model->incident->name):'Das Bild wurde leider nicht klassizifiert')
+				(($model->incident_id != -1)?Html::encode($model->incident->name):'Der Vorfall wurde leider nicht klassizifiert')
 			.
 				'</b></p><p>'
 			.
