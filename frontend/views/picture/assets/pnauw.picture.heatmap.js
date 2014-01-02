@@ -145,7 +145,9 @@ $(function() {
 
 	$('#search-cancel').on( 'click', function( event ) {
 		event.preventDefault();
-		window.location.assign($(event.target).data('url'));
+		// It is important that we use $('#search-cancel') and not $(event.target).data('value') 
+		// since in chrome the target is the span in the button and not the button itself!
+		window.location.assign($('#search-cancel').data('url'));
 		return false;
 	});
 
