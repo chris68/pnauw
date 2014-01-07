@@ -56,7 +56,7 @@ $(function() {
 				var bounds = map.getBounds();
 				$('#search-map-bounds').val(bounds.toUrlValue());
 				$('#search-map-bind').prop('checked',true);
-				// $('#search-form').submit();
+				$('#search-form').submit();
 			  }
 
 			function geolocation_fail(error) {
