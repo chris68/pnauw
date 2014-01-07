@@ -36,12 +36,7 @@ class PictureController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'actions' => ['index','geodata','guestcapture', 'view', 'massview'],
-					],
-					[
-						'allow' => false,
-						'actions' => ['upload', ],
-						'roles' => ['anonymous'],
+						'actions' => ['index','geodata','guestcapture', 'guestupload', 'view', 'massview'],
 					],
 					[
 						'allow' => true,
@@ -440,23 +435,7 @@ class PictureController extends Controller
 	public function actionGuestcapture()
 	{
 		if (!Yii::$app->user->checkAccess('anonymous')) {
-			// todo: Protocoll the ip address via Yii::$app->getRequest()->getUserIP()
-
-			$model = new User();
-			// Username and email blank will block login
-			$model->username = '';
-			$model->email = '';
-			$model->role = User::ROLE_ANONYMOUS;
-			// It will not be possible to log in another time - so the password does not matter...
-			$model->password = '*'; 
-			$model->setScenario('createAnonymous');
-			if ($model->save() && Yii::$app->getUser()->login($model)) {
-				// Reload to ensure the guest access is correctly visualized in the header
-				return $this->refresh();
-			} 
-			else {
-				throw new HttpException(500, 'Anonymous login did not work.');
-			}
+			return $this->enterGuestAccess();
 		} 
 		else {
 			return $this->actionCapture();
@@ -495,6 +474,20 @@ class PictureController extends Controller
 	}
 
 	/**
+	  Instant Upload Picture model (via anonymous user)
+	 * @return mixed
+	 */
+	public function actionGuestupload()
+	{
+		if (!Yii::$app->user->checkAccess('anonymous')) {
+			return $this->enterGuestAccess();
+		} 
+		else {
+			return $this->actionUpload();
+		}
+	}
+
+	/**
 	  Upload Picture model.
 	 * @return mixed
 	 */
@@ -525,7 +518,7 @@ class PictureController extends Controller
 				Yii::$app->session->setFlash('success', 
 					'<strong>Wunderbar</strong>, die ' . count($formmodel->file_handles) . 
 					' Bilder wurden problemlos eingelesen und Sie können diese nun '.
-					Html::a('hier', ['manage', 's[created_ts]'=> date("Y-m-d")]).
+					Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
 					' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
 				return $this->refresh();
 			}
@@ -571,6 +564,31 @@ class PictureController extends Controller
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');
+		}
+	}
+
+	/**
+	  Enter the guest access and then return the refreshed page
+	 * @return mixed
+	 */
+	protected function enterGuestAccess()
+	{
+		// todo: Protocoll the ip address via Yii::$app->getRequest()->getUserIP()
+
+		$model = new User();
+		// Username and email blank will block login
+		$model->username = '';
+		$model->email = '';
+		$model->role = User::ROLE_ANONYMOUS;
+		// It will not be possible to log in another time - so the password does not matter...
+		$model->password = '*'; 
+		$model->setScenario('createAnonymous');
+		if ($model->save() && Yii::$app->getUser()->login($model)) {
+			// Reload to ensure the guest access is correctly visualized in the header
+			return $this->refresh();
+		} 
+		else {
+			throw new HttpException(500, 'Anonymous login did not work.');
 		}
 	}
 
