@@ -97,6 +97,12 @@ class PictureSearch extends Model
 				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
 				'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
 				],
+			'moderator' => [
+				'id','taken','name','description', 
+				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
+				'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
+				'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
+				],
 			'private' => [
 				'id','taken','name','description', 
 				'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',

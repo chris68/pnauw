@@ -87,7 +87,13 @@ class PictureController extends Controller
 	{
 		// Differentiate whether we do a public or private search
 		if ($private == false || Yii::$app->user->isGuest) {
-			$searchModel = new PictureSearch(['scenario' => 'public']);
+			if 	(Yii::$app->user->checkAccess('moderator')) {
+				// A moderator may use some more attributes for the search
+				$searchModel = new PictureSearch(['scenario' => 'moderator']);
+			} else {
+				$searchModel = new PictureSearch(['scenario' => 'public']);
+			}
+				
 		} else {
 			$searchModel = new PictureSearch(['scenario' => 'private']);
 		}
@@ -319,7 +325,7 @@ class PictureController extends Controller
 			}
 		}
 
-		$searchModel = new PictureSearch(['scenario' => 'public']);
+		$searchModel = new PictureSearch(['scenario' => 'moderator']);
 		$searchModel->load($_GET);
 		// @todo: This is currently a hack since the user will not realize that a filter is set
 		// Besides the points on the map are initially slightly wrong!

@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
 			<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
 			</fieldset>
 
-		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
+		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' || $model->scenario == 'moderator') : ?>
 			<fieldset>
 			<legend>Verarbeitung</legend>
 			<?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
@@ -58,6 +58,8 @@ use yii\widgets\ActiveForm;
 			<?= $form->field($model, 'visibility_id')->listBox(frontend\models\Visibility::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 			</fieldset>
 
+		<?php endif; ?>
+		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
 			<fieldset>
 			<legend>Kfz &amp; Anzeigen</legend>
 			<?= $form->field($model, 'vehicle_country_code')->listBox(frontend\models\VehicleCountry::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
