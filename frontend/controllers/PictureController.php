@@ -328,7 +328,7 @@ class PictureController extends Controller
 		$searchModel->visibility_id = 'public_approval_pending';
 		$dataProvider = $searchModel->search(NULL);
 		
-		$dataProvider->query->scopeModerator();
+		$dataProvider->query->publicScope();
 		
 		$dataProvider->pagination->pageSize = 50;
 
