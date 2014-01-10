@@ -23,8 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			?>
 		</div>
 		<div class="col-sm-4 col-md-4 col-lg-4">
-			<p><b><?=(($model->incident_id != -1)?Html::encode($model->incident->name):'Das Bild wurde leider nicht klassizifiert')?></b></p>
+			<p><?=(($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Das Bild wurde leider nicht klassizifiert</i>')?></b></p>
 			<p>Vorfall am <b><?=date_format(date_create($model->taken),'d.m.Y')?></b></p>
+			<p><?=(($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')?></p>
 			<?php \frontend\views\picture\assets\PictureViewAsset::register($this); ?>
 			<?= Html::activeHiddenInput($model,'loc_lat', ['id'=>'picture-map-loc-lat', ]) ?>
 			<?= Html::activeHiddenInput($model,'loc_lng',['id'=>'picture-map-loc-lng', ]) ?>

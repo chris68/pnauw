@@ -84,13 +84,19 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 			.
 				((yii::$app->user->checkAccess('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')
 			.
-				'<p><b>'
+				'<p>'
 			.
-				(($model->incident_id != -1)?Html::encode($model->incident->name):'Der Vorfall wurde leider nicht klassizifiert')
+				(($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Das Bild wurde leider nicht klassizifiert</i>')
 			.
 				'</b></p><p>'
 			.
 					'Vorfall am <b>'.date_format(date_create($model->taken),'d.m.Y').'</b>'
+			.
+				'<p>'
+			.
+				(($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')
+			.
+				'</p><p>'
 			.
 				'</p>'
 			.
