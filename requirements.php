@@ -30,108 +30,108 @@ $requirementsChecker = new YiiRequirementChecker();
 /**
  * Adjust requirements according to your application specifics.
  */
-$requirements = [
+$requirements = array(
 	// Database :
-	[
+	array(
 		'name' => 'PDO extension',
 		'mandatory' => true,
 		'condition' => extension_loaded('pdo'),
 		'by' => 'All <a href="http://www.yiiframework.com/doc/api/#system.db">DB-related classes</a>',
-	],
-	[
+	),
+	array(
 		'name' => 'PDO PostgreSQL extension',
 		'mandatory' => true,
 		'condition' => extension_loaded('pdo_pgsql'),
 		'by' => 'All <a href="http://www.yiiframework.com/doc/api/#system.db">DB-related classes</a>',
 		'memo' => 'Required for PostgreSQL database.',
-	],
+	),
 	// Cache :
-	[
+	array(
 		'name' => 'Memcache extension',
 		'mandatory' => false,
 		'condition' => extension_loaded('memcache') || extension_loaded('memcached'),
 		'by' => '<a href="http://www.yiiframework.com/doc/api/CMemCache">CMemCache</a>',
 		'memo' => extension_loaded('memcached') ? 'To use memcached set <a href="http://www.yiiframework.com/doc/api/CMemCache#useMemcached-detail">CMemCache::useMemcached</a> to <code>true</code>.' : ''
-	],
-	[
+	),
+	array(
 		'name' => 'APC extension',
 		'mandatory' => false,
 		'condition' => extension_loaded('apc'),
 		'by' => '<a href="http://www.yiiframework.com/doc/api/CApcCache">CApcCache</a>',
-	],
+	),
 	// Additional PHP extensions :
-	[
+	array(
 		'name' => 'Mcrypt extension',
 		'mandatory' => false,
 		'condition' => extension_loaded('mcrypt'),
 		'by' => '<a href="http://www.yiiframework.com/doc/api/CSecurityManager">CSecurityManager</a>',
 		'memo' => 'Required by encrypt and decrypt methods.'
-	],
+	),
 	// PHP ini :
-	'phpSafeMode' => [
+	'phpSafeMode' => array(
 		'name' => 'PHP safe mode',
 		'mandatory' => false,
 		'condition' => $requirementsChecker->checkPhpIniOff("safe_mode"),
 		'by' => 'File uploading and console command execution',
 		'memo' => '"safe_mode" should be disabled at php.ini',
-	],
-	'phpExposePhp' => [
+	),
+	'phpExposePhp' => array(
 		'name' => 'Expose PHP',
 		'mandatory' => false,
 		'condition' => $requirementsChecker->checkPhpIniOff("expose_php"),
 		'by' => 'Security reasons',
 		'memo' => '"expose_php" should be disabled at php.ini',
-	],
-	'phpAllowUrlInclude' => [
+	),
+	'phpAllowUrlInclude' => array(
 		'name' => 'PHP allow url include',
 		'mandatory' => false,
 		'condition' => $requirementsChecker->checkPhpIniOff("allow_url_include"),
 		'by' => 'Security reasons',
 		'memo' => '"allow_url_include" should be disabled at php.ini',
-	],
-	'phpSmtp' => [
+	),
+	'phpSmtp' => array(
 		'name' => 'PHP mail SMTP',
 		'mandatory' => false,
 		'condition' => strlen(ini_get('SMTP'))>0,
 		'by' => 'Email sending',
 		'memo' => 'PHP mail SMTP server required',
-	],
+	),
 	// Pnauw specific
-	'phpFileUploadAllowed' => [
+	'phpFileUploadAllowed' => array(
 		'name' => 'PHP file upload allowed',
 		'mandatory' => true,
 		'condition' => $requirementsChecker->checkPhpIniOn('file_uploads'),
 		'by' => 'Uploading pictures',
 		'memo' => 'File uploads must be allowed',
-	],
-	'phpFileUploadSize' => [
+	),
+	'phpFileUploadSize' => array(
 		'name' => 'PHP file upload size',
 		'mandatory' => true,
 		'condition' => $requirementsChecker->compareByteSize(ini_get('upload_max_filesize'),'1mb','>='),
 		'by' => 'Uploading pictures',
 		'memo' => 'Maximum allowed filesize (upload_max_filesize) must be at least 1M; current value:'.ini_get('upload_max_filesize'),
-	],
-	'phpFileUploadNumber' => [
+	),
+	'phpFileUploadNumber' => array(
 		'name' => 'PHP file upload number',
 		'mandatory' => true,
 		'condition' => ini_get('max_file_uploads') >= 50,
 		'by' => 'Uploading pictures',
 		'memo' => 'Maximum allowed number of file upload (max_file_uploads) must be at least 50; current value:'.ini_get('max_file_uploads'),
-	],
-	'phpFileUploadPostSize' => [
+	),
+	'phpFileUploadPostSize' => array(
 		'name' => 'Post size',
 		'mandatory' => true,
 		'condition' => $requirementsChecker->getByteSize(ini_get('post_max_size')) >= 50 * $requirementsChecker->getByteSize('1mb')+$requirementsChecker->getByteSize('5mb'),
 		'by' => 'Uploading pictures',
 		'memo' => 'Maximum postsize (post_max_size) must fit to the file upload requirements (i.e. max files * max size + buffer); current value:'.ini_get('post_max_size'),
-	],
-	'phpFileUploadMemoryLimit' => [
+	),
+	'phpFileUploadMemoryLimit' => array(
 		'name' => 'Memory limit',
 		'mandatory' => true,
 		'condition' => ini_get('memory_limit') == -1 || $requirementsChecker->getByteSize(ini_get('memory_limit')) > 50 * $requirementsChecker->getByteSize('1mb')+$requirementsChecker->getByteSize('10mb'),
 		'by' => 'Uploading pictures',
 		'memo' => 'Memory limit (memory_limit) must fit to the file upload requirements (i.e. max files * max size + buffer); current value:'.ini_get('memory_limit'),
-	],
-];
+	),
+);
 $requirementsChecker->checkYii()->check($requirements)->render();
 
