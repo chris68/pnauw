@@ -22,11 +22,6 @@ return [
 
 	'components.db' => [
 		'class' => 'yii\db\Connection',
-		'dsn' => 'pgsql:host=localhost;dbname=pnauw',
-		'tablePrefix' => 'tbl_',
-		'username' => 'mailwitch',
-		// passwort does not matter since we use unix authentication; so just set it to the username
-		'password' => 'mailwitch', 
 		'charset' => 'utf8',
 	],
 	'components.auth' => [
