@@ -17,7 +17,6 @@ return [
 	'vendorPath' => $rootDir . '/vendor',
 	'controllerNamespace' => 'frontend\controllers',
 	'modules' => [
-		'gii' => 'yii\gii\Module',
 		'markdown' => [
 			// the module class
 			'class' => 'kartik\markdown\Module',

@@ -1,10 +1,10 @@
 <?php
 return [
 	'preload' => [
-		//'debug',
+		'debug',
 	],
 	'modules' => [
-//		'debug' => 'yii\debug\Module',
-//		'gii' => 'yii\gii\Module',
+		'debug' => 'yii\debug\Module',
+		'gii' => 'yii\gii\Module',
 	],
 ];
