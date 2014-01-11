@@ -15,13 +15,13 @@
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.4.0",
-		"yiisoft/yii2": "dev-master",
-		"yiisoft/yii2-swiftmailer": "dev-master",
-		"yiisoft/yii2-bootstrap": "dev-master",
-		"yiisoft/yii2-debug": "dev-master",
-		"yiisoft/yii2-gii": "dev-master",
-		"yiisoft/yii2-jui": "dev-master",
-		"kartik-v/yii2-markdown": "dev-master"
+		"yiisoft/yii2": "*",
+		"yiisoft/yii2-swiftmailer": "*",
+		"yiisoft/yii2-bootstrap": "*",
+		"yiisoft/yii2-debug": "*",
+		"yiisoft/yii2-gii": "*",
+		"yiisoft/yii2-jui": "*",
+		"kartik-v/yii2-markdown": "*"
 	},
 	"scripts": {
 		"post-create-project-cmd": [
