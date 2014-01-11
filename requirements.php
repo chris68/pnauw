@@ -39,11 +39,11 @@ $requirements = [
 		'by' => 'All <a href="http://www.yiiframework.com/doc/api/#system.db">DB-related classes</a>',
 	],
 	[
-		'name' => 'PDO PgSQL extension',
+		'name' => 'PDO PostgreSQL extension',
 		'mandatory' => true,
 		'condition' => extension_loaded('pdo_pgsql'),
 		'by' => 'All <a href="http://www.yiiframework.com/doc/api/#system.db">DB-related classes</a>',
-		'memo' => 'Required for Postgres SQL database.',
+		'memo' => 'Required for PostgreSQL database.',
 	],
 	// Cache :
 	[
