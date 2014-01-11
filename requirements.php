@@ -11,10 +11,10 @@
  */
 
 // you may need to adjust this path to the correct Yii framework path
-$frameworkPath = dirname(__FILE__) . '/vendor/yiisoft/yii2/yii';
+$frameworkPath = dirname(__FILE__) . '/vendor/yiisoft/yii2';
 if (!is_dir($frameworkPath)) {
 	// situation where the script is called from within the web root; so fix it to support both locations
-	$frameworkPath = dirname(__FILE__) . '/../../vendor/yiisoft/yii2/yii';
+	$frameworkPath = dirname(__FILE__) . '/../../vendor/yiisoft/yii2';
 }
 
 if (!is_dir($frameworkPath)) {
