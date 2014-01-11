@@ -17,13 +17,13 @@
 		"php": ">=5.4.0",
 		"yiisoft/yii2": "*",
 		"yiisoft/yii2-bootstrap": "*",
-		"yiisoft/yii2-swiftmailer": "*"
+		"yiisoft/yii2-swiftmailer": "*",
+		"yiisoft/yii2-jui": "*",
+		"kartik-v/yii2-markdown": "*"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "*",
-		"yiisoft/yii2-gii": "*",
-		"yiisoft/yii2-jui": "*",
-		"kartik-v/yii2-markdown": "*"
+		"yiisoft/yii2-gii": "*"
 	},
 	"scripts": {
 		"post-create-project-cmd": [
