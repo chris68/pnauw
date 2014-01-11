@@ -98,7 +98,7 @@ AppAsset::register($this);
 	<?= Alert::widget() ?>
 	<?= $content ?>
 	</div>
-
+	
 	<footer class="footer">
 		<div class="container">
 			<?php if (!Yii::$app->user->isGuest) : ?>
