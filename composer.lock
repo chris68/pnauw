@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ea493d97a92f6842d705e12a8cfab3f9",
+    "hash": "c4c497b271fe7e1de3ff945299c1821d",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -362,12 +362,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "58fed24707d514e4183bc5614517c641b3542a93"
+                "reference": "e9dca3816d4cb634539c4a32bd1f553be3591bf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/58fed24707d514e4183bc5614517c641b3542a93",
-                "reference": "58fed24707d514e4183bc5614517c641b3542a93",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/e9dca3816d4cb634539c4a32bd1f553be3591bf4",
+                "reference": "e9dca3816d4cb634539c4a32bd1f553be3591bf4",
                 "shasum": ""
             },
             "require": {
@@ -432,7 +432,7 @@
                 "framework",
                 "yii"
             ],
-            "time": "2014-01-11 16:49:29"
+            "time": "2014-01-11 22:30:06"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -522,94 +522,6 @@
                 "yii"
             ],
             "time": "2014-01-11 05:52:43"
-        },
-        {
-            "name": "yiisoft/yii2-debug",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "6fcb473c28a61593ec21cdfedcce11665cfc8537"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/6fcb473c28a61593ec21cdfedcce11665cfc8537",
-                "reference": "6fcb473c28a61593ec21cdfedcce11665cfc8537",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-bootstrap": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii\\debug\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com",
-                    "homepage": "http://www.yiiframework.com/",
-                    "role": "Founder and project lead"
-                }
-            ],
-            "description": "The debugger extension for the Yii framework",
-            "keywords": [
-                "debug",
-                "debugger",
-                "yii"
-            ],
-            "time": "2014-01-11 02:06:25"
-        },
-        {
-            "name": "yiisoft/yii2-gii",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "48d78775eb102e4c6ec3f02c6a5d80c48caa4d6e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/48d78775eb102e4c6ec3f02c6a5d80c48caa4d6e",
-                "reference": "48d78775eb102e4c6ec3f02c6a5d80c48caa4d6e",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-bootstrap": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii\\gii\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com",
-                    "homepage": "http://www.yiiframework.com/",
-                    "role": "Founder and project lead"
-                }
-            ],
-            "description": "The Gii extension for the Yii framework",
-            "keywords": [
-                "code generator",
-                "gii",
-                "yii"
-            ],
-            "time": "2014-01-11 08:24:23"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -702,21 +614,102 @@
         }
     ],
     "packages-dev": [
-
+        {
+            "name": "yiisoft/yii2-debug",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-debug.git",
+                "reference": "6fcb473c28a61593ec21cdfedcce11665cfc8537"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/6fcb473c28a61593ec21cdfedcce11665cfc8537",
+                "reference": "6fcb473c28a61593ec21cdfedcce11665cfc8537",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii\\debug\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                }
+            ],
+            "description": "The debugger extension for the Yii framework",
+            "keywords": [
+                "debug",
+                "debugger",
+                "yii"
+            ],
+            "time": "2014-01-11 02:06:25"
+        },
+        {
+            "name": "yiisoft/yii2-gii",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-gii.git",
+                "reference": "2735ad6486251aa6048341ee08b78af5fbd6a0fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/2735ad6486251aa6048341ee08b78af5fbd6a0fc",
+                "reference": "2735ad6486251aa6048341ee08b78af5fbd6a0fc",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii\\gii\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                }
+            ],
+            "description": "The Gii extension for the Yii framework",
+            "keywords": [
+                "code generator",
+                "gii",
+                "yii"
+            ],
+            "time": "2014-01-11 20:14:05"
+        }
     ],
     "aliases": [
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "yiisoft/yii2": 20,
-        "yiisoft/yii2-swiftmailer": 20,
-        "yiisoft/yii2-bootstrap": 20,
-        "yiisoft/yii2-debug": 20,
-        "yiisoft/yii2-gii": 20,
-        "yiisoft/yii2-jui": 20,
-        "kartik-v/yii2-markdown": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.4.0"
     },
