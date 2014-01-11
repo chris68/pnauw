@@ -35,80 +35,74 @@ AppAsset::register($this);
 
 	</script>
 	<?php $this->beginBody() ?>
-	<?php
-		NavBar::begin([
-			// Label should be small; otherwise on mobile phone the navbar blows up to two lines!
-			'brandLabel' => '<small>Parke nicht auf unseren Wegen</small>',
-			'brandUrl' => Yii::$app->homeUrl,
-			'options' => [
-				'class' => 'navbar-inverse navbar-fixed-top',
-			],
-		]);
-		$menuItems = [
-			['label' => \Yii::t('base','Home'), 'url' => ['/site/index']],
-			[
-				'label' => 'Moderieren', 
-				'visible' => Yii::$app->user->checkAccess('moderator'),
-				'items' => [
-					['label' => 'Bilder', 'url' => ['/picture/moderate','sort'=>'modified_ts-desc']],
+	<div class="wrap">
+		<?php
+			NavBar::begin([
+				// Label should be small; otherwise on mobile phone the navbar blows up to two lines!
+				'brandLabel' => '<small>Parke nicht auf unseren Wegen</small>',
+				'brandUrl' => Yii::$app->homeUrl,
+				'options' => [
+					'class' => 'navbar-inverse navbar-fixed-top',
 				],
-			],
-			[
-				'label' => 'Bilder', 
-				'visible' => !Yii::$app->user->isGuest,
-				'items' => [
-					['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
-					['label' => 'Hochladen', 'url' => ['/picture/upload']],
-					['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
-					['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
-					['label' => 'Veröffentlichen', 'url' => ['/picture/publish','sort'=>'modified_ts-desc']],
-					['label' => 'Anschauen', 'url' => ['/picture/index','sort'=>'taken-desc']],
+			]);
+			$menuItems = [
+				['label' => \Yii::t('base','Home'), 'url' => ['/site/index']],
+				[
+					'label' => 'Moderieren', 
+					'visible' => Yii::$app->user->checkAccess('moderator'),
+					'items' => [
+						['label' => 'Bilder', 'url' => ['/picture/moderate','sort'=>'modified_ts-desc']],
+					],
 				],
-			],
-			[
-				'label' => 'Verwalten', 
-				'visible' => !Yii::$app->user->isGuest,
-				'items' => [
-					['label' => 'Kampagnen', 'url' => ['/campaign/index','sort'=>'created_ts-desc']],
-					['label' => 'Anzeigen', 'url' => ['/citation/index','sort'=>'created_ts-desc']],
+				[
+					'label' => 'Bilder', 
+					'visible' => !Yii::$app->user->isGuest,
+					'items' => [
+						['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
+						['label' => 'Hochladen', 'url' => ['/picture/upload']],
+						['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
+						['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
+						['label' => 'Veröffentlichen', 'url' => ['/picture/publish','sort'=>'modified_ts-desc']],
+						['label' => 'Anschauen', 'url' => ['/picture/index','sort'=>'taken-desc']],
+					],
 				],
-			],
-			['label' => 'Hilfe', 'url' => ['/site/help']],
-			['label' => \Yii::t('base','About'), 'url' => ['/site/about']],
-			['label' => \Yii::t('base','Contact'), 'url' => ['/site/contact']],
-		];
-		if (Yii::$app->user->isGuest) {
-			$menuItems[] = ['label' => \Yii::t('base','Signup'), 'url' => ['/site/signup']];
-			$menuItems[] = ['label' => \Yii::t('base','Login'), 'url' => ['/site/login']];
-		} else {
-			$menuItems[] = ['label' => \Yii::t('base','Logout').' (' . Yii::$app->user->identity->username .')' , 'url' => ['/site/logout']];
-		}
-		echo Nav::widget([
-			'options' => ['class' => 'navbar-nav navbar-right'],
-			'items' => $menuItems,
-		]);
-		NavBar::end();
-	?>
+				[
+					'label' => 'Verwalten', 
+					'visible' => !Yii::$app->user->isGuest,
+					'items' => [
+						['label' => 'Kampagnen', 'url' => ['/campaign/index','sort'=>'created_ts-desc']],
+						['label' => 'Anzeigen', 'url' => ['/citation/index','sort'=>'created_ts-desc']],
+					],
+				],
+				['label' => 'Hilfe', 'url' => ['/site/help']],
+				['label' => \Yii::t('base','About'), 'url' => ['/site/about']],
+				['label' => \Yii::t('base','Contact'), 'url' => ['/site/contact']],
+			];
+			if (Yii::$app->user->isGuest) {
+				$menuItems[] = ['label' => \Yii::t('base','Signup'), 'url' => ['/site/signup']];
+				$menuItems[] = ['label' => \Yii::t('base','Login'), 'url' => ['/site/login']];
+			} else {
+				$menuItems[] = ['label' => \Yii::t('base','Logout').' (' . Yii::$app->user->identity->username .')' , 'url' => ['/site/logout']];
+			}
+			echo Nav::widget([
+				'options' => ['class' => 'navbar-nav navbar-right'],
+				'items' => $menuItems,
+			]);
+			NavBar::end();
+		?>
 
-	<div class="container">
-	<?= Breadcrumbs::widget([
-		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-		'encodeLabels' => false,
-	]) ?>
-	<?= Alert::widget() ?>
-	<?= $content ?>
+		<div class="container">
+		<?= Breadcrumbs::widget([
+			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+			'encodeLabels' => false,
+		]) ?>
+		<?= Alert::widget() ?>
+		<?= $content ?>
+		</div>
 	</div>
 	
 	<footer class="footer">
 		<div class="container">
-			<?php if (!Yii::$app->user->isGuest) : ?>
-			<div class="row">
-				<div class="col-sm-12 col-md-12 alert alert-warning">
-					Das System ist derzeit noch in Entwicklung und es wird daher noch gewisse Nutzungseinschränkungen geben!
-				</div>
-			</div>
-			<?php endif ?>
-			
 			<div class="row">
 				<div class="col-sm-6 col-md-6">
 					<?= Html::a('Nutzungsbedingungen','site/terms') ?> |
