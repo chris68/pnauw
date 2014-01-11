@@ -7,7 +7,7 @@ use yii\web\Controller;
 use common\models\LoginForm;
 use frontend\models\ContactForm;
 use common\models\User;
-use yii\web\HttpException;
+use yii\web\BadRequestHttpException;
 use yii\helpers\Security;
 
 class SiteController extends Controller
@@ -154,7 +154,7 @@ class SiteController extends Controller
 		]);
 
 		if (!$model) {
-			throw new HttpException(400, \Yii::t('base','Wrong password reset token.'));
+			throw new BadRequestHttpException('Wrong password reset token.');
 		}
 
 		$model->scenario = 'resetPassword';
