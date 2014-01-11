@@ -26,10 +26,8 @@ $this->title = 'Privatanzeige';
 		können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr mißbräuchliches Parken hinweisen und, wenn es nicht hilft
 		oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
 	</p>
-	<!-- The field is currently not HTML encoded since markdown does not work yet -->
-	<!-- However, since only the user himself will face the results we could not care less -->
 	<h2>Spezifische Angaben für die Anzeige</h2>
-	<p><?=$model->description?></p>
+	<p><?=Html::encode($model->description)?></p>
 	<h2>Generelle Erläuterungen</h2>
 	<p>
 		Unter Vorfall ist genau dokumentiert, wie der Anzeiger die Lage entschätzt. Wenn es dort heißt <b>Gehwegparken (mit Behinderung)</b>, 
