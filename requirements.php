@@ -6,16 +6,12 @@
  * php requirements.php
  *
  * In order to run this script from the web, you should copy it to the web root.
- * If you are using Linux you can create a hard link instead, using the following command:
- * ln ../../requirements.php requirements.php 
+ * If you are using Linux you can create a symbolic link instead, using the following command:
+ * ln -s ../../requirements.php requirements.php 
  */
 
 // you may need to adjust this path to the correct Yii framework path
 $frameworkPath = dirname(__FILE__) . '/vendor/yiisoft/yii2';
-if (!is_dir($frameworkPath)) {
-	// situation where the script is called from within the web root; so fix it to support both locations
-	$frameworkPath = dirname(__FILE__) . '/../../vendor/yiisoft/yii2';
-}
 
 if (!is_dir($frameworkPath)) {
 	echo '<h1>Error</h1>';
