@@ -1,8 +1,12 @@
 <?php
 return [
 	'components.db' => [
-		'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-		'username' => 'root',
-		'password' => '',
+		'class' => 'yii\db\Connection',
+		'tablePrefix' => 'tbl_',
+		'charset' => 'utf8',
+		'dsn' => 'pgsql:host=localhost;dbname=pnauw',
+		'username' => 'mailwitch',
+		// passwort does not matter since we use unix authentication; so just set it to the username
+		'password' => 'mailwitch', 
 	],
 ];

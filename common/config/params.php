@@ -20,10 +20,6 @@ return [
 		'viewPath' => '@common/mails',
 	],
 
-	'components.db' => [
-		'class' => 'yii\db\Connection',
-		'charset' => 'utf8',
-	],
 	'components.auth' => [
 		'class' => 'common\components\RBACPhpManager',
 		'authFile' => '@common/data/rbac.php',
