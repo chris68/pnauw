@@ -12,7 +12,7 @@ return [
 	'id' => 'app-frontend',
 	'basePath' => dirname(__DIR__),
 	'name' => 'Parke nicht auf unseren Wegen',
-	'version' => '0.3 (dev)',
+	'version' => '1.1 (dev)',
 	'language' => 'de',
 	'vendorPath' => $rootDir . '/vendor',
 	'controllerNamespace' => 'frontend\controllers',
