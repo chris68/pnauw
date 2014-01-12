@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Bilder hochladen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
-$this->params['breadcrumbs'][] = 'Hochladen';
+$this->params['breadcrumbs'][] = 'Hochladen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
 ?>
 
 
