@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
 
-		<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
+		<?= (\Yii::$app->user->checkAccess('trusted')?$form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()):'') ?>
 
 		<?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 

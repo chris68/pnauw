@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 ?>
 <div class="campaign-index">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
 	<?=
 		Collapse::widget([

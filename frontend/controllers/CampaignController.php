@@ -27,12 +27,28 @@ class CampaignController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
+						'actions' => ['show', ],
+					],
+					[
+						'allow' => true,
 						'actions' => ['index', 'view', 'create', 'update', 'delete', ],
-						'roles' => ['@'],
+						'roles' => ['trusted'],
 					],
 				],
 			],
 		];
+	}
+
+	/**
+	 * Shows (for the public) a single Campaign model.
+	 * @param integer $id
+	 * @return mixed
+	 */
+	public function actionShow($id)
+	{
+		return $this->render('show', [
+			'model' => $this->findModel($id),
+		]);
 	}
 
 	/**

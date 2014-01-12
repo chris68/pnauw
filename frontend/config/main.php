@@ -21,7 +21,7 @@ return [
 			// the module class
 			'class' => 'kartik\markdown\Module',
 			// whether to use PHP SmartyPants to process Markdown output
-			'smartyPants' => true
+			'smartyPants' => false
 
 		],
 	],

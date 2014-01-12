@@ -9,7 +9,7 @@
 		<?= $form->field($model, 'name')->textInput() ?>
 		<?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 		<?= $form->field($model, 'visibility_id')->dropDownList(frontend\models\Visibility::dropDownList()) ?>
-		<?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
+		<?= (\Yii::$app->user->checkAccess('trusted')?$form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()):'') ?>
 	</div>
 </div>
 

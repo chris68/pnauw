@@ -7,14 +7,14 @@ use yii\helpers\Html;
  * @var frontend\models\Citation $model
  */
 
-$this->title = 'Anzeige bearbeiten: ' . $model->name;
+$this->title = 'Anzeige bearbeiten: ' . Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="citation-update">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
 	<?php echo $this->render('_form', [
 		'model' => $model,

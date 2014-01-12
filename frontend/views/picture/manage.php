@@ -122,7 +122,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['man
 			'	</div>
 				<div class="col-sm-4 col-md-4 col-lg-4">'
 			.
-					$form->field($model, "[$model->id]campaign_id")->dropDownList(frontend\models\Campaign::dropDownList())
+					(\Yii::$app->user->checkAccess('trusted')?$form->field($model, "[$model->id]campaign_id")->dropDownList(frontend\models\Campaign::dropDownList()):'')
 			.
 					$form->field($model, "[$model->id]citation_id")->dropDownList(frontend\models\Citation::dropDownList())
 			.

@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
+use kartik\markdown\Markdown;
 
 
 $this->title = 'Privatanzeige';
@@ -20,14 +21,14 @@ $this->title = 'Privatanzeige';
 		}
 	?>
 	<!-- The header intentionally comes at the end to support better two side printing! -->
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 	<p>
 		Dies ist eine Privatanzeige, die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
 		können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr mißbräuchliches Parken hinweisen und, wenn es nicht hilft
 		oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
 	</p>
 	<h2>Spezifische Angaben für die Anzeige</h2>
-	<p><?=Html::encode($model->description)?></p>
+	<p><?=Markdown::convert(Html::encode($model->description))?></p>
 	<h2>Generelle Erläuterungen</h2>
 	<p>
 		Unter Vorfall ist genau dokumentiert, wie der Anzeiger die Lage entschätzt. Wenn es dort heißt <b>Gehwegparken (mit Behinderung)</b>, 

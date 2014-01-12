@@ -98,6 +98,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 			.
 				'</p><p>'
 			.
+				'<p>'
+			.
+				((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')
+			.
+				'</p><p>'
+			.
 				'</p>'
 			.
 				'<hr>'

@@ -70,7 +70,7 @@ AppAsset::register($this);
 					'label' => 'Verwalten', 
 					'visible' => !Yii::$app->user->isGuest,
 					'items' => [
-						['label' => 'Kampagnen', 'url' => ['/campaign/index','sort'=>'created_ts-desc']],
+						['label' => 'Kampagnen', 'url' => ['/campaign/index','sort'=>'created_ts-desc'], 'visible' => Yii::$app->user->checkAccess('trusted')],
 						['label' => 'Anzeigen', 'url' => ['/citation/index','sort'=>'created_ts-desc']],
 					],
 				],

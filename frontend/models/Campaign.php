@@ -25,6 +25,11 @@ namespace frontend\models;
 class Campaign extends \yii\db\ActiveRecord
 {
 	/**
+	 * Quick hack to support the attribute without model changes
+	 */
+	public $availability_id = '';
+	
+	/**
 	 * {@inheritdoc}
 	 */
 	public static function tableName()
@@ -61,8 +66,8 @@ class Campaign extends \yii\db\ActiveRecord
 	 */
 	public function validateVisibilityConsistency($attribute, $params)
 	{
-		if (strpos($this->visibility_id,'public') !== false) {
-			$this->addError('visibility_id', 'Sie dürfen derzeit leider generell noch keine Kampagnen veröffentlichen!');
+		if ((strpos($this->visibility_id,'public') !== false) && !Yii::$app->user->checkAccess('trusted')) {
+			$this->addError('visibility_id', 'Sie dürfen als noch nicht vertrauenswürdiger Nutzer derzeit leider generell noch keine Kampagnen veröffentlichen!');
 		}
 	}
 
@@ -72,8 +77,8 @@ class Campaign extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['name', 'description', 'visibility_id'], 'required'],
-			[['name', 'description', 'visibility_id', /*'loc_path',*/ ], 'string'],
+			[['name', 'description', 'visibility_id', 'availability_id', 'running_from', 'running_until'], 'required'],
+			[['name', 'description', 'visibility_id', 'availability_id', /*'loc_path',*/ ], 'string'],
 			['visibility_id',  'validateVisibilityConsistency', ],
 			[['running_from', 'running_until'], 'date']
 		];
@@ -92,6 +97,7 @@ class Campaign extends \yii\db\ActiveRecord
 			'running_from' => 'Startdatum',
 			'running_until' => 'Enddatum',
 			'visibility_id' => 'Sichtbarkeit',
+			'availability_id' => 'Verfügbarkeit',
 			'loc_path' => 'Ort (Pfad)',
 			'created_ts' => 'Angelegt am',
 			'modified_ts' => 'Verändert am',

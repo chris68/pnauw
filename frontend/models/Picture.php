@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use yii;
 use yii\db\ActiveQuery;
 use frontend\models\Image;
 use Imagick;
@@ -162,19 +163,27 @@ class Picture extends \yii\db\ActiveRecord
 	{
 		// It is utmost important that only attributes which a safe to be mass assigned are listed here!
 		// owner_id and the whole image_ids certainly should not be changed by the user!
-		return [
+		$rules = [
 			['citation_id', 'default', 'value' => NULL],
-			['campaign_id', 'default', 'value' => NULL],
 			['selected', 'default', 'value' => false],
 			['deleted', 'default', 'value' => false],
 			[['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
-			[['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', 'campaign_id'], 'integer'],
+			[['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'integer'],
 			[['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 			[['loc_lat', 'loc_lng',], 'double'],
 			['visibility_id',  'validateVisibilityConsistency', ],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 			['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
 		];
+		if (Yii::$app->user->checkAccess('trusted')) {
+			// Only trusted users currently may assign to a campaign
+			$rules = array_merge($rules,
+			[
+				['campaign_id', 'default', 'value' => NULL],
+				['campaign_id', 'integer'],
+			]);
+		};
+		return $rules;
 	}
 
 	/**

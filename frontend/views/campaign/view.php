@@ -2,19 +2,20 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use kartik\markdown\Markdown;
 
 /**
  * @var yii\web\View $this
  * @var frontend\models\Campaign $model
  */
 
-$this->title = $model->name;
+$this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="campaign-view">
 
-	<h1><?= Html::encode($this->title) ?></h1>
+	<h1><?= $this->title ?></h1>
 
 	<p>
 		<?= Html::a('Bearbeiten', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -30,7 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		'attributes' => [
 			'id',
 			'name:ntext',
-			'description:ntext',
+			[
+				'label' => 'Beschreibung',
+				'format' => 'raw',
+				'value' => Markdown::convert(Html::encode($model->description)),
+			],
 			'running_from',
 			'running_until',
 			[
