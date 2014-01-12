@@ -66,7 +66,7 @@ class Campaign extends \yii\db\ActiveRecord
 	 */
 	public function validateVisibilityConsistency($attribute, $params)
 	{
-		if ((strpos($this->visibility_id,'public') !== false) && !Yii::$app->user->checkAccess('trusted')) {
+		if ((strpos($this->visibility_id,'public') !== false) && !\Yii::$app->user->checkAccess('trusted')) {
 			$this->addError('visibility_id', 'Sie dürfen als noch nicht vertrauenswürdiger Nutzer derzeit leider generell noch keine Kampagnen veröffentlichen!');
 		}
 	}
