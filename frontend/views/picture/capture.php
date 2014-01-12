@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = 'Aufnehmen'.(Yii::$app->user->checkAccess('anon
 
 	<div class="help-block">
 		<p>Hier können Sie mit Ihrer Kamera auf der mobilen Einheit ein Bild aufnehmen, hochladen und dann gleich bearbeiten.</p>
+		<p>Wenn Sie Probleme mit dem direkten Zugriff auf die Kamera haben, dann können Sie die Bilder auch aus dem Dateisystem <a href="<?=Html::URL(['upload'])?>" >hochladen</p>.
 	</div>
 </div>
 
