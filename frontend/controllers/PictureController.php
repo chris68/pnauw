@@ -512,10 +512,16 @@ class PictureController extends Controller
 				}
 				
 				}
-
+				if (count($formmodel->file_handles) == 1) {
+					$flash = 'Das eine Bild wurde problemlos eingelesen.<br>';
+				} else {
+					$flash = 'Die '.count($formmodel->file_handles).' Bilder wurden problemlos eingelesen.<br>';
+					$flash = $flash.'<ul><li>Erstes Bild: '.$formmodel->file_handles[0]->name.'</li>';
+					$flash = $flash.'<li>Letzes Bild: '.$formmodel->file_handles[count($formmodel->file_handles)-1]->name.'</li></ul>';
+				}
 				Yii::$app->session->setFlash('success', 
-					'<strong>Wunderbar</strong>, die ' . count($formmodel->file_handles) . 
-					' Bilder wurden problemlos eingelesen und Sie können diese nun '.
+					$flash.
+					'Sie können diese nun '.
 					Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
 					' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
 				return $this->refresh();
