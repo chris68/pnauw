@@ -116,15 +116,13 @@ class PictureController extends Controller
 		
 		// Ultrafast and efficient data fetch!
 		$query = Picture::find();
-		$query->select("tbl_picture.id, tbl_picture.loc_lng, tbl_picture.loc_lat, tbl_incident.severity, earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) dist");
-		$query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
-		//$query->orderby('ST_Distance(ST_GeomFromText(\'POINT(-72.1235 42.3521)\'::text,(4326)),ST_GeomFromText(\'POINT(-72.1235 42.3521)\',(4326)))');
-		// @todo: Track the outcome of https://github.com/yiisoft/yii2/issues/1730
-		//$query->orderBy("earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}}))");
+		// @Todo: Waiting for fix https://github.com/yiisoft/yii2/issues/1955 to use parameters
+		$query->select(["tbl_picture.id", "tbl_picture.loc_lng", "tbl_picture.loc_lat", "tbl_incident.severity", "earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) as dist"]);
 		//$query->addParams([':lat' => $lat, ':lng' => $lng]);
+		$query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
 		// First sort for the year to cluster the data and then according to the distance
 		// So it least for the most current year in the search we should see good data! 
-		$query->orderBy('extract(year from taken) desc,dist');
+		$query->orderBy(['extract(year from taken)' => SORT_DESC, 'dist' => SORT_ASC]);
 		$query->asArray();
 
 		// Set the scope according to the mode/authorizations
