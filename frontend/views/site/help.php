@@ -6,6 +6,16 @@ use yii\helpers\Html;
 $this->title = 'Hilfe';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+	/* 
+		Otherwise when navigating to an anchor the heading is hidden behind the navbar 
+		See http://stackoverflow.com/questions/9047703/fixed-position-navbar-obscures-anchors
+	*/
+	.site-about a[name] {
+	  padding-top: 60px;
+	  margin-top: -60px;
+	}	
+</style>
 <div class="site-about">
 	<h1><?= $this->title ?></h1>
 	
