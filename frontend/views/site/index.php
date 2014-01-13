@@ -40,7 +40,7 @@ $this->title = \Yii::$app->name;
 				<p>Dann <?= Html::a("registrieren",['/site/signup'])?> Sie sich und laden ihre ganzen Bilder von Gehwegparkern hoch!</p>
 
 				<p><a class="btn btn-default" href="<?= Html::url(['picture/upload'])?>">Bilder hochladen&raquo;</a></p>
-				<p>Und wenn Sie länger dabei sind, dann beantragen Sie am besten schleunigst eine höhere <a href="<?=Html::Url(['help']).'#User-Level'?>">Berechtigungsstufe</a></p>
+				<p>Und wenn Sie länger dabei sind, dann beantragen Sie am besten schleunigst eine höhere <a href="<?=Html::Url(['help']).'#user-level'?>">Berechtigungsstufe</a></p>
 			</div>
 		</div>
 
