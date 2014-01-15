@@ -118,11 +118,13 @@ class PictureController extends Controller
 		$query = Picture::find();
 		// @Todo: Waiting for fix https://github.com/yiisoft/yii2/issues/1955 to use parameters
 		$query->select(["tbl_picture.id", "tbl_picture.loc_lng", "tbl_picture.loc_lat", "tbl_incident.severity", "earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) as dist"]);
-		//$query->addParams([':lat' => $lat, ':lng' => $lng]);
+		//$query->select(["tbl_picture.id", "tbl_picture.loc_lng", "tbl_picture.loc_lat", "tbl_incident.severity", "earth_distance( ll_to_earth((:lat), (:lng) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) as dist"]);
+		//$query->from ('tbl_picture');
 		$query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
 		// First sort for the year to cluster the data and then according to the distance
 		// So it least for the most current year in the search we should see good data! 
 		$query->orderBy(['extract(year from taken)' => SORT_DESC, 'dist' => SORT_ASC]);
+		//$query->addParams([':lat' => $lat, ':lng' => $lng]);
 		$query->asArray();
 
 		// Set the scope according to the mode/authorizations
