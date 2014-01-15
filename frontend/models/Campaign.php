@@ -27,7 +27,7 @@ class Campaign extends \yii\db\ActiveRecord
 	/**
 	 * Quick hack to support the attribute without model changes
 	 */
-	public $availability_id = '';
+	public $availability_id = 'trusted';
 	
 	/**
 	 * {@inheritdoc}
