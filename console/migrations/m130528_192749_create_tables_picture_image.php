@@ -60,7 +60,7 @@ $this->insert('{{%visibility}}',array('sortkey' => 600, 'id'=>'public_approval_w
 $sql = <<<'EOT'
 CREATE TABLE {{%incident}}
 (
-  id serial NOT NULL PRIMARY KEY,
+  id int NOT NULL PRIMARY KEY,
   sortkey real not null unique,
   name text not null unique,
   category text not null,
@@ -74,21 +74,21 @@ EOT;
 $this->execute($sql);
 
 $this->insert('{{%incident}}',array('id'=>-1,'sortkey' => 0, 'category'=>'', 'name'=>'(noch nicht gesetzt)', 'description'=>'Bild wurde noch nicht klassifiziert', 'severity'=>0));
-$this->insert('{{%incident}}',array('sortkey' => 100, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken', 'description'=>'Auto parkt auf dem Gehweg', 'severity'=>1));
-$this->insert('{{%incident}}',array('sortkey' => 200, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (behindernd)', 'description'=>'Auto parkt behindernd auf dem Gehweg', 'severity'=>3));
-$this->insert('{{%incident}}',array('sortkey' => 300, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (total behindernd)', 'description'=>'Auto parkt total behindernd auf dem Gehweg', 'severity'=>4));
-$this->insert('{{%incident}}',array('sortkey' => 400, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (auf dem Boardstein)', 'description'=>'Auto parkt ganz wenig auf dem Gehweg bzw. nur auf dem Boardstein', 'severity'=>1));
-$this->insert('{{%incident}}',array('sortkey' => 500, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (> 1h)', 'description'=>'Auto parkt länger als eine Stunde auf dem Gehweg', 'severity'=>2));
-$this->insert('{{%incident}}',array('sortkey' => 600, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde behindernd auf dem Gehweg', 'severity'=>4));
-$this->insert('{{%incident}}',array('sortkey' => 700, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (total behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde total behindernd auf dem Gehweg', 'severity'=>4));
-$this->insert('{{%incident}}',array('sortkey' => 800, 'category'=>'Nachweis Standzeit', 'name'=>'Parken (Nachweis Standzeit)', 'description'=>'Auto parkt bereits zu der Zeit', 'severity'=>-1));
-$this->insert('{{%incident}}',array('sortkey' => 900, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken auf der Straße', 'description'=>'Auto parkt korrekt auf der Straße', 'severity'=>0));
-$this->insert('{{%incident}}',array('sortkey' => 1000, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken in Parkbucht', 'description'=>'Auto parkt korrekt in einer Parkbucht', 'severity'=>0));
-$this->insert('{{%incident}}',array('sortkey' => 1100, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Korrektes Parken auf der Straße/Parkbuchten', 'description'=>'Autos parken korrekt auf der Straße/Parkbuchten', 'severity'=>0));
-$this->insert('{{%incident}}',array('sortkey' => 1200, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Unnötiges Gehwegparken trotz breiter Straße', 'description'=>'Autos parken auf dem Gehweg, obwohl dies hier nicht notwendig wäre', 'severity'=>2));
-$this->insert('{{%incident}}',array('sortkey' => 1300, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Unnötiges beidseitiges Gehwegparken', 'description'=>'Autos parken beidseitig, obwohl einseitig der Platz reichen würde', 'severity'=>2));
-$this->insert('{{%incident}}',array('sortkey' => 1400, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Gehwegparken ohne erforderliche Restbreite', 'description'=>'Autos parken mit weniger als die mindestens erforderlichen 1,20 m Restbreite', 'severity'=>3));
-$this->insert('{{%incident}}',array('sortkey' => 1500, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Gehwege komplett zugeparkt', 'description'=>'Die Gehwege sind komplett zugeparkt und man muss die Straße nutzen', 'severity'=>4));
+$this->insert('{{%incident}}',array('id'=>1, 'sortkey' => 100, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken', 'description'=>'Auto parkt auf dem Gehweg', 'severity'=>1));
+$this->insert('{{%incident}}',array('id'=>2, 'sortkey' => 200, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (behindernd)', 'description'=>'Auto parkt behindernd auf dem Gehweg', 'severity'=>3));
+$this->insert('{{%incident}}',array('id'=>3, 'sortkey' => 300, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (total behindernd)', 'description'=>'Auto parkt total behindernd auf dem Gehweg', 'severity'=>4));
+$this->insert('{{%incident}}',array('id'=>4, 'sortkey' => 400, 'category'=>'Gehwegparken', 'name'=>'Gehwegparken (auf dem Boardstein)', 'description'=>'Auto parkt ganz wenig auf dem Gehweg bzw. nur auf dem Boardstein', 'severity'=>1));
+$this->insert('{{%incident}}',array('id'=>5, 'sortkey' => 500, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (> 1h)', 'description'=>'Auto parkt länger als eine Stunde auf dem Gehweg', 'severity'=>2));
+$this->insert('{{%incident}}',array('id'=>6, 'sortkey' => 600, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde behindernd auf dem Gehweg', 'severity'=>4));
+$this->insert('{{%incident}}',array('id'=>7, 'sortkey' => 700, 'category'=>'Gehwegparken (> 1h)', 'name'=>'Gehwegparken (total behindernd, > 1h)', 'description'=>'Auto parkt länger als eine Stunde total behindernd auf dem Gehweg', 'severity'=>4));
+$this->insert('{{%incident}}',array('id'=>8, 'sortkey' => 800, 'category'=>'Nachweis Standzeit', 'name'=>'Parken (Nachweis Standzeit)', 'description'=>'Auto parkt bereits zu der Zeit', 'severity'=>-1));
+$this->insert('{{%incident}}',array('id'=>9, 'sortkey' => 900, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken auf der Straße', 'description'=>'Auto parkt korrekt auf der Straße', 'severity'=>0));
+$this->insert('{{%incident}}',array('id'=>10, 'sortkey' => 1000, 'category'=>'Korrektes Parken', 'name'=>'Korrektes Parken in Parkbucht', 'description'=>'Auto parkt korrekt in einer Parkbucht', 'severity'=>0));
+$this->insert('{{%incident}}',array('id'=>11, 'sortkey' => 1100, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Korrektes Parken auf der Straße/Parkbuchten', 'description'=>'Autos parken korrekt auf der Straße/Parkbuchten', 'severity'=>0));
+$this->insert('{{%incident}}',array('id'=>12, 'sortkey' => 1200, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Unnötiges Gehwegparken trotz breiter Straße', 'description'=>'Autos parken auf dem Gehweg, obwohl dies hier nicht notwendig wäre', 'severity'=>2));
+$this->insert('{{%incident}}',array('id'=>13, 'sortkey' => 1300, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Unnötiges beidseitiges Gehwegparken', 'description'=>'Autos parken beidseitig, obwohl einseitig der Platz reichen würde', 'severity'=>2));
+$this->insert('{{%incident}}',array('id'=>14, 'sortkey' => 1400, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Gehwegparken ohne erforderliche Restbreite', 'description'=>'Autos parken mit weniger als die mindestens erforderlichen 1,20 m Restbreite', 'severity'=>3));
+$this->insert('{{%incident}}',array('id'=>15, 'sortkey' => 1500, 'category'=>'Situation (bei Bild mit mehreren Autos)', 'name'=>'Gehwege komplett zugeparkt', 'description'=>'Die Gehwege sind komplett zugeparkt und man muss die Straße nutzen', 'severity'=>4));
 
 $sql = <<<'EOT'
 CREATE TABLE {{%campaign}}
@@ -112,7 +112,7 @@ $this->execute($sql);
 $sql = <<<'EOT'
 CREATE TABLE {{%action}}
 (
-  id serial NOT NULL PRIMARY KEY,
+  id int NOT NULL PRIMARY KEY,
   sortkey real not null unique,
   name text not null unique,
   description text not null,
@@ -123,11 +123,11 @@ CREATE TABLE {{%action}}
 EOT;
 $this->execute($sql);
 $this->insert('{{%action}}',array('id'=>-1, 'sortkey' => 0, 'name'=>'(noch nicht gesetzt)', 'description'=>''));
-$this->insert('{{%action}}',array('sortkey' => 100, 'name'=>'Keine', 'description'=>'Nichts gemacht'));
-$this->insert('{{%action}}',array('sortkey' => 200, 'name'=>'Zettel', 'description'=>'Zettel angebracht'));
-$this->insert('{{%action}}',array('sortkey' => 300, 'name'=>'Angesprochen', 'description'=>'Fahrer angesprochen'));
-$this->insert('{{%action}}',array('sortkey' => 400, 'name'=>'Polizei gerufen', 'description'=>'Die Polizei gerufen'));
-$this->insert('{{%action}}',array('sortkey' => 500, 'name'=>'Anzeige', 'description'=>'Anzeige gestellt'));
+$this->insert('{{%action}}',array('id'=>1, 'sortkey' => 100, 'name'=>'Nichts gemacht', 'description'=>'Nichts gemacht'));
+$this->insert('{{%action}}',array('id'=>2, 'sortkey' => 200, 'name'=>'Zettel angehängt', 'description'=>'Zettel angebracht'));
+$this->insert('{{%action}}',array('id'=>3, 'sortkey' => 300, 'name'=>'Fahrer angesprochen', 'description'=>'Fahrer angesprochen'));
+$this->insert('{{%action}}',array('id'=>4, 'sortkey' => 400, 'name'=>'Polizei gerufen', 'description'=>'Die Polizei gerufen'));
+$this->insert('{{%action}}',array('id'=>5, 'sortkey' => 500, 'name'=>'Anzeige gestellt', 'description'=>'Anzeige gestellt'));
 
 $sql = <<<'EOT'
 CREATE TABLE {{%citation}}
