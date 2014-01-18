@@ -29,8 +29,7 @@ while getopts "e:" optname
         ;;
     esac
   done
-if ["$env" -eq ""]
-then
+if [ "$env" = "" ]; then
 	echo "Parameter --env must be given"
 	exit 1
 fi
