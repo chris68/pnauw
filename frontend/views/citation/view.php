@@ -1,13 +1,11 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Citation */
+
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
-
-/**
- * @var yii\web\View $this
- * @var frontend\models\Citation $model
- */
 
 $this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
@@ -29,8 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
-			'id',
 			'name:ntext',
+			[
+				'label' => 'Anzeigentyp',
+				'format' => 'raw',
+				'value' => $model->encodeType(),
+			],
 			[
 				'label' => 'Beschreibung',
 				'format' => 'raw',
@@ -38,8 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
 			'created_ts',
 			'modified_ts',
-			'released_ts',
-			'deleted_ts',
+			//'released_ts',
 		],
 	]); ?>
 	

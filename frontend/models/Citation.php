@@ -8,6 +8,7 @@ namespace frontend\models;
  * @property integer $id
  * @property integer $owner_id
  * @property string $name
+ * @property string $type Either 'citation' or 'complaint'
  * @property string $description
  * @property string $created_ts
  * @property string $modified_ts
@@ -55,8 +56,8 @@ class Citation extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['name', 'description'], 'required'],
-			[['name', 'description', ], 'string']
+			[['name', 'description', 'type', ], 'required'],
+			[['name', 'description', 'type', ], 'string']
 		];
 	}
 
@@ -70,6 +71,7 @@ class Citation extends \yii\db\ActiveRecord
 			'owner_id' => 'Besitzer',
 			'name' => 'Name',
 			'description' => 'Beschreibung',
+			'type' => 'Anzeigentyp',
 			'created_ts' => 'Angelegt am',
 			'modified_ts' => 'Verändert am',
 			'released_ts' => 'Freigegeben am',
@@ -120,4 +122,21 @@ class Citation extends \yii\db\ActiveRecord
 		return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->dropdownScope()->orderBy('created_ts')->all(),'id','name');
 	}
 	
+	/**
+	 * Input for a standard dropdown list for the type of a citation
+	 * @return array 
+	 */
+	public static function dropDownListForType()
+	{
+		return ['' => '(nicht gesetzt)', 'citation' => 'rechtsverbindliche Anzeige', 'complaint' => 'unverbindliche Beschwerde'];
+	}
+	
+	/**
+	 * Output the type of the citation
+	 * @return string
+	 */
+	public function encodeType()
+	{
+		return $this->dropDownListForType()[$this->type];
+	}
 }

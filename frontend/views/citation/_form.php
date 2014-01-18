@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\markdown\MarkdownEditor;
 use frontend\helpers\Assist;
+use frontend\models\Citation;
 
 /**
  * @var yii\web\View $this
@@ -17,6 +18,7 @@ use frontend\helpers\Assist;
 	<?php $form = ActiveForm::begin(); ?>
 
 		<?= $form->field($model, 'name') ?>
+		<?= $form->field($model, 'type')->dropDownList(Citation::dropDownListForType())->hint('Geben Sie hier bitte an, ob Sie eine richtige rechtsverbindliche Anzeige machen wollen oder nur eine unverbindliche Beschwerde') ?>
 
 		<?php // $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 		<div class="form-group">
