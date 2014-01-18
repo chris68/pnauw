@@ -57,12 +57,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-markdown.git",
-                "reference": "facb892dd44e292bb6751581dc1bc3690a3e4be8"
+                "reference": "fba4522454b0ad9481691bd5a00238c916184eb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-markdown/zipball/facb892dd44e292bb6751581dc1bc3690a3e4be8",
-                "reference": "facb892dd44e292bb6751581dc1bc3690a3e4be8",
+                "url": "https://api.github.com/repos/kartik-v/yii2-markdown/zipball/fba4522454b0ad9481691bd5a00238c916184eb8",
+                "reference": "fba4522454b0ad9481691bd5a00238c916184eb8",
                 "shasum": ""
             },
             "require": {
@@ -101,7 +101,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2014-01-16 03:29:06"
+            "time": "2014-01-18 11:42:51"
         },
         {
             "name": "michelf/php-markdown",
