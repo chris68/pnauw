@@ -104,7 +104,7 @@ AppAsset::register($this);
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-md-6">
+				<div class="col-sm-6 col-md-6 small">
 					<?= Html::a('Nutzungsbedingungen','site/terms') ?> |
 					<?= Html::a('§55 RStV','site/impressum') ?> |
 					<?= Html::a('Datenschutz','site/privacy') ?>
