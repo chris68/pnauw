@@ -25,7 +25,7 @@ use kartik\markdown\MarkdownEditor;
 				[
 					'name' => Html::getInputName($model,'description'), 
 					'value' => $model->description,
-					'showSave' => true,
+					'showSave' => false,
 				]);
 			 ?>
 			<div class="hint-block">Den Text können sie mit der <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown syntax</a> formatieren. Sie sollten aber nur Fettmachungen, etc. einsetzen.</div>
