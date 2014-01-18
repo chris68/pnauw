@@ -106,14 +106,8 @@ AppAsset::register($this);
 			<div class="row">
 				<div class="col-sm-6 col-md-6">
 					<?= Html::a('Nutzungsbedingungen','site/terms') ?> |
-					<?= Html::a('Impressum','site/impressum') ?> |
+					<?= Html::a('§55 RStV','site/impressum') ?> |
 					<?= Html::a('Datenschutz','site/privacy') ?>
-				</div>
-				<div class="col-sm-2 col-md-2">
-					<hr class ="visible-xs visible-sm">
-				</div>
-				<div class="col-sm-4 col-md-4">
-					<p class ="pull-right"><?= Yii::powered() ?></p>
 				</div>
 			</div>
 		</div>
