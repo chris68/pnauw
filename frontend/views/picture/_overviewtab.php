@@ -42,11 +42,11 @@ use yii\widgets\DetailView;
 					'loc_path',
 					'loc_formatted_addr',
 					[
-						'label' => 'GPS (relevant)',
+						'label' => 'GPS (Relevant)',
 						'value' => $model->getLatLng(),
 					],
 					[
-						'label' => 'GPS (original)',
+						'label' => 'GPS (Original)',
 						'value' => $model->getOrgLatLng(),
 					],
 					[
