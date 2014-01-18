@@ -109,7 +109,7 @@ class PictureSearch extends Model
 				'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
 				'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
 				'vehicle_country_code', 'vehicle_reg_plate', 'citation_id', ],
-			'admin' => parent::scenarios(), // admin may do everthing
+			'admin' => parent::scenarios()[self::DEFAULT_SCENARIO], // admin may do everthing
 		];
 	}
 
