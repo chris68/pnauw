@@ -116,6 +116,19 @@ class Picture extends \yii\db\ActiveRecord
 	}
 
 	/**
+	 * Validator to check if location makes sense 
+	 */
+	public function validateLocationConsistency($attribute, $params)
+	{
+		if ($this->loc_lat == 0 && $this->loc_lng == 0) {
+			$this->addError('loc', 'Die Aufnahmeposition des Bildes muss angegeben werden.');
+		} elseif (!($this->loc_lng > -14 && $this->loc_lng < 38 && $this->loc_lat > 32 && $this->loc_lat < 65)) {
+			$this->addError('loc', 'Die Aufnahmeposition des Bildes muss im Kernbereich von Europa sein.');
+		}
+			
+	}
+
+	/**
 	 * Validator to check if country is filled if reg_plate is filled 
 	 */
 	public function validateVehiclePlateConsistency($attribute, $params)
@@ -172,6 +185,7 @@ class Picture extends \yii\db\ActiveRecord
 			[['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 			[['loc_lat', 'loc_lng',], 'double'],
 			['visibility_id',  'validateVisibilityConsistency', ],
+			[['loc_lat', 'loc_lng'], 'validateLocationConsistency', 'on' => self::DEFAULT_SCENARIO],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 			['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
 		];
@@ -191,7 +205,9 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public function scenarios()
 	{
-		return parent::scenarios();
+		$scenarios = parent::scenarios();
+		$scenarios['create'] = $scenarios[self::DEFAULT_SCENARIO];
+		return $scenarios;
 	}
 
 	/**
@@ -205,10 +221,12 @@ class Picture extends \yii\db\ActiveRecord
 			'name' => 'Bildname',
 			'description' => 'Beschreibung',
 			'taken' => 'Aufgenommen am',
-			'org_loc_lat' => 'Org Loc Lat',
-			'org_loc_lng' => 'Org Loc Lng',
-			'loc_lat' => 'Breite (lat.)',
-			'loc_lng' => 'Länge (long.)',
+			'org_loc' => 'Originale Aufnahmeposition',
+			'org_loc_lat' => 'Originale Geo-Position (Breite)',
+			'org_loc_lng' => 'Originale Geo-Position (Länge)',
+			'loc' => 'Aufnahmeposition',
+			'loc_lat' => 'Geo-Position (Breite)',
+			'loc_lng' => 'Geo-Position (Länge)',
 			'loc_path' => 'Ort (Pfad)',
 			'loc_formatted_addr' => 'Ortsangabe',
 			'original_image_id' => 'Original Image',

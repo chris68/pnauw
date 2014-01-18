@@ -228,7 +228,7 @@ class PictureController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model = new Picture;
+		$model = new Picture(['scenario' => 'create']);
 		$post_request = $model->load($_POST);
 
 		if (!$post_request) {
@@ -455,7 +455,7 @@ class PictureController extends Controller
 			if ($formmodel->validate()) {
 				$transaction = \Yii::$app->db->beginTransaction();
 				try {
-					$picmodel = new Picture;
+					$picmodel = new Picture(['scenario' => 'create']);
 					$picmodel->fillFromFile($formmodel->file_handle);
 					$transaction->commit();
 				} catch (Exception $ex) {
@@ -504,7 +504,7 @@ class PictureController extends Controller
 				$transaction = \Yii::$app->db->beginTransaction();
 				try {
 					foreach ($formmodel->file_handles as $file) {
-							$picmodel = new Picture;
+							$picmodel = new Picture(['scenario' => 'create']);
 							$picmodel->fillFromFile($file);
 					}
 					$transaction->commit();
