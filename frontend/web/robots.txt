@@ -12,7 +12,6 @@ Disallow: /site/contact
 Disallow: /site/impressum
 Disallow: /site/privacy
 Disallow: /site/terms
-# The help page is not ready yet @todo: Include it as soon as it is ready!
-Disallow: /site/help
+Disallow: /site/releasehistory
 # Disallow all referrals to actual content - most will not work anyway since it required login!
 Disallow: /picture

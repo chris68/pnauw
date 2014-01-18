@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\markdown\MarkdownEditor;
+use frontend\helpers\Assist;
 
 /**
  * @var yii\web\View $this
@@ -28,7 +29,7 @@ use kartik\markdown\MarkdownEditor;
 					'showExport' => false,
 				]);
 			 ?>
-			<div class="hint-block">Den Text können sie mit der <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown syntax</a> formatieren. Sie sollten aber nur Fettmachungen, etc. einsetzen.</div>
+			<div class="hint-block">Den Text können sie mit der <?= Assist::help('Markdown Syntax', 'markdown-syntax') ?>  formatieren. Sie sollten aber nur Fettmachungen, etc. einsetzen.</div>
 		</div>
 		<div class="form-group">
 			<?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

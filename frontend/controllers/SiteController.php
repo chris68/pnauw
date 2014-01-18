@@ -114,6 +114,11 @@ class SiteController extends Controller
 		return $this->render('help');
 	}
 
+	public function actionReleasehistory()
+	{
+		return $this->render('releasehistory');
+	}
+
 	public function actionSignup()
 	{
 		$model = new User();

@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use frontend\helpers\Assist;
 
 $this->title = \Yii::t('base','About');
 $this->params['breadcrumbs'][] = $this->title;
@@ -16,16 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
 		Das Problem des Gehwegparkens ist nach wie vor akut und leider wird es von offiziellen Stellen eher nicht ausreichend verfolgt
 	</p>
 	<p> 
-		Obwohl es gemäß <a href="http://dejure.org/gesetze/StVO/12.html">StVO §12</a> in der Regel verboten ist. 
+		Obwohl es gemäß <?= Assist::extlink('StVO §12','http://dejure.org/gesetze/StVO/12.html') ?> in der Regel verboten ist. 
 		Was aber viele Leute gar nicht wissen, sondern wie selbstverständlich lieber auf dem Gehweg parken als korrekt auf der Straße.
 	</p>
 	<p>
 		Doch auf dieser Seite soll gar nicht versucht werden, dies genauer zu beleuchten, sondern nur auf andere relevante Seiten zu dem Thema verwiesen werden
 	</p>
 	<ul>
-		<li><?= Html::a('Offizielle Seite "gehwege-frei.de" des Fuß eV','//www.gehwege-frei.de',['target' => '_blank']) ?></li>
-		<li><?= Html::a('Initiative "Geh weg vom Gehweg" in Karlsruhe','//geh-weg-vom-gehweg.blogspot.de',['target' => '_blank']) ?></li>
-		<li><?= Html::a('Verkehrswende Darmstadt', '//verkehrswende-darmstadt.wikispaces.com/Gehwegparken',['target' => '_blank']) ?></li>
+		<li><?= Assist::extlink('Offizielle Seite "gehwege-frei.de" des Fuß eV','//www.gehwege-frei.de') ?></li>
+		<li><?= Assist::extlink('Initiative "Geh weg vom Gehweg" in Karlsruhe','//geh-weg-vom-gehweg.blogspot.de') ?></li>
+		<li><?= Assist::extlink('Verkehrswende Darmstadt', '//verkehrswende-darmstadt.wikispaces.com/Gehwegparken') ?></li>
 	</ul>
 	<p>
 		Dort kann sich jeder informieren, wie die rechtliche Lage aussieht ("<b>Verboten</b>, wenn nicht ausdrücklich durch Schild erlaubt!"), 
@@ -51,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		Die Plattform "Parke nicht auf unseren Wegen"
 	</h4>
 	<p>
-		Die Plattform ist eine Webapplikation, die voll auf HTML5 und den damit verbundenen Möglichkeiten setzt. Die Webseiten sind hierbei 
+		Die Plattform ist eine Webapplikation (<?= Assist::linkNew('Releasehistorie',['site/releasehistory']) ?>), die voll auf HTML5 und den damit verbundenen Möglichkeiten setzt. Die Webseiten sind hierbei 
 		speziell für den Einsatz auf mobilen Geräten optimiert. Ältere Browser (vor allem nicht ältere Internet Exlorer!) werden als Konsequenz 
 		nicht unterstützt und es wird ausdrücklich empfohlen, einen aktuellen und HTML5-kompatiblen Browser einzusetzen.
 	</p>
@@ -59,10 +60,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		Sollte es Probleme mit <b>aktuellen</b> Browsern geben, dann melden Sie diese bitte über die Kontaktseite.
 	</p>
 	<?php if (!Yii::$app->user->isGuest) : ?>
-	<p>
-		<div class="col-sm-12 col-md-12 alert alert-warning">
-			Das System ist derzeit noch in Entwicklung und es wird daher noch gewisse Nutzungseinschränkungen geben!
-		</div>
-	</p>
+	<div class="col-sm-12 col-md-12 alert alert-warning">
+		Das System ist derzeit noch in Entwicklung und es wird daher noch gewisse Nutzungseinschränkungen geben!
+	</div>
 	<?php endif ?>
 </div>

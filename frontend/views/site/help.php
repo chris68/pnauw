@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use frontend\helpers\Assist;
 
 $this->title = 'Hilfe';
 $this->params['breadcrumbs'][] = $this->title;
@@ -81,6 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		So ist zum Beispiel die Tabulatorreihenfolge so optimiert, dass Sie über das Feld <em>Vorfall</em> sehr schnell durchspringen können. Auch die Auswahllisten sind so intelligent 
 		aufgebaut, dass Sie mit Buchstaben wie 'G' schnell und leicht den korrekten Verfall wählen können.
 	</p>
+	<p>
 		Einen Nachteil hat die Mehrfachbearbeitung - <b>eventuelle Eingabefehler werden nicht angezeigt, sondern der Satz wird einfach nicht gespeichert!</b>
 		In der Regel kein Problem, weil man über die Felder so gut wie nie Eingabefehler erzeugen kann. 
 	</p>
@@ -143,6 +145,17 @@ $this->params['breadcrumbs'][] = $this->title;
 		Übrigens sieht selbst der Moderator nur die verschwommenen Bilder - die unverschwommenen sehen immer nur Sie selbst!
 	</p>
 
+	<h2><a name="markdown-syntax">Markdown Syntax</a></h2>
+	<p>
+		Bei Webapplikationen will man seine eingestellten Inhalte möglichst schön formatieren. Hier kann man mit HTML zwar alles machen, aber HTML ist meist zu kompliziert und es wäre zudem gefährlich, den Nutzer HTML direkt ein-/ausgeben zu lassen
+	</p>
+	<p>
+		Und daher haben sich kluge Köpfe eine spezielle Syntax überlegt, mit der man solche Formatierungen machen kann: die <?=	Assist::extlink('Markdown Syntax', 'http://de.wikipedia.org/wiki/Markdown') ?>.
+		Wenn Sie sich den <?=	Assist::extlink('Artikel in Wikipedia', 'http://de.wikipedia.org/wiki/Markdown') ?> durchlesen, dann werden Sie es schnell verstehen und leicht nutzen können.
+	</p>
+	<p>
+		Und das beste ist: Sie haben sogar einen kleinen Editor, der Sie dabei unterstützt. Den Editor haben wir hierbei nicht selbst geschrieben, sondern <?=	Assist::extlink('Kartik Visweswaran', 'http://kartikv.krajee.com') ?> hat ihn freundlicherweise <?=	Assist::extlink('Public Domain', 'http://de.wikipedia.org/wiki/Gemeinfreiheit') ?> zur Verfügung gestellt.
+	</p>
 	<h2><a name="user-level">Berechtigungsstufen</a></h2>
 	<h3><a name="user-level-anonymous">Anonymer Nutzer / Gastzugang</a></h3>
 	<p>

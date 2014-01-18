@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\markdown\MarkdownEditor;
+use frontend\helpers\Assist;
 
 /**
  * @var yii\web\View $this
@@ -32,7 +33,7 @@ use kartik\markdown\MarkdownEditor;
 					'showExport' => false,
 				]);
 			 ?>
-			<div class="hint-block">Geben Sie hier eine beliebig lange Beschreibung für die Kampagne an, die dann auf der Infoseite der Kampagne angezeigt wird. Den Text können Sie hierbei mit der <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown-Syntax</a> formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.</div>
+			<div class="hint-block">Geben Sie hier eine beliebig lange Beschreibung für die Kampagne an, die dann auf der Infoseite der Kampagne angezeigt wird. Den Text können Sie hierbei mit der <?= Assist::help('Markdown Syntax', 'markdown-syntax') ?> formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.</div>
 		</div>
 		</fieldset>
 
