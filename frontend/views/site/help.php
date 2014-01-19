@@ -20,9 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
 	<h1><?= $this->title ?></h1>
 
-	<div class="alert alert-warning">
-		Die Hilfe wird gerade erstellt und ist daher noch nicht vollständig. Die offenen Stellen sind als Baustelle gekennzeichnet
-	</div>
 	<p>
 		Die Hilfefunktion ist kontextsensitiv. Wenn Sie in einer bestimmten Maske sind und dann oben auf Hilfe klicken, wird direkt zu dem entsprechenden Hilfetext navigiert.
 		Daher wird die Hilfe auch immer in einem neuen Fenster/Reiter geöffnet, damit auf keinen Fall irgendwelche offenen Bearbeitungen verloren gehen.
@@ -131,11 +128,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		Dies ist vor allem dann hilfreich, wenn Sie z.B. als für die Auswahl einen Filter setzen wie <em>Vorfall = leer</em>, weil dann nach dem Setzen des Vorfalls das Bild automatisch aus der Auswahl verschwindet. 
 		Dadurch können Sie sehr effizient einen Arbeitsvorat abarbeiten.
 	</p>
-	<h3><a name="picture-fields">Bedeutung der Eingabefelder bei Bildern</a></h3>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
-	
 	<h3><a name="picture-publish">Bilder veröffentlichen</a></h3>
 	<p>
 		Wenn Sie die Bilder bearbeitet haben, dann müssen Sie diese noch veröffentlichen. Sie können zwar das entsprechende Feld <em>Sichtbarkeit</em> auch in fast allen Masken direkt setzen, aber bei vielen Bildern hat es sich bewährt, es auf einem Rutsch und ganz am Ende zu machen.
@@ -150,24 +142,54 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 
 	<h3><a name="picture-index">Bilder betrachten</a></h3>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Hier können Sie die eingestellten Bilder betrachten. Die Bilder sind natürlich alle so verschwommen, dass man Automnummern, konkrete Personen, etc. nicht erkennen kann. Die Seite ist wie folgt aufgebaut:
+	</p>
+	<ul>
+	<li>Oben gibt es eine aufklappbare Sektion <a href='#picture-search'>Suchen &amp; Filtern</a>, wo Sie sehr umfangreich einstellen können, welche Bilder Sie sehen wollen</li>
+	<li>Dann kommt eine <a href='#quicksearch'>Schnellsuche</a>, mit der Sie wichtige und generelle Filter-/Sucheinstellungen vornehmen können.</li>
+	<li>Darunter haben Sie immer die <a href='#picture-heatmap'>Heatmap</a>, mit der man schnell sehen kann, wo viele Verfälle sind. Zudem kann man über die Heatmap den Suchbereich einschränken</li>
+	<li>Dann kommen Links mit kontextsensitiven Absprüngen auf weitere Funktionen</li>
+	<li>Und nicht zuletzt kommen am Ende natürlich die Bilder selbst und Sie können mit der Seitennavigation sich durchblättern</li>
+	</ul>
 	
 	<h3><a name="picture-view">Einzelbild betrachten</a></h3>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Hier kann man ein einzelnes Bild mit allen öffentlichen Details betrachten und sieht dann auf der Karte, wo genau der Vorfall war.
+	</p>
 	
 	<h3><a name="picture-heatmap">Heatmap</a></h3>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Auf der Heatmap werden die durch die Sucheinstellung derzeit selektierten Vorfälle als Punkte angezeigt. Je mehr Verfälle in einen Bereich sind und je schwerwiegender die Vorfälle sind, desto roter wird der Bereich.
+		Über die Heatmap kann zudem die Suche eingeschränkt werden, wenn dies durch die Option <em>Ausschnitt <b>begrenzt</b> Suchergebnisse</em> so vorgegeben ist. Andernfalls (<em>Ausschnitt <b>gemäß</b> Suchergebnisse</em>) ermittelt sich die Größe/Ausschnitt der Heatmap automatisch 
+		basierend auf den Suchergebnissen. Wenn man die Heatmap auf eine bestimmte Stelle haben will, kann man das oben über die Suchezeile wie von Google Maps gewohnt tun.
+	</p>
+	<p>
+		Bei den Sucheinstellungen kann zudem angegeben werden, ob man die Punkte nur für den aktuellen Kartenausschnitt berechnet haben will oder auch über den Ausschnitt hinaus (Option <em>Auch Ermittlung der Heatmap auf den Kartenbereich beschränken</em>).
+		Der Vorteil bei der Ermittlung über den Ausschnitt hinaus ist, dass man leichter die Karte verschieben kann und trotzdem noch Punkte bekommt. Der Vorteil bei der Beschränkung ist, dass die Intensität der Farbgebung sich nur auf den Ausschnitt bezieht und man dadurch nicht durch benachbarte Gebiete mit hoher Intensität runtergestuft wird.
+		Am besten einfach mal rumspielen, um den Unterschied zu erkennen!
+	</p>
 	
 	<h3><a name="picture-search">Suche und Filtern</a></h3>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		In dem aufklappbaren Detailbereich sieht man oben vor allem die Einstellungen bezüglich der Karte (siehe <a href='#picture-heatmap'>Heatmap</a>) und den gewünschten Zeitraum. 
+	</p>
+	<p>
+		Darunter sind weitere Suchoptionen, die aber eigentlich alle selbsterklärend sind. Folgende generelle Festlegungen:
+	</p>
+	<ul>
+		<li>Bei Datumsfeldern muss das Datum in der Form jjjj-mm-tt eingegeben werden; es gibt aber immer auch einen Datumselektor</li>
+		<li>Bei den Auswahlboxen kann man teilweise immer nur eine und teilweise auch mehrere Optionen wählen - einfach ausprobieren</li>
+		<li>Die Suche in den Textfeldern ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird. Eine Suche nach straße findet also Kriegsstraße, aber nicht Straße des 17.Juni</li>
+	</ul>
+	
+	<h3><a name="picture-quicksearch">Schnellsuche</a></h3>
+	<p>
+		Über die Schnellsuche kann man leicht häufig benötigte Sucheeinstellungen schneller durchführen und muss damit nicht immer in die detaillierte Suche. Zudem kann man die Karte auf seinen derzeitigen Standort setzen, wenn die die mobile Einheit unterstützt.
+	</p>
+	<p>
+		Mit den beiden Buttons rechts kann man einerseits die Suchergebnisse löschen und andererseits die Suchergebnisse aktualisieren.
+	</p>
 	
 	<h3><a name="picture-consistency">Konsistenzprüfungen</a></h3>
 	<p>
@@ -182,34 +204,45 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	
 	<h3><a name="picture-moderate">Bilder moderieren</a></h3>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Das Moderieren läuft generell genauso ab wie das <a href="picture-publish">Veröffentlichen</a>. Der einzige Unterschied ist, dass es eben nur ein <a href="#user-level-trusted">Moderator</a> machen kann und er dies dann für Bilder anderer Leute machen darf.
+	</p>
 
 	<h2><a name="campaign">Kampagnen &amp; Hotspots</a></h2>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Kampagnen und Hotspots sind die beiden Seiten der gleichen Medaille: wenn man einen Hotspot hat, wo extrem störend auf den Gehwegparken geparkt wird, wird man in der Regel eine Kampagne starten, um das Problem anzugehen. Und eine Kampagne wird man in der Regel nur dann starten, wenn man auch einen Hotspot hat.
+	</p>
+	<p>
+		Es besteht dann die Möglichkeit, Verfälle einer solchen Kampagne/Hotspot zuzuordnen und man kann auch danach filtern/suchen. Dadurch wird es dann deutlich leichter, den Autofahrern klarzumachen, wo das Problem liegt und wie eventuell die Konsequenzen sind.
+	</p>
 	
 	<h3><a name="campaign-crud">Verwalten von Kampagnen &amp; Hotspots </a></h2>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Das Verwalten von <a href='campaign'>Kampagnen bzw. Hotspots</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Kampagnen/Hotspots sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
+	</p>
 	
 	<h3><a name="campaign-show">Öffentliche Darstellung von Kampagnen &amp; Hotspots </a></h2>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Hier sehen Sie die öffentliche Darstellung zu <a href='campaign'>einer Kampagne bzw. einem Hotspot</a>. Diese Inhalte wurden von einem Nutzer eingestellt, um klarer zu dokumentieren, warum er sich konkret an dem Gehwegparken stört und was er eventuell gedenkt, dagegen zu unternehmen.
+	</p>
 	
 	<h2><a name="citation">Anzeigen &amp; Beschwerden</a></h2>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Anzeigen bzw. Beschwerden sind wahrscheinlich die einzigen Möglichkeiten, die Sie haben, wenn eine <a href='campaign'>Kampagne</a> alleine nicht ausreichend Wirkung zeigt.
+	</p>
+	<p>
+		Eine Beschwerde ist hierbei eine nette Zusammenfassung von vielen Falschparkern zum Ausdrucken oder Versand als PDF-Datei an die Polizei oder das Ordnungsamt. Eine Beschwerde ist rechtlich unverbindlich und Sie können auch darum bitten, das Ihr Name nicht öffentlich genannt wird. 
+		Die Hoffnung einer solchen Beschwerde ist, dass die Behörde die nicht tolerierbare Lage erkennt und dann entsprechend selbst tätig wird.
+	</p>
+	<p>
+		Wenn das nicht reicht oder Sie bereits wissen, dass nie was passiert, dann können Sie eine rechtsverbindliche Privatanzeige stellen. Hier müssen Sie die Sache meist ausdrucken, unterschreiben und in der Regel auch eine Kopie ihres Ausweises hinzufügen. Denn Sie werden dann als Zeuge 
+		genannt und für den betroffenen Halter des angezeigten Fahrzeugs wird dies auch erkenntlich sein. Darüber sollten Sie sich auf jeden Fall im Klaren sein. Die Anzeigen werden in der Regel dann auch umgesetzt, weil wir (zumindest in Deutschland) immer noch in einem Rechtsstaat leben.
+	</p>
 	
 	<h3><a name="citation-crud">Verwalten von Anzeigen &amp; Beschwerden</a></h2>
-	<div class="alert alert-warning">
-		Baustelle: Hier muss die Hilfe noch erstellt werden!
-	</div>
+	<p>
+		Das Verwalten von <a href='citation'>Anzeigen bzw. Beschwerden</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Anzeigen/Beschwerden sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
+	</p>
 	
 	<h2><a name="general">Generelles</a></h2>
 	<h3><a name="markdown-syntax">Markdown Syntax</a></h3>
