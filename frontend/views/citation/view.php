@@ -28,14 +28,14 @@ $this->params['help'] = 'citation-crud';
 	<?php echo DetailView::widget([
 		'model' => $model,
 		'attributes' => [
-			'name:ntext',
 			[
-				'label' => 'Anzeigentyp',
+				'label' => $model->getAttributeLabel('type'),
 				'format' => 'raw',
 				'value' => $model->encodeType(),
 			],
+			'name:ntext',
 			[
-				'label' => 'Beschreibung',
+				'label' => $model->getAttributeLabel('description'),
 				'format' => 'raw',
 				'value' => Markdown::convert(Html::encode($model->description)),
 			],

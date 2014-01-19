@@ -1,4 +1,7 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Citation */
+/* @var $form yii\widgets\ActiveForm */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -6,33 +9,31 @@ use kartik\markdown\MarkdownEditor;
 use frontend\helpers\Assist;
 use frontend\models\Citation;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Citation $model
- * @var yii\widgets\ActiveForm $form
- */
 ?>
 
 <div class="citation-form">
 
 	<?php $form = ActiveForm::begin(); ?>
 
-		<?= $form->field($model, 'name') ?>
+		<?= $form->errorSummary($model) ?>
+		<fieldset>
+		<legend>Typ</legend>
 		<?= $form->field($model, 'type')->dropDownList(Citation::dropDownListForType())->hint('Geben Sie hier bitte an, ob Sie eine richtige rechtsverbindliche Anzeige machen wollen oder nur eine unverbindliche Beschwerde') ?>
+		</fieldset>
+		<fieldset>
+		<legend>Name und Zusatzinformationen</legend>
+		<?= $form->field($model, 'name') ?>
 
-		<?php // $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-		<div class="form-group">
-			<?= Html::activeLabel($model, 'description') ?>
-			<?=
-				kartik\markdown\MarkdownEditor::widget(
-				[
-					'name' => Html::getInputName($model,'description'), 
-					'value' => $model->description,
-					'showExport' => false,
-				]);
-			 ?>
-			<div class="hint-block">Den Text können sie mit der <?= Assist::help('Markdown Syntax', 'markdown-syntax') ?>  formatieren. Sie sollten aber nur Fettmachungen, etc. einsetzen.</div>
-		</div>
+		<?= $form->field($model, 'description')->widget('\kartik\markdown\MarkdownEditor', 
+			[
+				'name' => Html::getInputName($model,'description'), 
+				'value' => $model->description,
+				'showExport' => false,
+			])->
+			hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Sie sollten aber nur Fettmachungen, etc. einsetzen.') 
+		?>
+		</fieldset>
+	
 		<div class="form-group">
 			<?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		</div>

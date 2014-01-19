@@ -1,15 +1,13 @@
 <?php
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Campaign */
+/* @var $form yii\widgets\ActiveForm */
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\markdown\MarkdownEditor;
 use frontend\helpers\Assist;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Campaign $model
- * @var yii\widgets\ActiveForm $form
- */
 ?>
 
 <div class="campaign-form">
@@ -18,23 +16,19 @@ use frontend\helpers\Assist;
 	
 	<?php $form = ActiveForm::begin(); ?>
 
+		<?= $form->errorSummary($model) ?>
 		<fieldset>
 		<legend>Name und Beschreibung</legend>
 		<?= $form->field($model, 'name')->hint('Geben Sie hier bitte einen kurzen und prägnanten Namen für die Kampagne ein, der dann auch in die Auswahlisten/Anzeige passt') ?>
 
-		<div class="form-group">
-			<?php // $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-			<?= Html::activeLabel($model, 'description') ?>
-			<?=
-				kartik\markdown\MarkdownEditor::widget(
-				[
-					'name' => Html::getInputName($model,'description'), 
-					'value' => $model->description,
-					'showExport' => false,
-				]);
-			 ?>
-			<div class="hint-block">Geben Sie hier eine beliebig lange Beschreibung für die Kampagne an, die dann auf der Infoseite der Kampagne angezeigt wird. Den Text können Sie hierbei mit der <?= Assist::help('Markdown Syntax', 'markdown-syntax') ?> formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.</div>
-		</div>
+		<?= $form->field($model, 'description')->widget('\kartik\markdown\MarkdownEditor', 
+			[
+				'name' => Html::getInputName($model,'description'), 
+				'value' => $model->description,
+				'showExport' => false,
+			])->
+			hint('Geben Sie hier eine beliebig lange Beschreibung für die Kampagne an, die dann auf der Infoseite der Kampagne angezeigt wird. Den Text können Sie hierbei mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.') 
+		?>
 		</fieldset>
 
 

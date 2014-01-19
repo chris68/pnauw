@@ -70,7 +70,7 @@ class Citation extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'owner_id' => 'Besitzer',
 			'name' => 'Name',
-			'description' => 'Beschreibung',
+			'description' => 'Zusatzinformationen',
 			'type' => 'Anzeigentyp',
 			'created_ts' => 'Angelegt am',
 			'modified_ts' => 'Verändert am',

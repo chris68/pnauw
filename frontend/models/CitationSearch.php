@@ -39,7 +39,7 @@ class CitationSearch extends Model
 			'id' => 'ID',
 			'owner_id' => 'Besitzer',
 			'name' => 'Name',
-			'description' => 'Beschreibung',
+			'description' => 'Zusatzinformationen',
 			'created_ts' => 'Angelegt am',
 			'modified_ts' => 'Verändert am',
 			'released_ts' => 'Freigegeben am',
