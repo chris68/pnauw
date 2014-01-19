@@ -11,6 +11,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Bilder moderieren';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['help'] = 'picture-moderate';
 ?>
 <div class="picture-moderate">
 

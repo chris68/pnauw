@@ -11,6 +11,7 @@ $this->title = 'Kampagne bearbeiten: ' . Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => Html::encode($model->name), 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
+$this->params['help'] = 'campaign-crud';
 ?>
 <div class="campaign-update">
 

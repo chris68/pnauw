@@ -10,7 +10,8 @@ use yii\helpers\Html;
 $this->title = 'Anzeige bearbeiten: ' . Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Bearbeiten';
+$this->params['help'] = 'citation-crud';
 ?>
 <div class="citation-update">
 

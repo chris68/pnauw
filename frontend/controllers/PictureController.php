@@ -232,10 +232,10 @@ class PictureController extends Controller
 					$messages['success'][] = $result['updated']['ok'].' Sätze wurden aktualisiert';
 				}
 				if ($result['updated']['nok'] == 1) {
-					$messages['danger'][] = '1 Satz konnte wegen verletzter '.Assist::help('Konsistenzprüfungen','picture-consistency').' nicht aktualisiert werden';
+					$messages['danger'][] = '1 Satz konnte wegen verletzter '.Assist::help('Konsistenzprüfungen','picture-consistency').' nicht aktualisiert werden und Ihre Änderungen wurden zudem verworfen.';
 					$type = 'danger';
 				} elseif ($result['updated']['nok'] > 1) {
-					$messages['danger'][] = $result['updated']['nok'].' Sätze konnten wegen verletzter '.Assist::help('Konsistenzprüfungen','picture-consistency').' nicht aktualisiert werden';
+					$messages['danger'][] = $result['updated']['nok'].' Sätze konnten wegen verletzter '.Assist::help('Konsistenzprüfungen','picture-consistency').' nicht aktualisiert werden und Ihre Änderungen wurden zudem verworfen';
 				}
 			}
 

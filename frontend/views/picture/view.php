@@ -4,11 +4,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use frontend\helpers\Assist;
 
 $this->title = 'Anzeigen von Bild: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Anzeigen';
+$this->params['help'] = 'picture-view';
 ?>
 <div class="picture-view">
 	<div class="row">

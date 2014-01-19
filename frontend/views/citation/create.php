@@ -10,6 +10,7 @@ use yii\helpers\Html;
 $this->title = 'Anzeige anlegen';
 $this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['help'] = 'citation-crud';
 ?>
 <div class="citation-create">
 

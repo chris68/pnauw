@@ -8,6 +8,7 @@ $this->title = 'Bearbeiten von Bild: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Bearbeiten';
+$this->params['help'] = 'picture-update';
 ?>
 <div class="picture-update">
 

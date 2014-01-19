@@ -35,7 +35,11 @@ use yii\bootstrap\Collapse;
 		},
 	]); 
 	?>
-
+	
+	<?php
+		// Need to override the help setting from the detail update
+		$this->params['help'] = 'picture-massupdate';
+	?>
 </div>
 
 

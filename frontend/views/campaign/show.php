@@ -12,6 +12,7 @@ use kartik\markdown\Markdown;
 $this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = 'Kampagne';
 $this->params['breadcrumbs'][] = Html::encode($model->name);
+$this->params['help'] = 'campaign-show';
 ?>
 <div class="campaign-view">
 

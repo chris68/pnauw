@@ -10,6 +10,7 @@ use yii\helpers\Html;
 $this->title = 'Kampagne anlegen';
 $this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['help'] = 'campaign-crud';
 ?>
 <div class="campaign-create">
 

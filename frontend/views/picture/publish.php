@@ -11,6 +11,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Bilder veröffentlichen';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['help'] = 'picture-publish';
 ?>
 <div class="picture-publish">
 

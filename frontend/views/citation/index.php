@@ -12,6 +12,7 @@ use yii\bootstrap\Collapse;
 
 $this->title = 'Anzeigen';
 $this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
+$this->params['help'] = 'citation-crud';
 ?>
 <div class="citation-index">
 

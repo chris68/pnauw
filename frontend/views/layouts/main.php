@@ -74,7 +74,7 @@ AppAsset::register($this);
 						['label' => 'Anzeigen', 'url' => ['/citation/index','sort'=>'created_ts-desc']],
 					],
 				],
-				['label' => 'Hilfe', 'url' => ['/site/help']],
+				['linkOptions' => ['target' => '_blank'], 'label' => 'Hilfe', 'url' => ['/site/help'.(isset($this->params['help']) ? ('#'.$this->params['help']) : ''), ],],
 				['label' => \Yii::t('base','About'), 'url' => ['/site/about']],
 				['label' => \Yii::t('base','Contact'), 'url' => ['/site/contact']],
 			];

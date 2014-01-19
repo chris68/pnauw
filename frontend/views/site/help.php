@@ -23,7 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="alert alert-warning">
 		Die Hilfe wird gerade erstellt und ist daher noch nicht vollständig. Die offenen Stellen sind als Baustelle gekennzeichnet
 	</div>
-
+	<p>
+		Die Hilfefunktion ist kontextsensitiv. Wenn Sie in einer bestimmten Maske sind und dann oben auf Hilfe klicken, wird direkt zu dem entsprechenden Hilfetext navigiert.
+		Daher wird die Hilfe auch immer in einem neuen Fenster/Reiter geöffnet, damit auf keinen Fall irgendwelche offenen Bearbeitungen verloren gehen.
+	</p>
 	<h2><a name="picture">Bilder</a></h2>
 	<h3><a name="picture-general">Generell</a></h3>
 	<p>
@@ -83,12 +86,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		aufgebaut, dass Sie mit Buchstaben wie 'G' schnell und leicht den korrekten Verfall wählen können.
 	</p>
 	<p>
-		Einen Nachteil hat die Mehrfachbearbeitung - <b>eventuelle Eingabefehler werden nicht angezeigt, sondern der Satz wird einfach nicht gespeichert!</b>
-		In der Regel kein Problem, weil man über die Felder so gut wie nie Eingabefehler erzeugen kann. 
-	</p>
-	<p>
-		Einzige Ausnahme ist die Sichtbarkeit: Sie können halt nur veröffentlichen, wenn Sie es auch dürfen (siehe <a href="#picture-publish">Bilder veröffentlichen</a>). Daher hier lieber die Veröffentlichungsmaske nutzen!
-	<p>
+		Einen Nachteil hat die Mehrfachbearbeitung - <b>eventuelle Eingabefehler werden nicht detailliert angezeigt, sondern der Satz wird einfach nicht gespeichert und die Änderungen gehen verloren!</b>
+		In der Regel kein Problem, weil man über die Felder so gut wie nie Eingabefehler erzeugen kann. Die Ausnahmen sind unter <a href='#picture-consistency'>Konsistenzprüfungen</a> erläutert.
 	</p>
 	<h3><a name="picture-update">Bilder detailliert bearbeiten</a></h3>
 	<p>
@@ -96,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<h4><a name="picture-update-imagetab">Reiter "Bild &amp; Kfz-/Vorfallsdaten"</a></h4>
 	<p>
-		In dem Reiter können Sie durch Klicken auf das Bild und den Ziehen des Zoom-Reglers sich das Kennzeichen genau rauszoomen. Das hilft beim Erfassen und das Detailbild kommt dann auch automatisch auf die Anzeige.
+		In dem Reiter können Sie durch Klicken auf das Bild und den Ziehen des Zoom-Reglers sich das Kennzeichen genau rauszoomen. Das hilft beim Erfassen und das Detailbild kommt dann auch automatisch auf eine potentielle <a href='#citation'>Anzeige</a>.
 	</p>
 	<p>
 		Die restlichen Felder erklären sich von selbst. Die Zuweisung zu einer Anzeige wird NIE öffentlich sein.
@@ -123,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<p>
 		In dem Reiter können Sie alle Daten genau tabellarisch sehen. Ändern können Sie hier jedoch nichts.
 	</p>
-	<h3><a name="picture-update">Mehrere Bilder detailliert bearbeiten</a></h3>
+	<h3><a name="picture-massupdate">Mehrere Bilder detailliert bearbeiten</a></h3>
 	<p>
 		Hier haben Sie die Möglichkeit, eine Auswahl von mehreren Bildern nacheinander detailliert zu bearbeiten. 
 		Sie können oben durch die Bilder durchnavigieren und das aktuelle Bild unten wie gewohnt im Detail bearbeiten.
@@ -132,6 +131,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		Dies ist vor allem dann hilfreich, wenn Sie z.B. als für die Auswahl einen Filter setzen wie <em>Vorfall = leer</em>, weil dann nach dem Setzen des Vorfalls das Bild automatisch aus der Auswahl verschwindet. 
 		Dadurch können Sie sehr effizient einen Arbeitsvorat abarbeiten.
 	</p>
+	<h3><a name="picture-fields">Bedeutung der Eingabefelder bei Bildern</a></h3>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
 	<h3><a name="picture-publish">Bilder veröffentlichen</a></h3>
 	<p>
 		Wenn Sie die Bilder bearbeitet haben, dann müssen Sie diese noch veröffentlichen. Sie können zwar das entsprechende Feld <em>Sichtbarkeit</em> auch in fast allen Masken direkt setzen, aber bei vielen Bildern hat es sich bewährt, es auf einem Rutsch und ganz am Ende zu machen.
@@ -145,6 +149,16 @@ $this->params['breadcrumbs'][] = $this->title;
 		Übrigens sieht selbst der Moderator nur die verschwommenen Bilder - die unverschwommenen sehen immer nur Sie selbst!
 	</p>
 
+	<h3><a name="picture-index">Bilder betrachten</a></h3>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
+	<h3><a name="picture-view">Einzelbild betrachten</a></h3>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
 	<h3><a name="picture-heatmap">Heatmap</a></h3>
 	<div class="alert alert-warning">
 		Baustelle: Hier muss die Hilfe noch erstellt werden!
@@ -164,15 +178,35 @@ $this->params['breadcrumbs'][] = $this->title;
 		<li>Sie müssen für alle Bilder einen genauen Aufnahmeort angeben. Wenn ihre Kamera das automatische Erfassen von GPS-Koordinaten unterstützt, dann werden Sie hier nie Probleme haben. Aber in allen anderen Fällen müssen Sie es manuell in dem <a href="#picture-update-maptab">Reiter "Karte &amp; Ortsdaten"</a> der Einzelbearbeitung angeben.</li>
 	</ul>
 	<p>
-		Wenn Sie ein Bild einzeln bearbeiten, werden Ihnen die verletzten Konsistenzpüfungen auch immer genau genannt. Nur in der Mehrfachbearbeitung kann dies leider immer nur summarisch genannt werden (= Anzahl der Bilder wo es geklappt hat bzw. eben nicht geklappt hat). Im Zweifel müssen Sie hier dann immer in die Einzelbearbeitung gehen, um herauszufinden, was das genaue Problem ist.
+		Wenn Sie ein Bild einzeln bearbeiten, werden Ihnen die verletzten Konsistenzpüfungen auch immer genau genannt. Nur in der Mehrfachbearbeitung kann dies leider immer nur summarisch genannt werden (= Anzahl der Bilder wo es geklappt hat bzw. eben nicht geklappt hat und <b>die gemachten Änderungen dann einfach verworfen wurden</b>). Im Zweifel müssen Sie hier dann immer in die Einzelbearbeitung gehen, um herauszufinden, was das genaue Problem ist.
 	</p>
 	
+	<h3><a name="picture-moderate">Bilder moderieren</a></h3>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+
 	<h2><a name="campaign">Kampagnen &amp; Hotspots</a></h2>
 	<div class="alert alert-warning">
 		Baustelle: Hier muss die Hilfe noch erstellt werden!
 	</div>
 	
+	<h3><a name="campaign-crud">Verwalten von Kampagnen &amp; Hotspots </a></h2>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
+	<h3><a name="campaign-show">Öffentliche Darstellung von Kampagnen &amp; Hotspots </a></h2>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
 	<h2><a name="citation">Anzeigen &amp; Beschwerden</a></h2>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
+	<h3><a name="citation-crud">Verwalten von Anzeigen &amp; Beschwerden</a></h2>
 	<div class="alert alert-warning">
 		Baustelle: Hier muss die Hilfe noch erstellt werden!
 	</div>

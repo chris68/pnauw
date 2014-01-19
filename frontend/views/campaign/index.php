@@ -12,6 +12,7 @@ use yii\bootstrap\Collapse;
 
 $this->title = 'Kampagnen';
 $this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
+$this->params['help'] = 'campaign-crud';
 ?>
 <div class="campaign-index">
 
