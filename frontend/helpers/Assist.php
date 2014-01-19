@@ -23,7 +23,7 @@ class Assist
 	}
 	
 	/**
-	 * Create a nice html anchor to for the help page
+	 * Create a nice html anchor to the help page
 	 * @param string $text The text to display in the html anchor
 	 * @param string $anchor The optional name of the anchor (without the '#'!)
 	 * @param array $options The optional options for the html element
