@@ -13,13 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
 	</p>
 	<h3>
-		Version 1.1 (geplant Mitte Januar 2014)
+		Version 1.1 (19.01.2014)
 	</h3>
 	<p>
 		Die Nutzbarkeit wurde extrem verbessert.
 	</p>
 	<ul>
-		<li>Bessere <?= Assist::help('Hilfe','')?></li>
+		<li>Deutliche bessere und kontextsensitive <?= Assist::help('Hilfe','')?></li>
 		<li>Kampagnen können nun von allen <?= Assist::help('vertrauenswürdigen Nutzern','user-level-trusted')?> angelegt/genutzt werden</li>
 		<li>Bei Kampagnen und Anzeigen können Sie nun die <?= Assist::help('Markdown Syntax','markdown-syntax')?> nutzen</li>
 	</ul>	
