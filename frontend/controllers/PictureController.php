@@ -15,6 +15,7 @@ use yii\web\HttpException;
 use yii\web\VerbFilter;
 use yii\web\UploadedFile;
 use yii\helpers\Html;
+use frontend\helpers\Assist;
 
 /**
  * PictureController implements CRUD actions and much more for Picture model.
@@ -158,6 +159,8 @@ class PictureController extends Controller
 	 */
 	public function actionManage($withPublish=false)
 	{
+		$result = ['deleted' => ['ok' => 0, 'nok' => 0],'updated' => ['ok' => 0, 'nok' => 0]];
+		
 		if (\Yii::$app->request->isPost && isset($_POST['Picture'])) {
 			$pics = [];
 			foreach ($_POST['Picture'] as $id => $post_pic) {
@@ -172,7 +175,12 @@ class PictureController extends Controller
 				}
 				
 				if ($form_pic->deleted) {
-					$model->delete();
+					$count = $model->delete();
+					if ($count === false) {
+						$result['deleted']['nok']++;
+					} else {
+						$result['deleted']['ok'] += $count;
+					}
 				} else
 				{
 					if (
@@ -182,6 +190,7 @@ class PictureController extends Controller
 						|| $model->action_id <> $form_pic->action_id
 						|| $model->campaign_id <> $form_pic->campaign_id
 						|| $model->citation_id <> $form_pic->citation_id
+						|| $model->citation_affix <> $form_pic->citation_affix
 						|| $model->visibility_id <> $form_pic->visibility_id
 					) {
 						$model->name = $form_pic->name;
@@ -190,9 +199,49 @@ class PictureController extends Controller
 						$model->action_id = $form_pic->action_id;
 						$model->campaign_id = $form_pic->campaign_id;
 						$model->citation_id = $form_pic->citation_id;
+						$model->citation_affix = $form_pic->citation_affix;
 						$model->visibility_id = $form_pic->visibility_id;
-						$model->save();
+						$success = $model->save();
+						if ($success === false) {
+							$result['updated']['nok']++;
+						} else {
+							$result['updated']['ok']++;
+						}
+						;
 					}
+				}
+			}
+			if ($result['deleted']['ok']+$result['deleted']['nok']+$result['updated']['ok']+$result['updated']['nok'] == 0) {
+				$messages['warning'][] = 'Es wurden keinerlei Änderungen übernommen, weil Sie nichts geändert hatten';
+			} else {
+				if ($result['deleted']['ok'] == 1) {
+					$messages['success'][] = '1 Satz wurde gelöscht';
+				} elseif ($result['deleted']['ok'] > 1) {
+					$messages['success'][] = $result['deleted']['ok'].' Sätze wurden gelöscht';
+				}
+				if ($result['deleted']['nok'] == 1) {
+					$messages['danger'][] = '1 Satz konnte nicht gelöscht werden';
+					$type = 'danger';
+				} elseif ($result['deleted']['nok'] > 1) {
+					$messages['danger'][] = $result['deleted']['nok'].' Sätze konnten nicht gelöscht werden';
+				}
+				
+				if ($result['updated']['ok'] == 1) {
+					$messages['success'][] = '1 Satz wurde aktualisiert';
+				} elseif ($result['updated']['ok'] > 1) {
+					$messages['success'][] = $result['updated']['ok'].' Sätze wurden aktualisiert';
+				}
+				if ($result['updated']['nok'] == 1) {
+					$messages['danger'][] = '1 Satz konnte wegen verletzter '.Assist::help('Konsistenzprüfungen','picture-consistency').' nicht aktualisiert werden';
+					$type = 'danger';
+				} elseif ($result['updated']['nok'] > 1) {
+					$messages['danger'][] = $result['updated']['nok'].' Sätze konnten wegen verletzter '.Assist::help('Konsistenzprüfungen','picture-consistency').' nicht aktualisiert werden';
+				}
+			}
+
+			foreach ($messages as $key => $message) {
+				if (count($message) > 0) {
+					Yii::$app->session->setFlash($key,implode('<br> ',$message));
 				}
 			}
 		}
@@ -552,7 +601,7 @@ class PictureController extends Controller
 				throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
 			}
 		} else {
-			throw new HttpException(404, 'The requested page does not exist.');
+			throw new HttpException(404, 'The requested object does not exist or has been already deleted.');
 		}
 	}
 

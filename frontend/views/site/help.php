@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h1><?= $this->title ?></h1>
 
 	<div class="alert alert-warning">
-		Die Hilfe wird gerade erstellt und ist daher noch nicht vollständig.
+		Die Hilfe wird gerade erstellt und ist daher noch nicht vollständig. Die offenen Stellen sind als Baustelle gekennzeichnet
 	</div>
 
 	<h2><a name="picture">Bilder</a></h2>
@@ -145,7 +145,40 @@ $this->params['breadcrumbs'][] = $this->title;
 		Übrigens sieht selbst der Moderator nur die verschwommenen Bilder - die unverschwommenen sehen immer nur Sie selbst!
 	</p>
 
-	<h2><a name="markdown-syntax">Markdown Syntax</a></h2>
+	<h3><a name="picture-heatmap">Heatmap</a></h3>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
+	<h3><a name="picture-search">Suche und Filtern</a></h3>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
+	<h3><a name="picture-consistency">Konsistenzprüfungen</a></h3>
+	<p>
+		Wenn Sie Bilder bearbeiten prüft das System vor dem Aktualisieren die Konsistenz. Folgende Prüfungen sind hierbei primär zu nennen:
+	</p>
+	<ul>
+		<li>Sie können nur als <a href="#user-level-trusted">vertrauenswürdiger Nutzer</a> direkt Bilder veröffentlichen. Als normaler Nutzer müssen Sie die Veröffentlichung beantragen.</li>
+		<li>Sie müssen für alle Bilder einen genauen Aufnahmeort angeben. Wenn ihre Kamera das automatische Erfassen von GPS-Koordinaten unterstützt, dann werden Sie hier nie Probleme haben. Aber in allen anderen Fällen müssen Sie es manuell in dem <a href="#picture-update-maptab">Reiter "Karte &amp; Ortsdaten"</a> der Einzelbearbeitung angeben.</li>
+	</ul>
+	<p>
+		Wenn Sie ein Bild einzeln bearbeiten, werden Ihnen die verletzten Konsistenzpüfungen auch immer genau genannt. Nur in der Mehrfachbearbeitung kann dies leider immer nur summarisch genannt werden (= Anzahl der Bilder wo es geklappt hat bzw. eben nicht geklappt hat). Im Zweifel müssen Sie hier dann immer in die Einzelbearbeitung gehen, um herauszufinden, was das genaue Problem ist.
+	</p>
+	
+	<h2><a name="campaign">Kampagnen &amp; Hotspots</a></h2>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
+	<h2><a name="citation">Anzeigen &amp; Beschwerden</a></h2>
+	<div class="alert alert-warning">
+		Baustelle: Hier muss die Hilfe noch erstellt werden!
+	</div>
+	
+	<h2><a name="general">Generelles</a></h2>
+	<h3><a name="markdown-syntax">Markdown Syntax</a></h3>
 	<p>
 		Bei Webapplikationen will man seine eingestellten Inhalte möglichst schön formatieren. Hier kann man mit HTML zwar alles machen, aber HTML ist meist zu kompliziert und es wäre zudem gefährlich, den Nutzer HTML direkt ein-/ausgeben zu lassen
 	</p>
@@ -156,16 +189,19 @@ $this->params['breadcrumbs'][] = $this->title;
 	<p>
 		Und das beste ist: Sie haben sogar einen kleinen Editor, der Sie dabei unterstützt. Den Editor haben wir hierbei nicht selbst geschrieben, sondern <?=	Assist::extlink('Kartik Visweswaran', 'http://kartikv.krajee.com') ?> hat ihn freundlicherweise <?=	Assist::extlink('Public Domain', 'http://de.wikipedia.org/wiki/Gemeinfreiheit') ?> zur Verfügung gestellt.
 	</p>
-	<h2><a name="user-level">Berechtigungsstufen</a></h2>
-	<h3><a name="user-level-anonymous">Anonymer Nutzer / Gastzugang</a></h3>
+	<h3><a name="user-level">Berechtigungsstufen</a></h3>
+	<p>
+		Als Nutzer in dem System können Sie folgende unterschiedliche Berechtigungsstufen haben.
+	</p>
+	<h4><a name="user-level-anonymous">Anonymer Nutzer / Gastzugang</a></h4>
 	<p>
 		Wenn Sie ohne eine Anmeldung arbeiten, dann sind Sie ein anonymer Nutzer und arbeiten im Gastzugang. Sie können dann Bilder hochladen und auch die Veröffentlichung beantragen. Aber Sie kommen später nie wieder an die Bilder dran. Daher sollten Sie sich bei einer regelmäßigen Nutzung registrieren.
 	</p>
-	<h3><a name="user-level-normal">Normaler Nutzer</a></h3>
+	<h4><a name="user-level-normal">Normaler Nutzer</a></h4>
 	<p>
 		Nachdem Sie sich registiert haben, sind Sie erst einmal ein normaler Nutzer, der noch eingeschränkte Rechte hat. Sie können keine Kampagnen anlegen und alle ihre hochgeladenen Bilder bzw. anderen Beiträge müssen moderiert/freigegeben werden.
 	</p>
-	<h3><a name="user-level-trusted">Vertrauenswürdiger Nutzer</a></h3>
+	<h4><a name="user-level-trusted">Vertrauenswürdiger Nutzer</a></h4>
 	<p>
 		Wenn Sie einige Bilder hochgeladen haben und schon eine gewisse Zeit tätig sind, dann können Sie beantragen, als <em>vertrauenswürdiger Nutzer</em> eingestuft zu werden.
 	</p>
@@ -178,14 +214,14 @@ $this->params['breadcrumbs'][] = $this->title;
 	<p>
 		<b>Sollten Sie das Vertrauen nicht erfüllen, ist die Sonderrolle auch sehr schnell wieder weg und es kann dann sogar Ihr gesamter Account gelöscht werden!</b>
 	</p>
-	<h3><a name="user-level-moderator">Moderator</a></h3>
+	<h4><a name="user-level-moderator">Moderator</a></h4>
 	<p>
 		Wenn Sie sehr lange dabei sind oder sich anderweitig besonders ausgezeichnet haben, dann können Sie sogar den Status eines Moderators beantragen (gleicher Weg wie oben).
 	</p>
 	<p>
 		Als Moderator können und sollen Sie dann die Bilder und Beiträge von normalen Nutzern moderieren.
 	</p>
-	<h3><a name="user-level-admin">Administrator</a></h3>
+	<h4><a name="user-level-admin">Administrator</a></h4>
 	<p>
 		Der Status eines Administrators wird derzeit nicht außerhalb des Kernbetreiberteams vergeben.
 	</p>
