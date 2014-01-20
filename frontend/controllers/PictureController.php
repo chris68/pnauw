@@ -585,6 +585,16 @@ class PictureController extends Controller
 	}
 
 	/**
+	 * Create a url to search for the campaign
+	 * @param string $action The requested action (i.e. index, manage, etc)
+	 * @param int $campaign_id The id of the campaign
+	 * @return array The url ready to be used in a link
+	 */
+	public static function urlCampaign($action,$campaign_id) {
+		return ["picture/$action", 's[campaign_id]' => $campaign_id];
+	}
+	
+	/**
 	 * Finds the Picture model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 * If the model is not owned by the user, a exception will be thrown
