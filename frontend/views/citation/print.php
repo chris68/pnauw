@@ -19,7 +19,7 @@ elseif ($model->type == 'complaint') {
 
 	<?php
 		/* var $pic frontend\models\Picture */
-		foreach ($model->pictures as $pic) {
+		foreach ($model->getPictures()->all() as $pic) {
 			echo $this->render('_printpicture', [
 				'model' => $pic,
 			]);

@@ -102,7 +102,8 @@ class Citation extends \yii\db\ActiveRecord
 	 */
 	public function getPictures()
 	{
-		return $this->hasMany(Picture::className(), ['citation_id' => 'id']);
+		return $this->hasMany(Picture::className(), ['citation_id' => 'id'])->
+			orderBy(['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ]);
 	}
 
 	/**
