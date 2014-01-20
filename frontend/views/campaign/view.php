@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use frontend\controllers\PictureController;
 
 /**
  * @var yii\web\View $this
@@ -26,6 +27,9 @@ $this->params['help'] = 'campaign-crud';
 			'data-method' => 'post',
 		]); ?>
 	</p>
+	
+	<?= Html::a('Öffentliche Kampagnendarstellung zeigen',['campaign/show','id' => $model->id], ['target' => '_blank'] ) ?>
+	
 
 	<?php echo DetailView::widget([
 		'model' => $model,
