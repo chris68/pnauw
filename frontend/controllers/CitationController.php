@@ -44,6 +44,7 @@ class CitationController extends Controller
 		$searchModel = new CitationSearch;
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->query->ownerScope();
+		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,

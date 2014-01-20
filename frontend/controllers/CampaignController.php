@@ -60,6 +60,7 @@ class CampaignController extends Controller
 		$searchModel = new CampaignSearch;
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->query->ownerScope();
+		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,

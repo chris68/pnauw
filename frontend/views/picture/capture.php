@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Bild aufnehmen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
-$this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage', 'sort'=>'modified_ts-desc', ]];
+$this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
 $this->params['breadcrumbs'][] = 'Aufnehmen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
 $this->params['help'] = Yii::$app->user->checkAccess('anonymous')?'picture-guestcapture':'picture-capture';
 ?>

@@ -63,6 +63,7 @@ class PictureController extends Controller
 		$searchModel = new PictureSearch(['scenario' => 'public']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->query->publicScope();
+		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 		$dataProvider->pagination->pageSize = 20;
 
 		return $this->render('index', [
@@ -249,6 +250,7 @@ class PictureController extends Controller
 		$searchModel = new PictureSearch(['scenario' => 'private']);
 		$dataProvider = $searchModel->search($_GET);
 		$dataProvider->query->ownerScope();
+		$dataProvider->sort->defaultOrder = ['id' => SORT_ASC,];
 		$dataProvider->pagination->pageSize = 20;
 
 		return $this->render('manage', [
@@ -380,6 +382,7 @@ class PictureController extends Controller
 		
 		$dataProvider->query->publicScope();
 		
+		$dataProvider->sort->defaultOrder = ['id' => SORT_ASC,];
 		$dataProvider->pagination->pageSize = 50;
 
 		return $this->render('moderate', [
@@ -423,6 +426,7 @@ class PictureController extends Controller
 		
 		$dataProvider->query->ownerScope();
 		
+		$dataProvider->sort->defaultOrder = ['id' => SORT_ASC,];
 		$dataProvider->pagination->pageSize = 50;
 
 		return $this->render('publish', [
@@ -439,8 +443,8 @@ class PictureController extends Controller
 	{
 		$searchModel = new PictureSearch(['scenario' => 'public']);
 		$dataProvider = $searchModel->search($_GET);
+		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 		$dataProvider->pagination->pageSize = 1;
-		$dataProvider->query->publicScope();
 
 		return $this->render('massview', [
 				'dataProvider' => $dataProvider,
@@ -467,8 +471,9 @@ class PictureController extends Controller
 
 		$searchModel = new PictureSearch(['scenario' => 'private']);
 		$dataProvider = $searchModel->search($_GET);
-		$dataProvider->pagination->pageSize = 1;
 		$dataProvider->query->ownerScope();
+		$dataProvider->sort->defaultOrder = ['id' => SORT_ASC,];
+		$dataProvider->pagination->pageSize = 1;
 
 		return $this->render('massupdate', [
 				'dataProvider' => $dataProvider,

@@ -51,7 +51,7 @@ AppAsset::register($this);
 					'label' => 'Moderieren', 
 					'visible' => Yii::$app->user->checkAccess('moderator'),
 					'items' => [
-						['label' => 'Bilder', 'url' => ['/picture/moderate','sort'=>'modified_ts-desc']],
+						['label' => 'Bilder', 'url' => ['/picture/moderate']],
 					],
 				],
 				[
@@ -61,17 +61,17 @@ AppAsset::register($this);
 						['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
 						['label' => 'Hochladen', 'url' => ['/picture/upload']],
 						['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
-						['label' => 'Bearbeiten', 'url' => ['/picture/manage','sort'=>'taken-desc']],
-						['label' => 'Veröffentlichen', 'url' => ['/picture/publish','sort'=>'modified_ts-desc']],
-						['label' => 'Anschauen', 'url' => ['/picture/index','sort'=>'taken-desc']],
+						['label' => 'Bearbeiten', 'url' => ['/picture/manage']],
+						['label' => 'Veröffentlichen', 'url' => ['/picture/publish']],
+						['label' => 'Anschauen', 'url' => ['/picture/index']],
 					],
 				],
 				[
 					'label' => 'Verwalten', 
 					'visible' => !Yii::$app->user->isGuest,
 					'items' => [
-						['label' => 'Kampagnen', 'url' => ['/campaign/index','sort'=>'created_ts-desc'], 'visible' => Yii::$app->user->checkAccess('trusted')],
-						['label' => 'Anzeigen', 'url' => ['/citation/index','sort'=>'created_ts-desc']],
+						['label' => 'Kampagnen', 'url' => ['/campaign/index'], 'visible' => Yii::$app->user->checkAccess('trusted')],
+						['label' => 'Anzeigen', 'url' => ['/citation/index']],
 					],
 				],
 				['linkOptions' => ['target' => '_blank'], 'label' => 'Hilfe', 'url' => ['/site/help'.(isset($this->params['help']) ? ('#'.$this->params['help']) : ''), ],],
