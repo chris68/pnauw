@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
 use yii\widgets\ActiveForm;
-
+use frontend\controllers\PictureController;
 
 $this->title = 'Bilder bearbeiten';
 $this->params['breadcrumbs'][] = ['label' => 'Bilder bearbeiten', 'url' => ['manage']];
@@ -105,7 +105,7 @@ $this->params['help'] = 'picture-manage';
 			.
 					'<br>'
 			.
-					'<b>'.Html::encode($model->vehicle_reg_plate).'</b>'
+					'<b> <a target = "_blank" href="'.Html::url(PictureController::urlVehicleRegPlate('manage',$model->vehicle_reg_plate)).'">'.Html::encode($model->vehicle_reg_plate).'</a> </b>'
 			.
 
 			'	</div>

@@ -593,10 +593,20 @@ class PictureController extends Controller
 	 * Create a url to search for the campaign
 	 * @param string $action The requested action (i.e. index, manage, etc)
 	 * @param int $campaign_id The id of the campaign
-	 * @return array The url ready to be used in a link
+	 * @return array The url ready to be used as parameter for e.g. Html::url
 	 */
 	public static function urlCampaign($action,$campaign_id) {
 		return ["picture/$action", 's[campaign_id]' => $campaign_id];
+	}
+	
+	/**
+	 * Create a url to search for the vehicle registration plate
+	 * @param string $action The requested action (i.e. index, manage, etc)
+	 * @param int $vehicle The vehicle registration plate
+	 * @return array The url ready to be used as parameter for e.g. Html::url
+	 */
+	public static function urlVehicleRegPlate($action,$vehicle_reg_plate) {
+		return ["picture/$action", 's[vehicle_reg_plate]' => $vehicle_reg_plate];
 	}
 	
 	/**
