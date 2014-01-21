@@ -53,16 +53,15 @@
         {
             "name": "kartik-v/yii2-markdown",
             "version": "dev-master",
-            "target-dir": "kartik",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-markdown.git",
-                "reference": "fba4522454b0ad9481691bd5a00238c916184eb8"
+                "reference": "ea6375db44eca5b6ec06371504450ddf4ae7f186"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-markdown/zipball/fba4522454b0ad9481691bd5a00238c916184eb8",
-                "reference": "fba4522454b0ad9481691bd5a00238c916184eb8",
+                "url": "https://api.github.com/repos/kartik-v/yii2-markdown/zipball/ea6375db44eca5b6ec06371504450ddf4ae7f186",
+                "reference": "ea6375db44eca5b6ec06371504450ddf4ae7f186",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +71,7 @@
             },
             "type": "yii2-extension",
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "kartik\\": ""
                 }
             },
@@ -101,7 +100,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2014-01-18 11:42:51"
+            "time": "2014-01-21 08:52:04"
         },
         {
             "name": "michelf/php-markdown",
@@ -248,12 +247,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "74ddf4b94c035224079ae5ec4401aaf0b0caf151"
+                "reference": "b93bd22c8c15d3d0272eb2ab3138c9b588871286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/74ddf4b94c035224079ae5ec4401aaf0b0caf151",
-                "reference": "74ddf4b94c035224079ae5ec4401aaf0b0caf151",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/b93bd22c8c15d3d0272eb2ab3138c9b588871286",
+                "reference": "b93bd22c8c15d3d0272eb2ab3138c9b588871286",
                 "shasum": ""
             },
             "require": {
@@ -289,7 +288,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-01-16 10:20:22"
+            "time": "2014-01-18 17:45:04"
         },
         {
             "name": "twbs/bootstrap",
@@ -297,12 +296,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "dcdf716eef06ceed259c525a0ab70e7065e3a14a"
+                "reference": "7938134fd1382deb7b300da1672559fe2afb3706"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/dcdf716eef06ceed259c525a0ab70e7065e3a14a",
-                "reference": "dcdf716eef06ceed259c525a0ab70e7065e3a14a",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/7938134fd1382deb7b300da1672559fe2afb3706",
+                "reference": "7938134fd1382deb7b300da1672559fe2afb3706",
                 "shasum": ""
             },
             "type": "library",
@@ -331,7 +330,7 @@
                 "bootstrap",
                 "css"
             ],
-            "time": "2014-01-18 03:04:14"
+            "time": "2014-01-21 11:15:49"
         },
         {
             "name": "yiisoft/jquery",
@@ -362,12 +361,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "bfafb9db267b8e04139dfa33a193168a9bdeade8"
+                "reference": "85e49b65a88f58a9ca2070f41b40155d72b88083"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/bfafb9db267b8e04139dfa33a193168a9bdeade8",
-                "reference": "bfafb9db267b8e04139dfa33a193168a9bdeade8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/85e49b65a88f58a9ca2070f41b40155d72b88083",
+                "reference": "85e49b65a88f58a9ca2070f41b40155d72b88083",
                 "shasum": ""
             },
             "require": {
@@ -377,7 +376,7 @@
                 "michelf/php-markdown": "1.3.*",
                 "php": ">=5.4.0",
                 "phpspec/php-diff": ">=1.0.2",
-                "yiisoft/jquery": "2.0.*",
+                "yiisoft/jquery": "~2.0 | ~1.10",
                 "yiisoft/yii2-composer": "*"
             },
             "type": "library",
@@ -432,7 +431,7 @@
                 "framework",
                 "yii"
             ],
-            "time": "2014-01-17 21:15:59"
+            "time": "2014-01-21 18:00:17"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -620,12 +619,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "cecee89bc588526eafea0f09e585e88b938a34d7"
+                "reference": "42a6b79c42aee86da844e731d57b462cf755cc99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/cecee89bc588526eafea0f09e585e88b938a34d7",
-                "reference": "cecee89bc588526eafea0f09e585e88b938a34d7",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/42a6b79c42aee86da844e731d57b462cf755cc99",
+                "reference": "42a6b79c42aee86da844e731d57b462cf755cc99",
                 "shasum": ""
             },
             "require": {
@@ -656,7 +655,7 @@
                 "debugger",
                 "yii"
             ],
-            "time": "2014-01-16 12:29:52"
+            "time": "2014-01-21 17:34:29"
         },
         {
             "name": "yiisoft/yii2-gii",

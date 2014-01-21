@@ -26,8 +26,6 @@ use frontend\models\Citation;
 
 		<?= $form->field($model, 'description')->widget('\kartik\markdown\MarkdownEditor', 
 			[
-				'name' => Html::getInputName($model,'description'), 
-				'value' => $model->description,
 				'showExport' => false,
 			])->
 			hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Sie sollten aber nur Fettmachungen, etc. einsetzen.') 

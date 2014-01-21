@@ -23,8 +23,6 @@ use frontend\helpers\Assist;
 
 		<?= $form->field($model, 'description')->widget('\kartik\markdown\MarkdownEditor', 
 			[
-				'name' => Html::getInputName($model,'description'), 
-				'value' => $model->description,
 				'showExport' => false,
 			])->
 			hint('Geben Sie hier eine beliebig lange Beschreibung für die Kampagne an, die dann auf der Infoseite der Kampagne angezeigt wird. Den Text können Sie hierbei mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.') 
