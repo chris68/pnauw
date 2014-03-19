@@ -92,10 +92,14 @@ AppAsset::register($this);
 		?>
 
 		<div class="container">
-		<?= Breadcrumbs::widget([
-			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-			'encodeLabels' => false,
-		]) ?>
+		<ul class="breadcrumb">
+			<?= Breadcrumbs::widget([
+				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+				'encodeLabels' => false,
+				'tag' => 'span',
+			]) ?>
+			<li style="float:right"><?= Html::a('Hilfe', ['/site/help'.(isset($this->params['help']) ? ('#'.$this->params['help']) : ''), ], ['target' => '_blank'] ) ?> </li>
+		</ul>
 		<?= Alert::widget() ?>
 		<?= $content ?>
 		</div>
@@ -104,10 +108,10 @@ AppAsset::register($this);
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-md-6 small">
-					<?= Html::a('Nutzungsbedingungen','site/terms') ?> |
-					<?= Html::a('§55 RStV','site/impressum') ?> |
-					<?= Html::a('Datenschutz','site/privacy') ?>
+				<div class="col-sm-6 col-md-6" style='font-size:x-small'>
+					<?= Html::a('Nutzungsbedingungen',['site/terms']) ?> |
+					<?= Html::a('§55 RStV',['site/impressum']) ?> |
+					<?= Html::a('Datenschutz',['site/privacy']) ?>
 				</div>
 			</div>
 		</div>
