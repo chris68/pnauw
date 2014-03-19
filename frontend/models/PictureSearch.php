@@ -225,7 +225,7 @@ class PictureSearch extends Model
 			$this->addCondition($query, 'loc_formatted_addr', true);
 			$this->addCondition2($query, 'visibility_id','ARRAY');
 			$this->addCondition2($query, 'vehicle_country_code','ARRAY');
-			$this->addCondition($query, 'vehicle_reg_plate', false); // Like does not work - see https://github.com/chris68/pnauw/issues/68
+			$this->addCondition($query, 'vehicle_reg_plate', true); 
 			$this->addCondition($query, 'citation_affix', true);
 			$this->addCondition2($query, 'action_id', 'ARRAY');
 			$this->addCondition2($query, 'incident_id','ARRAY');
@@ -256,7 +256,6 @@ class PictureSearch extends Model
 		$this->filter_count++;
 		$attribute = "{{%picture}}.".$attribute ;
 		if ($partialMatch) {
-			$value = '%' . strtr($value, ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\']) . '%';
 			$query->andWhere(['like', $attribute, $value]);
 		} else {
 			$query->andWhere([$attribute => $value]);
