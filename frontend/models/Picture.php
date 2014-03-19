@@ -253,21 +253,13 @@ class Picture extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @param ActiveQuery $query
+	 * {@inheritdoc}
 	 */
-	public static function ownerScope($query)
-	{
-		$query->andWhere("{{%picture}}.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
-	}
-
-	/**
-	 * @param ActiveQuery $query
-	 */
-	public static function publicScope($query)
-	{
-		$query->andWhere(["{{%picture}}.visibility_id" => ['public_approval_pending','public']]);
-	}
-
+    public static function createQuery()
+    {
+        return new PictureQuery(['modelClass' => get_called_class()]);
+    }
+	
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */

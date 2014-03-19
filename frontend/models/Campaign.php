@@ -107,23 +107,13 @@ class Campaign extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * Scope for the owner 
-	 * @param ActiveQuery $query
+	 * {@inheritdoc}
 	 */
-	public static function ownerScope($query)
-	{
-		$query->andWhere("{{%campaign}}.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
-	}
-
-	/**
-	 * Scope for retrieving the dropdown list
-	 * @param ActiveQuery $query
-	 */
-	public static function dropdownScope($query)
-	{
-		$query->andWhere("({{%campaign}}.owner_id = :owner or {{%campaign}}.visibility_id = 'public')", [':owner' => \Yii::$app->user->id]);
-	}
-
+    public static function createQuery()
+    {
+        return new CampaignQuery(['modelClass' => get_called_class()]);
+    }
+	
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */

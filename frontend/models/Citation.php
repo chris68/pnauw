@@ -80,23 +80,13 @@ class Citation extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * Scope for the owner 
-	 * @param ActiveQuery $query
+	 * {@inheritdoc}
 	 */
-	public static function ownerScope($query)
-	{
-		$query->andWhere("{{%citation}}.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
-	}
-
-	/**
-	 * Scope for retrieving the dropdown list
-	 * @param ActiveQuery $query
-	 */
-	public static function dropdownScope($query)
-	{
-		$query->andWhere("{{%citation}}.owner_id = :owner", [':owner' => \Yii::$app->user->id]);
-	}
-
+    public static function createQuery()
+    {
+        return new CitationQuery(['modelClass' => get_called_class()]);
+    }
+	
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
