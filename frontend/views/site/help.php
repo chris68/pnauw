@@ -147,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<ul>
 	<li>Oben gibt es eine aufklappbare Sektion <a href='#picture-search'>Suchen &amp; Filtern</a>, wo Sie sehr umfangreich einstellen können, welche Bilder Sie sehen wollen</li>
-	<li>Dann kommt eine <a href='#quicksearch'>Schnellsuche</a>, mit der Sie wichtige und generelle Filter-/Sucheinstellungen vornehmen können.</li>
+	<li>Dann kommt eine <a href='#picture-quicksearch'>Schnellsuche</a>, mit der Sie wichtige und generelle Filter-/Sucheinstellungen vornehmen können.</li>
 	<li>Darunter haben Sie immer die <a href='#picture-heatmap'>Heatmap</a>, mit der man schnell sehen kann, wo viele Verfälle sind. Zudem kann man über die Heatmap den Suchbereich einschränken</li>
 	<li>Dann kommen Links mit kontextsensitiven Absprüngen auf weitere Funktionen</li>
 	<li>Und nicht zuletzt kommen am Ende natürlich die Bilder selbst und Sie können mit der Seitennavigation sich durchblättern</li>
@@ -205,7 +205,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h3><a name="picture-moderate">Bilder moderieren</a></h3>
 	<p>
-		Das Moderieren läuft generell genauso ab wie das <a href="picture-publish">Veröffentlichen</a>. Der einzige Unterschied ist, dass es eben nur ein <a href="#user-level-trusted">Moderator</a> machen kann und er dies dann für Bilder anderer Leute machen darf.
+		Das Moderieren läuft generell genauso ab wie das <a href="#picture-publish">Veröffentlichen</a>. Der einzige Unterschied ist, dass es eben nur ein <a href="#user-level-trusted">Moderator</a> machen kann und er dies dann für Bilder anderer Leute machen darf.
 	</p>
 
 	<h2><a name="campaign">Kampagnen &amp; Hotspots</a></h2>
@@ -218,17 +218,17 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h3><a name="campaign-crud">Verwalten von Kampagnen &amp; Hotspots </a></h2>
 	<p>
-		Das Verwalten von <a href='campaign'>Kampagnen bzw. Hotspots</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Kampagnen/Hotspots sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
+		Das Verwalten von <a href='#campaign'>Kampagnen bzw. Hotspots</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Kampagnen/Hotspots sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
 	</p>
 	
 	<h3><a name="campaign-show">Öffentliche Darstellung von Kampagnen &amp; Hotspots </a></h2>
 	<p>
-		Hier sehen Sie die öffentliche Darstellung zu <a href='campaign'>einer Kampagne bzw. einem Hotspot</a>. Diese Inhalte wurden von einem Nutzer eingestellt, um klarer zu dokumentieren, warum er sich konkret an dem Gehwegparken stört und was er eventuell gedenkt, dagegen zu unternehmen.
+		Hier sehen Sie die öffentliche Darstellung zu <a href='#campaign'>einer Kampagne bzw. einem Hotspot</a>. Diese Inhalte wurden von einem Nutzer eingestellt, um klarer zu dokumentieren, warum er sich konkret an dem Gehwegparken stört und was er eventuell gedenkt, dagegen zu unternehmen.
 	</p>
 	
 	<h2><a name="citation">Anzeigen &amp; Beschwerden</a></h2>
 	<p>
-		Anzeigen bzw. Beschwerden sind wahrscheinlich die einzigen Möglichkeiten, die Sie haben, wenn eine <a href='campaign'>Kampagne</a> alleine nicht ausreichend Wirkung zeigt.
+		Anzeigen bzw. Beschwerden sind wahrscheinlich die einzigen Möglichkeiten, die Sie haben, wenn eine <a href='#campaign'>Kampagne</a> alleine nicht ausreichend Wirkung zeigt.
 	</p>
 	<p>
 		Eine Beschwerde ist hierbei eine nette Zusammenfassung von vielen Falschparkern zum Ausdrucken oder Versand als PDF-Datei an die Polizei oder das Ordnungsamt. Eine Beschwerde ist rechtlich unverbindlich und Sie können auch darum bitten, das Ihr Name nicht öffentlich genannt wird. 
@@ -241,7 +241,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h3><a name="citation-crud">Verwalten von Anzeigen &amp; Beschwerden</a></h2>
 	<p>
-		Das Verwalten von <a href='citation'>Anzeigen bzw. Beschwerden</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Anzeigen/Beschwerden sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
+		Das Verwalten von <a href='#citation'>Anzeigen bzw. Beschwerden</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Anzeigen/Beschwerden sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
 	</p>
 	
 	<h2><a name="general">Generelles</a></h2>
