@@ -136,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		Wenn Sie bereits ein <a href="#user-level-trusted">vertrauenswürdiger Nutzer</a> sind, dann können Sie direkt veröffentlichen.
 	</p>
 	<p>
-		Ansonsten müssen Sie die Veröffentlichung beantragen und in der Regel wird ein <a href="#user-level-trusted">Moderator</a> dies auch zeitnah freigeben.
+		Ansonsten müssen Sie die Veröffentlichung beantragen und in der Regel wird ein <a href="#user-level-moderator">Moderator</a> dies auch zeitnah freigeben.
 		Sollte der Moderator nicht einverstanden sein, wird er die Veröffentlichung ablehnen.
 		Übrigens sieht selbst der Moderator nur die verschwommenen Bilder - die unverschwommenen sehen immer nur Sie selbst!
 	</p>
@@ -205,7 +205,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<h3><a name="picture-moderate">Bilder moderieren</a></h3>
 	<p>
-		Das Moderieren läuft generell genauso ab wie das <a href="#picture-publish">Veröffentlichen</a>. Der einzige Unterschied ist, dass es eben nur ein <a href="#user-level-trusted">Moderator</a> machen kann und er dies dann für Bilder anderer Leute machen darf.
+		Das Moderieren läuft generell genauso ab wie das <a href="#picture-publish">Veröffentlichen</a>. Der einzige Unterschied ist, dass es eben nur ein <a href="#user-level-moderator">Moderator</a> machen kann und er dies dann für Bilder anderer Leute machen darf.
 	</p>
 
 	<h2><a name="campaign">Kampagnen &amp; Hotspots</a></h2>
@@ -294,5 +294,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<p>
 		Ein Administrator kann Nutzer auf eine höhere Berechtigungsstufe setzen und er kann Bilder, Beiträge und sogar Nutzer komplett löschen.
+	</p>
+	<p style="height: 500px">
+		
 	</p>
 </div>
