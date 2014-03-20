@@ -10,7 +10,8 @@ $this->title = \Yii::$app->name;
 	<div class="jumbotron">
 		<h1>Parke nicht auf unseren Wegen!</h1>
 
-		<p class="lead">Gehwegparken nervt und ist meist unnötig. Mit der Methode <a href="http://dictionary.cambridge.org/dictionary/british/name-and-shame">Name and Shame</a> werden wir es bekämpfen.</p>
+		<p class="lead">Gehwegparken nervt und ist meist unnötig. Mit der Methode <a href="http://dictionary.cambridge.org/dictionary/british/name-and-shame">Name and Shame</a> werden wir es bekämpfen. </p>
+		<p><small><a href="<?= Html::url(['site/about']) ?>">Hintergrundsinfos</a> &ndash; <a href="<?= Html::url(['site/help']) ?>">Hilfe</a></small></p>
 
 	</div>
 

@@ -92,14 +92,16 @@ AppAsset::register($this);
 		?>
 
 		<div class="container">
+		<?php if (isset($this->params['breadcrumbs'])) : ?>
 		<ul class="breadcrumb">
 			<?= Breadcrumbs::widget([
-				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+				'links' => $this->params['breadcrumbs'],
 				'encodeLabels' => false,
 				'tag' => 'span',
 			]) ?>
 			<li style="float:right"><?= Html::a('Hilfe', ['/site/help'.(isset($this->params['help']) ? ('#'.$this->params['help']) : ''), ], ['target' => '_blank'] ) ?> </li>
 		</ul>
+		<?php endif ?>
 		<?= Alert::widget() ?>
 		<?= $content ?>
 		</div>
