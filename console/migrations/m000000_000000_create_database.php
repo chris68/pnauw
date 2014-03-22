@@ -32,7 +32,12 @@ CREATE EXTENSION earthdistance; -- See http://www.postgresql.org/docs/9.1/static
 EOT;
 $this->execute($sql);
 
-	}
+$sql = <<<'EOT'
+CREATE EXTENSION postgis; 
+EOT;
+$this->execute($sql);
+
+}
 
 	public function safeDown()
 	{
