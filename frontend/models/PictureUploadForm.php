@@ -26,7 +26,8 @@ class PictureUploadForm extends Model
 	 */
     public function rules() {
         return [
- 			['file_handles', 'file', 'maxFiles' => 50, 'maxSize' => 1048576, 'types' => 'jpg'],
+			['file_names', 'required', ], 
+ 			['file_handles', 'file', 'maxFiles' => 50, 'maxSize' => 1048576, 'types' => 'jpg', ],
        ];
     }
 
