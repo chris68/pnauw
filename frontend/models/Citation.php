@@ -35,12 +35,12 @@ class Citation extends \yii\db\ActiveRecord
 	{
 		return [
 			'timestamp' => [
-				'class' => 'yii\behaviors\AutoTimestamp',
+				'class' => 'yii\behaviors\TimestampBehavior',
 				'attributes' => [
 					\yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_ts', 'modified_ts'],
 					\yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_ts',
 				],
-				'timestamp' => new \yii\db\Expression('NOW()'),
+				'value' => new \yii\db\Expression('NOW()'),
 			],
 			'EnsureOwnership' => [
 				'class' => 'common\behaviors\EnsureOwnership',
@@ -82,9 +82,10 @@ class Citation extends \yii\db\ActiveRecord
 	/**
 	 * {@inheritdoc}
 	 */
-    public static function createQuery()
+    public static function createQuery($config = [])
     {
-        return new CitationQuery(['modelClass' => get_called_class()]);
+        $config['modelClass'] = get_called_class();
+        return new CitationQuery($config);
     }
 	
 	/**

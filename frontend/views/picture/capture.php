@@ -4,6 +4,7 @@
 
 use yii;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Bild aufnehmen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
@@ -31,7 +32,7 @@ $this->params['help'] = Yii::$app->user->checkAccess('anonymous')?'picture-guest
 
 	<div class="help-block">
 		<p>Hier können Sie mit Ihrer Kamera auf der mobilen Einheit ein Bild aufnehmen, hochladen und dann gleich bearbeiten.</p>
-		<p>Wenn Sie Probleme mit dem direkten Zugriff auf die Kamera haben, dann können Sie die Bilder auch aus dem Dateisystem <a href="<?=Html::URL(['upload'])?>" >hochladen</p>.
+		<p>Wenn Sie Probleme mit dem direkten Zugriff auf die Kamera haben, dann können Sie die Bilder auch aus dem Dateisystem <a href="<?=Url::to(['upload'])?>" >hochladen</p>.
 	</div>
 </div>
 

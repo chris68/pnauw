@@ -5,6 +5,7 @@
 
 use yii;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Tabs;
 use frontend\widgets\Alert;
@@ -21,7 +22,7 @@ use frontend\widgets\Alert;
 		<?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 		<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
 		<button 
-			formaction="<?=Html::url(['delete', 'id' => $model->id, 'returl' => Yii::$app->getRequest()->getUrl()])?>"
+			formaction="<?=Url::to(['delete', 'id' => $model->id, 'returl' => Yii::$app->getRequest()->getUrl()])?>"
 			formmethod="POST"
 			class="btn btn-danger"
 		>

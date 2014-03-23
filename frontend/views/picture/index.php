@@ -41,9 +41,9 @@ $this->params['help'] = 'picture-index';
 			$request = Yii::$app->getRequest();
 			$params = $request instanceof yii\web\Request ? $request->get() : [];
 
-			unset($params[$dataProvider->getPagination()->pageVar]);
-			unset($params[$dataProvider->getSort()->sortVar]);
-			$params[$dataProvider->getSort()->sortVar] = 'id';
+			unset($params[$dataProvider->getPagination()->pageParam]);
+			unset($params[$dataProvider->getSort()->sortParam]);
+			$params[$dataProvider->getSort()->sortParam] = 'id';
 			$route = Yii::$app->controller->getRoute();
 			echo Html::a('Im Detail anschauen', Yii::$app->getUrlManager()->createUrl('picture/massview', $params), ['target' => '_blank']);
 			if (!Yii::$app->user->isGuest) {

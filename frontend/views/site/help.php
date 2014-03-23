@@ -2,6 +2,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use frontend\helpers\Assist;
 
 $this->title = 'Hilfe';
@@ -273,7 +274,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		Wenn Sie einige Bilder hochgeladen haben und schon eine gewisse Zeit tätig sind, dann können Sie beantragen, als <em>vertrauenswürdiger Nutzer</em> eingestuft zu werden.
 	</p>
 	<p>
-		Beantragen Sie dies bitte über die <a href="<?= Html::url(['contact']) ?>">Kontaktmöglichkeit</a> unter Angabe Ihrer Anmeldadresse. Ein Administrator wird sich dann gegebenenfalls bei Ihnen melden, wenn es Unstimmigkeiten gibt. In der Regel sollte das Hochstufen aber problemlos von Statten gehen, wenn Ihre bisherige Mitarbeit korrekt war.
+		Beantragen Sie dies bitte über die <a href="<?= Url::to(['contact']) ?>">Kontaktmöglichkeit</a> unter Angabe Ihrer Anmeldadresse. Ein Administrator wird sich dann gegebenenfalls bei Ihnen melden, wenn es Unstimmigkeiten gibt. In der Regel sollte das Hochstufen aber problemlos von Statten gehen, wenn Ihre bisherige Mitarbeit korrekt war.
 	</p>
 	<p>
 		Sobald Sie als vertrauenswürdig eingestuft wurden, können Sie Kampagnen anlegen, Bilder zu Kampagnen zuordnen und vor allem müssen Ihre Beiträge nicht mehr alle moderiert/freigeschaltet werden. Sondern Sie dürfen die Sachen gleich veröffentlichen - was leicher und schneller für Sie und für uns ist.

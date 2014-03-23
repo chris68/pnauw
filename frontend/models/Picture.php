@@ -100,12 +100,12 @@ class Picture extends \yii\db\ActiveRecord
 	{
 		return [
 			'timestamp' => [
-				'class' => 'yii\behaviors\AutoTimestamp',
+				'class' => 'yii\behaviors\TimestampBehavior',
 				'attributes' => [
 					\yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_ts', 'modified_ts'],
 					\yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_ts',
 				],
-				'timestamp' => new \yii\db\Expression('NOW()'),
+				'value' => new \yii\db\Expression('NOW()'),
 			],
 			'EnsureOwnership' => [
 				'class' => 'common\behaviors\EnsureOwnershipWithModeration',
@@ -185,7 +185,7 @@ class Picture extends \yii\db\ActiveRecord
 			[['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 			[['loc_lat', 'loc_lng',], 'double'],
 			['visibility_id',  'validateVisibilityConsistency', ],
-			[['loc_lat', 'loc_lng'], 'validateLocationConsistency', 'on' => self::DEFAULT_SCENARIO],
+			[['loc_lat', 'loc_lng'], 'validateLocationConsistency', 'on' => self::SCENARIO_DEFAULT],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 			['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
 		];
@@ -206,7 +206,7 @@ class Picture extends \yii\db\ActiveRecord
 	public function scenarios()
 	{
 		$scenarios = parent::scenarios();
-		$scenarios['create'] = $scenarios[self::DEFAULT_SCENARIO];
+		$scenarios['create'] = $scenarios[self::SCENARIO_DEFAULT];
 		return $scenarios;
 	}
 
@@ -255,9 +255,10 @@ class Picture extends \yii\db\ActiveRecord
 	/**
 	 * {@inheritdoc}
 	 */
-    public static function createQuery()
+    public static function createQuery($config = [])
     {
-        return new PictureQuery(['modelClass' => get_called_class()]);
+        $config['modelClass'] = get_called_class();
+        return new PictureQuery($config);
     }
 	
 	/**

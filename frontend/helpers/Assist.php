@@ -1,6 +1,7 @@
 <?php
 namespace frontend\helpers;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 class Assist
 {
@@ -44,7 +45,7 @@ class Assist
 			}
 		}
 		
-		$url = Html::url(['site/help']).(isset($anchor)?('#'.$anchor):'');
+		$url = Url::to(['site/help']).(isset($anchor)?('#'.$anchor):'');
 		return Html::a($text, $url, $options);
 	}
 	
