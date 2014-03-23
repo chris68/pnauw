@@ -46,13 +46,13 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		return [
 			'timestamp' => [
-				'class' => 'yii\behaviors\AutoTimestamp',
+				'class' => 'yii\behaviors\TimestampBehavior',
 				'attributes' => [
 					ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
 					ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
 				],
 				// use real timestamps instead of the unix time saved as int
-				'timestamp' => new \yii\db\Expression ('NOW()'),
+				'value' => new \yii\db\Expression ('NOW()'),
 			],
 		];
 	}
@@ -66,6 +66,14 @@ class User extends ActiveRecord implements IdentityInterface
 	public static function findIdentity($id)
 	{
 		return static::find($id);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public static function findIdentityByAccessToken($token)
+	{
+		throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
 	}
 
 	/**
