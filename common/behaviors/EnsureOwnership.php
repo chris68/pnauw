@@ -60,8 +60,9 @@ class EnsureOwnership extends Behavior {
      * @param yii\base\Event $event event parameter
      */
     public function beforeDelete($event) {
-        if ($this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId())
+        if ($this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId()) {
             throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
+		}
     }
     
     /**
@@ -70,8 +71,9 @@ class EnsureOwnership extends Behavior {
      * @param yii\base\Event $event event parameter
      */
     public function afterFind($event) {
-        if ($this->ensureOnFind && $this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId())
+        if ($this->ensureOnFind && $this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId()) {
             throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
+		}
     }
 }
 ?>
