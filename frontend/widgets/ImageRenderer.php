@@ -21,8 +21,7 @@ class ImageRenderer extends \yii\base\Widget
     public $size = 'small';
  
 	/**
-	 * @var array the HTML attributes for the container tag of this widget. The "tag" option specifies
-	 * what container tag should be used. It defaults to "table" if not set.
+	 * @var array the HTML attributes for the container tag of this widget.
 	 */
 	public $options = [];
     
