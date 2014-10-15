@@ -35,9 +35,9 @@ use frontend\helpers\Assist;
 		<div class="help-block">
 			Sie müssen die Kampagne zeitlich einschränken, damit die Auswahllisten bei der Zuordnung der Bilder zu einer Kampagne über diesen Zeitrahmen beschränkt werden können (sonst werden die zu groß!).
 		</div>
-		<?= $form->field($model, 'running_from')->widget(\yii\jui\DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd'])->hint('Geben Sie hier ein Anfangsdatum an. Sie können dann keine Bilder, die vor diesem Anfangsdatum aufgenommen wurden, zur Kampagne hinzufügen.') ?>
+		<?= $form->field($model, 'running_from')->widget(\yii\jui\DatePicker::className())->hint('Geben Sie hier ein Anfangsdatum an. Sie können dann keine Bilder, die vor diesem Anfangsdatum aufgenommen wurden, zur Kampagne hinzufügen.') ?>
 
-		<?= $form->field($model, 'running_until')->widget(\yii\jui\DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd'])->hint('Geben Sie hier ein Endedatum an. Sie können dann keine Bilder, die nach diesem Endedatum aufgenommen wurden, zur Kampagne hinzufügen.') ?>
+		<?= $form->field($model, 'running_until')->widget(\yii\jui\DatePicker::className())->hint('Geben Sie hier ein Endedatum an. Sie können dann keine Bilder, die nach diesem Endedatum aufgenommen wurden, zur Kampagne hinzufügen.') ?>
 		</fieldset>
 
 		<fieldset>

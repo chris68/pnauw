@@ -80,6 +80,7 @@ class Campaign extends \yii\db\ActiveRecord
 			[['name', 'description', 'visibility_id', 'availability_id', 'running_from', 'running_until'], 'required'],
 			[['name', 'description', 'visibility_id', 'availability_id', /*'loc_path',*/ ], 'string'],
 			['visibility_id',  'validateVisibilityConsistency', ],
+			[['running_from', 'running_until'], 'default', 'value' => NULL],
 			[['running_from', 'running_until'], 'date']
 		];
 	}

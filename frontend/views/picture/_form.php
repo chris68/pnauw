@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'name')->textInput() ?>
 
-		<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd']) ?>
+		<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className()) ?>
 
 		<?= $form->field($model, 'clip_x')->textInput() ?>
 

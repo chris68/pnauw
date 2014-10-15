@@ -69,6 +69,12 @@ return [
 				],
 			],
 		],
+		'formatter' => [
+			'class' => 'yii\i18n\Formatter',
+			'dateFormat' => 'yyyy-MM-dd',
+//			'datetimeFormat' => 'yyyy-MM-dd H:i:s',
+			//'timeFormat' => 'H:i:s',
+		]
 	],
 	'params' => $params,
 ];

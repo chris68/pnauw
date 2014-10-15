@@ -73,8 +73,11 @@ class PictureSearch extends Model
 				'safe'
 			],
 			[
+				['taken', 'created_ts', 'modified_ts', 'deleted_ts' ],
+				'default', 'value' => NULL],
+			[
 				['taken', 'created_ts', 'modified_ts', 'deleted_ts' ], 
-				'date',
+				'date', 
 			],
 			[	['map_bind', 'map_limit_points', ],
 				'boolean',
