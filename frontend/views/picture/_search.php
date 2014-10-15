@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
 			<fieldset>
 			<legend>Ort &amp; Zeit</legend>
 			
-			<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
+			<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd']) ?>
 
 			<?= $form->field($model, 'loc_formatted_addr')->hint('Eine Suche nach der Adresse ist eher unzuverlässig, da die Adresse nur sporadisch ausgefüllt ist. Suchen Sie am besten über die Karte.') ?>
 			</fieldset>
@@ -51,9 +51,9 @@ use yii\widgets\ActiveForm;
 		<?php if ($model->scenario == 'private' || $model->scenario == 'admin' || $model->scenario == 'moderator') : ?>
 			<fieldset>
 			<legend>Verarbeitung</legend>
-			<?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
+			<?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd']) ?>
 
-			<?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
+			<?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd']) ?>
 			
 			<?= $form->field($model, 'visibility_id')->listBox(frontend\models\Visibility::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 			</fieldset>

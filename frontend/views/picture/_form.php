@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'name')->textInput() ?>
 
-		<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['clientOptions' => ['dateFormat' => 'yy-mm-dd']]) ?>
+		<?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(), ['dateFormat' => 'yyyy-MM-dd']) ?>
 
 		<?= $form->field($model, 'clip_x')->textInput() ?>
 
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
 
 		<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
 
-		<?= (\Yii::$app->user->checkAccess('trusted')?$form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()):'') ?>
+		<?= (\Yii::$app->user->can('trusted')?$form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()):'') ?>
 
 		<?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 

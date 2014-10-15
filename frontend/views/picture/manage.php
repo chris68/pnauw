@@ -22,7 +22,9 @@ $this->params['help'] = 'picture-manage';
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suchen und Filtern  <span class="badge">'.$searchModel->getFilterStatus().'</span>'  => [
+				[
+					'label' => 'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' ,
+					'encode' => false,
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
@@ -68,7 +70,7 @@ $this->params['help'] = 'picture-manage';
 		'itemView' => function ($model, $key, $index, $widget) use ($form, $withPublish) {
 						
 			if ($withPublish) {
-				$model->visibility_id = Yii::$app->user->checkAccess('trusted')?'public':'public_approval_pending';
+				$model->visibility_id = Yii::$app->user->can('trusted')?'public':'public_approval_pending';
 			}
 
 			return
@@ -123,7 +125,7 @@ $this->params['help'] = 'picture-manage';
 			'	</div>
 				<div class="col-sm-4 col-md-4 col-lg-4">'
 			.
-					(\Yii::$app->user->checkAccess('trusted')?$form->field($model, "[$model->id]campaign_id")->dropDownList(frontend\models\Campaign::dropDownList()):'')
+					(\Yii::$app->user->can('trusted')?$form->field($model, "[$model->id]campaign_id")->dropDownList(frontend\models\Campaign::dropDownList()):'')
 			.
 					$form->field($model, "[$model->id]citation_id")->dropDownList(frontend\models\Citation::dropDownList())
 			.

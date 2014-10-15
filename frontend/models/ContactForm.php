@@ -17,7 +17,7 @@ class ContactForm extends Model
 	public $verifyCode;
 
 	/**
-	 * @return array the validation rules.
+     * @inheritdoc
 	 */
 	public function rules()
 	{
@@ -32,36 +32,33 @@ class ContactForm extends Model
 	}
 
 	/**
-	 * @return array customized attribute labels
+     * @inheritdoc
 	 */
 	public function attributeLabels()
 	{
 		return [
 			'name' => \Yii::t('base','Name'), 
-                        'email' => \Yii::t('base','Email'), 
-                        'subject' => \Yii::t('base','Subject'), 
-                        'body' => \Yii::t('base', 'Body'),
+			'email' => \Yii::t('base','Email'), 
+			'subject' => \Yii::t('base','Subject'), 
+			'body' => \Yii::t('base', 'Body'),
 			'verifyCode' => \Yii::t('base','Verification Code'),
 		];
 	}
 
 	/**
-	 * Sends an email using the information collected by this model.
-	 * @return boolean whether the model passes validation
+     * Sends an email to the specified email address using the information collected by this model.
+     *
+     * @param  string  $email the target email address
+     * @return boolean whether the email was sent
 	 */
-	public function contact()
+    public function sendEmail($email)
 	{
-		if ($this->validate()) {
-			Yii::$app->mail->compose()
+			return Yii::$app->mailer->compose()
 				->setTo([$this->email => $this->name])
+				->setFrom([Yii::$app->params['noreplyEmail'] => Yii::$app->name . ' (robot)'])
 				->setBcc(Yii::$app->params['contactEmail'])
-				->setFrom([Yii::$app->params['noreplyEmail'] => Yii::$app->name . ' robot'])
 				->setSubject($this->subject)
 				->setTextBody($this->body)
 				->send();
-			return true;
-		} else {
-			return false;
-		}
 	}
 }

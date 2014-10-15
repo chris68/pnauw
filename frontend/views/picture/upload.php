@@ -5,10 +5,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Bilder hochladen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
+$this->title = 'Bilder hochladen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
-$this->params['breadcrumbs'][] = 'Hochladen'.(Yii::$app->user->checkAccess('anonymous')?' (Gastzugang)':'');
-$this->params['help'] = Yii::$app->user->checkAccess('anonymous')?'picture-guestupload':'picture-upload';
+$this->params['breadcrumbs'][] = 'Hochladen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestupload':'picture-upload';
 ?>
 
 

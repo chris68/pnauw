@@ -82,10 +82,9 @@ class Citation extends \yii\db\ActiveRecord
 	/**
 	 * {@inheritdoc}
 	 */
-    public static function createQuery($config = [])
+    public static function find()
     {
-        $config['modelClass'] = get_called_class();
-        return new CitationQuery($config);
+        return new CitationQuery(get_called_class());
     }
 	
 	/**

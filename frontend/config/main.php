@@ -1,20 +1,17 @@
 <?php
-$rootDir = __DIR__ . '/../..';
-
 $params = array_merge(
-	require($rootDir . '/common/config/params.php'),
-	require($rootDir . '/common/config/params-local.php'),
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
 	require(__DIR__ . '/params.php'),
 	require(__DIR__ . '/params-local.php')
 );
 
 return [
-	'id' => 'app-frontend',
+	'id' => 'pnauw',
 	'basePath' => dirname(__DIR__),
 	'name' => 'Parke nicht auf unseren Wegen',
-	'version' => '1.1',
+	'version' => '1.2',
 	'language' => 'de',
-	'vendorPath' => $rootDir . '/vendor',
 	'controllerNamespace' => 'frontend\controllers',
 	'modules' => [
 		'markdown' => [
@@ -25,16 +22,7 @@ return [
 
 		],
 	],
-	'extensions' => require($rootDir . '/vendor/yiisoft/extensions.php'),
 	'components' => [
-		'db' => $params['components.db'],
-		'cache' => $params['components.cache'],
-		'mail' => $params['components.mail'],
-		'authManager' => $params['components.auth'],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
 		'user' => [
 			'identityClass' => 'common\models\User',
 			'enableAutoLogin' => true,
@@ -51,11 +39,21 @@ return [
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
+		'authManager' => [
+			'class' => 'yii\rbac\PhpManager',
+            'itemFile' => '@common/data/items.php', 
+            'assignmentFile' => '@common/data/assignments.php', 
+			'ruleFile' => '@common/data/rules.php', 
+			'defaultRoles' => ['admin','moderator','trusted','user','anonymous'],
+		],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
 		'i18n' => [
 			'translations' => [
 				'yii' => [
 					'class' => 'yii\i18n\PhpMessageSource',
-					//'basePath' => $rootDir . '/vendor/yiisoft/yii2/yii/messages', // would actually be the correct base path - but yiisoft did not incorporate translations yet!
 					'basePath' => '@common/messages', // the yii translations are currently in the common section of the application template
 					'sourceLanguage' => 'en-US',
 				],

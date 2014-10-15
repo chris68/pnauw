@@ -12,7 +12,8 @@ use common\models\User;
 use yii;
 use yii\web\Controller;
 use yii\web\HttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use yii\helpers\Html;
 use frontend\helpers\Assist;
@@ -33,7 +34,7 @@ class PictureController extends Controller
 				],
 			],
 			'access' => [
-				'class' => \yii\web\AccessControl::className(),
+				'class' => AccessControl::className(),
 				'rules' => [
 					[
 						'allow' => true,
@@ -84,7 +85,7 @@ class PictureController extends Controller
 	{
 		// Differentiate whether we do a public or private search
 		if ($private == false || Yii::$app->user->isGuest) {
-			if 	(Yii::$app->user->checkAccess('moderator')) {
+			if 	(Yii::$app->user->can('moderator')) {
 				// A moderator may use some more attributes for the search
 				$searchModel = new PictureSearch(['scenario' => 'moderator']);
 			} else {
@@ -171,7 +172,7 @@ class PictureController extends Controller
 			foreach ($pics as $id => $form_pic) {
 				$model = $this->findModel((int) $id);
 				
-				if (!Yii::$app->user->checkAccess('isObjectOwner', array('model' => $model))) {
+				if (!Yii::$app->user->can('isObjectOwner', array('model' => $model))) {
 					throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
 				}
 				
@@ -365,7 +366,7 @@ class PictureController extends Controller
 			}
 
 			foreach ($pics as $id => $form_pic) {
-				$model = Picture::find((int) $id);
+				$model = Picture::findOne((int) $id);
 				$model->visibility_id = $form_pic->visibility_id;
 				$model->save();
 			}
@@ -409,7 +410,7 @@ class PictureController extends Controller
 			}
 
 			foreach ($pics as $id => $form_pic) {
-				$model = Picture::find((int) $id);
+				$model = Picture::findOne((int) $id);
 				$model->visibility_id = $form_pic->visibility_id;
 				$model->save();
 			}
@@ -488,7 +489,7 @@ class PictureController extends Controller
 	 */
 	public function actionGuestcapture()
 	{
-		if (!Yii::$app->user->checkAccess('anonymous')) {
+		if (!Yii::$app->user->can('anonymous')) {
 			return $this->enterGuestAccess();
 		} 
 		else {
@@ -533,7 +534,7 @@ class PictureController extends Controller
 	 */
 	public function actionGuestupload()
 	{
-		if (!Yii::$app->user->checkAccess('anonymous')) {
+		if (!Yii::$app->user->can('anonymous')) {
 			return $this->enterGuestAccess();
 		} 
 		else {
@@ -553,7 +554,7 @@ class PictureController extends Controller
 			$formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
 
 			if ($formmodel->validate()) {
-				for ($i=0;$i<(Yii::$app->user->checkAccess('admin')?((int)$replicate):1);$i++) {
+				for ($i=0;$i<(Yii::$app->user->can('admin')?((int)$replicate):1);$i++) {
 				set_time_limit(120);
 				$transaction = \Yii::$app->db->beginTransaction();
 				try {
@@ -619,8 +620,8 @@ class PictureController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Picture::find($id)) !== null) {
-			if (Yii::$app->user->checkAccess('isObjectOwner', array('model' => $model))) {
+		if (($model = Picture::findOne($id)) !== null) {
+			if (Yii::$app->user->can('isObjectOwner', array('model' => $model))) {
 				return $model;
 			} else {
 				throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
@@ -640,7 +641,7 @@ class PictureController extends Controller
 	 */
 	protected function findPublicModel($id)
 	{
-		if (($model = Picture::find($id)) !== null) {
+		if (($model = Picture::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new HttpException(404, 'The requested page does not exist.');
@@ -662,8 +663,8 @@ class PictureController extends Controller
 		$model->role = User::ROLE_ANONYMOUS;
 		// It will not be possible to log in another time - so the password does not matter...
 		$model->password = '*'; 
-		$model->setScenario('createAnonymous');
-		if ($model->save() && Yii::$app->getUser()->login($model)) {
+        $model->generateAuthKey();
+		if ($model->save(false) && Yii::$app->getUser()->login($model)) {
 			// Reload to ensure the guest access is correctly visualized in the header
 			return $this->refresh();
 		} 

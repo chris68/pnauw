@@ -5,10 +5,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 
-/**
- * @var \yii\web\View $this
- * @var string $content
- */
+/* @var $this \yii\web\View */
+/* @var $content string */
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -17,6 +16,7 @@ AppAsset::register($this);
 <head>
 	<meta charset="<?= Yii::$app->charset ?>"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= Html::csrfMetaTags() ?>
 	<title><?= Html::encode($this->title) ?></title>
 	<?php $this->head() ?>
 </head>
@@ -37,7 +37,11 @@ AppAsset::register($this);
 			if (Yii::$app->user->isGuest) {
 				$menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
 			} else {
-				$menuItems[] = ['label' => 'Logout (' . Yii::$app->user->identity->username .')' , 'url' => ['/site/logout']];
+                $menuItems[] = [
+                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ];
 			}
 			echo Nav::widget([
 				'options' => ['class' => 'navbar-nav navbar-right'],

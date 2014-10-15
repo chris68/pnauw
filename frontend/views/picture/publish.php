@@ -20,7 +20,9 @@ $this->params['help'] = 'picture-publish';
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suchen und Filtern  <span class="badge">'.$searchModel->getFilterStatus().'</span>'  => [
+				[
+					'label' => 'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' ,
+					'encode' => false,
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],
@@ -72,7 +74,7 @@ $this->params['help'] = 'picture-publish';
 			.
 				'<p class="form-group">'
 			.
-					Html::dropDownList("PicturePublishForm[$key][visibility_id]", Yii::$app->user->checkAccess('trusted')?'public':'public_approval_pending', frontend\models\Visibility::dropDownList())
+					Html::dropDownList("PicturePublishForm[$key][visibility_id]", Yii::$app->user->can('trusted')?'public':'public_approval_pending', frontend\models\Visibility::dropDownList())
 			.
 				'</p>'
 			.

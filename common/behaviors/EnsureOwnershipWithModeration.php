@@ -25,7 +25,7 @@ class EnsureOwnershipWithModeration extends EnsureOwnership {
         if ($this->owner->getIsNewRecord()) {
             $this->owner->{$this->ownerAttribute} = \Yii::$app->user->getId();
         } else {
-            if (!\Yii::$app->user->checkAccess('moderator') && $this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId())
+            if (!\Yii::$app->user->can('moderator') && $this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId())
                 throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
             
         }

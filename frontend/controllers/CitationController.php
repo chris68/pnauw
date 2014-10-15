@@ -6,7 +6,8 @@ use frontend\models\Citation;
 use frontend\models\CitationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * CitationController implements the CRUD actions for Citation model.
@@ -23,7 +24,7 @@ class CitationController extends Controller
 				],
 			],
 			'access' => [
-				'class' => \yii\web\AccessControl::className(),
+				'class' => AccessControl::className(),
 				'rules' => [
 					[
 						'allow' => true,
@@ -135,7 +136,7 @@ class CitationController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Citation::find($id)) !== null) {
+		if (($model = Citation::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

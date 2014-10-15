@@ -7,10 +7,9 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
 
-/**
- * @var \yii\web\View $this
- * @var string $content
- */
+/* @var $this \yii\web\View */
+/* @var $content string */
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -20,6 +19,7 @@ AppAsset::register($this);
 	<meta charset="<?= Yii::$app->charset ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Plattform zum Dokumentieren von missbräuchlichen Parken auf Gehwegen, Radwegen und in verkehrsberuhigten Zonen">
+    <?= Html::csrfMetaTags() ?>
 	<link rel="icon" type="image/x-icon" href="<?=Url::to('favicon.ico')?>">
 	<title><?= $this->title ?></title>
 	<?php $this->head() ?>
@@ -50,7 +50,7 @@ AppAsset::register($this);
 				['label' => \Yii::t('base','Home'), 'url' => ['/site/index']],
 				[
 					'label' => 'Moderieren', 
-					'visible' => Yii::$app->user->checkAccess('moderator'),
+					'visible' => Yii::$app->user->can('moderator'),
 					'items' => [
 						['label' => 'Bilder', 'url' => ['/picture/moderate']],
 					],
@@ -71,7 +71,7 @@ AppAsset::register($this);
 					'label' => 'Verwalten', 
 					'visible' => !Yii::$app->user->isGuest,
 					'items' => [
-						['label' => 'Kampagnen', 'url' => ['/campaign/index'], 'visible' => Yii::$app->user->checkAccess('trusted')],
+						['label' => 'Kampagnen', 'url' => ['/campaign/index'], 'visible' => Yii::$app->user->can('trusted')],
 						['label' => 'Anzeigen', 'url' => ['/citation/index']],
 					],
 				],
@@ -83,7 +83,11 @@ AppAsset::register($this);
 				$menuItems[] = ['label' => \Yii::t('base','Signup'), 'url' => ['/site/signup']];
 				$menuItems[] = ['label' => \Yii::t('base','Login'), 'url' => ['/site/login']];
 			} else {
-				$menuItems[] = ['label' => \Yii::t('base','Logout').' (' . Yii::$app->user->identity->username .')' , 'url' => ['/site/logout']];
+                $menuItems[] = [
+                    'label' => \Yii::t('base','Logout').' (' . Yii::$app->user->identity->username .')' ,
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ];
 			}
 			echo Nav::widget([
 				'options' => ['class' => 'navbar-nav navbar-right'],

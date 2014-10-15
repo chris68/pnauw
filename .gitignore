@@ -1,8 +1,21 @@
 # Backup files
 *~
 
-#Main Yii File
+# yii console command
 /yii
 
+# phpstorm project files
+.idea
 #Private Net Beans Project properties
 /nbproject/private/
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml

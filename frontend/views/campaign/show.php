@@ -21,7 +21,7 @@ $this->params['help'] = 'campaign-show';
 	<h1><?= $this->title ?></h1>
 	<?= Html::a('Alle Bilder zur Kampagne anschauen', PictureController::urlCampaign('index', $model->id)) ?> 
 	<?= (!yii::$app->user->isGuest?(' | '.Html::a('Meine Bilder zur Kampagne bearbeiten', PictureController::urlCampaign('manage', $model->id), ['target' => '_blank'])):'') ?>
-	<?= ((yii::$app->user->checkAccess('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Kampagne bearbeiten', ['campaign/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
+	<?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Kampagne bearbeiten', ['campaign/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
 	<!-- @Todo: Add the mother and child campaigns in a box above and below the text -->
 	<?= Markdown::convert(Html::encode($model->description))?>
 	

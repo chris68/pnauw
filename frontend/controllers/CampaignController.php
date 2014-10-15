@@ -6,7 +6,8 @@ use frontend\models\Campaign;
 use frontend\models\CampaignSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\VerbFilter;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * CampaignController implements the CRUD actions for Campaign model.
@@ -23,7 +24,7 @@ class CampaignController extends Controller
 				],
 			],
 			'access' => [
-				'class' => \yii\web\AccessControl::className(),
+				'class' => AccessControl::className(),
 				'rules' => [
 					[
 						'allow' => true,
@@ -138,7 +139,7 @@ class CampaignController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Campaign::find($id)) !== null) {
+		if (($model = Campaign::findOne($id)) !== null) {
 			return $model;
 		} else {
 			throw new NotFoundHttpException('The requested page does not exist.');

@@ -7,7 +7,7 @@ class m000000_000000_create_database extends \yii\db\Migration
 	public function safeUp()
 	{
 $sql = <<<'EOT'
-CREATE DATABASE pnauw
+CREATE DATABASE pnauw -- add _dev for development!
   WITH ENCODING='UTF8'
        TEMPLATE=template0 -- otherwise we sometimes get problems with encoding!
        OWNER=mailwitch
@@ -15,7 +15,7 @@ CREATE DATABASE pnauw
        
 EOT;
 // $this->execute($sql);
-echo "You need to execute the following sql manually:\n\n".$sql."\n\n";
+echo "You should have executed the following sql manually before:\n\n".$sql."\n\n";
 
 $sql = <<<'EOT'
 CREATE EXTENSION ltree; -- Extension for creating hierachies

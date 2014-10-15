@@ -1,9 +1,7 @@
 <?php
-$rootDir = dirname(dirname(__DIR__));
-
 $params = array_merge(
-	require($rootDir . '/common/config/params.php'),
-	require($rootDir . '/common/config/params-local.php'),
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
 	require(__DIR__ . '/params.php'),
 	require(__DIR__ . '/params-local.php')
 );
@@ -11,21 +9,10 @@ $params = array_merge(
 return [
 	'id' => 'app-backend',
 	'basePath' => dirname(__DIR__),
-	'language' => 'en-US',
-	'vendorPath' => $rootDir . '/vendor',
-	'preload' => ['log'],
 	'controllerNamespace' => 'backend\controllers',
+    'bootstrap' => ['log'],
 	'modules' => [],
-	'extensions' => require($rootDir . '/vendor/yiisoft/extensions.php'),
 	'components' => [
-		'db' => $params['components.db'],
-		'cache' => $params['components.cache'],
-		'mail' => $params['components.mail'],
-		'authManager' => $params['components.auth'],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
 		'user' => [
 			'identityClass' => 'common\models\User',
 			'enableAutoLogin' => true,
@@ -46,8 +33,7 @@ return [
 			'translations' => [
 				'yii' => [
 					'class' => 'yii\i18n\PhpMessageSource',
-					//'basePath' => $rootDir . '/vendor/yiisoft/yii2/yii/messages', // would actually be the correct base path - but yiisoft did not incorporate translations yet!
-					'basePath' => '@common/messages', // the yii translations are currently in the common section of the application template
+					'basePath' => '@common/messages', // the yii translations are currently in the common section of the application template @todo: Move it to the correct location
 					'sourceLanguage' => 'en-US',
 				],
 				'common' => [

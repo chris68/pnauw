@@ -1,9 +1,7 @@
 <?php
-$rootDir = __DIR__ . '/../..';
-
 $params = array_merge(
-	require($rootDir . '/common/config/params.php'),
-	require($rootDir . '/common/config/params-local.php'),
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
 	require(__DIR__ . '/params.php'),
 	require(__DIR__ . '/params-local.php')
 );
@@ -11,16 +9,13 @@ $params = array_merge(
 return [
 	'id' => 'app-console',
 	'basePath' => dirname(__DIR__),
+    'bootstrap' => ['log', 'gii'],
 	'language' => 'en-US',
-	'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
 	'controllerNamespace' => 'console\controllers',
 	'modules' => [
+        'gii' => 'yii\gii\Module',
 	],
-	'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
 	'components' => [
-		'db' => $params['components.db'],
-		'cache' => $params['components.cache'],
-		'mail' => $params['components.mail'],
 		'log' => [
 			'targets' => [
 				[
@@ -28,6 +23,12 @@ return [
 					'levels' => ['error', 'warning'],
 				],
 			],
+		],
+		'authManager' => [
+			'class' => 'yii\rbac\PhpManager',
+            'itemFile' => '@common/data/items.php', 
+            'assignmentFile' => '@common/data/assignments.php', 
+			'ruleFile' => '@common/data/rules.php', 
 		],
 		'i18n' => [
 			'translations' => [

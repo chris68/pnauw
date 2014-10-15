@@ -142,10 +142,10 @@ class Picture extends \yii\db\ActiveRecord
 	 */
 	public function validateVisibilityConsistency($attribute, $params)
 	{
-		if ($this->visibility_id == 'public' && !\Yii::$app->user->checkAccess('trusted')) {
+		if ($this->visibility_id == 'public' && !\Yii::$app->user->can('trusted')) {
 			if (!$this->getIsNewRecord()) {
 				/* @var $old frontend\models\Picture */
-				$old = Picture::find($this->id);
+				$old = Picture::findOne($this->id);
 				
 				// Check whether it was already public before AND the user did not change any relevant information!
 				if ($old->visibility_id == 'public') {
@@ -160,7 +160,7 @@ class Picture extends \yii\db\ActiveRecord
 			$this->visibility_id = 'public_approval_pending';
 			
 			$this->addError('visibility_id', 'Sie dürfen mit ihren Rechten leider keine Bilder oder Texte direkt veröffentlichen, sondern müssen die Freigabe anfordern. Die Sichtbarkeit wurde entsprechend angepasst. Bitte speichern Sie nun erneut.');
-		} else if ($this->visibility_id != 'public_approval_pending' && \Yii::$app->user->checkAccess('anonymous')) {
+		} else if ($this->visibility_id != 'public_approval_pending' && \Yii::$app->user->can('anonymous')) {
 			// Request to approval
 			$this->visibility_id = 'public_approval_pending';
 			
@@ -189,7 +189,7 @@ class Picture extends \yii\db\ActiveRecord
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 			['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
 		];
-		if (Yii::$app->user->checkAccess('trusted')) {
+		if (Yii::$app->user->can('trusted')) {
 			// Only trusted users currently may assign to a campaign
 			$rules = array_merge($rules,
 			[
@@ -255,10 +255,9 @@ class Picture extends \yii\db\ActiveRecord
 	/**
 	 * {@inheritdoc}
 	 */
-    public static function createQuery($config = [])
+    public static function find()
     {
-        $config['modelClass'] = get_called_class();
-        return new PictureQuery($config);
+        return new PictureQuery(get_called_class());
     }
 	
 	/**
@@ -398,8 +397,8 @@ class Picture extends \yii\db\ActiveRecord
 		if (!
 			(
 			$this->visibility_id == 'public' ||
-			\Yii::$app->user->checkAccess('isObjectOwner', array('model' => $this)) ||
-			\Yii::$app->user->checkAccess('moderator')
+			\Yii::$app->user->can('isObjectOwner', array('model' => $this)) ||
+			\Yii::$app->user->can('moderator')
 			)
 		) {
 			$this->name = empty($this->name)?'':'[Der Titel wurde leider noch nicht von einem Moderator freigebeben]';

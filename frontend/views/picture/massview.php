@@ -12,7 +12,9 @@ use yii\bootstrap\Collapse;
 	<?=
 		Collapse::widget([
 			'items' => [
-				'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' => [
+				[
+					'label' => 'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' ,
+					'encode' => false,
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],
 			],

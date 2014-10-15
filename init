@@ -5,7 +5,7 @@
  *
  * In order to run in non-interactive mode:
  *
- * init --env=dev --overwrite=n
+ * init --env=Development --overwrite=n
  *
  * @author Alexander Makarov <sam@rmcreative.ru>
  *
@@ -13,6 +13,10 @@
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
+
+if (!extension_loaded('mcrypt')) {
+    die('The mcrypt PHP extension is required by Yii2.');
+}
 
 $params = getParams();
 $root = str_replace('\\', '/', __DIR__);
@@ -68,17 +72,10 @@ foreach ($files as $file) {
 	}
 }
 
-if (isset($env['writable'])) {
-	foreach ($env['writable'] as $writable) {
-		echo "      chmod 0777 $writable\n";
-		@chmod("$root/$writable", 0777);
-	}
-}
-
-if (isset($env['executable'])) {
-	foreach ($env['executable'] as $executable) {
-		echo "      chmod 0755 $executable\n";
-		@chmod("$root/$executable", 0755);
+$callbacks = ['setCookieValidationKey', 'setWritable', 'setExecutable'];
+foreach ($callbacks as $callback) {
+    if (!empty($env[$callback])) {
+        $callback($root, $env[$callback]);
 	}
 }
 
@@ -166,4 +163,43 @@ function getParams()
 		}
 	}
 	return $params;
+}
+
+function setWritable($root, $paths)
+{
+    foreach ($paths as $writable) {
+        echo "      chmod 0777 $writable\n";
+        @chmod("$root/$writable", 0777);
+    }
+}
+
+function setExecutable($root, $paths)
+{
+    foreach ($paths as $executable) {
+        echo "      chmod 0755 $executable\n";
+        @chmod("$root/$executable", 0755);
+    }
+}
+
+function setCookieValidationKey($root, $paths)
+{
+    foreach ($paths as $file) {
+        echo "   generate cookie validation key in $file\n";
+        $file = $root . '/' . $file;
+        $length = 32;
+        $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
+        $key = strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
+        $content = preg_replace('/(("|\')cookieValidationKey("|\')\s*=>\s*)(""|\'\')/', "\\1'$key'", file_get_contents($file));
+        file_put_contents($file, $content);
+    }
+}
+
+function createSymlink($links)
+{
+    foreach ($links as $link => $target) {
+        echo "    symlink $target as $link\n";
+        if (!is_link($link)) {
+            symlink($target, $link);
+        }
+    }
 }
