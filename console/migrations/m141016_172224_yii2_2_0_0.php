@@ -21,7 +21,7 @@ class m141016_172224_yii2_2_0_0 extends Migration
 		}
             
 		// With Yii2 2.0.0 the column is no longer varchar(32)
-		$this->alterColumn('{{%user}}','password_hash', Schema::TYPE_STRING);
+		$this->alterColumn('{{%user}}','password_reset_token', Schema::TYPE_STRING);
 
     }
 
