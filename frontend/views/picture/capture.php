@@ -2,7 +2,6 @@
 /* @var $this yii\web\View */
 /* @var $formmodel frontend\models\PictureCaptureForm */
 
-use yii;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;

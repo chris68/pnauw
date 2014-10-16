@@ -9,7 +9,7 @@ use frontend\models\PictureCaptureForm;
 use frontend\models\PictureModerateForm;
 use frontend\models\PicturePublishForm;
 use common\models\User;
-use yii;
+use Yii;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\filters\VerbFilter;

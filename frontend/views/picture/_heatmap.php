@@ -2,7 +2,6 @@
 /* @var $this yii\web\View */
 /* @var $private boolean */
 
-use yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 

@@ -3,7 +3,7 @@
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel frontend\models\PictureSearch */
 
-use yii;
+use Yii;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;

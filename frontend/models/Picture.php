@@ -2,7 +2,7 @@
 
 namespace frontend\models;
 
-use yii;
+use Yii;
 use yii\db\ActiveQuery;
 use frontend\models\Image;
 use Imagick;
