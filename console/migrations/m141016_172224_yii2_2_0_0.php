@@ -7,11 +7,13 @@ class m141016_172224_yii2_2_0_0 extends Migration
 {
     public function safeUp()
     {
-		// Add the to missing columns (for migration); if they already exist then just skip that
+		// Add the to missing columns with default values (for migration); if they already exist then just skip that
 		$transaction = $this->db->beginTransaction();
 		try {
-			$this->addColumn('{{%user}}','created_at', Schema::TYPE_INTEGER . ' NOT NULL');
-			$this->addColumn('{{%user}}','updated_at', Schema::TYPE_INTEGER . ' NOT NULL');
+			$this->addColumn('{{%user}}','created_at', Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0');
+			$this->addColumn('{{%user}}','updated_at', Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0');
+            $this->execute('alter table {{%user}} alter column created_at DROP DEFAULT');
+            $this->execute('alter table {{%user}} alter column updated_at DROP DEFAULT');
 			$transaction->commit();
 		} catch (Exception $ex) {
 			$transaction->rollBack();
@@ -25,6 +27,8 @@ class m141016_172224_yii2_2_0_0 extends Migration
 
     public function safeDown()
     {
+		$this->dropColumn('{{%user}}','created_at');
+		$this->dropColumn('{{%user}}','updated_at');
 		
     }
 }
