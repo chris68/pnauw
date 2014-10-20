@@ -444,6 +444,7 @@ class PictureController extends Controller
 	{
 		$searchModel = new PictureSearch(['scenario' => 'public']);
 		$dataProvider = $searchModel->search(Yii::$app->request->get());
+		$dataProvider->query->publicScope();
 		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 		$dataProvider->pagination->pageSize = 1;
 
