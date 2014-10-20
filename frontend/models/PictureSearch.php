@@ -48,7 +48,7 @@ class PictureSearch extends Model
 	// See https://github.com/chris68/pnauw/issues/22
 	public $map_bounds;
 	public $map_bind=false;
-	public $map_limit_points=false;
+	public $map_limit_points=true;
 	public $time_range;
 	
 	protected $filter_count;
