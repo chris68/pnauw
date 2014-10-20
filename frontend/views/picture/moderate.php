@@ -56,7 +56,7 @@ $this->params['help'] = 'picture-moderate';
 			.
 				Html::encode($model->name)
 			.
-				'</p></b>'
+				'</b></p>'
 			.
 					frontend\widgets\ImageRenderer::widget(
 						[

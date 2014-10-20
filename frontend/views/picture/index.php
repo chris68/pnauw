@@ -97,7 +97,7 @@ $this->params['help'] = 'picture-index';
 			.
 				(($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Das Bild wurde leider nicht klassizifiert</i>')
 			.
-				'</b></p><p>'
+				'</p><p>'
 			.
 					'Vorfall am <b>'.date_format(date_create($model->taken),'d.m.Y').'</b>'
 			.
@@ -106,8 +106,6 @@ $this->params['help'] = 'picture-index';
 				(($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')
 			.
 				'</p><p>'
-			.
-				'<p>'
 			.
 				((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')
 			.
