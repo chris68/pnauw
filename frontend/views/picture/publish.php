@@ -66,9 +66,19 @@ $this->params['help'] = 'picture-publish';
 						]
 					)
 			.
+				Html::a('Detail', ['picture/view','id'=>$model->id], ['target' => '_blank'])
+			.
+				((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')
+			.
 				'<p>'
 			.
 				Html::encode($model->description)
+			.
+				'</p>'
+			.
+				'<p>'
+			.
+				(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
 			.
 				'</p>'
 			.
