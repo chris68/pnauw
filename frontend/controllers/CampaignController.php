@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use Yii;
 use frontend\models\Campaign;
 use frontend\models\CampaignSearch;
 use yii\web\Controller;
@@ -59,7 +60,7 @@ class CampaignController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new CampaignSearch;
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		$dataProvider->query->ownerScope();
 		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 
@@ -90,7 +91,7 @@ class CampaignController extends Controller
 	{
 		$model = new Campaign;
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('create', [
@@ -109,7 +110,7 @@ class CampaignController extends Controller
 	{
 		$model = $this->findModel($id);
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('update', [

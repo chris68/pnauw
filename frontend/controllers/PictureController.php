@@ -62,7 +62,7 @@ class PictureController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new PictureSearch(['scenario' => 'public']);
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		$dataProvider->query->publicScope();
 		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 		$dataProvider->pagination->pageSize = 20;
@@ -96,7 +96,7 @@ class PictureController extends Controller
 			$searchModel = new PictureSearch(['scenario' => 'private']);
 		}
 		
-		$searchModel->load($_GET);
+		$searchModel->load(Yii::$app->request->get());
 		
 		// Do not bind the search to the map if the geodata search shall not be limited to the map bounds
 		if (!$searchModel->map_limit_points) {
@@ -163,12 +163,12 @@ class PictureController extends Controller
 	{
 		$result = ['deleted' => ['ok' => 0, 'nok' => 0],'updated' => ['ok' => 0, 'nok' => 0]];
 		
-		if (\Yii::$app->request->isPost && isset($_POST['Picture'])) {
+		if (Yii::$app->request->isPost && (Yii::$app->request->post('Picture') !== NULL)) {
 			$pics = [];
-			foreach ($_POST['Picture'] as $id => $post_pic) {
+			foreach (Yii::$app->request->post('Picture') as $id => $post_pic) {
 				$pics[$id] = new Picture();
 			}
-			\yii\base\Model::loadMultiple($pics, $_POST);
+			\yii\base\Model::loadMultiple($pics, Yii::$app->request->post());
 			foreach ($pics as $id => $form_pic) {
 				$model = $this->findModel((int) $id);
 				
@@ -249,7 +249,7 @@ class PictureController extends Controller
 		}
 
 		$searchModel = new PictureSearch(['scenario' => 'private']);
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		$dataProvider->query->ownerScope();
 		$dataProvider->sort->defaultOrder = ['id' => SORT_ASC,];
 		$dataProvider->pagination->pageSize = 20;
@@ -281,7 +281,7 @@ class PictureController extends Controller
 	public function actionCreate()
 	{
 		$model = new Picture(['scenario' => 'create']);
-		$post_request = $model->load($_POST);
+		$post_request = $model->load(Yii::$app->request->post());
 
 		if (!$post_request) {
 			// If it is the beginning of a create, set the default values
@@ -318,7 +318,7 @@ class PictureController extends Controller
 	{
 		$model = $this->findModel($id);
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			// Reload after save to make sure that all changes triggered in the db are incorporated
 			$model = $this->findModel($id);
 			Yii::$app->session->setFlash('success', "Änderung wurde übernommen");
@@ -354,13 +354,13 @@ class PictureController extends Controller
 	 */
 	public function actionModerate()
 	{
-		if (\Yii::$app->request->isPost && isset($_POST['PictureModerateForm'])) {
+		if (Yii::$app->request->isPost && Yii::$app->request->post('PictureModerateForm') !== NULL) {
 			$pics = [];
-			foreach ($_POST['PictureModerateForm'] as $id => $post_pic) {
+			foreach (Yii::$app->request->post('PictureModerateForm') as $id => $post_pic) {
 				$pics[$id] = new PictureModerateForm();
 			}
 
-			\yii\base\Model::loadMultiple($pics, $_POST);
+			\yii\base\Model::loadMultiple($pics, Yii::$app->request->post());
 			if (!\yii\base\Model::validateMultiple($pics)) {
 				throw new HttpException(400, 'Incorrect input.');
 			}
@@ -373,7 +373,7 @@ class PictureController extends Controller
 		}
 
 		$searchModel = new PictureSearch(['scenario' => 'moderator']);
-		$searchModel->load($_GET);
+		$searchModel->load(Yii::$app->request->get());
 		// @todo: This is currently a hack since the user will not realize that a filter is set
 		// Besides the points on the map are initially slightly wrong!
 		// It should be a url parameter when calling the routine!
@@ -398,13 +398,13 @@ class PictureController extends Controller
 	 */
 	public function actionPublish()
 	{
-		if (\Yii::$app->request->isPost && isset($_POST['PicturePublishForm'])) {
+		if (Yii::$app->request->isPost && (Yii::$app->request->post('PicturePublishForm') !== NULL)) {
 			$pics = [];
-			foreach ($_POST['PicturePublishForm'] as $id => $post_pic) {
+			foreach (Yii::$app->request->post('PicturePublishForm') as $id => $post_pic) {
 				$pics[$id] = new PicturePublishForm();
 			}
 
-			\yii\base\Model::loadMultiple($pics, $_POST);
+			\yii\base\Model::loadMultiple($pics, Yii::$app->request->post());
 			if (!\yii\base\Model::validateMultiple($pics)) {
 				throw new HttpException(400, 'Incorrect input.');
 			}
@@ -417,7 +417,7 @@ class PictureController extends Controller
 		}
 
 		$searchModel = new PictureSearch(['scenario' => 'private']);
-		$searchModel->load($_GET);
+		$searchModel->load(Yii::$app->request->get());
 		// @todo: This is currently a hack since the user will not realize that a filter is set
 		// Besides the points on the map are initially slightly wrong! 
 		// It should be a url parameter when calling the routine!
@@ -443,7 +443,7 @@ class PictureController extends Controller
 	public function actionMassview()
 	{
 		$searchModel = new PictureSearch(['scenario' => 'public']);
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 		$dataProvider->pagination->pageSize = 1;
 
@@ -459,10 +459,10 @@ class PictureController extends Controller
 	 */
 	public function actionMassupdate()
 	{
-		if (\Yii::$app->request->isPost && isset($_POST['Picture'])) {
-			$model = $this->findModel($_POST['Picture']['id']);
+		if (Yii::$app->request->isPost && (Yii::$app->request->post('Picture') !== NULL)) {
+			$model = $this->findModel(Yii::$app->request->post('Picture')['id']); 
 
-			if ($model->load($_POST) && $model->save()) {
+			if ($model->load(Yii::$app->request->post()) && $model->save()) {
 				// Model has been saved => we can reload!
 				$model = NULL;
 			}
@@ -471,7 +471,7 @@ class PictureController extends Controller
 		}
 
 		$searchModel = new PictureSearch(['scenario' => 'private']);
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		$dataProvider->query->ownerScope();
 		$dataProvider->sort->defaultOrder = ['id' => SORT_ASC,];
 		$dataProvider->pagination->pageSize = 1;
@@ -505,10 +505,10 @@ class PictureController extends Controller
 	{
 		$formmodel = new PictureCaptureForm();
 
-		if ($formmodel->load($_POST)) {
+		if ($formmodel->load(Yii::$app->request->post())) {
 			$formmodel->file_handle = UploadedFile::getInstance($formmodel, 'file_name');
 			if ($formmodel->validate()) {
-				$transaction = \Yii::$app->db->beginTransaction();
+				$transaction = Yii::$app->db->beginTransaction();
 				try {
 					$picmodel = new Picture(['scenario' => 'create']);
 					$picmodel->fillFromFile($formmodel->file_handle);
@@ -550,13 +550,13 @@ class PictureController extends Controller
 	{
 		$formmodel = new PictureUploadForm();
 
-		if ($formmodel->load($_POST)) {
+		if ($formmodel->load(Yii::$app->request->post())) {
 			$formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
 
 			if ($formmodel->validate()) {
 				for ($i=0;$i<(Yii::$app->user->can('admin')?((int)$replicate):1);$i++) {
 				set_time_limit(120);
-				$transaction = \Yii::$app->db->beginTransaction();
+				$transaction = Yii::$app->db->beginTransaction();
 				try {
 					foreach ($formmodel->file_handles as $file) {
 							$picmodel = new Picture(['scenario' => 'create']);

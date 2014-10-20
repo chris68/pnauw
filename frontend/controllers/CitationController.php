@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use Yii;
 use frontend\models\Citation;
 use frontend\models\CitationSearch;
 use yii\web\Controller;
@@ -43,7 +44,7 @@ class CitationController extends Controller
 	public function actionIndex()
 	{
 		$searchModel = new CitationSearch;
-		$dataProvider = $searchModel->search($_GET);
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		$dataProvider->query->ownerScope();
 		$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
 
@@ -87,7 +88,7 @@ class CitationController extends Controller
 	{
 		$model = new Citation;
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('create', [
@@ -106,7 +107,7 @@ class CitationController extends Controller
 	{
 		$model = $this->findModel($id);
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load(Yii::$app->request->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('update', [
