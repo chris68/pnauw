@@ -2,7 +2,8 @@
 env=""
 vendor=""
 stage=""
-while getopts "sve:" optname
+branch="master"
+while getopts "b:sve:" optname
   do
     case "$optname" in
       "e")
@@ -19,6 +20,9 @@ while getopts "sve:" optname
 			exit 1
 			;;
 		esac
+        ;;
+      "b")
+        branch=$OPTARG
         ;;
       "v")
         vendor="yes"
@@ -44,6 +48,7 @@ fi
 echo Deploying to $env
 rm -R -f /home/mailwitch/pnauw$suffix #remove old
 git clone https://github.com/chris68/pnauw /home/mailwitch/pnauw$suffix
+{ cd /home/mailwitch/pnauw$suffix; git checkout $branch; }
 # psql postgres #create the database (see migration)
 # psql postgres #CREATE DATABASE pnauw_dev WITH TEMPLATE pnauw; (for Development test)
 if [ "$vendor" == "yes" ]; then
