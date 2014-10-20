@@ -1,6 +1,8 @@
 #!/bin/bash
 env=""
-while getopts "e:" optname
+vendor=""
+stage=""
+while getopts "sve:" optname
   do
     case "$optname" in
       "e")
@@ -17,6 +19,12 @@ while getopts "e:" optname
 			exit 1
 			;;
 		esac
+        ;;
+      "v")
+        vendor="yes"
+        ;;
+      "s")
+        stage="yes"
         ;;
       "?")
         echo "Unknown option $OPTARG"
@@ -38,13 +46,17 @@ rm -R -f /home/mailwitch/pnauw$suffix #remove old
 git clone https://github.com/chris68/pnauw /home/mailwitch/pnauw$suffix
 # psql postgres #create the database (see migration)
 # psql postgres #CREATE DATABASE pnauw_dev WITH TEMPLATE pnauw; (for Development test)
-sudo composer.phar self-update
-composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta3"
-composer.phar create-project -d /home/mailwitch/pnauw$suffix 
+if [ "$vendor" == "yes" ]; then
+	sudo composer.phar self-update
+	composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta3"
+	composer.phar create-project -d /home/mailwitch/pnauw$suffix 
+fi
 /home/mailwitch/pnauw$suffix/init --env=$env
 /home/mailwitch/pnauw$suffix/yii migrate
-sudo rm -R /opt/mailwitch/www/pnauw$suffix
-sudo cp -R /home/mailwitch/pnauw$suffix /opt/mailwitch/www/.
-sudo rm -R /opt/mailwitch/www/pnauw$suffix/.git
-sudo chown -R www-data:mailwitch /opt/mailwitch/www/pnauw$suffix
+if [ "$stage" == "yes" ]; then
+	sudo rm -R /opt/mailwitch/www/pnauw$suffix
+	sudo cp -R /home/mailwitch/pnauw$suffix /opt/mailwitch/www/.
+	sudo rm -R /opt/mailwitch/www/pnauw$suffix/.git
+	sudo chown -R www-data:mailwitch /opt/mailwitch/www/pnauw$suffix
+fi
 # rm -R -f /home/mailwitch/pnauw$suffix #remove again.
