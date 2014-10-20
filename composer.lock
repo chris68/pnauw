@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "06d0d1fa94ebfc3773434aac5ff35439",
+    "hash": "5bb5b1ac3fdb86e56211d5637eee7b50",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -102,16 +102,16 @@
         },
         {
             "name": "bower-asset/jquery-ui",
-            "version": "1.11.1",
+            "version": "1.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jqueryui.git",
-                "reference": "39890e8599bdd79c423ea21b967195106800b87d"
+                "reference": "396781474d936959061271505f506b78398fe6a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jqueryui/zipball/39890e8599bdd79c423ea21b967195106800b87d",
-                "reference": "39890e8599bdd79c423ea21b967195106800b87d",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/396781474d936959061271505f506b78398fe6a2",
+                "reference": "396781474d936959061271505f506b78398fe6a2",
                 "shasum": ""
             },
             "require": {
@@ -127,16 +127,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.31",
+            "version": "3.1.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "2b485a3f9329c829b40872e4463c42143b0c6405"
+                "reference": "0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/2b485a3f9329c829b40872e4463c42143b0c6405",
-                "reference": "2b485a3f9329c829b40872e4463c42143b0c6405",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d",
+                "reference": "0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d",
                 "shasum": ""
             },
             "require": {
@@ -338,16 +338,16 @@
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "c7ad8a0d091af111dd0e6d3b93bb04841f657019"
+                "reference": "7a9161d1cb0db5cd25a63fd18ae5ef1397356e79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/c7ad8a0d091af111dd0e6d3b93bb04841f657019",
-                "reference": "c7ad8a0d091af111dd0e6d3b93bb04841f657019",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/7a9161d1cb0db5cd25a63fd18ae5ef1397356e79",
+                "reference": "7a9161d1cb0db5cd25a63fd18ae5ef1397356e79",
                 "shasum": ""
             },
             "type": "library",
@@ -379,26 +379,26 @@
                 "preview",
                 "upload"
             ],
-            "time": "2014-10-05 14:53:05"
+            "time": "2014-10-13 18:52:56"
         },
         {
             "name": "kartik-v/bootstrap-star-rating",
-            "version": "v2.5.0",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-star-rating.git",
-                "reference": "c79f59ed0943a4cd78ef2947bcc384a66fc3236a"
+                "reference": "5f9dedc14fbf13477ea72322b7b608676b046cbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-star-rating/zipball/c79f59ed0943a4cd78ef2947bcc384a66fc3236a",
-                "reference": "c79f59ed0943a4cd78ef2947bcc384a66fc3236a",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-star-rating/zipball/5f9dedc14fbf13477ea72322b7b608676b046cbc",
+                "reference": "5f9dedc14fbf13477ea72322b7b608676b046cbc",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "kartik\\": ""
+                    "kartik\\plugins\\rating\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -420,7 +420,7 @@
                 "jquery",
                 "star"
             ],
-            "time": "2014-05-29 13:35:12"
+            "time": "2014-10-05 14:55:58"
         },
         {
             "name": "kartik-v/dependent-dropdown",
@@ -904,16 +904,16 @@
         },
         {
             "name": "yiisoft/yii2-jui",
-            "version": "2.0.0-rc",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-jui.git",
-                "reference": "e0b5ebe539df2ff94206c8a3e4ffd01c2eb39c9b"
+                "reference": "354ce4155448f9d438397cbccfd7ec984b910245"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/e0b5ebe539df2ff94206c8a3e4ffd01c2eb39c9b",
-                "reference": "e0b5ebe539df2ff94206c8a3e4ffd01c2eb39c9b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/354ce4155448f9d438397cbccfd7ec984b910245",
+                "reference": "354ce4155448f9d438397cbccfd7ec984b910245",
                 "shasum": ""
             },
             "require": {
@@ -946,20 +946,20 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2014-09-28 01:59:54"
+            "time": "2014-10-12 17:09:06"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
-            "version": "2.0.0-rc",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-                "reference": "75b3b7631e82341db03c1734148c46aed80ad2b5"
+                "reference": "40fc07ab41e553c8ffaf0847f10ddc68cb553cf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/75b3b7631e82341db03c1734148c46aed80ad2b5",
-                "reference": "75b3b7631e82341db03c1734148c46aed80ad2b5",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/40fc07ab41e553c8ffaf0847f10ddc68cb553cf8",
+                "reference": "40fc07ab41e553c8ffaf0847f10ddc68cb553cf8",
                 "shasum": ""
             },
             "require": {
@@ -996,7 +996,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2014-09-28 01:59:54"
+            "time": "2014-10-12 17:09:06"
         }
     ],
     "packages-dev": [
