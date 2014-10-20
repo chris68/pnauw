@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 		var heatmapSource = 
 		"<?php 
 			{
-				echo Url::toRoute(array_merge(['picture/geodata'], ['private' => $private], Yii::$app->getRequest()->get()));
+				echo Url::toRoute(array_replace_recursive(['picture/geodata'], Yii::$app->getRequest()->get(), ['private' => $private]));
 			}
 		  ?>";
 </script>

@@ -47,9 +47,9 @@ $this->params['help'] = 'picture-index';
 			unset($params[$dataProvider->getSort()->sortParam]);
 			$params[$dataProvider->getSort()->sortParam] = 'id';
 			
-			echo Html::a('Im Detail anschauen', Url::toRoute(array_merge(['picture/massview'], $params)), ['target' => '_blank']);
+			echo Html::a('Im Detail anschauen', Url::toRoute(array_replace_recursive(['picture/massview'], $params)), ['target' => '_blank']);
 			if (!Yii::$app->user->isGuest) {
-				echo ' | '.Html::a('Im Detail bearbeiten', Url::toRoute(array_merge(['picture/massupdate'], $params)), ['target' => '_blank']);
+				echo ' | '.Html::a('Im Detail bearbeiten', Url::toRoute(array_replace_recursive(['picture/massupdate'], $params)), ['target' => '_blank']);
 			}
 		}
 	?>

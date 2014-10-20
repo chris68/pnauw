@@ -49,9 +49,9 @@ $this->params['help'] = 'picture-manage';
 			unset($params[$dataProvider->getPagination()->pageParam]);
 			unset($params[$dataProvider->getSort()->sortParam]);
 			$params[$dataProvider->getSort()->sortParam] = 'id';
-			echo Html::a('Bilder detailliert bearbeiten', Url::toRoute(array_merge(['picture/massupdate'], $params)), ['target' => '_blank']);
+			echo Html::a('Bilder detailliert bearbeiten', Url::toRoute(array_replace_recursive(['picture/massupdate'], $params)), ['target' => '_blank']);
 			echo ' | ';
-			echo Html::a('Bilder veröffentlichen', Url::toRoute(array_merge(['picture/publish'], $params)), ['target' => '_blank']);
+			echo Html::a('Bilder veröffentlichen', Url::toRoute(array_replace_recursive(['picture/publish'], $params)), ['target' => '_blank']);
 		}
 	?>
 	</div>
