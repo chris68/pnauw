@@ -72,6 +72,18 @@ $this->params['help'] = 'picture-moderate';
 			.
 				'</p>'
 			.
+				'<p>'
+			.
+				(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
+			.
+				'</p>'
+			.
+				'<p>'
+			.
+				Html::a('Details', ['picture/view','id'=>$model->id], ['target' => '_blank'])
+			.
+				'</p>'
+			.
 				'<p class="form-group">'
 			.
 					Html::dropDownList("PictureModerateForm[$key][visibility_id]", 'public', frontend\models\Visibility::dropDownList())

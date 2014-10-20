@@ -89,6 +89,12 @@ $this->params['help'] = 'picture-index';
 			.
 				'<p>'
 			.
+				(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
+			.
+				'</p>'
+			.
+				'<p>'
+			.
 				(($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Das Bild wurde leider nicht klassizifiert</i>')
 			.
 				'</b></p><p>'

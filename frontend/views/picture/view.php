@@ -35,7 +35,7 @@ $this->params['help'] = 'picture-view';
 			<?= Html::activeHiddenInput($model,'loc_lng',['id'=>'picture-map-loc-lng', ]) ?>
 			<!-- The Google maps canvas needs absolute coordinates -->
 			<div style="width: 300px; height: 300px;" id="picture-map-canvas"></div>
-			<p><?=Html::encode($model->loc_formatted_addr)?></p>
+			<p><?=(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')?></p>
 		</div>
 	</div>
 </div>
