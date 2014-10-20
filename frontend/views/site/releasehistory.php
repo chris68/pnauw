@@ -13,11 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
 		Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
 	</p>
 	<h3>
-		Version 1.2 (16.10.2014)
+		Version 1.2 (??.??.????)
 	</h3>
 	<p>
-		Darunter liegendes Framework Yii2 aktualisiert
+		Interne Stabilisierung
 	</p>
+	<ul>
+		<li>Das darunter liegende Framework Yii2 wurde auf einen Produktivstand (2.0.0) aktualisiert</li>
+		<li>Das Anzeige- und Zoomverhalten bei den Karten (Heatmaps) ist deutlich besser</li>
+		<li>Es werden an vielen Stellen mehr Felder angezeigt</li>
+	</ul>	
 	<h3>
 		Version 1.1 (19.01.2014)
 	</h3>
