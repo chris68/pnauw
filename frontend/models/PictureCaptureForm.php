@@ -26,7 +26,7 @@ class PictureCaptureForm extends Model
 	 */
     public function rules() {
         return [
- 			['file_name', 'required', ],
+ 			//['file_name', 'required', ],
  			['file_handle', 'file', 'maxFiles' => 1, 'maxSize' => 1048576, 'extensions' => 'jpg', 'mimeTypes' => 'image/jpeg',  'skipOnEmpty' => false],
        ];
     }

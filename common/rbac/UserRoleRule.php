@@ -22,6 +22,7 @@ class UserRoleRule extends Rule
 		else
 			return false;
 
+		// Here the children hierachie of the roles needs to be replicated in a flat reverse order
 		if ($item->name === 'admin') {
 			return $role == User::ROLE_ADMIN;
 		} elseif ($item->name === 'moderator') {
@@ -29,7 +30,7 @@ class UserRoleRule extends Rule
 		} elseif ($item->name === 'trusted') {
 			return $role == User::ROLE_TRUSTED || $role == User::ROLE_MODERATOR ||  $role == User::ROLE_ADMIN;
 		} elseif ($item->name === 'user') {
-			return $role == User::ROLE_USER || $role == User::ROLE_TRUSTED || $role == User::ROLE_MODERATOR ||  $role == User::ROLE_ADMIN;
+			return $role == User::ROLE_USER || User::ROLE_ANONYMOUS || $role == User::ROLE_TRUSTED || $role == User::ROLE_MODERATOR ||  $role == User::ROLE_ADMIN;
 		} elseif ($item->name === 'anonymous') {
 			return $role ==  User::ROLE_ANONYMOUS;
 		} else {

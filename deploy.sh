@@ -38,6 +38,8 @@ rm -R -f /home/mailwitch/pnauw$suffix #remove old
 git clone https://github.com/chris68/pnauw /home/mailwitch/pnauw$suffix
 # psql postgres #create the database (see migration)
 # psql postgres #CREATE DATABASE pnauw_dev WITH TEMPLATE pnauw; (for Development test)
+sudo composer.phar self-update
+composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta3"
 composer.phar create-project -d /home/mailwitch/pnauw$suffix 
 /home/mailwitch/pnauw$suffix/init --env=$env
 /home/mailwitch/pnauw$suffix/yii migrate

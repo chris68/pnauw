@@ -6,7 +6,7 @@ use yii\rbac\Rule;
 use common\models\User;
 
 /**
- * Checks if authorID matches user passed via params
+ * Checks if owner_id matches user passed via params
  */
 class ObjectOwnerRule extends Rule
 {
@@ -21,6 +21,5 @@ class ObjectOwnerRule extends Rule
     public function execute($user, $item, $params)
     {
         return isset($params['model']) ? $params['model']->owner_id == $user : false;
-		// 'bizRule' => 'return Yii::$app->user->id==$params["model"]->owner_id;',
     }
 }
