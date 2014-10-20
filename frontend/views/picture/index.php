@@ -5,6 +5,7 @@
 
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
 
@@ -40,16 +41,15 @@ $this->params['help'] = 'picture-index';
 		{
 			// Generate the massview link by changing the route and throwing out sort/pagination
 
-			$request = Yii::$app->getRequest();
-			$params = $request instanceof yii\web\Request ? $request->get() : [];
+			$params = Yii::$app->getRequest()->get();
 
 			unset($params[$dataProvider->getPagination()->pageParam]);
 			unset($params[$dataProvider->getSort()->sortParam]);
 			$params[$dataProvider->getSort()->sortParam] = 'id';
-			$route = Yii::$app->controller->getRoute();
-			echo Html::a('Im Detail anschauen', Yii::$app->getUrlManager()->createUrl('picture/massview', $params), ['target' => '_blank']);
+			
+			echo Html::a('Im Detail anschauen', Url::toRoute(array_merge(['picture/massview'], $params)), ['target' => '_blank']);
 			if (!Yii::$app->user->isGuest) {
-				echo ' | '.Html::a('Im Detail bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
+				echo ' | '.Html::a('Im Detail bearbeiten', Url::toRoute(array_merge(['picture/massupdate'], $params)), ['target' => '_blank']);
 			}
 		}
 	?>

@@ -44,16 +44,14 @@ $this->params['help'] = 'picture-manage';
 		{
 			// Generate the massupdate link by changing the route and throwing out sort/pagination
 
-			$request = Yii::$app->getRequest();
-			$params = $request instanceof yii\web\Request ? $request->get() : [];
+			$params = Yii::$app->getRequest()->get();
 
 			unset($params[$dataProvider->getPagination()->pageParam]);
 			unset($params[$dataProvider->getSort()->sortParam]);
 			$params[$dataProvider->getSort()->sortParam] = 'id';
-			$route = Yii::$app->controller->getRoute();
-			echo Html::a('Bilder detailliert bearbeiten', Yii::$app->getUrlManager()->createUrl('picture/massupdate', $params), ['target' => '_blank']);
+			echo Html::a('Bilder detailliert bearbeiten', Url::toRoute(array_merge(['picture/massupdate'], $params)), ['target' => '_blank']);
 			echo ' | ';
-			echo Html::a('Bilder veröffentlichen', Yii::$app->getUrlManager()->createUrl('picture/publish', $params), ['target' => '_blank']);
+			echo Html::a('Bilder veröffentlichen', Url::toRoute(array_merge(['picture/publish'], $params)), ['target' => '_blank']);
 		}
 	?>
 	</div>

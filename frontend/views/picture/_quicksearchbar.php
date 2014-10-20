@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+use yii\helpers\Url;
 ?>
 
 <div class="btn-group" style="margin-top: 10px;">
@@ -29,7 +30,7 @@
 			<li><a data-value="" href="#">Keine Einschränkung</a></li>
 		  </ul>
 	</div>
-	<button type="button" data-url="<?=Yii::$app->getUrlManager()->createUrl(Yii::$app->controller->getRoute())?>" id="search-cancel" class="btn btn-xs" style="margin-left:10px;"><span class="glyphicon glyphicon-remove-circle"></span></button>
+	<button type="button" data-url="<?=Url::toRoute([Yii::$app->controller->getRoute()])?>" id="search-cancel" class="btn btn-xs" style="margin-left:10px;"><span class="glyphicon glyphicon-remove-circle"></span></button>
 	<button type="button" id="search-refresh" class="btn btn-xs" style="margin-left:10px;"><span class="glyphicon glyphicon-refresh"></span></button>
 	
 </div>

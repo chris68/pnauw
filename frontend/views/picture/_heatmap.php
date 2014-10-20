@@ -3,6 +3,7 @@
 /* @var $private boolean */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 ?>
@@ -14,14 +15,11 @@ use yii\widgets\ActiveForm;
 	
 <script type="text/javascript">
 		var heatmapSource = 
-				"<?php 
-					{
-						$request = Yii::$app->getRequest();
-						$params = $request instanceof yii\web\Request ? $request->get() : [];
-						$params = ['private' => $private] + $params;
-						echo Yii::$app->getUrlManager()->createUrl('picture/geodata', $params);
-					}
-				  ?>";
+		"<?php 
+			{
+				echo Url::toRoute(array_merge(['picture/geodata'], ['private' => $private], Yii::$app->getRequest()->get()));
+			}
+		  ?>";
 </script>
 <div class="row">
 	<div class="col-sm-4 col-md-4 col-lg-4 form-group" style="margin-top: 10px; margin-bottom: 10px;">
