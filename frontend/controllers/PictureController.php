@@ -349,7 +349,8 @@ class PictureController extends Controller
 	}
 
 	/**
-	 * Moderate Picture models according to search.
+	 * Moderate Picture models according to search. 
+	 * However, the search is always automatically limited to pics with visibility_id = public_approval_pending
 	 * @return mixed
 	 */
 	public function actionModerate()
@@ -372,12 +373,13 @@ class PictureController extends Controller
 			}
 		}
 
+		// Force search parameter "visibility_id" to public_approval_pending since the moderator may see only pics with that status
+		Yii::$app->getRequest()->setQueryParams(
+			array_replace_recursive(Yii::$app->getRequest()->getQueryParams(),['s' => ['visibility_id' => 'public_approval_pending']]));
+			
 		$searchModel = new PictureSearch(['scenario' => 'moderator']);
 		$searchModel->load(Yii::$app->request->get());
-		// @todo: This is currently a hack since the user will not realize that a filter is set
-		// Besides the points on the map are initially slightly wrong!
-		// It should be a url parameter when calling the routine!
-		// See https://github.com/chris68/pnauw/issues/31
+		// For utter security - set the parameter another time! Just in case something goes wrong above....
 		$searchModel->visibility_id = 'public_approval_pending';
 		$dataProvider = $searchModel->search(NULL);
 		
@@ -394,6 +396,7 @@ class PictureController extends Controller
 
 	/**
 	 * Publish Picture models according to search.
+	 * However, the search is always automatically limited to pics with visibility_id = private
 	 * @return mixed
 	 */
 	public function actionPublish()
@@ -416,13 +419,12 @@ class PictureController extends Controller
 			}
 		}
 
+		// Force search parameter "visibility_id" to private since publish mostly makes sense only for still private pictures
+		Yii::$app->getRequest()->setQueryParams(
+			array_replace_recursive(Yii::$app->getRequest()->getQueryParams(),['s' => ['visibility_id' => 'private']]));
+			
 		$searchModel = new PictureSearch(['scenario' => 'private']);
 		$searchModel->load(Yii::$app->request->get());
-		// @todo: This is currently a hack since the user will not realize that a filter is set
-		// Besides the points on the map are initially slightly wrong! 
-		// It should be a url parameter when calling the routine!
-		// See https://github.com/chris68/pnauw/issues/31
-		$searchModel->visibility_id = 'private';
 		$dataProvider = $searchModel->search(NULL);
 		
 		$dataProvider->query->ownerScope();
