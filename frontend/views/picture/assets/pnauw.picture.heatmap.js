@@ -15,9 +15,15 @@ $(function() {
 		var ne = new google.maps.LatLng(corners[2],corners[3]);
 		bounds = new google.maps.LatLngBounds(sw,ne);
 		// console.debug('Bounds restored - Target ('+bounds.toUrlValue()+')');
-		map.fitBounds(bounds);
-		// Google zooms just one zoom level lower - so we need to zoom in again!
-		map.setZoom(map.getZoom()+1);
+		map.fitBounds(bounds); 
+
+		var listener = google.maps.event.addListener(map, 'idle', function(){
+			// Google zooms just one zoom level lower - so we need to zoom in again!
+			// But we have to wait for the idle event, i.e. until the fitBounds is completed
+			google.maps.event.removeListener(listener);
+			map.setZoom(map.getZoom()+1); 
+		});
+
 		// console.debug('Bounds restored - Actual ('+map.getBounds().toUrlValue()+')');
 	}
 
@@ -52,7 +58,7 @@ $(function() {
 				// console.debug('Geolocation: Got it');
 				var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 				map.setCenter(pos);
-				map.setZoom(17);
+				map.setZoom(16);
 				var bounds = map.getBounds();
 				$('#search-map-bounds').val(bounds.toUrlValue());
 				$('#search-map-bind').prop('checked',true);
@@ -113,10 +119,16 @@ $(function() {
 		}
 
 		map.fitBounds(bounds);
-		map.setZoom(map.getZoom()+2);
-		if (map.getZoom() > 17) {
-			map.setZoom(17);
-		}
+		var listener = google.maps.event.addListener(map, 'idle', function(){
+			// Google zooms a little bit to far out - so we need to zoom in again!
+			// But we have to wait for the idle event, i.e. until the fitBounds is completed
+			google.maps.event.removeListener(listener);
+			if (map.getZoom() > 16) {
+				map.setZoom(16);
+			} else {
+				map.setZoom(map.getZoom()+1);
+			}
+		});
 	});
 
 	// Idle is better than bounds_changed since it fires only once at the end
