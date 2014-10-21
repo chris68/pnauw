@@ -10,6 +10,9 @@ class RbacController extends Controller
     {
         $auth = Yii::$app->authManager;
 
+		// Need to remove all at the beginning since we want to build it up anew each time
+        $auth->removeAll();
+		
 		$objectownerrule = new \common\rbac\ObjectOwnerRule(); 
 		$auth->add($objectownerrule);
 
