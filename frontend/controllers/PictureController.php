@@ -16,6 +16,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use yii\helpers\Html;
+use yii\helpers\FileHelper;
+use yii\base\InvalidParamException;
 use frontend\helpers\Assist;
 
 /**
@@ -41,13 +43,18 @@ class PictureController extends Controller
 						'actions' => ['index','geodata','guestcapture', 'guestupload', 'view', 'massview'],
 					],
 					[
+						'allow' => false,
+						'actions' => ['serverupload',],
+						'roles' => ['anonymous'],
+					],
+					[
 						'allow' => true,
 						'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'capture', 'publish'],
 						'roles' => ['@'],
 					],
 					[
 						'allow' => true,
-						'actions' => ['moderate'],
+						'actions' => ['moderate', 'serverupload'. ],
 						'roles' => ['moderator'],
 					],
 				],
@@ -514,7 +521,7 @@ class PictureController extends Controller
 				$transaction = Yii::$app->db->beginTransaction();
 				try {
 					$picmodel = new Picture(['scenario' => 'create']);
-					$picmodel->fillFromFile($formmodel->file_handle);
+					$picmodel->fillFromFile($formmodel->file_handle->tempName);
 					$transaction->commit();
 				} catch (Exception $ex) {
 					$transaction->rollback();
@@ -573,7 +580,7 @@ class PictureController extends Controller
 				try {
 					foreach ($formmodel->file_handles as $file) {
 							$picmodel = new Picture(['scenario' => 'create']);
-							$picmodel->fillFromFile($file);
+							$picmodel->fillFromFile($file->tempName);
 					}
 					$transaction->commit();
 				} catch (Exception $ex) {
@@ -602,6 +609,47 @@ class PictureController extends Controller
 				'formmodel' => $formmodel,
 		]);
 	}
+
+	/**
+	 * Load the pictures from the server (usually a ftp access)
+	 */
+    public function actionServerupload()
+    {
+		if (Yii::$app->getRequest()->isPost) {
+			$dir = Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username;
+			if (!is_dir($dir) || 
+				(count($files = FileHelper::findFiles(
+					Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username,
+					['recursive'=>false, 'only'=>['*.jpg']]
+				)) == 0))
+			{
+				Yii::$app->session->setFlash('warning', 'Es liegen leider keine Dateien auf dem Server vor');
+			} else
+			{
+				$transaction = Yii::$app->db->beginTransaction();
+				try {
+					foreach ($files as $filename) {
+						$picmodel = new Picture(['scenario' => 'create']);
+						$picmodel->fillFromFile($filename);
+					}
+					$transaction->commit();
+				} catch (Exception $ex) {
+					$transaction->rollback();
+					throw($ex);
+				}
+				foreach ($files as $filename) {
+					unlink ($filename);
+				}
+				Yii::$app->session->setFlash('success', 
+					'Die '.count($files).' Bilder wurden problemlos eingelesen.<br>'.
+					'Sie können diese nun '.
+					Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
+					' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
+			}
+		}
+		
+		Render: return $this->render('serverupload');
+    }
 
 	/**
 	 * Create a url to search for the campaign

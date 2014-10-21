@@ -415,12 +415,12 @@ class Picture extends \yii\db\ActiveRecord
 
 	/**
 	 * Fill the data from the file input and saves the data; best encapsule in transaction for atomic behavior
-	 * @param file $file The image
+	 * @param string $filename The name of the file with the image
 	 */
-	public function fillFromFile($file) {
+	public function fillFromFile($filename) {
 		$this->setDefaults();
 
-		$props = exif_read_data($file->tempName);
+		$props = exif_read_data($filename);
 		if (isset($props['GPSLatitude']) && isset($props['GPSLatitudeRef']) && isset($props['GPSLongitude']) && isset($props['GPSLongitudeRef'])) {
 			$this->org_loc_lat = $this->loc_lat = $this->getGPS($props['GPSLatitude'], $props['GPSLatitudeRef']);
 			$this->org_loc_lng = $this->loc_lng = $this->getGPS($props['GPSLongitude'], $props['GPSLongitudeRef']);
@@ -440,14 +440,14 @@ class Picture extends \yii\db\ActiveRecord
 		}
 
 		$image = new Image;
-		$rawdata = new Imagick($file->tempName);
+		$rawdata = new Imagick($filename);
 		$this->autoRotateImage($rawdata);
 		$rawdata->scaleimage(0, 800);
 		$image->rawdata = bin2hex($rawdata->getimageblob());
 		$image->save(false);
 		$this->original_image_id = $image->id;
 
-		$rawdata = new Imagick($file->tempName);
+		$rawdata = new Imagick($filename);
 		$this->autoRotateImage($rawdata);
 		$rawdata->profileimage('*', NULL); // Remove profile information
 		$rawdata->scaleimage(0, 100);
@@ -462,7 +462,7 @@ class Picture extends \yii\db\ActiveRecord
 		$image->save(false);
 		$this->blurred_thumbnail_image_id = $image->id;
 
-		$rawdata = new Imagick($file->tempName);
+		$rawdata = new Imagick($filename);
 		$this->autoRotateImage($rawdata);
 		$rawdata->profileimage('*', NULL); // Remove profile information
 		$rawdata->scaleimage(0, 240);
@@ -477,7 +477,7 @@ class Picture extends \yii\db\ActiveRecord
 		$image->save(false);
 		$this->blurred_small_image_id = $image->id;
 
-		$rawdata = new Imagick($file->tempName);
+		$rawdata = new Imagick($filename);
 		$this->autoRotateImage($rawdata);
 		$rawdata->profileimage('*', NULL); // Remove profile information
 		$rawdata->scaleimage(0, 500);
