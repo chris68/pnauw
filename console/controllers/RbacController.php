@@ -4,8 +4,14 @@ namespace console\Controllers;
 use Yii;
 use yii\console\Controller;
 
+/**
+ * Command to initialize the rbac configuration
+ */
 class RbacController extends Controller
 {
+	/**
+	 * Initialize the rbac configuration
+	 */
     public function actionInit()
     {
         $auth = Yii::$app->authManager;
