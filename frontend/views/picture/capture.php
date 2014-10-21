@@ -31,7 +31,8 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestcapture'
 
 	<div class="help-block">
 		<p>Hier können Sie mit Ihrer Kamera auf der mobilen Einheit ein Bild aufnehmen, hochladen und dann gleich bearbeiten.</p>
-		<p>Wenn Sie Probleme mit dem direkten Zugriff auf die Kamera haben, dann können Sie die Bilder auch aus dem Dateisystem <a href="<?=Url::to(['upload'])?>" >hochladen</p>.
+		<p>Wenn Sie Probleme mit dem direkten Zugriff auf die Kamera haben, dann können Sie die Bilder auch aus dem Dateisystem <a href="<?=Url::to(['upload'])?>" >hochladen</a>.</p>
+		<p>Und keine Angst: alle Bilder werden <b>öffentlich</b> immer nur <b>automatisch verschleiert</b> angezeigt! Nur Sie sehen die Originale.</p>
 	</div>
 </div>
 
