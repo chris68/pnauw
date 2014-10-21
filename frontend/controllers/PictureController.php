@@ -54,7 +54,7 @@ class PictureController extends Controller
 					],
 					[
 						'allow' => true,
-						'actions' => ['moderate', 'serverupload'. ],
+						'actions' => ['moderate', 'serverupload', ],
 						'roles' => ['moderator'],
 					],
 				],
