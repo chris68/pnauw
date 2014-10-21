@@ -16,6 +16,7 @@ use \yii\helpers\Html;
 	</div>
 
 	<div class ="col-lg-3">
+		<div>
 			<div class="form-group">
 			<?= Html::label('Bildausschnitt (Nummernschild)','picture-clip-canvas') ?>
 			<canvas id="picture-clip-canvas" class="img-responsive" style = "margin-bottom: 7px;">
@@ -39,7 +40,7 @@ use \yii\helpers\Html;
 		<?=
 		frontend\widgets\ImageRenderer::widget(
 			[
-				'image' => $model->originalImage,
+				'image' => $model->mediumImage,
 				'size' => 'medium',
 				'options' => ['id' => 'picture-image', 'class' => 'img-responsive'],
 			]

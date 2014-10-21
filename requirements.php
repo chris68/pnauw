@@ -109,9 +109,9 @@ $requirements = array(
 	'phpFileUploadSize' => array(
 		'name' => 'PHP file upload size',
 		'mandatory' => true,
-		'condition' => $requirementsChecker->compareByteSize(ini_get('upload_max_filesize'),'1mb','>='),
+		'condition' => $requirementsChecker->compareByteSize(ini_get('upload_max_filesize'),'10mb','>='),
 		'by' => 'Uploading pictures',
-		'memo' => 'Maximum allowed filesize (upload_max_filesize) must be at least 1M; current value:'.ini_get('upload_max_filesize'),
+		'memo' => 'Maximum allowed filesize (upload_max_filesize) must be at least 10M; current value:'.ini_get('upload_max_filesize'),
 	),
 	'phpFileUploadNumber' => array(
 		'name' => 'PHP file upload number',

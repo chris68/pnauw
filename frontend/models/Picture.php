@@ -442,6 +442,7 @@ class Picture extends \yii\db\ActiveRecord
 		$image = new Image;
 		$rawdata = new Imagick($file->tempName);
 		$this->autoRotateImage($rawdata);
+		$rawdata->scaleimage(0, 800);
 		$image->rawdata = bin2hex($rawdata->getimageblob());
 		$image->save(false);
 		$this->original_image_id = $image->id;
@@ -449,7 +450,7 @@ class Picture extends \yii\db\ActiveRecord
 		$rawdata = new Imagick($file->tempName);
 		$this->autoRotateImage($rawdata);
 		$rawdata->profileimage('*', NULL); // Remove profile information
-		$rawdata->scaleimage(75, 100);
+		$rawdata->scaleimage(0, 100);
 		$image = new Image;
 		$image->rawdata = bin2hex($rawdata->getimageblob());
 		$image->save(false);
@@ -464,7 +465,7 @@ class Picture extends \yii\db\ActiveRecord
 		$rawdata = new Imagick($file->tempName);
 		$this->autoRotateImage($rawdata);
 		$rawdata->profileimage('*', NULL); // Remove profile information
-		$rawdata->scaleimage(180, 240);
+		$rawdata->scaleimage(0, 240);
 		$image = new Image;
 		$image->rawdata = bin2hex($rawdata->getimageblob());
 		$image->save(false);
@@ -479,7 +480,7 @@ class Picture extends \yii\db\ActiveRecord
 		$rawdata = new Imagick($file->tempName);
 		$this->autoRotateImage($rawdata);
 		$rawdata->profileimage('*', NULL); // Remove profile information
-		$rawdata->scaleimage(375, 500);
+		$rawdata->scaleimage(0, 500);
 		$image = new Image;
 		$image->rawdata = bin2hex($rawdata->getimageblob());
 		$image->save(false);
