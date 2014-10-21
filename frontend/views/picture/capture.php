@@ -23,8 +23,9 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestcapture'
 	?>
 		<?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>
 		<?= $form->field($formmodel, 'file_name')->fileInput(['accept' => 'image/*', 'capture' => 'camera', ]) ?>
+		<?= $form->field($formmodel, 'directEdit')->checkbox()->hint('Aktivieren Sie die Option, um nach dem Hochladen das Bild direkt zu verarbeiten ') ?>
 		<div class="form-group">
-			<?= Html::submitButton('Hochladen&Bearbeiten', ['class' => 'btn btn-primary']) ?>
+			<?= Html::submitButton('Hochladen', ['class' => 'btn btn-primary']) ?>
 			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
 		</div>
 	<?php ActiveForm::end(); ?>

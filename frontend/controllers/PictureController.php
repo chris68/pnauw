@@ -521,8 +521,18 @@ class PictureController extends Controller
 					throw($ex);
 				}
 
-				Yii::$app->session->setFlash('success', "Sie können das Bild nun bearbeiten.");
-				return $this->redirect(['update', 'id' => $picmodel->id]);
+				if ($formmodel->directEdit) {
+					Yii::$app->session->setFlash('success', "Sie können das Bild nun bearbeiten.");
+					return $this->redirect(['update', 'id' => $picmodel->id]);
+				} else {
+					Yii::$app->session->setFlash('success', 
+						'Sie können das/die aufgenommenen Bilder nun '.
+						Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
+						' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder aufnehmen.');
+					return $this->refresh();
+				}
+					
+				
 			}
 		}
 

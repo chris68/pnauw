@@ -12,6 +12,11 @@ class PictureCaptureForm extends Model
 {
 
 	/**
+     * @var bool Edit the picture directly afterwards?
+     */
+    public $directEdit=false;
+
+	/**
      * @var string The name of the file to be uploaded/captured
      */
     public $file_name;
@@ -27,6 +32,7 @@ class PictureCaptureForm extends Model
     public function rules() {
         return [
  			['file_handle', 'file', 'maxFiles' => 1, 'maxSize' => 10485760, 'extensions' => 'jpg', 'mimeTypes' => 'image/jpeg',  'skipOnEmpty' => false],
+			['directEdit', 'boolean'],
        ];
     }
 
@@ -37,6 +43,7 @@ class PictureCaptureForm extends Model
         return [
             'file_name' => 'Aufgenommenes Bild',
             'file_handle' => 'Aufgenommenes Bild (Datei)',
+            'directEdit' => 'Direkt danach bearbeiten?',
         ];
     }
 
