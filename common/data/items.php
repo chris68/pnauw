@@ -21,12 +21,17 @@ return [
             'user',
         ],
     ],
+    'canUploadFromServer' => [
+        'type' => 2,
+        'description' => 'Can the user upload from the server?',
+    ],
     'trusted' => [
         'type' => 1,
         'description' => 'Trusted User',
         'ruleName' => 'UserRole',
         'children' => [
             'user',
+            'canUploadFromServer',
         ],
     ],
     'moderator' => [

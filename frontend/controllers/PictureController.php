@@ -43,18 +43,18 @@ class PictureController extends Controller
 						'actions' => ['index','geodata','guestcapture', 'guestupload', 'view', 'massview'],
 					],
 					[
-						'allow' => false,
-						'actions' => ['serverupload',],
-						'roles' => ['anonymous'],
-					],
-					[
 						'allow' => true,
 						'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'capture', 'publish'],
 						'roles' => ['@'],
 					],
 					[
 						'allow' => true,
-						'actions' => ['moderate', 'serverupload', ],
+						'actions' => ['serverupload', ],
+						'roles' => ['canUploadFromServer'],
+					],
+					[
+						'allow' => true,
+						'actions' => ['moderate', ],
 						'roles' => ['moderator'],
 					],
 				],

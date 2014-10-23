@@ -62,6 +62,7 @@ AppAsset::register($this);
 						['label' => 'Aufnehmen', 'url' => ['/picture/capture']],
 						['label' => 'Hochladen', 'url' => ['/picture/upload']],
 						['label' => 'Ohne Bild anlegen', 'url' => ['/picture/create']],
+						['label' => 'Von FTP übernehmen', 'url' => ['/picture/serverupload'], 'visible' => Yii::$app->user->can('canUploadFromServer')],
 						['label' => 'Bearbeiten', 'url' => ['/picture/manage']],
 						['label' => 'Veröffentlichen', 'url' => ['/picture/publish']],
 						['label' => 'Anschauen', 'url' => ['/picture/index']],

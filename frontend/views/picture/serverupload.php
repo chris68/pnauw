@@ -4,9 +4,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Bilder vom Server hochladen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->title = 'Bilder von FTP übernehmen';
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
-$this->params['breadcrumbs'][] = 'Hochladen vom Server'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->params['breadcrumbs'][] = 'Bilder von FTP übernehmen';
 $this->params['help'] = 'picture-serverupload';
 ?>
 

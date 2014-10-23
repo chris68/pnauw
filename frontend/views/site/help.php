@@ -11,12 +11,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <style>
 	/* 
 		Otherwise when navigating to an anchor the heading is hidden behind the navbar 
-		See http://stackoverflow.com/questions/9047703/fixed-position-navbar-obscures-anchors
+		See http://stackoverflow.com/questions/4086107/html-positionfixed-page-header-and-in-page-anchors
 	*/
-	.site-about a[name] {
-		padding-top: 60px;
-		margin-top: -60px;
-	}	
+	.site-about a[name]:before {
+	  content:"";
+	  display:block;
+	  height:40px; /* fixed header height*/
+	  margin:-40px 0 0; /* negative fixed header height; it should be just a line so it does not overlap content and makes it unclickable */
+	}
 </style>
 <div class="site-about">
 	<h1><?= $this->title ?></h1>
@@ -73,6 +75,23 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h3><a name="picture-create">Vorfall ohne Bild anlegen</a></h3>
 	<p>
 		Manchmal gibt es Situationen, wo Sie gerade keine Kamera haben bzw. kein gutes Bild machen können (z.B. Nachts). Dann können Sie trotzdem einen Vorfall ohne Bild anlegen. Der Vorfall wird dann jedoch automatisch und nicht änderbar auf den Zeitpunkt der Anlage datiert.
+	</p>
+	<h3><a name="picture-serverupload">Bilder von FTP übernehmen</a></h3>
+	<p>
+		Sie können hierbei Bilder über anonymen FTP-Zugriff auf den Server hochladen (Zugang: ftp parke-nicht-auf-unseren-wegen.de, User: ftp, Passwort: leer, Verzeichnis upload/<i>username</i>). 
+		Der Clou ist hierbei, dass man die Bilder direkt von Mobiltelefon übermitteln kann, wenn man eine Software wie z.B. 
+		<?=	Assist::extlink('JustResizeIt for Android', 'http://justresizeit.com') ?> einsetzt. Damit kann man die Bilder direkt 
+		aus der Bildergallery auswählen und mit 2-3 Clicks an den Server übermitteln. Bald wird es sogar möglich sein, die Bilder vorher
+		zu verkleinern (derzeit geht leider beim Verkleinern die EXIF-Informationen mit den GPS-Infos verloren, aber das soll in einer 
+		zukünftigen Version wahrscheinlich bis Ende 2014 gefixt werden).
+	</p>
+	<p>
+		Diese Bilder können dann über die Funktion übernommen werden und stehen danach zur Verfügung wie wenn man diese direkt aus dem Dateisystem des Rechners oder Mobiltelefons hochgeladen 
+		hätte. Es ist halt nur wesentlich schneller und einfacher und vor allem bei Vor-Ort-Einsätzen sehr nützlich.
+	</p>
+	<p>
+		Die Funktion steht jedoch nur dafür freigeschalteten <a href="#user-level-trusted">vertrauenswürdigen Nutzern</a> zur Verfügung. Wenn Sie interessiert sind, dann
+		kontaktieren Sie uns bitte über die <a href="<?= Url::to(['contact']) ?>">Kontaktmöglichkeit</a> unter Angabe ihres Nutzernamens.
 	</p>
 	<h3><a name="picture-manage">Bilder bearbeiten</a></h3>
 	<p>
@@ -144,7 +163,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<h3><a name="picture-index">Bilder betrachten</a></h3>
 	<p>
-		Hier können Sie die eingestellten Bilder betrachten. Die Bilder sind natürlich alle so verschwommen, dass man Automnummern, konkrete Personen, etc. nicht erkennen kann. Die Seite ist wie folgt aufgebaut:
+		Hier können Sie die eingestellten Bilder betrachten. Die Bilder sind natürlich alle so verschwommen, dass man Autonummern, konkrete Personen, etc. nicht erkennen kann. Die Seite ist wie folgt aufgebaut:
 	</p>
 	<ul>
 	<li>Oben gibt es eine aufklappbare Sektion <a href='#picture-search'>Suchen &amp; Filtern</a>, wo Sie sehr umfangreich einstellen können, welche Bilder Sie sehen wollen</li>
@@ -181,7 +200,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<ul>
 		<li>Bei Datumsfeldern muss das Datum in der Form jjjj-mm-tt eingegeben werden; es gibt aber immer auch einen Datumselektor</li>
 		<li>Bei den Auswahlboxen kann man teilweise immer nur eine und teilweise auch mehrere Optionen wählen - einfach ausprobieren</li>
-		<li>Die Suche in den Textfeldern ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird. Eine Suche nach straße findet also Kriegsstraße, aber nicht Straße des 17.Juni</li>
+		<li>Die Suche in den Textfeldern ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird. Eine Suche nach <i>straße</i> findet also <i>Kriegsstraße</i>, aber nicht <i>Straße des 17.Juni</i></li>
 	</ul>
 	
 	<h3><a name="picture-quicksearch">Schnellsuche</a></h3>

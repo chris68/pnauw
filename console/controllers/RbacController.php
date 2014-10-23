@@ -42,11 +42,16 @@ class RbacController extends Controller
 		$auth->add($anonymous); 
 		$auth->addChild($anonymous, $user); 
 
+        $canUploadFromServer = $auth->createPermission('canUploadFromServer');
+        $canUploadFromServer->description = \Yii::t('common', 'Can the user upload from the server?');
+        $auth->add($canUploadFromServer);
+
 		$trusted = $auth->createRole('trusted');
 		$trusted->ruleName = $userrule->name;
 		$trusted->description = \Yii::t('common', 'Trusted User');
 		$auth->add($trusted); 
 		$auth->addChild($trusted, $user); 
+		$auth->addChild($trusted, $canUploadFromServer); 
 
 		$moderator = $auth->createRole('moderator');
 		$moderator->ruleName = $userrule->name;
