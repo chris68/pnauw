@@ -6,6 +6,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
+\frontend\views\picture\assets\PictureLivemapAsset::register($this);
+
 $this->title = 'Bild aufnehmen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
 $this->params['breadcrumbs'][] = 'Aufnehmen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
@@ -29,7 +31,7 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestcapture'
 			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
 		</div>
 	<?php ActiveForm::end(); ?>
-
+	<div id="map" style="height: 250px"></div>
 	<div class="help-block">
 		<p>Hier können Sie mit Ihrer Kamera auf der mobilen Einheit ein Bild aufnehmen, hochladen und dann gleich bearbeiten.</p>
 		<p>Wenn Sie Probleme mit dem direkten Zugriff auf die Kamera haben, dann können Sie die Bilder auch aus dem Dateisystem <a href="<?=Url::to(['upload'])?>" >hochladen</a>.</p>
