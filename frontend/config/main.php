@@ -74,7 +74,7 @@ return [
 			'dateFormat' => 'yyyy-MM-dd',
 //			'datetimeFormat' => 'yyyy-MM-dd H:i:s',
 			//'timeFormat' => 'H:i:s',
-		]
+		],
 	],
 	'params' => $params,
 ];
