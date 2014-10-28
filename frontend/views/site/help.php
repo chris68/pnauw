@@ -46,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h3><a name="picture-capture">Bilder aufnehmen</a></h3>
 	<p>
 		Bei den meisten Kameras in Smartphone können Sie direkt aus dem Browser heraus ein Bild aufnehmen, dass dann gleich hochgeladen wird.
-		Wegen der Größenbeschränkung sollte Sie die Kamera nur vorher schnell auf z.B. nur 0.3 MB große Bilder einstellen, damit Sie nicht mit der Maximalgröße Probleme bekommen.
+		Damit Sie nicht unnötig Bandbreite vergeuden, sollte Sie die Kamera auf z.B. nur 0.3 MB große Bilder einstellen - das reicht vollkommen.
+		Die Karte unten zeigt Ihnen den derzeitigen Standort als blauen Kreis an. Hierzu müssen Sie natürlich im Brower akzeptieren, dass wir diesen Standort ermitteln können.
 	</p>
 	<p>
 		In der Regel funktioniert dieses direkte Aufnehmen dann auch recht gut, aber leider kann es bei der Übernahme in den Webbrowser Probleme geben. In diesem Fall müssen Sie das normale Hochladen aus dem Order, wo in dem Smartphone die Bilder abgespeichert sind, nutzen.

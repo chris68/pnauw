@@ -1,41 +1,37 @@
-/*
-var map =	L.map('map', {
-                layers: MQ.mapLayer(),
-                center: [ 40.731701, -73.993411 ],
-                zoom: 12
-            });
-*/
-// var map = L.map('map').setView([51.505, -0.09], 16);
-var map = L.map('map');
+var map = L.map('livemap');
 map.locate({setView: true, watch: true, maxZoom: 16});
-L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>',
-    maxZoom: 18
-}).addTo(map);
+MQ.mapLayer().addTo(map);
+
+var geocode = MQ.geocode().on('success', function(e) { 
+	$('#livemap-nearest-address').html(geocode.describeLocation(e.result.best)); 
+	//$('#livemap-nearest-address').html(e.result.best.postalcode + e.result.best.adminArea5); 
+});
 
 var circle;
-var marker;
-function onLocationFound(e) {
-    var radius = e.accuracy / 2;
-
+map.on('locationfound', function(e) { 
 	if (circle) {
 		map.removeLayer(circle); 
 	}
-    circle = L.circle(e.latlng, radius, {opacity:0.2}).addTo(map);
+    circle = L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}).addTo(map);
+	geocode.reverse(e.latlng);
+});
 
-	/*
-	if (marker) {
-		map.removeLayer(marker);
-	}
-    marker = L.marker(e.latlng).addTo(map)
-        .bindPopup("You are within " + radius + " meters from this point");
-	*/
-}
-
-map.on('locationfound', onLocationFound);
-
-function onLocationError(e) {
-    alert(e.message);
-}
-
-map.on('locationerror', onLocationError);
+map.on('locationerror', function(e) { 
+	var message;
+    switch(e.code) {
+        case 1:
+            message = 'Sie haben den Zugriff auf die Geolocation verweigert';
+            break;
+        case 2:
+            message = 'Es ist keine Geolocation verfügbar';
+            break;
+        case 3:
+            message = 'Die Ermittlung der Geolocation dauerte zu lange';
+            break;
+        default:
+            message = 'Bei der Ermittlung der Geolocation ist ein unbekannter Fehler aufgetreten';
+            break;
+    }
+	$('#livemap-nearest-address').html('<i>'+message+'</i>'); 
+    // alert(e.message);
+});
