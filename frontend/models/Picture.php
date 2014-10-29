@@ -176,7 +176,7 @@ class Picture extends \yii\db\ActiveRecord
 	{
 		// It is utmost important that only attributes which a safe to be mass assigned are listed here!
 		// owner_id and the whole image_ids certainly should not be changed by the user!
-		$rules = [
+		return [
 			['citation_id', 'default', 'value' => NULL],
 			['selected', 'default', 'value' => false],
 			['deleted', 'default', 'value' => false],
@@ -188,16 +188,10 @@ class Picture extends \yii\db\ActiveRecord
 			[['loc_lat', 'loc_lng'], 'validateLocationConsistency', 'on' => self::SCENARIO_DEFAULT],
 			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
 			['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
-		];
-		if (Yii::$app->user->can('trusted')) {
 			// Only trusted users currently may assign to a campaign
-			$rules = array_merge($rules,
-			[
-				['campaign_id', 'default', 'value' => NULL],
-				['campaign_id', 'integer'],
-			]);
-		};
-		return $rules;
+			['campaign_id', 'default', 'value' => NULL, 'when' => function ($model) {return Yii::$app->user->can('trusted');}],
+			['campaign_id', 'integer', 'when' => function ($model) {return Yii::$app->user->can('trusted');}],
+		];
 	}
 
 	/**
