@@ -182,6 +182,7 @@ class Picture extends \yii\db\ActiveRecord
 			['deleted', 'default', 'value' => false],
 			[['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
 			[['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'integer'],
+			[['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'filter', 'filter' => 'intval', 'skipOnEmpty' => true],
 			[['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 			[['loc_lat', 'loc_lng',], 'double'],
 			['visibility_id',  'validateVisibilityConsistency', ],
@@ -191,6 +192,7 @@ class Picture extends \yii\db\ActiveRecord
 			// Only trusted users currently may assign to a campaign
 			['campaign_id', 'default', 'value' => NULL, 'when' => function ($model) {return Yii::$app->user->can('trusted');}],
 			['campaign_id', 'integer', 'when' => function ($model) {return Yii::$app->user->can('trusted');}],
+			['campaign_id', 'filter', 'filter' => 'intval', 'skipOnEmpty' => true, 'when' => function ($model) {return Yii::$app->user->can('trusted');}],
 		];
 	}
 

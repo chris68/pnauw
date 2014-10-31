@@ -171,19 +171,17 @@ class PictureController extends Controller
 		$result = ['deleted' => ['ok' => 0, 'nok' => 0],'updated' => ['ok' => 0, 'nok' => 0]];
 		
 		if (Yii::$app->request->isPost && (Yii::$app->request->post('Picture') !== NULL)) {
-			$pics = [];
-			foreach (Yii::$app->request->post('Picture') as $id => $post_pic) {
-				$pics[$id] = new Picture();
-			}
-			\yii\base\Model::loadMultiple($pics, Yii::$app->request->post());
-			foreach ($pics as $id => $form_pic) {
-				$model = $this->findModel((int) $id);
-				
+			
+			$models= Picture::find()->where(['id' => array_keys(Yii::$app->request->post('Picture'))])->indexBy('id')->all();
+			\yii\base\Model::loadMultiple($models, Yii::$app->request->post());
+			// Validation necessary that default and filter validators fire; otherwise getDirtyAttributes shows bogus changes!
+			\yii\base\Model::validateMultiple($models);
+			foreach ($models as $id => $model) {
 				if (!Yii::$app->user->can('isObjectOwner', array('model' => $model))) {
 					throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
 				}
 				
-				if ($form_pic->deleted) {
+				if ($model->deleted) {
 					$count = $model->delete();
 					if ($count === false) {
 						$result['deleted']['nok']++;
@@ -192,31 +190,13 @@ class PictureController extends Controller
 					}
 				} else
 				{
-					if (
-						$model->name <> $form_pic->name 
-						|| $model->description <> $form_pic->description
-						|| $model->incident_id <> $form_pic->incident_id
-						|| $model->action_id <> $form_pic->action_id
-						|| $model->campaign_id <> $form_pic->campaign_id
-						|| $model->citation_id <> $form_pic->citation_id
-						|| $model->citation_affix <> $form_pic->citation_affix
-						|| $model->visibility_id <> $form_pic->visibility_id
-					) {
-						$model->name = $form_pic->name;
-						$model->description = $form_pic->description;
-						$model->incident_id = $form_pic->incident_id;
-						$model->action_id = $form_pic->action_id;
-						$model->campaign_id = $form_pic->campaign_id;
-						$model->citation_id = $form_pic->citation_id;
-						$model->citation_affix = $form_pic->citation_affix;
-						$model->visibility_id = $form_pic->visibility_id;
+					if (count($model->getDirtyAttributes()) > 0) {
 						$success = $model->save();
 						if ($success === false) {
 							$result['updated']['nok']++;
 						} else {
 							$result['updated']['ok']++;
 						}
-						;
 					}
 				}
 			}
