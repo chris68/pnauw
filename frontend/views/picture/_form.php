@@ -4,7 +4,7 @@
 /* @todo: FORM IS CURRENTLY NOT USED */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 ?>
 
@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
 	<div class ="col-md-4">
 		<?php 
-			/* @var $form yii\widgets\ActiveForm */
+			/* @var $form yii\bootstrap\ActiveForm */
 			$form = ActiveForm::begin(); 
 		?>
 		

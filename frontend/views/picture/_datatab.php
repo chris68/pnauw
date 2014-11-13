@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap\ActiveForm */
 ?>
 
 <div class=	"row">

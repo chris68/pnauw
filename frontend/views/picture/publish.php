@@ -6,7 +6,7 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 
 $this->title = 'Bilder veröffentlichen';
@@ -38,7 +38,7 @@ $this->params['help'] = 'picture-publish';
 	<?= $this->render('_heatmap', ['private' => 1]) ?>
 	
 	<?php 
-		/* @var $form yii\widgets\ActiveForm */
+		/* @var $form yii\bootstrap\ActiveForm */
 		$form = ActiveForm::begin(); 
 	?>
 	

@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 \frontend\views\picture\assets\PictureLivemapAsset::register($this);
 
@@ -20,7 +20,7 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestcapture'
 	<h1><?= $this->title ?></h1>
 
 	<?php 
-		/* @var $form yii\widgets\ActiveForm */
+		/* @var $form yii\bootstrap\ActiveForm */
 		$form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); 
 	?>
 		<?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>

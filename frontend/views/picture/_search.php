@@ -3,7 +3,7 @@
 /* @var $model frontend\models\PictureSearch */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 ?>
 
@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
 	<div class ="col-sm-4 col-md-4 form-group">
 	<?php 
-		/** @var yii\widgets\ActiveForm $form */
+		/** @var yii\bootstrap\ActiveForm $form */
 		$form = ActiveForm::begin([
 		'action' => [Yii::$app->controller->getRoute()],
 		'method' => 'get',

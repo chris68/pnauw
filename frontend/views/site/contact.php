@@ -1,10 +1,10 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\ContactForm */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
 $this->title = \Yii::t('base','Contact');

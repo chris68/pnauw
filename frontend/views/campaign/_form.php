@@ -1,10 +1,10 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Campaign */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap\ActiveForm */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use kartik\markdown\MarkdownEditor;
 use frontend\helpers\Assist;
 

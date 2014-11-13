@@ -3,7 +3,7 @@
 /* @var $formmodel frontend\models\PictureUploadForm */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'Bilder hochladen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];

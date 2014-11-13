@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use frontend\controllers\PictureController;
 
 $this->title = 'Bilder bearbeiten';
@@ -57,7 +57,7 @@ $this->params['help'] = 'picture-manage';
 	</div>
 	
 	<?php 
-		/* @var $form yii\widgets\ActiveForm */
+		/* @var $form yii\bootstrap\ActiveForm */
 		$form = ActiveForm::begin(); 
 	?>
 
