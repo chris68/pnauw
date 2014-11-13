@@ -412,8 +412,9 @@ class Picture extends \yii\db\ActiveRecord
 	/**
 	 * Fill the data from the file input and saves the data; best encapsule in transaction for atomic behavior
 	 * @param string $filename The name of the file with the image
+	 * @param Picture $defaultsvalues Optional default values which will override the existing values if given
 	 */
-	public function fillFromFile($filename) {
+	public function fillFromFile($filename, $defaultvalues) {
 		$this->setDefaults();
 
 		$props = exif_read_data($filename);
@@ -487,6 +488,25 @@ class Picture extends \yii\db\ActiveRecord
 		$image->rawdata = bin2hex($rawdata->getimageblob());
 		$image->save(false);
 		$this->blurred_medium_image_id = $image->id;
+		
+		if (isset($defaultvalues)) {
+			$this->action_id = $defaultvalues->action_id;
+			$this->campaign_id = $defaultvalues->campaign_id;
+			$this->citation_id = $defaultvalues->citation_id;
+			$this->citation_affix = $defaultvalues->citation_affix;
+			$this->description = $defaultvalues->description;
+			$this->incident_id = $defaultvalues->incident_id;
+			$this->loc_formatted_addr = $defaultvalues->loc_formatted_addr;
+			// Override geocoords only if not already set!
+			if ($this->loc_lat == 0 && $this->loc_lng == 0) {
+				$this->loc_lat = $defaultvalues->loc_lat;
+				$this->loc_lng = $defaultvalues->loc_lng;
+			}
+			$this->name = $defaultvalues->name;
+			$this->vehicle_country_code = $defaultvalues->vehicle_country_code;
+			$this->vehicle_reg_plate = $defaultvalues->vehicle_reg_plate ;
+			$this->visibility_id = $defaultvalues->visibility_id ;
+		}
 
 		$this->save(false);
 	}

@@ -49,24 +49,24 @@ Install the package via ``sudo apt-get vsftpd``
 ### Set up file stucture ###
 Set up the file structure as follows:
 ```
-/tmp/ftp:
+/srv/ftp/pnauw:
 dr-xr-xr-x 4 www-data www-data 4096 Okt 22 18:35 .
-drwxrwxrwt 5 root     root     4096 Okt 22 18:09 ..
+drwxrwxrwt 5 root     ftp      4096 Okt 22 18:09 ..
 dr-xr-xr-x 5 www-data www-data 4096 Okt 22 18:35 upload
 dr-xr-xr-x 5 www-data www-data 4096 Okt 22 18:34 upload_dev
-/tmp/ftp/upload:
+/srv/ftp/pnauw/upload:
 dr-xr-xr-x 5 www-data www-data 4096 Okt 22 18:35 .
 dr-xr-xr-x 4 www-data www-data 4096 Okt 22 18:35 ..
 drwxr-xr-x 2 www-data www-data 4096 Okt 22 18:35 user_a
 drwxr-xr-x 2 www-data www-data 4096 Okt 22 18:35 user_b
-/tmp/ftp/upload/upload_dev:
+/srv/ftp/pnauw//upload/upload_dev:
 total 12
 dr-xr-xr-x 3 www-data www-data 4096 Okt 22 18:35 .
 dr-xr-xr-x 5 www-data www-data 4096 Okt 22 18:35 ..
 drwxr-xr-x 2 www-data www-data 4096 Okt 22 18:35 user_a
 drwxr-xr-x 2 www-data www-data 4096 Okt 22 18:35 user_b
 ```
-It is important that ``/tmp/ftp`` and everything below is owned by ``www-data:www-data`` (the user the apache process runs in) 
+It is important that ``/srv/ftp/pnauw`` and everything below is owned by ``www-data:www-data`` (the user the apache process runs in) 
 and that the permissions are exactly as indicated with **not giving write access** to the folders except for the very 
 users folders ``user_a``, ``user_b``, etc. 
 
@@ -87,7 +87,7 @@ chown_username=www-data
 # The username for anonymous uploads
 ftp_username=www-data
 # Upload dir for anonymous uploads 
-anon_root=/tmp/ftp
+anon_root=/srv/ftp/pnauw
 # Dir lists forbidden
 dirlist_enable=NO
 # Downloads forbidden

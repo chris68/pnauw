@@ -1,8 +1,10 @@
 <?php
 /* @var $this yii\web\View */
+/* @var $defaultvalues frontend\models\Picture */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Collapse;
 
 $this->title = 'Bilder von FTP übernehmen';
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
@@ -16,6 +18,25 @@ $this->params['help'] = 'picture-serverupload';
 	<h1><?= $this->title ?></h1>
 
 	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); ?>
+		<?= $form->errorSummary([$defaultvalues],['class' => "alert alert-danger"]) ?>
+		<?=
+			Collapse::widget([
+				'items' => [
+					[
+						'label' => 'Vorgabewerte setzen',
+						'content' => 
+							$this->render('_formtabbed', [
+								'model' => $defaultvalues,
+								'outerform' => $form,
+							]),
+					],
+				],
+				'options' => 
+				[
+					'style' => 'margin-bottom: 10px'
+				],
+		   ]);
+		?>
 		<div class="form-group">
 			<?= Html::submitButton('Hochladen', ['class' => 'btn btn-primary']) ?>
 			<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>

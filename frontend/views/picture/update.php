@@ -14,6 +14,7 @@ $this->params['help'] = 'picture-update';
 
 	<?php echo $this->render('_formtabbed', [
 		'model' => $model,
+		'outerform' => NULL,
 	]); ?>
 
 </div>

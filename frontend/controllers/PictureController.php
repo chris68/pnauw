@@ -548,45 +548,52 @@ class PictureController extends Controller
 	 */
 	public function actionUpload($replicate=1)
 	{
+		$defaultvalues = new Picture();
 		$formmodel = new PictureUploadForm();
 
-		if ($formmodel->load(Yii::$app->request->post())) {
-			$formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
+		if (Yii::$app->getRequest()->isPost) {
+			if ($defaultvalues->load(Yii::$app->request->post()) && $defaultvalues->validate() && $formmodel->load(Yii::$app->request->post())) {
+				$formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
 
-			if ($formmodel->validate()) {
-				for ($i=0;$i<(Yii::$app->user->can('admin')?((int)$replicate):1);$i++) {
-				set_time_limit(120);
-				$transaction = Yii::$app->db->beginTransaction();
-				try {
-					foreach ($formmodel->file_handles as $file) {
-							$picmodel = new Picture(['scenario' => 'create']);
-							$picmodel->fillFromFile($file->tempName);
+				if ($formmodel->validate()) {
+					for ($i=0;$i<(Yii::$app->user->can('admin')?((int)$replicate):1);$i++) {
+					set_time_limit(120);
+					$transaction = Yii::$app->db->beginTransaction();
+					try {
+						foreach ($formmodel->file_handles as $file) {
+								$picmodel = new Picture(['scenario' => 'create']);
+								$picmodel->fillFromFile($file->tempName,$defaultvalues);
+						}
+						$transaction->commit();
+					} catch (Exception $ex) {
+						$transaction->rollback();
+						throw($ex);
 					}
-					$transaction->commit();
-				} catch (Exception $ex) {
-					$transaction->rollback();
-					throw($ex);
+
+					}
+					if (count($formmodel->file_handles) == 1) {
+						$flash = 'Das eine Bild wurde problemlos eingelesen.<br>';
+					} else {
+						$flash = 'Die '.count($formmodel->file_handles).' Bilder wurden problemlos eingelesen.<br>';
+						$flash = $flash.'<ul><li>Erstes Bild: '.$formmodel->file_handles[0]->name.'</li>';
+						$flash = $flash.'<li>Letzes Bild: '.$formmodel->file_handles[count($formmodel->file_handles)-1]->name.'</li></ul>';
+					}
+					Yii::$app->session->setFlash('success', 
+						$flash.
+						'Sie können diese nun '.
+						Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
+						' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
+					return $this->refresh();
 				}
-				
-				}
-				if (count($formmodel->file_handles) == 1) {
-					$flash = 'Das eine Bild wurde problemlos eingelesen.<br>';
-				} else {
-					$flash = 'Die '.count($formmodel->file_handles).' Bilder wurden problemlos eingelesen.<br>';
-					$flash = $flash.'<ul><li>Erstes Bild: '.$formmodel->file_handles[0]->name.'</li>';
-					$flash = $flash.'<li>Letzes Bild: '.$formmodel->file_handles[count($formmodel->file_handles)-1]->name.'</li></ul>';
-				}
-				Yii::$app->session->setFlash('success', 
-					$flash.
-					'Sie können diese nun '.
-					Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
-					' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
-				return $this->refresh();
 			}
+		}
+		else {
+			$defaultvalues->setDefaults();
 		}
 
 		return $this->render('upload', [
 				'formmodel' => $formmodel,
+				'defaultvalues' => $defaultvalues,
 		]);
 	}
 
@@ -595,40 +602,52 @@ class PictureController extends Controller
 	 */
     public function actionServerupload()
     {
-		if (Yii::$app->getRequest()->isPost) {
-			$dir = Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username;
-			if (!is_dir($dir) || 
-				(count($files = FileHelper::findFiles(
-					Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username,
-					['recursive'=>false, 'only'=>['*.jpg']]
-				)) == 0))
-			{
-				Yii::$app->session->setFlash('warning', 'Es liegen leider keine Dateien auf dem Server vor');
-			} else
-			{
-				$transaction = Yii::$app->db->beginTransaction();
-				try {
-					foreach ($files as $filename) {
-						$picmodel = new Picture(['scenario' => 'create']);
-						$picmodel->fillFromFile($filename);
-					}
-					$transaction->commit();
-				} catch (Exception $ex) {
-					$transaction->rollback();
-					throw($ex);
-				}
-				foreach ($files as $filename) {
-					unlink ($filename);
-				}
-				Yii::$app->session->setFlash('success', 
-					'Die '.count($files).' Bilder wurden problemlos eingelesen.<br>'.
-					'Sie können diese nun '.
-					Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
-					' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
-			}
+		$defaultvalues = new Picture();
+
+		$dir = Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username;
+		if (!is_dir($dir) || 
+			(count($files = FileHelper::findFiles(
+				Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username,
+				['recursive'=>false, 'only'=>['*.jpg']]
+			)) == 0)) {
+			Yii::$app->session->setFlash('info', 'Es liegen keine Dateien auf dem Server vor');
+		} else {
+			Yii::$app->session->setFlash('info', 'Es liegen '.count($files).' Dateien auf dem Server vor');
 		}
 		
-		Render: return $this->render('serverupload');
+		if (Yii::$app->getRequest()->isPost) {
+			if ($defaultvalues->load(Yii::$app->request->post()) && $defaultvalues->validate()) {
+				if (isset($files) && count($files) <> 0) {
+					$transaction = Yii::$app->db->beginTransaction();
+					try {
+						foreach ($files as $filename) {
+							$picmodel = new Picture(['scenario' => 'create']);
+							$picmodel->fillFromFile($filename,$defaultvalues);
+						}
+						$transaction->commit();
+					} catch (Exception $ex) {
+						$transaction->rollback();
+						throw($ex);
+					}
+					foreach ($files as $filename) {
+						unlink ($filename);
+					}
+					Yii::$app->session->setFlash('success', 
+						'Die '.count($files).' Bilder wurden problemlos eingelesen.<br>'.
+						'Sie können diese nun '.
+						Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
+						' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
+				}
+				return $this->refresh();
+			}
+		}
+		else {
+			$defaultvalues->setDefaults();
+		}
+		
+		return $this->render('serverupload', [
+				'defaultvalues' => $defaultvalues,
+		]);
     }
 
 	/**

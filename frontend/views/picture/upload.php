@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Collapse;
 
 $this->title = 'Bilder hochladen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
@@ -17,7 +18,25 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestupload':
 	<h1><?= $this->title ?></h1>
 
 	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); ?>
-		<?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>
+		<?= $form->errorSummary([$formmodel,$defaultvalues],['class' => "alert alert-danger"]) ?>
+		<?=
+			Collapse::widget([
+				'items' => [
+					[
+						'label' => 'Vorgabewerte setzen',
+						'content' => 
+							$this->render('_formtabbed', [
+								'model' => $defaultvalues,
+								'outerform' => $form,
+							]),
+					],
+				],
+				'options' => 
+				[
+					'style' => 'margin-bottom: 10px'
+				],
+		   ]);
+		?>
 		<?= $form->field($formmodel, 'file_names[]')->fileInput(['multiple' => true, 'accept' => 'image/jpeg', ]) ?>
 		<div class="form-group">
 			<?= Html::submitButton('Hochladen', ['class' => 'btn btn-primary']) ?>

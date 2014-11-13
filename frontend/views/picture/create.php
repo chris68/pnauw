@@ -13,6 +13,7 @@ $this->params['help'] = 'picture-create';
 
 	<?php echo $this->render('_formtabbed', [
 		'model' => $model,
+		'outerform' => NULL,
 	]); ?>
 
 </div>

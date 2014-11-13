@@ -1,4 +1,4 @@
 <?php
 return [
-	'server-upload-dir' => '/tmp/ftp/upload',
+	'server-upload-dir' => '/srv/ftp/pnauw/upload',
 ];

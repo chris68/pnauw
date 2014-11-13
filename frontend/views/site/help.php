@@ -62,12 +62,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<h3><a name="picture-upload">Bilder hochladen</a></h3>
 	<p>
-		Das Hochladen von einem oder mehreren Bilder aus einem Ordner ist ebenso möglich. Wenn die Bilder im Original zu groß sind, dann müssen Sie diese voher 
-		entsprechend verkleinern, denn durch das Hochladen unnötig großer Bilder wäre die Last für unseren Server zu hoch.
+		Das Hochladen von einem oder mehreren Bilder aus einem Ordner ist ebenso möglich. Wenn die Bilder im Original sehr groß sind, dann sollten Sie diese voher 
+		entsprechend verkleinern, denn durch das Hochladen unnötig großer Bilder wäre die Last für unseren Server zu hoch. Zudem werden die Bilder nach dem Hochladen sowieso verkleinert.
 	</p>
 	<p>
 		Wenn Sie sehr, sehr viele Bilder hochladen, dann sollten Sie die Bilder am besten von 1 ab durchnumerieren bzw. irgendwie sortieren, damit Sie nicht durcheinander kommen. 
 		Es werden daher auch immer das erste und das letzte hochgeladene Bild nach dem Hochladen nochmal angezeigt, damit Sie wissen, wo Sie gerade stehen.
+	</p>
+	<p>
+		Sie können in dem aufklappbaren Bereich Vorgabewerte (z.B. Vorfall 'Gehwegparken', Aktion 'Zettel angehängt') für die hochgeladenen Bilder setzen, um die Bilder schneller korrekt zu klassifizieren. 		
+		Hierbei werden jedoch bereits in den Bilder enthaltene Geokoordinaten sinnigerrweise nie überschrieben, sondern es wird maximal eine textuelle Ortangabe übernommen (z.B. Berlin, Deutschland).
 	</p>
 	<h3><a name="picture-guestupload">Bilder hochladen (Gastzugang) </a></h3>
 	<p>
@@ -88,7 +92,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<p>
 		Diese Bilder können dann über die Funktion übernommen werden und stehen danach zur Verfügung wie wenn man diese direkt aus dem Dateisystem des Rechners oder Mobiltelefons hochgeladen 
-		hätte. Es ist halt nur wesentlich schneller und einfacher und vor allem bei Vor-Ort-Einsätzen sehr nützlich.
+		hätte. Es ist halt nur wesentlich schneller und einfacher und vor allem bei Vor-Ort-Einsätzen sehr nützlich. Ansonsten funktioniert die Funktion
+		aber wie das normale <a href="#picture-upload">Hochladen von Bildern</a>
+		
 	</p>
 	<p>
 		Die Funktion steht jedoch nur dafür freigeschalteten <a href="#user-level-trusted">vertrauenswürdigen Nutzern</a> zur Verfügung. Wenn Sie interessiert sind, dann

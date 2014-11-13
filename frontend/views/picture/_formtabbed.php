@@ -1,25 +1,28 @@
 <?php
 /* @var $this \yii\web\View */
 /* @var $model frontend\models\Picture */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $outerform yii\bootstrap\ActiveForm If an outer form exists pass it here */
+
+/* @var $form yii\bootstrap\ActiveForm */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
 use frontend\widgets\Alert;
 ?>
 
 <div class="picture-form">
-	<?php $form = ActiveForm::begin(); ?>
+	<?php $form = $outerform?$outerform:ActiveForm::begin(); ?>
 	
 	<?= Html::activeHiddenInput($model, 'id' ) ?>
 
 	<?= $form->errorSummary($model,['class' => "alert alert-danger"]);?>
 
 	<div class="form-group">
-		<?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-		<?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
+		<?= $outerform?'':Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+		<?= $outerform?'':Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
+		<?php if (!isset($outerform)) : ?>
 		<button 
 			formaction="<?=Url::to(['delete', 'id' => $model->id, 'returl' => Yii::$app->getRequest()->getUrl()])?>"
 			formmethod="POST"
@@ -27,6 +30,7 @@ use frontend\widgets\Alert;
 		>
 			Löschen
 		</button>
+		<?php endif ?>
 		
 	</div>
 
@@ -69,7 +73,7 @@ use frontend\widgets\Alert;
 		?>
 	</div>
 
-	<?php ActiveForm::end(); ?>
+	<?php $outerform?'':ActiveForm::end(); ?>
 	
 	<?php \frontend\views\picture\assets\PictureUpdateAsset::register($this); ?>
 </div>
