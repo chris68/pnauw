@@ -548,7 +548,7 @@ class PictureController extends Controller
 	 */
 	public function actionUpload($replicate=1)
 	{
-		$defaultvalues = new Picture();
+		$defaultvalues = new Picture(['scenario' => 'defval']);
 		$formmodel = new PictureUploadForm();
 
 		if (Yii::$app->getRequest()->isPost) {
@@ -602,7 +602,7 @@ class PictureController extends Controller
 	 */
     public function actionServerupload()
     {
-		$defaultvalues = new Picture();
+		$defaultvalues = new Picture(['scenario' => 'defval']);
 
 		$dir = Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username;
 		if (!is_dir($dir) || 

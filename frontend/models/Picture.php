@@ -206,6 +206,7 @@ class Picture extends \yii\db\ActiveRecord
 	{
 		$scenarios = parent::scenarios();
 		$scenarios['create'] = $scenarios[self::SCENARIO_DEFAULT];
+		$scenarios['defval'] = $scenarios[self::SCENARIO_DEFAULT];
 		return $scenarios;
 	}
 
