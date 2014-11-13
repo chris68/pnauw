@@ -418,7 +418,7 @@ class Picture extends \yii\db\ActiveRecord
 	 * @param string $filename The name of the file with the image
 	 * @param Picture $defaultsvalues Optional default values which will override the existing values if given
 	 */
-	public function fillFromFile($filename, $defaultvalues) {
+	public function fillFromFile($filename, $defaultvalues=NULL) {
 		$this->setDefaults();
 
 		$props = exif_read_data($filename);
