@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	.site-about a[name]:before {
 	  content:"";
 	  display:block;
-	  height:40px; /* fixed header height*/
-	  margin:-40px 0 0; /* negative fixed header height; it should be just a line so it does not overlap content and makes it unclickable */
+	  height:50px; /* fixed header height*/
+	  margin:-50px 5px 0; /* negative fixed header height; it should be just a line so it does not overlap content and makes it unclickable */
 	}
 </style>
 <div class="site-about">
