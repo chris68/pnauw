@@ -90,6 +90,9 @@ class Picture extends \yii\db\ActiveRecord
 		$this->clip_x = 50;
 		$this->clip_y = 50;
 		$this->clip_size = 25;
+		// If no better coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
+		$this->org_loc_lat = $this->loc_lat = 0;
+		$this->org_loc_lng = $this->loc_lng = 0;
 	}
 		
 
@@ -421,10 +424,6 @@ class Picture extends \yii\db\ActiveRecord
 		if (isset($props['GPSLatitude']) && isset($props['GPSLatitudeRef']) && isset($props['GPSLongitude']) && isset($props['GPSLongitudeRef'])) {
 			$this->org_loc_lat = $this->loc_lat = $this->getGPS($props['GPSLatitude'], $props['GPSLatitudeRef']);
 			$this->org_loc_lng = $this->loc_lng = $this->getGPS($props['GPSLongitude'], $props['GPSLongitudeRef']);
-		} else {
-			// If no coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
-			$this->org_loc_lat = $this->loc_lat = 0;  
-			$this->org_loc_lng = $this->loc_lng = 0; 
 		}
 
 		if (isset($props['DateTimeOriginal'])) {
