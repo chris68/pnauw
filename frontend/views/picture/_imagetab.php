@@ -9,10 +9,16 @@ use \yii\helpers\Html;
 <div class="row">
 	<div class="col-lg-3">
 		<?= $form->field($model, 'incident_id')->dropDownList(frontend\models\Incident::dropDownList()) ?>
+		<?= frontend\widgets\VehicleIncidentHistory::widget(
+				[
+					'picture' => $model,
+				]
+			)
+		?>
 		<?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
 		<?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
-		<?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
 		<?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
+		<?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
 	</div>
 
 	<div class ="col-lg-3">

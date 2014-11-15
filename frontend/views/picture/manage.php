@@ -106,7 +106,11 @@ $this->params['help'] = 'picture-manage';
 			.
 					'<br>'
 			.
-					'<b> <a target = "_blank" href="'.Url::to(PictureController::urlVehicleRegPlate('manage',$model->vehicle_reg_plate)).'">'.Html::encode($model->vehicle_reg_plate).'</a> </b>'
+					frontend\widgets\VehicleIncidentHistory::widget(
+						[
+							'picture' => $model,
+						]
+					)
 			.
 
 			'	</div>
