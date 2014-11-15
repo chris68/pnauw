@@ -72,7 +72,7 @@ $this->params['help'] = 'picture-publish';
 			.
 				'<p>'
 			.
-				Html::encode($model->description)
+				nl2br(Html::encode($model->description))
 			.
 				'</p>'
 			.

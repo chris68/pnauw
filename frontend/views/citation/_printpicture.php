@@ -37,10 +37,10 @@ use yii\widgets\DetailView;
 						'value' => $model->incident->name,
 					],
 					[
-						'label' => 'Maßnahme',
-						'value' => $model->action->name,
+						'label' => 'Details zum Vorfall',
+						'format' => 'raw',
+						'value' => nl2br(Html::encode($model->citation_affix)),
 					],
-					'citation_affix',
 					'loc_formatted_addr',
 					[
 						'label' => 'GPS (Korrigiert)',
@@ -50,8 +50,6 @@ use yii\widgets\DetailView;
 						'label' => 'GPS (Original)',
 						'value' => $model->getOrgLatLng(),
 					],
-					'created_ts',
-					'modified_ts',
 				]
 			]
 		);

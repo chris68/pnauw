@@ -4,6 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 
 use yii\widgets\DetailView;
+use yii\helpers\Html;
 
 ?>
 
@@ -18,7 +19,11 @@ use yii\widgets\DetailView;
 				'attributes' => [
 					'taken',
 					'name',
-					'description',
+					[
+						'label' => 'Beschreibung',
+						'format' => 'raw',
+						'value' => nl2br(Html::encode($model->description)),
+					],
 					[
 						'label' => 'Kennzeichen',
 						'value' => $model->vehicle_reg_plate .' [' . $model->vehicleCountryCode->name . ']',
@@ -38,6 +43,11 @@ use yii\widgets\DetailView;
 					[
 						'label' => 'Anzeige',
 						'value' => ($model->citation)?$model->citation->name:'(nicht gesetzt)',
+					],
+					[
+						'label' => 'Anzeigenzusatz',
+						'format' => 'raw',
+						'value' => nl2br(Html::encode($model->citation_affix)),
 					],
 					'loc_path',
 					'loc_formatted_addr',

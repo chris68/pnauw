@@ -16,7 +16,7 @@ $this->params['help'] = 'picture-view';
 	<div class="row">
 		<div class="col-sm-4 col-md-4 col-lg-4">
 			<p><b><?=Html::encode($model->name)?></b></p>
-			<p><?=Html::encode($model->description)?></p>
+			<p><?=nl2br(Html::encode($model->description))?></p>
 			<?= frontend\widgets\ImageRenderer::widget(
 				[
 					'image' => $model->blurredMediumImage,

@@ -71,7 +71,7 @@ $this->params['help'] = 'picture-index';
 			.
 				'</b></p>'
 			.
-				Html::encode($model->description)
+				nl2br(Html::encode($model->description))
 			.
 				'</p>'
 			.

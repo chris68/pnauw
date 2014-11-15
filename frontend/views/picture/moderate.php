@@ -68,7 +68,7 @@ $this->params['help'] = 'picture-moderate';
 			.
 				'<p>'
 			.
-				Html::encode($model->description)
+				nl2br(Html::encode($model->description))
 			.
 				'</p>'
 			.
