@@ -34,15 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<ol>
 		<li>Das Bild wird gemäß der EXIF-Ausrichtung gedreht</li>
-		<li>Das Originalbild wird dann ohne weitere Änderungen abgespeichert. <b>Es ist so aber nur für den Eigner sichtbar!</b></li>
+		<li>Das Originalbild wird auf eine sinnvolle Auflösung reduziert, aber ansonsten ohne weitere Änderungen abgespeichert. <b>Es ist so aber nur für den Eigner sichtbar!</b></li>
 		<li>Es werden dann Verkleinerungen in der Größe Thumbnail, Small und Medium generiert. <b>Auch diese sind nur für den Eigner sichtbar!</b></li>
 		<li>Die Verkleinerungen werden dann in einer zweiten Version verschwommen abgespeichert. <b>Nur diese Versionen sind für die Öffentlichkeit bestimmt!</b></li>
 		<li>Bei allen Verkleinerungen werden alle EXIF-Parameter gelöscht - es ist also keine Kamerakennung etc. mehr erkennbar</li>
 		<li>Vorher wird noch das Aufnahmedatum und eventuell vorhandene GEO-Koordinaten aus den Bilder ausgelesen und gespeichert.</li>
 	</ol>
-	<p>
-		Bei den Bildern gibt es eine Größenbegrenzung (siehe Hinweis beim Hochladen). Zudem ist es für die Layouts der Masken empfehlenswert, wenn die Bilder <b>Hochkant</b> aufgenommen werden.
-	</p>
 	<h3><a name="picture-capture">Bilder aufnehmen</a></h3>
 	<p>
 		Bei den meisten Kameras in Smartphone können Sie direkt aus dem Browser heraus ein Bild aufnehmen, dass dann gleich hochgeladen wird.
@@ -62,16 +59,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<h3><a name="picture-upload">Bilder hochladen</a></h3>
 	<p>
-		Das Hochladen von einem oder mehreren Bilder aus einem Ordner ist ebenso möglich. Wenn die Bilder im Original sehr groß sind, dann sollten Sie diese voher 
-		entsprechend verkleinern, denn durch das Hochladen unnötig großer Bilder wäre die Last für unseren Server zu hoch. Zudem werden die Bilder nach dem Hochladen sowieso verkleinert.
+		Das Hochladen von einem oder mehreren Bildern aus einem Ordner ist ebenso möglich. Wenn die Bilder im Original sehr groß sind, dann sollten Sie diese voher 
+		entsprechend verkleinern, denn durch das Hochladen unnötig großer Bilder wird die Last für unseren Server sehr hoch. Zudem wird die Auflösung der Bilder nach dem Hochladen sowieso reduziert.
 	</p>
 	<p>
 		Wenn Sie sehr, sehr viele Bilder hochladen, dann sollten Sie die Bilder am besten von 1 ab durchnumerieren bzw. irgendwie sortieren, damit Sie nicht durcheinander kommen. 
 		Es werden daher auch immer das erste und das letzte hochgeladene Bild nach dem Hochladen nochmal angezeigt, damit Sie wissen, wo Sie gerade stehen.
 	</p>
 	<p>
-		Sie können in dem aufklappbaren Bereich Vorgabewerte (z.B. Vorfall 'Gehwegparken', Aktion 'Zettel angehängt') für die hochgeladenen Bilder setzen, um die Bilder schneller korrekt zu klassifizieren. 		
-		Hierbei werden jedoch bereits in den Bilder enthaltene Geokoordinaten sinnigerrweise nie überschrieben, sondern es wird maximal eine textuelle Ortangabe übernommen (z.B. Berlin, Deutschland).
+		Sie können in dem aufklappbaren Bereich Vorgabewerte (z.B. Vorfall 'Gehwegparken', Aktion 'Zettel angehängt') für die hochgeladenen Bilder setzen, um die Verfälle schneller zu klassifizieren. 		
+		Hierbei werden jedoch bereits in den Bilder enthaltene Geokoordinaten sinnigerweise nie überschrieben, sondern es wird maximal eine textuelle Ortangabe übernommen (z.B. 'Berlin, Deutschland').
 	</p>
 	<h3><a name="picture-guestupload">Bilder hochladen (Gastzugang) </a></h3>
 	<p>
@@ -83,11 +80,14 @@ $this->params['breadcrumbs'][] = $this->title;
 	</p>
 	<h3><a name="picture-serverupload">Bilder von FTP übernehmen</a></h3>
 	<p>
-		Sie können hierbei Bilder über anonymen FTP-Zugriff auf den Server hochladen (Zugang: ftp parke-nicht-auf-unseren-wegen.de, User: ftp, Passwort: leer, Verzeichnis upload/<i>username</i>). 
+		Sie können hier Bilder über einen anonymen FTP-Zugriff auf den Server hochladen (Zugang: ftp parke-nicht-auf-unseren-wegen.de, User: 'ftp', Passwort: leer, Verzeichnis: 'upload/<i>&lt;Ihr jeweiliger Login/Nutzername&gt;</i>'). 
 		Der Clou ist hierbei, dass man die Bilder direkt von Mobiltelefon übermitteln kann, wenn man eine Software wie z.B. 
-		<?=	Assist::extlink('JustResizeIt for Android', 'http://justresizeit.com') ?> einsetzt. Damit kann man die Bilder direkt 
-		aus der Bildergallery auswählen und mit 2-3 Clicks an den Server übermitteln. Bald wird es sogar möglich sein, die Bilder vorher
-		zu verkleinern (derzeit geht leider beim Verkleinern die EXIF-Informationen mit den GPS-Infos verloren, aber das soll in einer 
+		<?=	Assist::extlink('JustResizeIt for Android', 'http://justresizeit.com/mobile') ?> oder <?=	Assist::extlink('FTP Picture Upload for Apple', 'https://itunes.apple.com/de/app/ftp-picture-upload/id302286413?mt=8') ?> einsetzt. 
+	</p>
+	<p>
+		Mit diesen Apps kann man die Bilder direkt aus der Bildergallery auswählen und mit 2-3 Clicks an den Server übermitteln. Es besteht sogar die Möglichkeit, die Bilder vorher
+		zu verkleinern, wodurch das Hochladen deutlich schneller wird und man entsprechend weniger Datenvolumen verbraucht 
+		(Hinweis für JustResizeIt: derzeit geht leider beim Verkleinern die EXIF-Informationen mit den GPS-Infos verloren, aber das soll in einer 
 		zukünftigen Version wahrscheinlich bis Ende 2014 gefixt werden).
 	</p>
 	<p>
@@ -105,13 +105,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		Nach dem Hochladen müssen Sie die Bilder bearbeiten. Es gibt hierzu eine Mehrfachbearbeitung, wo Sie immer mehrere Bilder gleichzeitig bearbeiten können und eine Einzelbearbeitung, wo Sie jeweils nur ein einzelnes Bild bearbeiten.
 	</p>
 	<p>
-		Die Mehrfachbearbeitung ist vor allem für große Kampagnen gedacht, wo Sie sehr, sehr viele Bilder schnell klassifzieren wollen, aber keine großen Detailinfos (wie z.B. Autonummern) eingeben wollen und die Masken sind für diesen Zweck sehr effizient aufgebaut.
+		Die Mehrfachbearbeitung ist vor allem für große Kampagnen gedacht, wo Sie sehr, sehr viele Bilder schnell klassifzieren wollen, aber keine großen Detailinfos (wie z.B. Autonummern) eingeben wollen. Die Masken sind daher für diesen Zweck sehr effizient aufgebaut.
 		So ist zum Beispiel die Tabulatorreihenfolge so optimiert, dass Sie über das Feld <em>Vorfall</em> sehr schnell durchspringen können. Auch die Auswahllisten sind so intelligent 
 		aufgebaut, dass Sie mit Buchstaben wie 'G' schnell und leicht den korrekten Verfall wählen können.
 	</p>
 	<p>
 		Einen Nachteil hat die Mehrfachbearbeitung - <b>eventuelle Eingabefehler werden nicht detailliert angezeigt, sondern der Satz wird einfach nicht gespeichert und die Änderungen gehen verloren!</b>
-		In der Regel kein Problem, weil man über die Felder so gut wie nie Eingabefehler erzeugen kann. Die Ausnahmen sind unter <a href='#picture-consistency'>Konsistenzprüfungen</a> erläutert.
+		In der Regel kein Problem, weil man über die Felder in der Mehrfachbearbeitung so gut wie nie Eingabefehler erzeugen kann. Die Ausnahmen sind unter <a href='#picture-consistency'>Konsistenzprüfungen</a> erläutert.
 	</p>
 	<h3><a name="picture-update">Bilder detailliert bearbeiten</a></h3>
 	<p>
@@ -165,7 +165,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<p>
 		Ansonsten müssen Sie die Veröffentlichung beantragen und in der Regel wird ein <a href="#user-level-moderator">Moderator</a> dies auch zeitnah freigeben.
 		Sollte der Moderator nicht einverstanden sein, wird er die Veröffentlichung ablehnen.
-		Übrigens sieht selbst der Moderator nur die verschwommenen Bilder - die unverschwommenen sehen immer nur Sie selbst!
+		Übrigens sieht selbst der Moderator nur die verschwommenen Bilder - die unverschwommenen Bilder sehen immer nur Sie selbst!
 	</p>
 
 	<h3><a name="picture-index">Bilder betrachten</a></h3>
