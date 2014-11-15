@@ -33,7 +33,7 @@ elseif ($model->type == 'complaint') {
 		können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr mißbräuchliches Parken hinweisen und, wenn es nicht hilft
 		oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
 	</p>
-	<h2>Spezifische Angaben für die Anzeige</h2>
+	<h2>Zeuge und weitere spezifische Angaben für die Anzeige</h2>
 	<p><?=Markdown::convert(Html::encode($model->description))?></p>
 	<h2>Generelle Erläuterungen</h2>
 	<p>
