@@ -44,12 +44,16 @@ elseif ($model->type == 'complaint') {
 	<p>
 		Wenn ein Auto an mehreren Tagen aufgeführt ist, dann ist dies in der Regel (wenn dem nicht indiviudell und ausdrücklich wiedersprochen wird) auch als <b>Mehrfachanzeige</b> gemeint. 
 	</p>
+	<h2>Information bei Nichtumsetzung</h2>
 	<p>
-		Wenn die Anzeigen im Rahmen des Ermessenspielraums im Rahmen des Opportunitätsprinzips nicht in Verwarnungen umgesetzt wurden, dann bittet der Anzeiger 
-		um eine kurze Info. Dies gilt weniger bei Nichtumsetzen von vereinzelten Anzeigen/Vorfällen - hier muss ja auch der Datenschutz des Betroffenen 
+		Wenn die Anzeigen z.B. aus Gründen des Ermessenspielraums im Rahmen des Opportunitätsprinzips nicht in Verwarnungen umgesetzt wurden, dann bittet der Anzeiger 
+		um eine kurze Info z.B. an die in der Regel ja angegebene Emailadresse. 
+	</p>
+	<p>
+		Dies gilt weniger bei Nichtumsetzen von vereinzelten Anzeigen/Vorfällen - hier muss ja auch der Datenschutz des Betroffenen 
 		beachtet werden. Sondern es geht vielmehr darum, dass ein Nichtumsetzen aller oder sehr vieler Anzeigen rechtlich eher nicht durch das Opportunitätsprinzip 
 		abgedeckt wäre. Und dann will der Anzeiger eventuell die Möglichkeit des Rechtsweges oder der Dienstaufsichtsbeschwerde einschlagen.
-		Und daher muss sichergestellt sein, dass die Anzeigen nicht einfach und in großen Stil einfach eingestellt werden.
+		Und daher muss sichergestellt sein, dass die Anzeigen nicht einfach und in großen Stil ohne weitere Benachrichtigung eingestellt werden.
 		Denn der Anzeiger macht die Sache ja meist nicht aus Spass, sondern eher aus Notwehr, weil es die offiziellen Stellen nicht machen!
 	</p>
 	<?php elseif ($model->type == 'complaint') : ?>
