@@ -52,11 +52,6 @@ return [
         ],
 		'i18n' => [
 			'translations' => [
-				'yii' => [
-					'class' => 'yii\i18n\PhpMessageSource',
-					'basePath' => '@common/messages', // the yii translations are currently in the common section of the application template
-					'sourceLanguage' => 'en-US',
-				],
 				'common' => [
 					'class' => 'yii\i18n\PhpMessageSource',
 					'basePath' => '@common/messages',

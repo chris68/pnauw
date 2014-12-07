@@ -32,12 +32,6 @@ return [
 		],
 		'i18n' => [
 			'translations' => [
-				'yii' => [
-					'class' => 'yii\i18n\PhpMessageSource',
-					//'basePath' => $rootDir . '/vendor/yiisoft/yii2/yii/messages', // would actually be the correct base path - but yiisoft did not incorporate translations yet!
-					'basePath' => '@common/messages', // the yii translations are currently in the common section of the application template
-					'sourceLanguage' => 'en-US',
-				],
 				'common' => [
 					'class' => 'yii\i18n\PhpMessageSource',
 					'basePath' => '@common/messages',
