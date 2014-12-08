@@ -42,7 +42,7 @@ $this->execute($sql);
 	public function safeDown()
 	{
 	$sql = <<<'EOT'
-DROP DATABASE gwvgw;
+DROP DATABASE pnauw;
 EOT;
 // $this->execute($sql);
 echo "You need to execute the following sql manually:\n\n".$sql."\n\n";
