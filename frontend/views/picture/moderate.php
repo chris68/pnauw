@@ -21,7 +21,7 @@ $this->params['help'] = 'picture-moderate';
 		Collapse::widget([
 			'items' => [
 				[
-					'label' => 'Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' ,
+					'label' => '<span class="glyphicon glyphicon-collapse-down"></span> Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' ,
 					'encode' => false,
 					'content' => $this->render('_search', ['model' => $searchModel]),
 				],

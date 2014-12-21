@@ -23,7 +23,8 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestupload':
 			Collapse::widget([
 				'items' => [
 					[
-						'label' => 'Vorgabewerte setzen',
+						'label' => '<span class="glyphicon glyphicon-collapse-down"></span> Vorgabewerte setzen',
+						'encode' => false,
 						'content' => 
 							$this->render('_formtabbed', [
 								'model' => $defaultvalues,
