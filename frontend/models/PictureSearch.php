@@ -85,7 +85,7 @@ class PictureSearch extends Model
 			[	['map_bounds', 'time_range'],
 				'string',
 			],
-			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
+            [['vehicle_reg_plate'], 'filter', 'filter' => 'mb_strtoupper', 'skipOnEmpty' => true],
 		];
 	}
 

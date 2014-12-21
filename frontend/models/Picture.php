@@ -190,7 +190,7 @@ class Picture extends \yii\db\ActiveRecord
 			[['loc_lat', 'loc_lng',], 'double'],
 			['visibility_id',  'validateVisibilityConsistency', ],
 			[['loc_lat', 'loc_lng'], 'validateLocationConsistency', 'on' => self::SCENARIO_DEFAULT],
-			['vehicle_reg_plate', \common\validators\ConvertToUppercase::className()],
+            [['vehicle_reg_plate'], 'filter', 'filter' => 'mb_strtoupper', 'skipOnEmpty' => true],
 			['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
 			// Only trusted users currently may assign to a campaign
 			['campaign_id', 'default', 'value' => NULL, 'when' => function ($model) {return Yii::$app->user->can('trusted');}],
