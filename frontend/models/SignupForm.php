@@ -14,10 +14,10 @@ class SignupForm extends Model
     public $email;
     public $password;
 
-	/**
-	 * @var boolean the term acceptance. Used to check whether user accepted the termns and isn't saved in database
-	 */
-	public $acceptTerms = false;
+    /**
+     * @var boolean the term acceptance. Used to check whether user accepted the termns and isn't saved in database
+     */
+    public $acceptTerms = false;
 
 
     /**
@@ -29,7 +29,7 @@ class SignupForm extends Model
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => \Yii::t('common','This user name has already been taken.')],
-			['username', 'compare', 'operator' => '!=', 'compareValue' => 'Guest access', 'message' => \Yii::t('common','This user name is reserved.')],
+            ['username', 'compare', 'operator' => '!=', 'compareValue' => 'Guest access', 'message' => \Yii::t('common','This user name is reserved.')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
@@ -40,22 +40,22 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
-			['acceptTerms', 'required', 'requiredValue' => true, 'message' => \Yii::t('common','You need to accept the terms.')],
+            ['acceptTerms', 'required', 'requiredValue' => true, 'message' => \Yii::t('common','You need to accept the terms.')],
         ];
     }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'username' => \Yii::t('common','Username'),
-			'email' => \Yii::t('common','Email'),
-			'password' => \Yii::t('common','Password'),
-			'acceptTerms' => \Yii::t('common','Terms accepted'),
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => \Yii::t('common','Username'),
+            'email' => \Yii::t('common','Email'),
+            'password' => \Yii::t('common','Password'),
+            'acceptTerms' => \Yii::t('common','Terms accepted'),
+        ];
+    }
 
     /**
      * Signs user up.

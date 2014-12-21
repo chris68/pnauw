@@ -3,11 +3,11 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-			'dsn' => 'pgsql:host=localhost;dbname=pnauw_dev',
+            'dsn' => 'pgsql:host=localhost;dbname=pnauw_dev',
             'username' => 'mailwitch',
             'password' => 'mailwitch',
             'charset' => 'utf8',
-			'tablePrefix' => 'tbl_',
+            'tablePrefix' => 'tbl_',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

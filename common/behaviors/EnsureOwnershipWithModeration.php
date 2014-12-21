@@ -17,7 +17,7 @@ class EnsureOwnershipWithModeration extends EnsureOwnership {
     /**
      * Set the owner id to the current user upon object creation
      * Checks if owner id fits to current user upon object update
-	 * or the user is a moderator (who may change objects from other users)
+     * or the user is a moderator (who may change objects from other users)
      *
      * @param yii\base\Event $event event parameter
      */

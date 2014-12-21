@@ -14,13 +14,13 @@ $this->params['help'] = 'campaign-crud';
 ?>
 <div class="campaign-update">
 
-	<?= Html::a('Alle Bilder zur Kampagne anschauen', PictureController::urlCampaign('index', $model->id)) ?> | 
-	<?= Html::a('Öffentliche Kampagnendarstellung zeigen',['campaign/show','id' => $model->id], ['target' => '_blank'] ) ?>
-	
-	<h1><?= $this->title ?></h1>
+    <?= Html::a('Alle Bilder zur Kampagne anschauen', PictureController::urlCampaign('index', $model->id)) ?> | 
+    <?= Html::a('Öffentliche Kampagnendarstellung zeigen',['campaign/show','id' => $model->id], ['target' => '_blank'] ) ?>
+    
+    <h1><?= $this->title ?></h1>
 
-	<?php echo $this->render('_form', [
-		'model' => $model,
-	]); ?>
+    <?php echo $this->render('_form', [
+        'model' => $model,
+    ]); ?>
 
 </div>

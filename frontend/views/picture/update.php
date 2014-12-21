@@ -12,9 +12,9 @@ $this->params['help'] = 'picture-update';
 ?>
 <div class="picture-update">
 
-	<?php echo $this->render('_formtabbed', [
-		'model' => $model,
-		'outerform' => NULL,
-	]); ?>
+    <?php echo $this->render('_formtabbed', [
+        'model' => $model,
+        'outerform' => NULL,
+    ]); ?>
 
 </div>

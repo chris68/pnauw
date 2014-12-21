@@ -17,57 +17,57 @@ namespace frontend\models;
  */
 class Action extends \yii\db\ActiveRecord
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function tableName()
-	{
-		return 'tbl_action';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'tbl_action';
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function rules()
-	{
-		return [
-			[['sortkey', 'name', 'description'], 'required'],
-			[['sortkey', 'name', 'description', 'created_ts', 'modified_ts', 'deleted_ts'], 'string']
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['sortkey', 'name', 'description'], 'required'],
+            [['sortkey', 'name', 'description', 'created_ts', 'modified_ts', 'deleted_ts'], 'string']
+        ];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'sortkey' => 'Sortkey',
-			'name' => 'Name',
-			'description' => 'Description',
-			'created_ts' => 'Created Ts',
-			'modified_ts' => 'Modified Ts',
-			'deleted_ts' => 'Deleted Ts',
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'sortkey' => 'Sortkey',
+            'name' => 'Name',
+            'description' => 'Description',
+            'created_ts' => 'Created Ts',
+            'modified_ts' => 'Modified Ts',
+            'deleted_ts' => 'Deleted Ts',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getPictures()
-	{
-		return $this->hasMany(Picture::className(), ['action_id' => 'id']);
-	}
-	
-	/**
-	 * Input for a standard dropdown list for all items
-	 * @return array 
-	 */
-	public static function dropDownList()
-	{
-		return \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name');
-	}
-	
-	
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getPictures()
+    {
+        return $this->hasMany(Picture::className(), ['action_id' => 'id']);
+    }
+    
+    /**
+     * Input for a standard dropdown list for all items
+     * @return array 
+     */
+    public static function dropDownList()
+    {
+        return \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name');
+    }
+    
+    
 }

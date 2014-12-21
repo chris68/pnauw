@@ -4,8 +4,8 @@ use yii\db\Schema;
 
 class m130528_202944_create_tables_locations extends \yii\db\Migration
 {
-	public function safeUp()
-	{
+    public function safeUp()
+    {
 $sql = <<<'EOT'
 CREATE TABLE {{%locationtype}}
 (
@@ -202,8 +202,8 @@ EOT;
 $this->execute($sql);
         }
 
-	public function safeDown()
-	{
+    public function safeDown()
+    {
 $sql = <<<'EOT'
 drop table {{%locationhierachy}};
 EOT;
@@ -217,5 +217,5 @@ drop table {{%locationtype}};
 EOT;
 $this->execute($sql);
 
-	}
+    }
 }

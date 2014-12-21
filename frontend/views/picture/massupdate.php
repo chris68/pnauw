@@ -11,37 +11,37 @@ use yii\bootstrap\Collapse;
 ?>
 <div class="picture-massupdate">
 
-	<?=
-		Collapse::widget([
-			'items' => [
-				[
-					'label' => '<span class="glyphicon glyphicon-collapse-down"></span> Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' ,
-					'encode' => false,
-					'content' => $this->render('_search', ['model' => $searchModel]),
-				],
-			],
-			'options' => 
-			[
-				'style' => 'margin-bottom: 10px'
-			],
-	   ]);
-	?>
+    <?=
+        Collapse::widget([
+            'items' => [
+                [
+                    'label' => '<span class="glyphicon glyphicon-collapse-down"></span> Suchen und Filtern <span class="badge">'.$searchModel->getFilterStatus().'</span>' ,
+                    'encode' => false,
+                    'content' => $this->render('_search', ['model' => $searchModel]),
+                ],
+            ],
+            'options' => 
+            [
+                'style' => 'margin-bottom: 10px'
+            ],
+       ]);
+    ?>
 
-	<?= ListView::widget([
-		'dataProvider' => $dataProvider,
-		'layout' => "{pager}\n{items}",
-		'itemView' => function ($model, $key, $index, $widget) use ($updatedmodel) {
-			return $this->render('update', [
-				'model' => isset($updatedmodel)?$updatedmodel:$model,
-			]);
-		},
-	]); 
-	?>
-	
-	<?php
-		// Need to override the help setting from the detail update
-		$this->params['help'] = 'picture-massupdate';
-	?>
+    <?= ListView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => "{pager}\n{items}",
+        'itemView' => function ($model, $key, $index, $widget) use ($updatedmodel) {
+            return $this->render('update', [
+                'model' => isset($updatedmodel)?$updatedmodel:$model,
+            ]);
+        },
+    ]); 
+    ?>
+    
+    <?php
+        // Need to override the help setting from the detail update
+        $this->params['help'] = 'picture-massupdate';
+    ?>
 </div>
 
 

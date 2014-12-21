@@ -10,55 +10,55 @@ use yii\base\Model;
  */
 class ContactForm extends Model
 {
-	public $name;
-	public $email;
-	public $subject;
-	public $body;
-	public $verifyCode;
+    public $name;
+    public $email;
+    public $subject;
+    public $body;
+    public $verifyCode;
 
-	/**
+    /**
      * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			// name, email, subject and body are required
-			[['name', 'email', 'subject', 'body'], 'required'],
-			// email has to be a valid email address
-			['email', 'email'],
-			// verifyCode needs to be entered correctly
-			['verifyCode', 'captcha'],
-		];
-	}
+     */
+    public function rules()
+    {
+        return [
+            // name, email, subject and body are required
+            [['name', 'email', 'subject', 'body'], 'required'],
+            // email has to be a valid email address
+            ['email', 'email'],
+            // verifyCode needs to be entered correctly
+            ['verifyCode', 'captcha'],
+        ];
+    }
 
-	/**
+    /**
      * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'name' => \Yii::t('base','Name'), 
-			'email' => \Yii::t('base','Email'), 
-			'subject' => \Yii::t('base','Subject'), 
-			'body' => \Yii::t('base', 'Body'),
-			'verifyCode' => \Yii::t('base','Verification Code'),
-		];
-	}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => \Yii::t('base','Name'), 
+            'email' => \Yii::t('base','Email'), 
+            'subject' => \Yii::t('base','Subject'), 
+            'body' => \Yii::t('base', 'Body'),
+            'verifyCode' => \Yii::t('base','Verification Code'),
+        ];
+    }
 
-	/**
+    /**
      * Sends an email to the specified email address using the information collected by this model.
      *
      * @param  string  $email the target email address
      * @return boolean whether the email was sent
-	 */
+     */
     public function sendEmail($email)
-	{
-			return Yii::$app->mailer->compose()
-				->setTo([$this->email => $this->name])
-				->setFrom([Yii::$app->params['noreplyEmail'] => Yii::$app->name . ' (robot)'])
-				->setBcc(Yii::$app->params['contactEmail'])
-				->setSubject($this->subject)
-				->setTextBody($this->body)
-				->send();
-	}
+    {
+            return Yii::$app->mailer->compose()
+                ->setTo([$this->email => $this->name])
+                ->setFrom([Yii::$app->params['noreplyEmail'] => Yii::$app->name . ' (robot)'])
+                ->setBcc(Yii::$app->params['contactEmail'])
+                ->setSubject($this->subject)
+                ->setTextBody($this->body)
+                ->send();
+    }
 }

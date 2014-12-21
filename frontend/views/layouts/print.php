@@ -13,22 +13,22 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-	<meta charset="<?= Yii::$app->charset ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Plattform zum Dokumentieren von missbräuchlichen Parken auf Gehwegen, Radwegen und in verkehrsberuhigten Zonen">
+    <meta charset="<?= Yii::$app->charset ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plattform zum Dokumentieren von missbräuchlichen Parken auf Gehwegen, Radwegen und in verkehrsberuhigten Zonen">
     <?= Html::csrfMetaTags() ?>
-	<link rel="icon" type="image/x-icon" href="<?=Url::to('favicon.ico')?>">
-	<title><?= $this->title ?></title>
-	<?php $this->head() ?>
+    <link rel="icon" type="image/x-icon" href="<?=Url::to('favicon.ico')?>">
+    <title><?= $this->title ?></title>
+    <?php $this->head() ?>
 </head>
 <body>
-	<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-	<div class="container">
-	<?= $content ?>
-	</div>
+    <div class="container">
+    <?= $content ?>
+    </div>
 
-	<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>

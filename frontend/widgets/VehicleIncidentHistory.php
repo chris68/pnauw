@@ -18,30 +18,30 @@ class VehicleIncidentHistory extends \yii\base\Widget
      */
     public $picture;
  
-	/**
-	 * @var array the HTML attributes for the container tag of this widget.
-	 */
-	public $options = [];
+    /**
+     * @var array the HTML attributes for the container tag of this widget.
+     */
+    public $options = [];
     
-	public function init()
-	{
-		parent::init();
+    public function init()
+    {
+        parent::init();
 
-		if (!empty($this->picture->vehicle_reg_plate)) {
-			$count = Picture::find()->where(['vehicle_reg_plate' => $this->picture->vehicle_reg_plate])->count();
+        if (!empty($this->picture->vehicle_reg_plate)) {
+            $count = Picture::find()->where(['vehicle_reg_plate' => $this->picture->vehicle_reg_plate])->count();
 
-			if ($count > 3) {
-				$content = 'Bereits <b style="color:red">'.$count.' Vorfälle</b>';
-			}
-			elseif ($count > 1) {
-				$content = 'Bereits <b>'.$count.' Vorfälle</b> ';
-			} else {
-				$content = 'Keine weiteren Vorfälle';
-			}
-			$content = $content.' bei <a target = "_blank" href="'.Url::to(PictureController::urlVehicleRegPlate('manage',$this->picture->vehicle_reg_plate)).'">'.Html::encode($this->picture->vehicle_reg_plate).'</a>';
+            if ($count > 3) {
+                $content = 'Bereits <b style="color:red">'.$count.' Vorfälle</b>';
+            }
+            elseif ($count > 1) {
+                $content = 'Bereits <b>'.$count.' Vorfälle</b> ';
+            } else {
+                $content = 'Keine weiteren Vorfälle';
+            }
+            $content = $content.' bei <a target = "_blank" href="'.Url::to(PictureController::urlVehicleRegPlate('manage',$this->picture->vehicle_reg_plate)).'">'.Html::encode($this->picture->vehicle_reg_plate).'</a>';
 
-			echo \yii\helpers\Html::tag('p',$content,$this->options);
-		}
+            echo \yii\helpers\Html::tag('p',$content,$this->options);
+        }
     }
  
 };

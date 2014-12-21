@@ -17,13 +17,13 @@ class PasswordResetRequestForm extends Model
     public function rules()
     {
         return [
-			['email', 'filter', 'filter' => 'trim'],
-			['email', 'required'],
-			['email', 'email'],
-			['email', 'exist', 
+            ['email', 'filter', 'filter' => 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'exist', 
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-				'message' => \Yii::t('common','There is no user with such email.'), 
+                'message' => \Yii::t('common','There is no user with such email.'), 
 
             ],
         ];

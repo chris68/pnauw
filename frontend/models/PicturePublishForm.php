@@ -11,29 +11,29 @@ use yii\base\Model;
 class PicturePublishForm extends Model
 {
 
-	/**
+    /**
      * @var int The id of the picture
      */
     public $id;
 
-	/**
+    /**
      * @var string The visibility of the picture
      */
     public $visibility_id;
 
-	/**
-	 * {@inheritdoc}
-	 */
+    /**
+     * {@inheritdoc}
+     */
     public function rules() {
         return [
- 			['id', 'integer'],
- 			['visibility_id', 'string'],
+             ['id', 'integer'],
+             ['visibility_id', 'string'],
        ];
     }
 
-	/**
-	 * {@inheritdoc}
-	 */
+    /**
+     * {@inheritdoc}
+     */
     public function attributeLabels() {
         return [
             'visibility_id' => 'Sichtbarkeit',

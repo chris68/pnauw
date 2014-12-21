@@ -15,10 +15,10 @@ $this->params['help'] = 'citation-crud';
 ?>
 <div class="citation-update">
 
-	<h1><?= $this->title ?></h1>
+    <h1><?= $this->title ?></h1>
 
-	<?php echo $this->render('_form', [
-		'model' => $model,
-	]); ?>
+    <?php echo $this->render('_form', [
+        'model' => $model,
+    ]); ?>
 
 </div>

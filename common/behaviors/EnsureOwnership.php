@@ -24,19 +24,19 @@ class EnsureOwnership extends Behavior {
      */
     public $ensureOnFind = true;
 
-	/**
-	 * Declares event handlers for the [[owner]]'s events.
-	 * @return array events (array keys) and the corresponding event handler methods (array values).
-	 */
-	public function events()
-	{
-		return [
-			ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
-			ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
-			ActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
-			ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
-		];
-	}
+    /**
+     * Declares event handlers for the [[owner]]'s events.
+     * @return array events (array keys) and the corresponding event handler methods (array values).
+     */
+    public function events()
+    {
+        return [
+            ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
+            ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
+            ActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
+            ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
+        ];
+    }
 
     /**
      * Set the owner id to the current user upon object creation
@@ -62,7 +62,7 @@ class EnsureOwnership extends Behavior {
     public function beforeDelete($event) {
         if ($this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId()) {
             throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
-		}
+        }
     }
     
     /**
@@ -73,7 +73,7 @@ class EnsureOwnership extends Behavior {
     public function afterFind($event) {
         if ($this->ensureOnFind && $this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId()) {
             throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
-		}
+        }
     }
 }
 ?>

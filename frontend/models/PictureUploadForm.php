@@ -11,28 +11,28 @@ use yii\base\Model;
 class PictureUploadForm extends Model
 {
 
-	/**
+    /**
      * @var string[] The names of the files to be uploaded
      */
     public $file_names;
 
-	/**
-	 * @var file[] The file handles of the files to be uploaded
-	 */
-	public $file_handles;
+    /**
+     * @var file[] The file handles of the files to be uploaded
+     */
+    public $file_handles;
 
-	/**
-	 * {@inheritdoc}
-	 */
+    /**
+     * {@inheritdoc}
+     */
     public function rules() {
         return [
- 			['file_handles', 'file', 'maxFiles' => 50, 'maxSize' => 10485760, 'extensions' => 'jpg', 'mimeTypes' => 'image/jpeg',  'skipOnEmpty' => false],
+             ['file_handles', 'file', 'maxFiles' => 50, 'maxSize' => 10485760, 'extensions' => 'jpg', 'mimeTypes' => 'image/jpeg',  'skipOnEmpty' => false],
        ];
     }
 
-	/**
-	 * {@inheritdoc}
-	 */
+    /**
+     * {@inheritdoc}
+     */
     public function attributeLabels() {
         return [
             'file_names' => 'Hochzuladene Bilder',

@@ -4,8 +4,8 @@ use yii\db\Schema;
 
 class m130528_192749_create_tables_picture_image extends \yii\db\Migration
 {
-	public function safeUp()
-	{
+    public function safeUp()
+    {
 $sql = <<<'EOT'
 CREATE TABLE {{%image}}
 (
@@ -222,10 +222,10 @@ CREATE TABLE {{%picture}}
 EOT;
 $this->execute($sql);
 
-	}
+    }
 
-	public function safeDown()
-	{
+    public function safeDown()
+    {
 $sql = <<<'EOT'
 drop table {{%picture}};
 EOT;
@@ -271,5 +271,5 @@ drop table {{%image}};
 EOT;
 $this->execute($sql);
 
-	}
+    }
 }

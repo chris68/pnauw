@@ -20,67 +20,67 @@ namespace frontend\models;
  */
 class Incident extends \yii\db\ActiveRecord
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function tableName()
-	{
-		return 'tbl_incident';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'tbl_incident';
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function rules()
-	{
-		return [
-			[['sortkey', 'name', 'category', 'description', 'severity'], 'required'],
-			[['sortkey', 'name', 'category', 'description', 'created_ts', 'modified_ts', 'deleted_ts'], 'string'],
-			[['severity'], 'integer']
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['sortkey', 'name', 'category', 'description', 'severity'], 'required'],
+            [['sortkey', 'name', 'category', 'description', 'created_ts', 'modified_ts', 'deleted_ts'], 'string'],
+            [['severity'], 'integer']
+        ];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'sortkey' => 'Sortkey',
-			'name' => 'Name',
-			'category' => 'Category',
-			'description' => 'Description',
-			'severity' => 'Severity',
-			'created_ts' => 'Created Ts',
-			'modified_ts' => 'Modified Ts',
-			'deleted_ts' => 'Deleted Ts',
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'sortkey' => 'Sortkey',
+            'name' => 'Name',
+            'category' => 'Category',
+            'description' => 'Description',
+            'severity' => 'Severity',
+            'created_ts' => 'Created Ts',
+            'modified_ts' => 'Modified Ts',
+            'deleted_ts' => 'Deleted Ts',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getPictures()
-	{
-		return $this->hasMany(Picture::className(), ['incident_id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getPictures()
+    {
+        return $this->hasMany(Picture::className(), ['incident_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getSeverity()
-	{
-		return $this->hasOne(Severity::className(), ['level' => 'severity']);
-	}
-	
-	/**
-	 * Input for a standard dropdown list for all items
-	 * @return array 
-	 */
-	public static function dropDownList()
-	{
-		return \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name', 'category');
-	}
-	
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getSeverity()
+    {
+        return $this->hasOne(Severity::className(), ['level' => 'severity']);
+    }
+    
+    /**
+     * Input for a standard dropdown list for all items
+     * @return array 
+     */
+    public static function dropDownList()
+    {
+        return \yii\helpers\ArrayHelper::map(self::find()->orderBy('sortkey')->all(),'id','name', 'category');
+    }
+    
 }
