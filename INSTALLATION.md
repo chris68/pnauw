@@ -1,47 +1,33 @@
-## Foreign ppa ##
-For Ubuntu 12.04 you must use foreign ppas. In order to install them easily via ``add-apt-repository`` you must install it first.
-### Install  ``add-apt-repository`` ###
-``add-apt-repository`` resides in package ``python-software-properties``. Install it via:
-```
-sudo apt-get install python-software-properties
-```
-With Ubuntu >= 12.10 it will be (see http://stackoverflow.com/questions/13018626/add-apt-repository-not-found):
-```
-sudo apt-get install software-properties-common
-```
-## Usage ##
-Before you install things from a foreign ppa it make sense to update the system before to the an up-to-date level via
-```
-sudo apt-get update
-sudo apt-get dist-upgrade
-```
 ## Php ##
-### Install PHP 5.4 ###
-To use Yii2 for Ubuntu 12.04 you must first install PHP 5.4 manually since Ubuntu 12.04 only comes with PHP 5.3.
+Php >= 5.4 is required
+### Further modules ###
+The following modules are needed. Install/Activate them via
 
-PHP 5.4 is packaged in the ppa https://launchpad.net/~ondrej/+archive/ubuntu/php5-oldstable. Install it via:
+sudo apt-get install php5-mcrypt
+sudo php5enmod mcrypt
+
+sudo apt-get install php5-imagick
+sudo php5enmod imagick
+### php.ini ###
+Add the following to the end of php.ini
 ```
-sudo add-apt-repository ppa:ondrej/php5
-sudo apt-get update
-sudo apt-get dist-upgrade
+[custom]
+; Settings for pnauw
+max_file_uploads = 50
+post_max_size = 55M
+upload_max_filesize = 10M
+memory_limit = 128M
 ```
-
-Restart the apache server via ``sudo service apache restart``
-### Kill superfluous xcache.ini ###
-There might exist a second and superflous file ``/etc/php/apache2/conf.d/xcache.ini``, parallel to the correct ``20-xcache.ini``. Delete it since otherwise you get constant errors about a wrong ``xcache.so`` file.
-
 ## Postgres ##
+Postgres 9.3 is used.
 ### Install postgis ###
-To use postgis for Ubuntu 12.04 you must first install it manually.
+``sudo apt-get install postgresql-9.3-postgis-2.1``
+## Migrate postgres ##
+If you need to migrate postgres from e.g. 9.1 to 9.3 then make sure that postgis is installed first.
 
-Be sure that no old installation (e.g. version 1.5) exists before. If it does remove it via ``sudo apt-get remove postgresql-9.1-postgis``
+Then follow the instructions in http://nixmash.com/postgresql/upgrading-postgresql-9-1-to-9-3-in-ubuntu
 
-Then install version 2.x from the ppa https://launchpad.net/~ubuntugis/+archive/ubuntu/ppa via:
-```
-sudo add-apt-repository ppa:ubuntugis/ppa
-sudo apt-get update
-sudo apt-get install postgresql-9.1-postgis
-```
+Finally you need to fix the port for 9.3 again to listen to 5432 (it listens to 5433 after the install!)
 ## FTP ##
 The ftp server ``vsftpd`` is best used for the ftp access.
 ### Install package ###
