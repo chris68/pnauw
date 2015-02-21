@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use frontend\helpers\Assist;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'email') ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
                 <p>
-                    Ich habe die <?= Html::a('Nutzungsbedingungen','site/terms') ?> <b>und</b> <?= Html::a('Datenschutzregeln','site/privacy') ?> gelesen und akzeptiere <b>beide</b>.
+                    Ich habe die <?= Assist::linkNew('Nutzungsbedingungen',['site/terms']) ?> <b>und</b> <?= Assist::linkNew('Datenschutzregeln',['site/privacy']) ?> gelesen und akzeptiere <b>beide</b>.
                 </p>
                 <?= 
                 $form->field($model, 'acceptTerms')->checkbox() ?>
