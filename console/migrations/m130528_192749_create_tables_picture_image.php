@@ -94,7 +94,7 @@ $sql = <<<'EOT'
 CREATE TABLE {{%campaign}}
 (
   id serial NOT NULL PRIMARY KEY,
-  owner_id int NOT NULL references {{%user}}(id),
+  owner_id int NOT NULL references {{%user}}(id) on delete cascade,
   name text not null,
   description text not null,
   running_from date,
@@ -133,7 +133,7 @@ $sql = <<<'EOT'
 CREATE TABLE {{%citation}}
 (
   id serial NOT NULL PRIMARY KEY,
-  owner_id int NOT NULL references {{%user}}(id),
+  owner_id int NOT NULL references {{%user}}(id) on delete cascade,
   name text not null,
   description text not null,
   created_ts timestamp not null default current_timestamp,
@@ -175,7 +175,7 @@ $sql = <<<'EOT'
 CREATE TABLE {{%picture}}
 (
   id serial NOT NULL PRIMARY KEY,
-  owner_id int NOT NULL references {{%user}}(id),
+  owner_id int NOT NULL references {{%user}}(id) on delete cascade,
   
   -- Name and description
   name text NOT NULL DEFAULT '',

@@ -74,6 +74,8 @@ AppAsset::register($this);
                     'items' => [
                         ['label' => 'Kampagnen', 'url' => ['/campaign/index'], 'visible' => Yii::$app->user->can('trusted')],
                         ['label' => 'Anzeigen', 'url' => ['/citation/index']],
+                        '<li class="divider"></li>',
+                        ['label' => 'Nutzerdaten', 'url' => ['/site/userdata']],
                     ],
                 ],
                 ['linkOptions' => ['target' => '_blank'], 'label' => 'Hilfe', 'url' => ['/site/help'.(isset($this->params['help']) ? ('#'.$this->params['help']) : ''), ],],

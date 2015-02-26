@@ -12,6 +12,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use frontend\models\UserdataForm;
 
 /**
  * Site controller
@@ -26,7 +27,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'userdata'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -39,6 +40,11 @@ class SiteController extends Controller
                         'allow' => true,
                     // Logout actually should be possible all the time!
                     //    'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['userdata'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
@@ -195,4 +201,21 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionUserdata()
+    {
+        $model = new UserdataForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                $model->save();
+                Yii::$app->getSession()->setFlash('success', 'Die Änderungen wurden übernommen');
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('userdata', [
+            'model' => $model,
+        ]);
+    }
+
 }
