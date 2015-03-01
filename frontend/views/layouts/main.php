@@ -47,7 +47,7 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => \Yii::t('base','Home'), 'url' => ['/site/index']],
+                ['label' => \Yii::t('base','Home'), 'url' => Yii::$app->homeUrl],
                 [
                     'label' => 'Moderieren', 
                     'visible' => Yii::$app->user->can('moderator'),
