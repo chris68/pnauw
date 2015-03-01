@@ -26,6 +26,10 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'as loginLogger' => [
+                'class' => 'common\behaviors\ProtocolLogin',
+                // ... property init values ...
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
