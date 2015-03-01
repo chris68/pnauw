@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <h4>Änderung der Nutzungsbedingung</h4>
     <p>
-        Alle Änderungen dieser Nutzungsbedingungen werden hier veröffentlicht und mit dem in bei Veröffentlichung angegebenen Gültigkeitdatum gültig. Wir werden Ihnen eine Benachrichtigungsmail an Ihre Standard Emailadresse aus dem Nutzerprofil schicken und Sie zudem auf der Startseite auf die Änderungen hinweisen. Wenn Sie mit den Änderungen nicht einverstanden sind, dann dürfen Sie den Service nicht weiter nutzen.
+        Alle Änderungen dieser Nutzungsbedingungen werden hier veröffentlicht und mit dem angegebenen Gültigkeitdatum gültig. Wir werden Ihnen eine Benachrichtigungsmail an Ihre Standard Emailadresse aus dem Nutzerprofil schicken und Sie zudem auf der Startseite auf die Änderungen hinweisen. Wenn Sie mit den Änderungen nicht einverstanden sind, dann dürfen Sie den Service nicht weiter nutzen.
     </p>
 
     <p>
