@@ -3,7 +3,6 @@
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel frontend\models\PictureSearch */
 
-use Yii;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
