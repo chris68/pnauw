@@ -21,8 +21,8 @@ class LeafletAsset extends AssetBundle
     ];
     public $js = [
         "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js",
-        "http://www.mapquestapi.com/sdk/leaflet/v1.s/mq-map.js?key=Fmjtd%7Cluurnu0znq%2Cal%3Do5-9w820a",
-        "http://www.mapquestapi.com/sdk/leaflet/v1.s/mq-geocoding.js?key=Fmjtd%7Cluurnu0znq%2Cal%3Do5-9w820a",
+        "http://open.mapquestapi.com/sdk/leaflet/v1.s/mq-map.js?key=Fmjtd%7Cluurnu0znq%2Cal%3Do5-9w820a",
+        "http://open.mapquestapi.com/sdk/leaflet/v1.s/mq-geocoding.js?key=Fmjtd%7Cluurnu0znq%2Cal%3Do5-9w820a",
     ];
     public $depends = [
         'yii\web\YiiAsset',
