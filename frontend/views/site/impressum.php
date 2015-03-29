@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h4>Betreiber</h4>
     <p>
-        Diese Seite als technische Plattform wird von Christoph Toussaint, Am Knittelberg 71, 76229 Karlsruhe, Deutschland als Betreiber bereitgestellt. Sie können mich <?= Html::a('hier','site/contact')?> kontaktieren.
+        Diese Seite als technische Plattform wird von Christoph Toussaint, Am Knittelberg 71, 76229 Karlsruhe, Deutschland als Betreiber bereitgestellt. Sie können mich <?= Html::a('hier',['site/contact'])?> kontaktieren.
     </p>
 
     <h4>Verantwortlichkeit für Inhalte</h4>
