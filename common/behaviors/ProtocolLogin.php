@@ -26,12 +26,10 @@ class ProtocolLogin extends Behavior {
      * @param yii\base\Event $event event parameter
      */
     public function afterLogin($event) {
-        $userlog = new Userlog();
-        $userlog->owner_id = Yii::$app->getUser()->getIdentity()->getId();
-        $userlog->ts = new \yii\db\Expression ('NOW()');
-        $userlog->event = 'login';
-        $userlog->log = 'Login from <'.Yii::$app->getRequest()->getUserHost().'> ['.Yii::$app->getRequest()->getUserIP().'] via '.($event->cookieBased?'cookie':'user/password');
-        $userlog->save();
+        Userlog::log(
+            'login',
+            'Login from <'.Yii::$app->getRequest()->getUserHost().'> ['.Yii::$app->getRequest()->getUserIP().'] via '.($event->cookieBased?'cookie':'user/password')
+        );
     }
 }
 ?>

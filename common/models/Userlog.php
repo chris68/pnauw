@@ -55,4 +55,25 @@ class Userlog extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'owner_id']);
     }
+
+    /**
+     * Create a log entry
+     * @param string $event The event
+     * @param string $log The log message
+     * @param int $user The user's id; if null the currently logged in user will be taken
+     */
+    public static function log($event, $log, $user = NULL)
+    {
+        $userlog = new Userlog();
+
+        if ($user === NULL) {
+            $user = Yii::$app->getUser()->getIdentity()->getId();
+        }
+
+        $userlog->owner_id = $user;
+        $userlog->ts = new \yii\db\Expression ('NOW()');
+        $userlog->event = $event;
+        $userlog->log = $log;
+        $userlog->save();
+    }
 }
