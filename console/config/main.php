@@ -45,6 +45,11 @@ return [
                 //],
             ],
         ],
+        'urlManager' => [
+            'baseUrl' => 'http://parke-nicht-auf-unseren-wegen.de/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ]
     ],
     'params' => $params,
 ];

@@ -9,8 +9,6 @@ $params = array_merge(
 return [
     'id' => 'pnauw',
     'basePath' => dirname(__DIR__),
-    'name' => 'Parke nicht auf unseren Wegen',
-    'version' => '1.2.1',
     'language' => 'de',
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
