@@ -18,6 +18,12 @@ The gibhub repository where the yii2-app-advanced template is hosted; this is ne
  * yii2-app-advanced	https://github.com/yiisoft/yii2-app-advanced (fetch)
  * yii2-app-advanced	https://github.com/yiisoft/yii2-app-advanced (push)
 
+Add this remote via:
+```
+git remote add yii2-app-advanced https://github.com/yiisoft/yii2-app-advanced
+git config remote.yii2-app-advanced.tagopt --no-tags
+```
+The no-tags option is necessary so that the tags defined in the Yii framework are not fetched to our local repo
 Branches
 --------
 
