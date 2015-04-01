@@ -72,6 +72,10 @@ return [
 //            'datetimeFormat' => 'yyyy-MM-dd H:i:s',
             //'timeFormat' => 'H:i:s',
         ],
+        'assetManager' => [
+            'linkAssets' => true,
+            'appendTimestamp' => true,
+        ],
     ],
     'params' => $params,
 ];
