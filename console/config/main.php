@@ -10,7 +10,6 @@ return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'bootstrap' => ['log', 'gii'],
     'language' => 'en-US',
     'controllerNamespace' => 'console\controllers',
     'components' => [
