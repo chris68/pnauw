@@ -40,13 +40,14 @@ $this->params['help'] = 'picture-index';
         {
             // Generate the massview link by changing the route and throwing out sort/pagination
 
-            $params = Yii::$app->getRequest()->get();
+            $params = Yii::$app->getRequest()->getQueryParams();
 
             unset($params[$dataProvider->getPagination()->pageParam]);
             unset($params[$dataProvider->getSort()->sortParam]);
             $params[$dataProvider->getSort()->sortParam] = 'id';
+            $params[0] = '/picture/massview';
             
-            echo Html::a('Im Detail anschauen', Url::toRoute(array_replace_recursive(['picture/massview'], $params)), ['target' => '_blank']);
+            echo Html::a('Im Detail anschauen', Url::toRoute($params), ['target' => '_blank']);
             if (!Yii::$app->user->isGuest) {
                 echo ' | '.Html::a('Im Detail bearbeiten', Url::toRoute(array_replace_recursive(['picture/massupdate'], $params)), ['target' => '_blank']);
             }
