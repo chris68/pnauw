@@ -40,20 +40,13 @@ Handling
 Merge in changes from yii2-app-advanced
 ---------------------------------------
 
- * Check and write down as *CommitOld* (via `git log` or `git log-pretty-abs`) the **current** top-most commit of yii2-app-advanced/master
- * Execute `git fetch -t yii2-app-advanced`
- * Check and write down as *CommitNew* the **now** top-most commit of yii2-app-advanced/master
- * Then `git cherry-pick -e -x` all the commits which are new; do this best copy and past directly from github
- * It is likely that you get conflicts; resolve them
- * Check the results and commit them; due to the -x the cherrypicked sha will be included; due to the -e you have the chance to review at all!
+ * You want to merge changes from a *tag-from* to a *tag-to*
+ * Execute `git fetch yii2-app-advanced`
+ * Gather from github the commit of the *tag-from* and the commit of the *tag-to* of yii2-app-advanced/master
+ * Execute `git log-pretty-abs <commit-from>..<commit-to>`
+ * Copy and paste the output to a text file and edit the textfile; throw out all commits which do not change any relevant part of our application
+ * Then `git cherry-pick -e -x <commit>` all the relevant commits from the textfile
+ * It is likely that you get conflicts; resolve them in netbeans (quite well supported)
+ * Check the results and commit them in netbeans; due to the -x the cherrypicked sha will be included; due to the -e you have the chance to review at all!
  * Check the log and see that the commits are now on master!
 
-Alternative way:
-
- * Goto to the checkout yii2-app-advanced
- * Execute `git fetch -t`
- * Excecute `git diff tag_from tag_to -- > the-patch.diff` (tag_from / tag_to are the revision tags, e.g. 2.0.2
- * Check via `git log-pretty-abs` the changes; take especial care for moved files!
- * Install the patch via netbeans
- * Check to output window/tab to see whether all patches are executed!
- * Check the results and commit them
