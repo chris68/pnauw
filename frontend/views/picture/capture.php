@@ -5,8 +5,9 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
+use frontend\views\picture\assets\PictureLivemapAsset;
 
-\frontend\views\picture\assets\PictureLivemapAsset::register($this);
+PictureLivemapAsset::register($this);
 
 $this->title = 'Bild aufnehmen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];

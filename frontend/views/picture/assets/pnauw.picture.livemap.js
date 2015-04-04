@@ -1,18 +1,25 @@
 var map = L.map('livemap');
 map.locate({setView: true, watch: true, maxZoom: 16});
-MQ.mapLayer().addTo(map);
+L.tileLayer("http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+   subdomains: "1234",
+   attribution: "&copy; <a href='http://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='http://www.openstreetmap.org/copyright' title='ODbL'>open license</a>. Tiles Courtesy of <a href='http://www.mapquest.com/'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>"
+}).addTo(map);
+//
+//MQ.mapLayer().addTo(map); // No attribution change feasible!
+
+var positionLayerGroup = L.layerGroup([]);
+positionLayerGroup.addTo(map);
+
+L.control.layers({},{"Position": positionLayerGroup}).addTo(map);
 
 var geocode = MQ.geocode().on('success', function(e) { 
     $('#livemap-nearest-address').html(geocode.describeLocation(e.result.best)); 
     //$('#livemap-nearest-address').html(e.result.best.postalcode + e.result.best.adminArea5); 
 });
 
-var circle;
 map.on('locationfound', function(e) { 
-    if (circle) {
-        map.removeLayer(circle); 
-    }
-    circle = L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}).addTo(map);
+    positionLayerGroup.clearLayers();
+    positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
     geocode.reverse(e.latlng);
 });
 

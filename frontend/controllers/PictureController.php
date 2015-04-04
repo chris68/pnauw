@@ -112,9 +112,9 @@ class PictureController extends Controller
 
         // Retrieve the center of the current map bounds
         if (!empty($searchModel->map_bounds)) {
-            $corners = explode(',',$searchModel->map_bounds); // Format: "lat_lo,lng_lo,lat_hi,lng_hi"
-            $lat = ((float)$corners[0]+(float)$corners[2])/2;
-            $lng = ((float)$corners[1]+(float)$corners[3])/2;
+            $corners = explode(',',$searchModel->map_bounds); // Format: "lng_lo,lat_lo,lng_hi,lat_hi"
+            $lat = ((float)$corners[1]+(float)$corners[3])/2;
+            $lng = ((float)$corners[0]+(float)$corners[2])/2;
         }
         else
         {
@@ -150,12 +150,21 @@ class PictureController extends Controller
         $dataProvider->sort = false; // no sorting - even if the URL requires it!
         
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
+
         $coords = [];
         foreach ($dataProvider->getModels() as $pic) {
             // Only return coordinates that have been fixed already and not (0,0)
             if ($pic['loc_lat'] <> '0' && $pic['loc_lng'] <> '0' ) {
-                $coords[] = ['location'=>['lat'=>$pic['loc_lat'],'lng'=>$pic['loc_lng'],],'severity'=>$pic['severity'],'dist'=>$pic['dist']];
+                $coords[] = [
+                    'type'=>'Feature',
+                    'geometry' => [
+                        'type' => 'Point',
+                        'coordinates'=>[(double)$pic['loc_lng'],(double)$pic['loc_lat'],],
+                    ],
+                    'properties'=> [
+                        'popupContent' => 'This is where the Rockies play!'
+                    ],
+                ];
             }
         }
         return $coords;

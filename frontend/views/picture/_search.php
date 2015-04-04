@@ -28,6 +28,8 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'map_bind')->checkBox(['id'=>'search-map-bind', ]) ?>
             <?= $form->field($model, 'map_limit_points')->checkBox() ?>
             <?= Html::activeHiddenInput($model, 'map_bounds', ['id'=>'search-map-bounds', ]) ?>
+            <?= Html::activeHiddenInput($model, 'map_state', ['id'=>'search-map-state', ]) ?>
+            <?= Html::activeHiddenInput($model, 'map_gps', ['id'=>'search-map-gps', ]) ?>
             <?= $form->field($model, 'time_range')->dropDownList(frontend\models\PictureSearch::dropDownListTimeRanges(), ['id'=>'search-time-range', ]) ?>
             </fieldset>
         

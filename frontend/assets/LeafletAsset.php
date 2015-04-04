@@ -5,15 +5,19 @@ namespace frontend\assets;
 use yii\web\AssetBundle;
 
 /**
- * 
- * 
+ *
+ * // Method using MQ plugin
  * MQ.mapLayer().addTo(map);
  * 
- * L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
- *     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>',
- *     maxZoom: 18
- * })addTo(map);
-*/
+ * // Method using self constructed tile layer
+ * L.tileLayer("http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+ *   subdomains: "1234",
+ *   attribution: "&copy; <a href='http://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='http://www.openstreetmap.org/copyright' title='ODbL'>open license</a>. Tiles Courtesy of <a href='http://www.mapquest.com/'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>"
+ * }).addTo(map);
+ *
+ * See https://gist.github.com/mourner/1804938 for further tile layers
+ * 
+ */
 class LeafletAsset extends AssetBundle
 {
     public $css = [

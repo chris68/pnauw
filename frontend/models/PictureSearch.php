@@ -46,6 +46,8 @@ class PictureSearch extends Model
 
     // @todo: Separate these attributes into a separate search class/form; and then the form name here will became ps instead of s.
     // See https://github.com/chris68/pnauw/issues/22
+    public $map_state;
+    public $map_gps;
     public $map_bounds;
     public $map_bind=false;
     public $map_limit_points=true;
@@ -82,7 +84,7 @@ class PictureSearch extends Model
             [    ['map_bind', 'map_limit_points', ],
                 'boolean',
             ],
-            [    ['map_bounds', 'time_range'],
+            [    ['map_bounds', 'time_range', 'map_state', 'map_gps'],
                 'string',
             ],
             [['vehicle_reg_plate'], 'filter', 'filter' => 'mb_strtoupper', 'skipOnEmpty' => true],
@@ -98,18 +100,18 @@ class PictureSearch extends Model
             'public' => [
                 'id','taken','name','description', 
                 'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
-                'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
+                'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 'map_state', 'map_gps',
                 ],
             'moderator' => [
                 'id','taken','name','description', 
                 'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
-                'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
+                'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 'map_state', 'map_gps',
                 'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
                 ],
             'private' => [
                 'id','taken','name','description', 
                 'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
-                'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 
+                'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 'map_state', 'map_gps',
                 'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
                 'vehicle_country_code', 'vehicle_reg_plate', 'citation_id', ],
             'admin' => parent::scenarios()[self::SCENARIO_DEFAULT], // admin may do everthing
@@ -154,6 +156,8 @@ class PictureSearch extends Model
             'deleted_ts' => 'Gelöscht am',
             
             'map_bounds' => 'Kartengrenzen',
+            'map_state' => 'Kartenstatus',
+            'map_gps' => 'GPS-Mode',
             'map_bind' => 'Suche durch den Kartenbereich begrenzen',
             'map_limit_points' => 'Auch Ermittlung der Heatmap auf den Kartenbereich beschränken', 
             'time_range' => 'Zeitraum',
@@ -281,8 +285,8 @@ class PictureSearch extends Model
             case 'BOUNDS':
                 $corners = explode(',',$value);
                 // Format: "lat_lo,lng_lo,lat_hi,lng_hi"
-                $query->andWhere(['between', '{{%picture}}.'.$params['attr_lat'], $corners[0], $corners[2]]);
-                $query->andWhere(['between', '{{%picture}}.'.$params['attr_lng'], $corners[1], $corners[3]]);
+                $query->andWhere(['between', '{{%picture}}.'.$params['attr_lng'], $corners[0], $corners[2]]);
+                $query->andWhere(['between', '{{%picture}}.'.$params['attr_lat'], $corners[1], $corners[3]]);
                 break;
             case 'TIMERANGE':
                 $range = explode(';',$value);

@@ -9,7 +9,7 @@ use yii\bootstrap\ActiveForm;
 ?>
 
 <?php
-  \frontend\views\picture\assets\PictureHeatmapAsset::register($this);
+  \frontend\views\picture\assets\PictureOverviewmapAsset::register($this);
 ?>
 
     
@@ -23,9 +23,6 @@ use yii\bootstrap\ActiveForm;
 </script>
 <div class="row">
     <div class="col-sm-4 col-md-4 col-lg-4 form-group" style="margin-top: 10px; margin-bottom: 10px;">
-        <input type="text" id="picture-heatmap-search-address" class="form-control" style="margin-bottom: 5px" autocomplete="off" placeholder="Kartensuche">
-            
-        <!-- The Google maps canvas needs absolute coordinates -->
-        <div id="picture-heatmap-map-canvas" style="width: 300px; height: 300px;"></div>
+        <div id="overviewmap" style="height: 300px;"></div>
     </div>
 </div>
