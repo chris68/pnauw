@@ -26,7 +26,7 @@ $this->title = \Yii::$app->name;
                 <p>Dann schauen Sie doch einfach, was man zu Ihrem Parkverhalten sagt!</p>
 
                 <p>
-                    <a class="btn btn-default" href="<?= Url::to(['/picture/index', 's[time_range]' => '-30;0', 's[map_gps]' => 'locate-once', 's[map_bind]' => '1'])?>"><b style="color:red">Hier und heute</b>&raquo;</a>
+                    <a class="btn btn-default" href="<?= Url::to(['/picture/index', 's[time_range]' => '-1;0', 's[map_gps]' => 'locate-once', 's[map_bind]' => '1'])?>"><b style="color:red">Hier&amp;heute</b>&raquo;</a>
                     <a class="btn btn-default" href="<?= Url::to(['/picture/index', 's[time_range]' => '-180;0', 's[map_bind]' => '1'])?>">Alle aktuellen Vorfälle&raquo;</a>
                 </p>
             </div>
