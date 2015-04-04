@@ -68,6 +68,11 @@ $(function() {
         }
         else if (realtarget.data('value') == 'gps') {
             // Do not call event.preventDefault to ensure the menue is closed again!
+            // The new map center and zoom level will only be set after the map has ended to move
+            map.on('moveend', function(e) {
+                update_map_attributes();
+                $('#search-form').submit();
+            });
             map.locate({setView: true, watch: false, maxZoom: 16});
         }
         else {
