@@ -9,7 +9,7 @@ use yii\helpers\Url;
         <button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
             Karte <span class="caret"></span>
         </button>
-          <ul class="dropdown-menu" id="search-map" role="menu">
+          <ul class="dropdown-menu" id="search-map" role="menu" style="z-index: 100000;">
               <li><a data-value="bind" href="#">Ausschnitt <b>begrenzt</b> Suchergebnis</a></li>
               <li><a data-value="dynamic" href="#">Ausschnitt <b>gemäß</b> Suchergebnisse</a></li>
                 <li class="divider"></li>
@@ -19,7 +19,7 @@ use yii\helpers\Url;
         <button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" style="margin-left:10px;">
             Zeitraum <span class="caret"></span>
         </button>
-          <ul class="dropdown-menu" id="search-time" role="menu">
+          <ul class="dropdown-menu" id="search-time" role="menu" style="z-index: 100000;">
             <li><a data-value="0;0" href="#">Heute</a></li>
             <li><a data-value="-1;0" href="#">Gestern &amp; heute</a></li>
             <li class="divider"></li>
