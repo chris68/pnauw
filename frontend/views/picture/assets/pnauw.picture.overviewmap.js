@@ -38,7 +38,7 @@ $(function() {
         
         $('#search-map-gps').val('');
         
-        map.locate({setView: true, watch: false, maxZoom: 14});
+        map.locate({setView: true, watch: false, maxZoom: 16});
     }
 
     if ($('#search-map-bounds').val() != '') {
