@@ -59,17 +59,27 @@ var marker;
 var marker_org;
 
 function geocodePosition(pos) {
-  geocoder.geocode({
-    latLng: pos
-  }, function(responses,status) {
-    if (status == google.maps.GeocoderStatus.OK) { 
-      $('#picture-map-nearest-address').text (responses[0].formatted_address);
-      // Only if something relevant has been found update the model!
-      $('#picture-map-loc-formatted-addr').val (responses[0].formatted_address);
-    } else {
-      $('#picture-map-nearest-address').text ("Keine Adresse gefunden (Fehlercode:" + status + ")"); 
-    }
-  });
+    
+    var geocode = MQ.geocode().on('success', function(e) {
+        console.debug(e.result);
+        var location = e.result.best.street + ', '+ e.result.best.postalCode + ' ' + e.result.best.adminArea5 + ', ' + e.result.best.adminArea1;
+
+        $('#picture-map-nearest-address-mapquest').text (location);
+        $('#picture-map-loc-formatted-addr').val(location);
+    });
+    geocode.reverse(L.latLng(pos.lat(),pos.lng()));
+  
+    geocoder.geocode({
+      latLng: pos
+    }, function(responses,status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        $('#picture-map-nearest-address-google').text (responses[0].formatted_address);
+        // Only if something relevant has been found update the model!
+        // $('#picture-map-loc-formatted-addr').val (responses[0].formatted_address);
+      } else {
+        $('#picture-map-nearest-address-google').text ("Keine Adresse gefunden (Fehlercode:" + status + ")");
+      }
+    });
 }
 
 geocoder = new google.maps.Geocoder();

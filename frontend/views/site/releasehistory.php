@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Das Anzeige- und Zommverhalter bei den neuen Übersichtskarten ist durch die Umstellung noch einmal besser geworden; vor allem das Setzen auf die aktuelle GPS Position funktioniert nun wesentlich besser</li>
         <li>Die Autofahrer sehen damit nun noch schneller und einfacher via dem Absprung "Heute&amp;hier" ihren eigenen Vorfall</li>
         <li>Vorfälle, die vor mehr als einem Jahr dokumentiert wurden, werden öffentlich nur noch mit weniger Details und ohne Bild angezeigt</li>
+        <li>Die gespeicherte Adressinformationen zu den Bildern kommt nun aus Maqquest und basiert auf Openstreetmap-Daten, damit diese dauerhaft gespeichert werden können (Copyright von Google Maps sehr stringent!)</li>
     </ul>
     <h3>
         Version 1.2 (15.11.2014)

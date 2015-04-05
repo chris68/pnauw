@@ -13,8 +13,12 @@ use \yii\helpers\Html;
         <input type="text" id="picture-map-search-address" class="form-control" autocomplete="off" value="<?=$model->loc_formatted_addr?>" placeholder="Kartensuche">
         </div>
         <div class ="form-group">
-        <?php echo Html::label('Nächstliegende Adresse (ermittelt via Google Maps)','picture-map-nearest-address'); ?>
-        <p id="picture-map-nearest-address"></p>
+        <?php echo Html::label('Nächstliegende Adresse (ermittelt via Google Maps)','picture-map-nearest-address-google'); ?>
+        <p id="picture-map-nearest-address-google"></p>
+        </div>
+        <div class ="form-group">
+        <?php echo Html::label('Nächstliegende Adresse (ermittelt via Mapquest)','picture-map-nearest-address-mapquest'); ?>
+        <p id="picture-map-nearest-address-mapquest"></p>
         </div>
         <?= $form->field($model,'loc_formatted_addr')->textInput(['id'=>'picture-map-loc-formatted-addr', ]) ?>
         <!-- Hidden fields are not reset upon a form reset; therefore, we need to use normal fields which we hide -->

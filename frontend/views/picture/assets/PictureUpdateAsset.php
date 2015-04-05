@@ -15,5 +15,6 @@ class PictureUpdateAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        'frontend\assets\LeafletAsset'
     ];
 }
