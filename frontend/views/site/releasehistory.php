@@ -13,15 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
-        Version 1.3 (??.??.2015)
+        Version 1.3 (??.04.2015)
     </h3>
     <p>
         
     </p>
     <ul>
-        <li>Es gibt nun eine Benutzerverwaltung (eigentlich schon mit V.1.2.2) </li>
-        <li>Die Karten wurden von Google Maps auf die Leaflet Library mit dem Karten von OpenStreetMap umgestellt</li>
-        <li>Die Autofahrer sehen nun noch schneller und einfacher via dem Absprung "Heute und hier" ihren eigenen Vorfall</li>
+        <li>Es gibt nun eine Benutzerverwaltung (eigentlich schon mit Version 1.2.2) </li>
+        <li>Die Übersichtskarten wurden von Google Maps auf die Leaflet Library mit dem Karten von OpenStreetMap umgestellt</li>
+        <li>Das Anzeige- und Zommverhalter bei den neuen Übersichtskarten ist durch die Umstellung noch einmal besser geworden; vor allem das Setzen auf die aktuelle GPS Position funktioniert nun wesentlich besser</li>
+        <li>Die Autofahrer sehen damit nun noch schneller und einfacher via dem Absprung "Heute&amp;hier" ihren eigenen Vorfall</li>
     </ul>
     <h3>
         Version 1.2 (15.11.2014)

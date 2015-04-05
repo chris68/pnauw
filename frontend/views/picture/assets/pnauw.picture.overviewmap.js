@@ -101,7 +101,7 @@ $(function() {
         return false;
     });
 
-    $.getJSON( heatmapSource, function( data ) {
+    $.getJSON(overviewmapSource, function( data ) {
         var geojsonMarkerOptions = {
             radius: 6,
             fillColor: "#FF0000",

@@ -35,7 +35,7 @@ $this->params['help'] = 'picture-publish';
     
     <?= $this->render('_quicksearchbar') ?>
     
-    <?= $this->render('_heatmap', ['private' => 1]) ?>
+    <?= $this->render('_overviewmap', ['private' => 1]) ?>
     
     <?php 
         /* @var $form yii\bootstrap\ActiveForm */

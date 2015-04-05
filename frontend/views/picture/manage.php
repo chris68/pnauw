@@ -37,7 +37,7 @@ $this->params['help'] = 'picture-manage';
     
     <?= $this->render('_quicksearchbar') ?>
     
-    <?= $this->render('_heatmap', ['private' => 1]) ?>
+    <?= $this->render('_overviewmap', ['private' => 1]) ?>
     
     <div style="margin-top: 10px;">
     <?php

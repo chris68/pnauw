@@ -175,7 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
     <li>Oben gibt es eine aufklappbare Sektion <a href='#picture-search'>Suchen &amp; Filtern</a>, wo Sie sehr umfangreich einstellen können, welche Bilder Sie sehen wollen</li>
     <li>Dann kommt eine <a href='#picture-quicksearch'>Schnellsuche</a>, mit der Sie wichtige und generelle Filter-/Sucheinstellungen vornehmen können.</li>
-    <li>Darunter haben Sie immer die <a href='#picture-heatmap'>Heatmap</a>, mit der man schnell sehen kann, wo viele Verfälle sind. Zudem kann man über die Heatmap den Suchbereich einschränken</li>
+    <li>Darunter haben Sie immer die <a href='#picture-overviewmap'>Übersichtskarte</a>, mit der man schnell sehen kann, wo viele Verfälle sind. Zudem kann man über die Übersichtskarte den Suchbereich einschränken</li>
     <li>Dann kommen Links mit kontextsensitiven Absprüngen auf weitere Funktionen</li>
     <li>Und nicht zuletzt kommen am Ende natürlich die Bilder selbst und Sie können mit der Seitennavigation sich durchblättern</li>
     </ul>
@@ -185,21 +185,21 @@ $this->params['breadcrumbs'][] = $this->title;
         Hier kann man ein einzelnes Bild mit allen öffentlichen Details betrachten und sieht dann auf der Karte, wo genau der Vorfall war.
     </p>
     
-    <h3><a name="picture-heatmap">Heatmap</a></h3>
+    <h3><a name="picture-overviewmap">Übersichtskarte</a></h3>
     <p>
-        Auf der Heatmap werden die durch die Sucheinstellung derzeit selektierten Vorfälle als Punkte angezeigt. Je mehr Verfälle in einen Bereich sind und je schwerwiegender die Vorfälle sind, desto roter wird der Bereich.
-        Über die Heatmap kann zudem die Suche eingeschränkt werden, wenn dies durch die Option <em>Ausschnitt <b>begrenzt</b> Suchergebnisse</em> so vorgegeben ist. Andernfalls (<em>Ausschnitt <b>gemäß</b> Suchergebnisse</em>) ermittelt sich die Größe/Ausschnitt der Heatmap automatisch 
-        basierend auf den Suchergebnissen. Wenn man die Heatmap auf eine bestimmte Stelle haben will, kann man das oben über die Suchezeile wie von Google Maps gewohnt tun.
+        Auf der Übersichtskarte werden die durch die Sucheinstellung derzeit selektierten Vorfälle als Punkte angezeigt. Je mehr Verfälle in einen Bereich sind und je schwerwiegender die Vorfälle sind, desto roter wird der Bereich.
+        Über die Übersichtskarte kann zudem die Suche eingeschränkt werden, wenn dies durch die Option <em>Ausschnitt <b>begrenzt</b> Suchergebnisse</em> so vorgegeben ist. Andernfalls (<em>Ausschnitt <b>gemäß</b> Suchergebnisse</em>) ermittelt sich die Größe/Ausschnitt der Übersichtskarte automatisch
+        basierend auf den Suchergebnissen. Wenn man die Übersichtskarte auf eine bestimmte Stelle haben will, kann man das oben über die Suchezeile wie von Google Maps gewohnt tun.
     </p>
     <p>
-        Bei den Sucheinstellungen kann zudem angegeben werden, ob man die Punkte nur für den aktuellen Kartenausschnitt berechnet haben will oder auch über den Ausschnitt hinaus (Option <em>Auch Ermittlung der Heatmap auf den Kartenbereich beschränken</em>).
+        Bei den Sucheinstellungen kann zudem angegeben werden, ob man die Punkte nur für den aktuellen Kartenausschnitt berechnet haben will oder auch über den Ausschnitt hinaus (Option <em>Auch Ermittlung der Übersichtskarte auf den Kartenbereich beschränken</em>).
         Der Vorteil bei der Ermittlung über den Ausschnitt hinaus ist, dass man leichter die Karte verschieben kann und trotzdem noch Punkte bekommt. Der Vorteil bei der Beschränkung ist, dass die Intensität der Farbgebung sich nur auf den Ausschnitt bezieht und man dadurch nicht durch benachbarte Gebiete mit hoher Intensität runtergestuft wird.
         Am besten einfach mal rumspielen, um den Unterschied zu erkennen!
     </p>
     
     <h3><a name="picture-search">Suche und Filtern</a></h3>
     <p>
-        In dem aufklappbaren Detailbereich sieht man oben vor allem die Einstellungen bezüglich der Karte (siehe <a href='#picture-heatmap'>Heatmap</a>) und den gewünschten Zeitraum. 
+        In dem aufklappbaren Detailbereich sieht man oben vor allem die Einstellungen bezüglich der Karte (siehe <a href='#picture-overviewmap'>Übersichtskarte</a>) und den gewünschten Zeitraum.
     </p>
     <p>
         Darunter sind weitere Suchoptionen, die aber eigentlich alle selbsterklärend sind. Folgende generelle Festlegungen:

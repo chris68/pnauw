@@ -35,7 +35,7 @@ $this->params['help'] = 'picture-moderate';
     
     <?= $this->render('_quicksearchbar') ?>
     
-    <?= $this->render('_heatmap', ['private' => 0]) ?>
+    <?= $this->render('_overviewmap', ['private' => 0]) ?>
     
     <?php 
         /* @var $form yii\bootstrap\ActiveForm */

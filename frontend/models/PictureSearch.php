@@ -159,7 +159,7 @@ class PictureSearch extends Model
             'map_state' => 'Kartenstatus',
             'map_gps' => 'GPS-Mode',
             'map_bind' => 'Suche durch den Kartenbereich begrenzen',
-            'map_limit_points' => 'Auch Ermittlung der Heatmap auf den Kartenbereich beschränken', 
+            'map_limit_points' => 'Auch Ermittlung der Übersichtskarte auf den Kartenbereich beschränken',
             'time_range' => 'Zeitraum',
         ];
     }
