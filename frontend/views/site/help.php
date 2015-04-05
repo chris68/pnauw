@@ -189,7 +189,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         Auf der Übersichtskarte werden die durch die Sucheinstellung derzeit selektierten Vorfälle als Punkte angezeigt. Je mehr Verfälle in einen Bereich sind und je schwerwiegender die Vorfälle sind, desto roter wird der Bereich.
         Über die Übersichtskarte kann zudem die Suche eingeschränkt werden, wenn dies durch die Option <em>Ausschnitt <b>begrenzt</b> Suchergebnisse</em> so vorgegeben ist. Andernfalls (<em>Ausschnitt <b>gemäß</b> Suchergebnisse</em>) ermittelt sich die Größe/Ausschnitt der Übersichtskarte automatisch
-        basierend auf den Suchergebnissen. Wenn man die Übersichtskarte auf eine bestimmte Stelle haben will, kann man das oben über die Suchezeile wie von Google Maps gewohnt tun.
+        basierend auf den Suchergebnissen. Wenn man die Übersichtskarte auf eine bestimmte Stelle haben will, kann man das oben über die Suchezeile tun.
     </p>
     <p>
         Bei den Sucheinstellungen kann zudem angegeben werden, ob man die Punkte nur für den aktuellen Kartenausschnitt berechnet haben will oder auch über den Ausschnitt hinaus (Option <em>Auch Ermittlung der Übersichtskarte auf den Kartenbereich beschränken</em>).

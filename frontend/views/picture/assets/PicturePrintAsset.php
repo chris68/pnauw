@@ -9,7 +9,6 @@ class PicturePrintAsset extends AssetBundle
 {
     public $sourcePath = '@frontend/views/picture/assets';
     public $js = [
-        //'http://maps.googleapis.com/maps/api/js?sensor=false&language=de',
         'pnauw.picture.print.js',
     ];
     public $depends = [
