@@ -7,7 +7,7 @@ use yii\helpers\Html;
 ?>
 Hallo <?=$user->username?>!
 
-Bei der Webplattform parke-nicht-auf-unseren-wegen.de ist soeben die neue Release <?=Yii::$app->version?> verÃ¶ffentlicht worden. Die Neuerungen finden Sie in der Releasehistorie (<?=Yii::$app->urlManager->createAbsoluteUrl(['site/releasehistory'])?>).
+Bei der Webplattform parke-nicht-auf-unseren-wegen.de ist soeben die neue Release <?=Yii::$app->version?> veröffentlicht worden. Die Neuerungen finden Sie in der Releasehistorie (<?=Yii::$app->urlManager->createAbsoluteUrl(['site/releasehistory'])?>).
 
 ===================================================================================================
 
