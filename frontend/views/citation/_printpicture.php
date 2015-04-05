@@ -4,7 +4,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use frontend\views\picture\assets\PictureLocationmapAsset;
 
+PictureLocationmapAsset::register($this);
 ?>
 
 <div class="picture-print" style="page-break-after: always;">
@@ -43,12 +45,19 @@ use yii\widgets\DetailView;
                     ],
                     'loc_formatted_addr',
                     [
-                        'label' => 'GPS (Korrigiert)',
-                        'value' => $model->getLatLng(),
-                    ],
-                    [
-                        'label' => 'GPS (Original)',
-                        'value' => $model->getOrgLatLng(),
+                        'label' => 'Karte',
+                        'format' => 'raw',
+                        'value' => 
+                            Html::tag('div','', [
+                              'style' => 'height: 200px;',
+                              'id' => "map-{$model->id}",
+                              'data' => [
+                                  'map' => 1,
+                                  'lat' => $model->loc_lat,
+                                  'lng' => $model->loc_lng,
+                                  'zoom' => 17,
+                              ]
+                            ])
                     ],
                 ]
             ]

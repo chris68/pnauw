@@ -5,6 +5,9 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use frontend\helpers\Assist;
+use frontend\views\picture\assets\PictureLocationmapAsset;
+
+PictureLocationmapAsset::register($this);
 
 $this->title = 'Anzeigen von Bild: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
@@ -35,11 +38,18 @@ $this->params['help'] = 'picture-view';
             <p>Vorfall am <b><?=date_format(date_create($model->taken),'d.m.Y')?></b></p>
             <p><?=(($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')?></p>
             <p><?=((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')?></p>
-            <?php \frontend\views\picture\assets\PictureViewAsset::register($this); ?>
-            <?= Html::activeHiddenInput($model,'loc_lat', ['id'=>'picture-map-loc-lat', ]) ?>
-            <?= Html::activeHiddenInput($model,'loc_lng',['id'=>'picture-map-loc-lng', ]) ?>
-            <!-- The Google maps canvas needs absolute coordinates -->
-            <div style="width: 300px; height: 300px;" id="picture-map-canvas"></div>
+            <?php
+                echo Html::tag('div','', [
+                  'style' => 'height: 300px;',
+                  'id' => 'map',
+                  'data' => [
+                      'map' => 1,
+                      'lat' => $model->loc_lat,
+                      'lng' => $model->loc_lng,
+                      'zoom' => 16,
+                  ]
+                ]);
+            ?>
             <p><?=(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')?></p>
         </div>
         <?php endif; ?>
