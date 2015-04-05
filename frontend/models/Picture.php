@@ -414,6 +414,15 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
+     *
+     * @return boolean Is the picture older then a year?
+     */
+    public function isLegacy()
+    {
+        return date_create()->diff(date_create ($this->taken))->y >= 1;
+    }
+
+    /**
      * Fill the data from the file input and saves the data; best encapsule in transaction for atomic behavior
      * @param string $filename The name of the file with the image
      * @param Picture $defaultsvalues Optional default values which will override the existing values if given

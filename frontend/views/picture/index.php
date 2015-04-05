@@ -59,66 +59,109 @@ $this->params['help'] = 'picture-index';
         'layout' => "{pager}\n{summary}\n{items}\n{pager}",
         'id' => 'picture-list',
         'itemView' => function ($model, $key, $index, $widget) {
-            return
-            '<div class="row">
-                <div class="col-sm-4 col-md-4 col-lg-4">'
-            .
-                '<hr>'
-            .
-                '<p><b>'
-            .
-                Html::encode($model->name)
-            .
-                '</b></p>'
-            .
-                nl2br(Html::encode($model->description))
-            .
-                '</p>'
-            .
-                    frontend\widgets\ImageRenderer::widget(
-                        [
-                            'image' => $model->blurredSmallImage,
-                            'size' => 'small',
-                            'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:10px'],
-                        ]
-                    )
-            .
-                Html::a('Detail', ['picture/view','id'=>$model->id], ['target' => '_blank'])
-            .
-                ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')
-            .
-                '<p>'
-            .
-                (!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
-            .
-                '</p>'
-            .
-                '<p>'
-            .
-                (($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Das Bild wurde leider nicht klassizifiert</i>')
-            .
-                '</p><p>'
-            .
-                    'Vorfall am <b>'.date_format(date_create($model->taken),'d.m.Y').'</b>'
-            .
-                '<p>'
-            .
-                (($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')
-            .
-                '</p><p>'
-            .
-                ((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')
-            .
-                '</p><p>'
-            .
-                '</p>'
-            .
-                '<hr>'
-            .
+            if ($model->isLegacy()) {
+                return
+                '<div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4">'
+                .
+                    '<hr>'
+                .
+                    '<p>'
+                .
+                    (($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Der Vorfall wurde leider nicht klassifiziert</i>')
+                .
+                    '</p><p>'
+                .
+                     'Vorfall aus dem Jahr <b>'.date_format(date_create($model->taken),'Y').'</b>'
+                .
+                    '</p><p>'
+                .
+                    '<i>(Der Vorfall liegt über ein Jahr zurück und daher werden hierzu keine Details mehr veröffentlicht)</i>'
+                .
+                    '</p><p>'
+                .
+                    (!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
+                .
+                    '</p>'
+                .
+                    '<p>'
+                .
+                    '</p><p>'
+                .
+                    ((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')
+                .
+                    '</p>'
+                .
+                    '<p></p>'
+                .
+                    '<hr>'
+                .
+                    '</div>'
+                .
                 '</div>'
-            .
-            '</div>'
-            ;
+                ;
+            } else {
+                return
+                '<div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4">'
+                .
+                    '<hr>'
+                .
+                    '<p><b>'
+                .
+                    Html::encode($model->name)
+                .
+                    '</b></p>'
+                .
+                    nl2br(Html::encode($model->description))
+                .
+                    '</p>'
+                .
+                        frontend\widgets\ImageRenderer::widget(
+                            [
+                                'image' => $model->blurredSmallImage,
+                                'size' => 'small',
+                                'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:10px'],
+                            ]
+                        )
+                .
+                    Html::a('Detail', ['picture/view','id'=>$model->id], ['target' => '_blank'])
+                .
+                    ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')
+                .
+                    '<p>'
+                .
+                    (!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
+                .
+                    '</p>'
+                .
+                    '<p>'
+                .
+                    (($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Der Vorfall wurde leider nicht klassifiziert</i>')
+                .
+                    '</p><p>'
+                .
+                        'Vorfall am <b>'.date_format(date_create($model->taken),'d.m.Y').'</b>'
+                .
+                    '<p>'
+                .
+                    (($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')
+                .
+                    '</p><p>'
+                .
+                    ((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')
+                .
+                    '</p><p>'
+                .
+                    '</p>'
+                .
+                    '<hr>'
+                .
+                    '</div>'
+                .
+                '</div>'
+                ;
+            }
         },
     ]); ?>
 </div>

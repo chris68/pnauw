@@ -272,6 +272,18 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     
     <h2><a name="general">Generelles</a></h2>
+    <h3><a name="right-to-be-forgotten">Recht auf Vergessenwerden</a></h3>
+    <p>
+        Die Plattform ist für aktuelle Kampagnen gegen das Gehwegparken gedacht und hier braucht es leider die Möglichkeit, die Autos auf dem Gehweg auch mal zu zeigen, um ein Undenken zu bewirken.
+        Aber es gibt auch ein <?= Assist::extlink('Recht auf Vergessenwerden', 'http://de.wikipedia.org/wiki/Recht_auf_Vergessenwerden') ?> und bei uns soll dies nach einem Jahr sein. 
+    </p>
+    <p>
+        Daher werden alle Vorfälle, die älter als ein Jahr sein, öffentlich nur noch deutlich weniger detailliert und vor allem ohne Bild angezeigt. Nur der Eigner der Bilder kann diese weiterhin
+        einsehen, denn eine physikalische Löschung wird erst nach weiteren Jahren durchgeführt.
+    </p>
+    <p>
+        Was jedoch bleibt sind die roten Punkte in der Übersichtskarte, denn für eine historische Betrachtung von Kampagnen (und deren Erfolg oder Mißerfolg) sind diese Informationen zu wertvoll.
+    </p>
     <h3><a name="markdown-syntax">Markdown Syntax</a></h3>
     <p>
         Bei Webapplikationen will man seine eingestellten Inhalte möglichst schön formatieren. Hier kann man mit HTML zwar alles machen, aber HTML ist meist zu kompliziert und es wäre zudem gefährlich, den Nutzer HTML direkt ein-/ausgeben zu lassen

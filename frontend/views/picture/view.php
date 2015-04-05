@@ -14,6 +14,11 @@ $this->params['help'] = 'picture-view';
 ?>
 <div class="picture-view">
     <div class="row">
+        <?php if ($model->isLegacy()): ?>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <p>Der Vorfall liegt über ein Jahr zurück und daher werden hierzu keine Details mehr veröffentlicht.</p>
+        </div>
+        <?php else: ?>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <p><b><?=Html::encode($model->name)?></b></p>
             <p><?=nl2br(Html::encode($model->description))?></p>
@@ -26,7 +31,7 @@ $this->params['help'] = 'picture-view';
             ?>
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <p><?=(($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Das Bild wurde leider nicht klassizifiert</i>')?></b></p>
+            <p><?=(($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Der Vorfall wurde leider nicht klassifiziert</i>')?></p>
             <p>Vorfall am <b><?=date_format(date_create($model->taken),'d.m.Y')?></b></p>
             <p><?=(($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')?></p>
             <p><?=((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')?></p>
@@ -37,5 +42,6 @@ $this->params['help'] = 'picture-view';
             <div style="width: 300px; height: 300px;" id="picture-map-canvas"></div>
             <p><?=(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')?></p>
         </div>
+        <?php endif; ?>
     </div>
 </div>
