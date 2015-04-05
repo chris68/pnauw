@@ -16,7 +16,7 @@ $this->params['help'] = 'picture-view';
     <div class="row">
         <?php if ($model->isLegacy()): ?>
         <div class="col-sm-4 col-md-4 col-lg-4">
-            <p>Der Vorfall liegt über ein Jahr zurück und daher werden hierzu keine Details mehr veröffentlicht.</p>
+            <p>(Der Vorfall wurde vor über einem Jahr dokumentiert und daher werden hierzu keine Details mehr veröffentlicht).</p>
         </div>
         <?php else: ?>
         <div class="col-sm-4 col-md-4 col-lg-4">

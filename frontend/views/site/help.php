@@ -278,7 +278,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Aber es gibt auch ein <?= Assist::extlink('Recht auf Vergessenwerden', 'http://de.wikipedia.org/wiki/Recht_auf_Vergessenwerden') ?> und bei uns soll dies nach einem Jahr sein. 
     </p>
     <p>
-        Daher werden alle Vorfälle, die älter als ein Jahr sein, öffentlich nur noch deutlich weniger detailliert und vor allem ohne Bild angezeigt. Nur der Eigner der Bilder kann diese weiterhin
+        Daher werden alle Vorfälle, die vor mehr als ein Jahr in der Plattform dokumentiert wurden, öffentlich nur noch deutlich weniger detailliert und vor allem ohne Bild angezeigt. Nur der Eigner der Bilder kann diese weiterhin
         einsehen, denn eine physikalische Löschung wird erst nach weiteren Jahren durchgeführt.
     </p>
     <p>

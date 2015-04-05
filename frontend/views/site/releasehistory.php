@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Die Übersichtskarten wurden von Google Maps auf die Leaflet Library mit dem Karten von OpenStreetMap umgestellt</li>
         <li>Das Anzeige- und Zommverhalter bei den neuen Übersichtskarten ist durch die Umstellung noch einmal besser geworden; vor allem das Setzen auf die aktuelle GPS Position funktioniert nun wesentlich besser</li>
         <li>Die Autofahrer sehen damit nun noch schneller und einfacher via dem Absprung "Heute&amp;hier" ihren eigenen Vorfall</li>
-        <li>Vorfälle, die älter als ein Jahr sind (gemäß Aufnahmedatum), werden öffentlich nur noch mit weniger Details und ohne Bild angezeigt</li>
+        <li>Vorfälle, die vor mehr als einem Jahr dokumentiert wurden, werden öffentlich nur noch mit weniger Details und ohne Bild angezeigt</li>
     </ul>
     <h3>
         Version 1.2 (15.11.2014)

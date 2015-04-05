@@ -76,7 +76,7 @@ $this->params['help'] = 'picture-index';
                 .
                     '</p><p>'
                 .
-                    '<i>(Der Vorfall liegt über ein Jahr zurück und daher werden hierzu keine Details mehr veröffentlicht)</i>'
+                    '<i>(Der Vorfall wurde vor über einem Jahr dokumentiert und daher werden hierzu keine Details mehr veröffentlicht)</i>'
                 .
                     '</p><p>'
                 .

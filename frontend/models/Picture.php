@@ -414,12 +414,12 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
-     *
+     * The date when the picture has been uploaded is used to find out whether the picture/incident is legacy and has the right to be forgotten
      * @return boolean Is the picture older then a year?
      */
     public function isLegacy()
     {
-        return date_create()->diff(date_create ($this->taken))->y >= 1;
+        return date_create()->diff(date_create ($this->created_ts))->y >= 1;
     }
 
     /**
