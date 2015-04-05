@@ -36,7 +36,7 @@ class ImageRenderer extends \yii\base\Widget
             // If no image is available construct one!
             $image = new \Imagick();
             $draw = new \ImagickDraw();
-            $draw->setFont('Bookman-DemiItalic');
+            $draw->setFont('AvantGarde-BookOblique');
             switch ($this->size) {
                 // According to: http://flickrj.sourceforge.net/api/com/aetrion/flickr/photos/Size.html
                 case 'thumbnail':
@@ -63,7 +63,7 @@ class ImageRenderer extends \yii\base\Widget
 
 
             /* Create text */
-            $image->annotateImage($draw, 10, $offset, 0, "Ohne Bild\n    oder\nBild noch\nim Review");
+            $image->annotateImage($draw, 10, $offset, 0, "Ohne Bild\n\n(Bild noch\nim Review)");
             $image->setImageFormat('jpg');
             $rawdata = bin2hex($image->getimageblob());
             
