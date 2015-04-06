@@ -102,9 +102,9 @@ $(function() {
     });
 
     $.getJSON(overviewmapSource, function( data ) {
-        var geojsonMarkerOptions = {
+        var pointDefaultOptions = {
             radius: 6,
-            fillColor: "#FF0000",
+            fillColor: "#FF0000", // red
             color: "#000",
             weight: 1,
             opacity: 1,
@@ -112,12 +112,57 @@ $(function() {
         };
         incidentGroup.addLayer(L.geoJson(data, {
             onEachFeature: function (feature, layer) {
-                if (feature.properties && feature.properties.popupContent) {
-                    // layer.bindPopup(feature.properties.popupContent);
+                if (feature.properties && feature.properties.incident_name) {
+                    layer.bindPopup(feature.properties.incident_name);
                 }
             },
             pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, geojsonMarkerOptions);
+                var pointOptions = pointDefaultOptions;
+                if (feature.properties && feature.properties.incident_id) {
+                    switch (feature.properties.incident_id) {
+                        case -1: 
+                        case 8:
+                            pointOptions.radius = 6;
+                            pointOptions.fillColor = '#808080'; // grey
+                            break;
+                        case 12:
+                        case 13:
+                            pointOptions.radius = 9;
+                            pointOptions.fillColor = '#FFA500'; // orange
+                            break;
+                        case 1:
+                        case 16:
+                            pointOptions.radius = 6;
+                            pointOptions.fillColor = '#FFA500'; // orange
+                            break;
+                        case 14:
+                        case 15:
+                            pointOptions.radius = 9;
+                            pointOptions.fillColor = '#FF0000'; // red
+                            break;
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                            pointOptions.radius = 6;
+                            pointOptions.fillColor = '#FF0000'; // red
+                            break;
+                        case 11:
+                            pointOptions.radius = 9;
+                            pointOptions.fillColor = '#228B22'; // ForestGreen
+                            break;
+                        case 9:
+                        case 10:
+                            pointOptions.radius = 6;
+                            pointOptions.fillColor = '#228B22'; // ForestGreen
+                            break;
+                        default: 
+                            ;
+                    }
+                }
+                return L.circleMarker(latlng, pointOptions);
             }
         }));
 

@@ -127,8 +127,8 @@ class PictureController extends Controller
         // Ultrafast and efficient data fetch!
         $query = Picture::find();
         // @Todo: Waiting for fix https://github.com/yiisoft/yii2/issues/1955 to use parameters
-        $query->select(["tbl_picture.id", "tbl_picture.loc_lng", "tbl_picture.loc_lat", "tbl_incident.severity", "earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) as dist"]);
-        //$query->select(["tbl_picture.id", "tbl_picture.loc_lng", "tbl_picture.loc_lat", "tbl_incident.severity", "earth_distance( ll_to_earth((:lat), (:lng) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) as dist"]);
+        $query->select(["tbl_picture.id", "tbl_picture.loc_lng", "tbl_picture.loc_lat", "tbl_picture.incident_id", "tbl_incident.name as incident_name", "earth_distance( ll_to_earth(({$lat}), ({$lng}) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) as dist"]);
+        //$query->select(["tbl_picture.id", "tbl_picture.loc_lng", "tbl_picture.loc_lat", "tbl_picture.incident_id", "earth_distance( ll_to_earth((:lat), (:lng) ), ll_to_earth({{%picture}}.{{loc_lat}},{{%picture}}.{{loc_lng}})) as dist"]);
         //$query->from ('tbl_picture');
         $query->innerJoin('tbl_incident','tbl_picture.incident_id=tbl_incident.id');
         // First sort for the year to cluster the data and then according to the distance
@@ -162,7 +162,8 @@ class PictureController extends Controller
                         'coordinates'=>[(double)$pic['loc_lng'],(double)$pic['loc_lat'],],
                     ],
                     'properties'=> [
-                        'popupContent' => 'This is where the Rockies play!'
+                        'incident_id' => $pic['incident_id'],
+                        'incident_name' => $pic['incident_name'],
                     ],
                 ];
             }
