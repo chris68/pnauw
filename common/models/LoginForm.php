@@ -13,7 +13,7 @@ class LoginForm extends Model
     public $password;
     public $rememberMe = false;
 
-    private $_user = false;
+    private $_user;
 
     /**
      * @inheritdoc
@@ -80,7 +80,7 @@ class LoginForm extends Model
      */
     private function getUser()
     {
-        if ($this->_user === false) {
+        if ($this->_user === null) {
             $this->_user = User::findByUsername($this->username);
         }
 
