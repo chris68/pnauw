@@ -266,11 +266,11 @@ class SiteController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', \Yii::t('base','Check your email for further instructions.'));
+                Yii::$app->session->setFlash('success', \Yii::t('base','Check your email for further instructions.'));
 
                 return $this->goHome();
             } else {
-                Yii::$app->getSession()->setFlash('error', \Yii::t('base','There was an error sending email.'));
+                Yii::$app->session->setFlash('error', \Yii::t('base','There was an error sending email.'));
             }
         }
 
@@ -295,7 +295,7 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->getSession()->setFlash('success', \Yii::t('base','New password was saved.'));
+            Yii::$app->session->setFlash('success', \Yii::t('base','New password was saved.'));
 
             return $this->goHome();
         }
