@@ -1,18 +1,6 @@
 $(function() {
     var map = L.map('overviewmap');
 
-    function update_map_attributes() {
-         $('#search-map-bounds').val(map.getBounds().toBBoxString());
-         var mapstate = {center:map.getCenter(), zoom:map.getZoom()};
-         $('#search-map-state').val(JSON.stringify(mapstate));
-         console.debug('#search-map-bounds updated ('+$('#search-map-bounds').val()+')');
-         console.debug('#search-map-state updated ('+$('#search-map-state').val()+')');
-    }
-
-    map.on('moveend', function(e) {
-        update_map_attributes();
-    });
-
     L.tileLayer("http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
        subdomains: "1234",
        attribution: "&copy; <a href='http://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='http://www.openstreetmap.org/copyright' title='ODbL'>open license</a>. Tiles Courtesy of <a href='http://www.mapquest.com/'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>"
@@ -21,24 +9,32 @@ $(function() {
     var incidentGroup = L.featureGroup([]);
     incidentGroup.addTo(map);
 
-    L.control.layers({},{"Vorfälle": incidentGroup}).addTo(map);
+    var positionLayerGroup = L.layerGroup([]);
+    positionLayerGroup.addTo(map);
+
+    L.control.layers({},{"Position": positionLayerGroup, "Vorfälle": incidentGroup}).addTo(map);
+
+    map.on('moveend', function(e) {
+         $('#search-map-bounds').val(map.getBounds().toBBoxString());
+         var mapstate = {center:map.getCenter(), zoom:map.getZoom()};
+         $('#search-map-state').val(JSON.stringify(mapstate));
+         //console.debug('#search-map-bounds updated ('+$('#search-map-bounds').val()+')');
+         //console.debug('#search-map-state updated ('+$('#search-map-state').val()+')');
+    });
+
+    map.on('locationerror', function(e) {
+        alert(e.message);
+    });
+
+    map.on('locationfound', function(e) {
+        positionLayerGroup.clearLayers();
+        positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
+    });
 
     if ($('#search-map-gps').val() == 'locate-once') {
-        map.on('locationfound', function(e) {
-            // The new map center and zoom level will only be set after the map has ended to move
-            map.on('moveend', function(e) {
-                update_map_attributes();
-                $('#search-form').submit();
-            });
-        });
-
-        map.on('locationerror', function(e) {
-            alert(e.message);
-        });
-        
         $('#search-map-gps').val('');
         
-        map.locate({setView: true, watch: false, maxZoom: 16});
+        map.locate({setView: true, watch: false, maxZoom: 16}); 
     }
 
     if ($('#search-map-bounds').val() != '') {
@@ -68,11 +64,6 @@ $(function() {
         }
         else if (realtarget.data('value') == 'gps') {
             // Do not call event.preventDefault to ensure the menue is closed again!
-            // The new map center and zoom level will only be set after the map has ended to move
-            map.on('moveend', function(e) {
-                update_map_attributes();
-                $('#search-form').submit();
-            });
             map.locate({setView: true, watch: false, maxZoom: 16});
         }
         else {
