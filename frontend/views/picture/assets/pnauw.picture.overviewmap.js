@@ -111,7 +111,8 @@ $(function() {
                 var pointOptions = pointDefaultOptions;
                 if (feature.properties && feature.properties.incident_id) {
                     switch (feature.properties.incident_id) {
-                        case -1: 
+                        case -1:
+                        case 19:
                         case 8:
                             pointOptions.radius = 6;
                             pointOptions.fillColor = '#808080'; // grey
@@ -137,6 +138,7 @@ $(function() {
                         case 5:
                         case 6:
                         case 7:
+                        case 18:
                             pointOptions.radius = 6;
                             pointOptions.fillColor = '#FF0000'; // red
                             break;
@@ -148,6 +150,10 @@ $(function() {
                         case 10:
                             pointOptions.radius = 6;
                             pointOptions.fillColor = '#228B22'; // ForestGreen
+                            break;
+                        case 17:
+                            pointOptions.radius = 6;
+                            pointOptions.fillColor = '#0000FF'; // Blue
                             break;
                         default: 
                             ;
