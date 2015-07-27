@@ -132,9 +132,9 @@ class User extends ActiveRecord implements IdentityInterface
         if (empty($token)) {
             return false;
         }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
         return $timestamp + $expire >= time();
     }
 
