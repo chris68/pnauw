@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
+use yii\widgets\Pjax;
 
 
 $this->title = 'Bilder';
@@ -24,7 +25,7 @@ $this->params['help'] = 'picture-index';
                     'content' => $this->render('_search', ['model' => $searchModel]),
                 ],
             ],
-            'options' => 
+            'options' =>
             [
                 'style' => 'margin-bottom: 10px'
             ],
@@ -32,9 +33,9 @@ $this->params['help'] = 'picture-index';
     ?>
 
     <?= $this->render('_quicksearchbar') ?>
-    
+
     <?= $this->render('_overviewmap', ['private' => 0]) ?>
-    
+
     <div style="margin-top: 10px;">
     <?php
         {
@@ -49,11 +50,15 @@ $this->params['help'] = 'picture-index';
             
             echo Html::a('Im Detail anschauen', Url::toRoute($params), ['target' => '_blank']);
             if (!Yii::$app->user->isGuest) {
-                echo ' | '.Html::a('Im Detail bearbeiten', Url::toRoute(array_replace_recursive(['picture/massupdate'], $params)), ['target' => '_blank']);
+                $params[0] = '/picture/massupdate';
+                echo ' | '.Html::a('Im Detail bearbeiten', Url::toRoute($params), ['target' => '_blank']);
             }
         }
     ?>
     </div>
+    
+    <?php Pjax::begin(['id' => 'main', 'enablePushState' => TRUE, 'timeout' => 10000, 'linkSelector' => '.pagination a', 'formSelector' => '', ]); ?>
+
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'layout' => "{pager}\n{summary}\n{items}\n{pager}",
@@ -164,4 +169,5 @@ $this->params['help'] = 'picture-index';
             }
         },
     ]); ?>
+    <?php Pjax::end(); ?>
 </div>
