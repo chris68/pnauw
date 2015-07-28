@@ -126,7 +126,7 @@ $this->params['help'] = 'picture-index';
                             [
                                 'image' => $model->blurredSmallImage,
                                 'size' => 'small',
-                                'options' => ['class' => 'img-responsive', 'style' => 'min-width:70%; margin-bottom:10px'],
+                                'options' => ['class' => 'img-responsive', 'style' => 'min-width:80%; margin-bottom:10px'],
                             ]
                         )
                 .
