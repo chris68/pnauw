@@ -104,7 +104,8 @@ $(function() {
         incidentGroup.addLayer(L.geoJson(data, {
             onEachFeature: function (feature, layer) {
                 if (feature.properties && feature.properties.incident_name) {
-                    layer.bindPopup(feature.properties.incident_name);
+                    layer.bindPopup('<a href="/picture/view?id='+feature.properties.picture_id+
+                            '" target="_blank">'+feature.properties.incident_name+'</a>');
                 }
             },
             pointToLayer: function (feature, latlng) {

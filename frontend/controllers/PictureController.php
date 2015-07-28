@@ -162,6 +162,7 @@ class PictureController extends Controller
                         'coordinates'=>[(double)$pic['loc_lng'],(double)$pic['loc_lat'],],
                     ],
                     'properties'=> [
+                        'picture_id' => $pic['id'],
                         'incident_id' => $pic['incident_id'],
                         'incident_name' => $pic['incident_name'],
                     ],
