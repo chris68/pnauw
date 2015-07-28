@@ -1,7 +1,7 @@
 <?php
 return [
     'name' => 'Parke nicht auf unseren Wegen',
-    'version' => '1.3.2',
+    'version' => '1.3.3',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
