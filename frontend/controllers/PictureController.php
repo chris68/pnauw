@@ -668,7 +668,7 @@ class PictureController extends Controller
      * @return array The url ready to be used as parameter for e.g. Url::to
      */
     public static function urlCampaign($action,$campaign_id) {
-        return ["picture/$action", 's[campaign_id]' => $campaign_id];
+        return ["picture/$action", 's[campaign_id]' => $campaign_id, 's[map_bind]' => '1'];
     }
     
     /**
