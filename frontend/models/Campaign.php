@@ -148,5 +148,14 @@ class Campaign extends \yii\db\ActiveRecord
         return ['' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->dropdownScope()->orderBy('created_ts')->all(),'id','name');
     }
     
+    /**
+     * Input for a standard dropdown list for all items (for usage in search)
+     * @return array
+     */
+    public static function dropDownListSearch()
+    {
+        return ['#' => '(nicht gesetzt)'] + \yii\helpers\ArrayHelper::map(self::find()->dropdownScope()->orderBy('created_ts')->all(),'id','name');
+    }
+
     
 }

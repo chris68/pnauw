@@ -209,6 +209,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Bei Datumsfeldern muss das Datum in der Form jjjj-mm-tt eingegeben werden; es gibt aber immer auch einen Datumselektor</li>
         <li>Bei den Auswahlboxen kann man teilweise immer nur eine und teilweise auch mehrere Optionen wählen - einfach ausprobieren</li>
         <li>Die Suche in den Textfeldern ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird. Eine Suche nach <i>straße</i> findet also <i>Kriegsstraße</i>, aber nicht <i>Straße des 17.Juni</i></li>
+        <li>Bei der Suche in den Textfeldern kann über Eingabe von <i>#</i> nach leeren Feldern gesucht werden (z.B. Finden von Anzeigen, wo keine Autonummer eingegeben wurde, etc)</li>
     </ul>
     
     <h3><a name="picture-quicksearch">Schnellsuche</a></h3>

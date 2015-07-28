@@ -236,8 +236,8 @@ class PictureSearch extends Model
             $this->addCondition($query, 'citation_affix', true);
             $this->addCondition2($query, 'action_id', 'ARRAY');
             $this->addCondition2($query, 'incident_id','ARRAY');
-            $this->addCondition($query, 'citation_id');
-            $this->addCondition($query, 'campaign_id');
+            $this->addCondition2($query, 'citation_id', 'ARRAY');
+            $this->addCondition2($query, 'campaign_id', 'ARRAY');
             $this->addCondition2($query, 'created_ts', 'DATE');
             $this->addCondition2($query, 'modified_ts', 'DATE');
             $this->addCondition2($query, 'deleted_ts', 'DATE');
@@ -262,10 +262,15 @@ class PictureSearch extends Model
         }
         $this->filter_count++;
         $attribute = "{{%picture}}.".$attribute ;
-        if ($partialMatch) {
-            $query->andWhere(['like', $attribute, $value]);
+        // '#' means generally: look for empty value
+        if (trim($value) === '#') {
+                $query->andWhere(['in',$attribute,'']);
         } else {
-            $query->andWhere([$attribute => $value]);
+            if ($partialMatch) {
+                $query->andWhere(['like', $attribute, $value]);
+            } else {
+                $query->andWhere([$attribute => $value]);
+            }
         }
     }
 
@@ -315,7 +320,18 @@ class PictureSearch extends Model
                 }
                 break;
             case 'ARRAY':
-                $query->andWhere([$attribute => $value]);
+                if (!is_array($value)) {
+                    $value = [$value];
+                }
+                // '#' means generally: look for NULL value
+                if(($key = array_search('#', $value)) !== false) {
+                    unset($value[$key]);
+                }
+                $condition = ['in',$attribute,$value];
+                if ($key !== false) {
+                    $condition = ['or',$condition,"$attribute is null"];
+                }
+                $query->andWhere($condition);
                 break;
         }
     }

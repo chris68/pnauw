@@ -47,7 +47,7 @@ use yii\bootstrap\ActiveForm;
 
             <?= $form->field($model, 'action_id')->listBox(frontend\models\Action::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
-            <?= $form->field($model, 'campaign_id')->dropDownList(frontend\models\Campaign::dropDownList()) ?>
+            <?= $form->field($model, 'campaign_id')->listBox(frontend\models\Campaign::dropDownListSearch(), ['multiple' => true, 'unselect' => '', ]) ?>
             </fieldset>
 
         <?php if ($model->scenario == 'private' || $model->scenario == 'admin' || $model->scenario == 'moderator') : ?>
@@ -68,7 +68,7 @@ use yii\bootstrap\ActiveForm;
 
             <?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
             
-            <?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
+            <?= $form->field($model, 'citation_id')->listBox(frontend\models\Citation::dropDownListSearch(), ['multiple' => true, 'unselect' => '', ]) ?>
 
             </fieldset>
         <?php endif; ?>
