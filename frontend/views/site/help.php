@@ -175,6 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
     <li>Oben gibt es eine aufklappbare Sektion <a href='#picture-search'>Suchen &amp; Filtern</a>, wo Sie sehr umfangreich einstellen können, welche Bilder Sie sehen wollen</li>
     <li>Dann kommt eine <a href='#picture-quicksearch'>Schnellsuche</a>, mit der Sie wichtige und generelle Filter-/Sucheinstellungen vornehmen können.</li>
+    <li>Über den blauen Refreshbutton <span class="glyphicon glyphicon-refresh" style="color:blue"></span> aktualisiert man die farbigen Punkte auf der Karte und die Bilder unten <b>(wichtig nach dem Setzen auf den GPS-Standort)</b></li>
     <li>Darunter haben Sie immer die <a href='#picture-overviewmap'>Übersichtskarte</a>, mit der man schnell sehen kann, wo viele Verfälle sind. Zudem kann man über die Übersichtskarte den Suchbereich einschränken</li>
     <li>Dann kommen Links mit kontextsensitiven Absprüngen auf weitere Funktionen</li>
     <li>Und nicht zuletzt kommen am Ende natürlich die Bilder selbst und Sie können mit der Seitennavigation sich durchblättern</li>
