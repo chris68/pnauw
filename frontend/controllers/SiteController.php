@@ -30,7 +30,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup', 'userdata'],
+                'only' => ['logout', 'signup', 'userdata', 'foreignlogin'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -95,6 +95,14 @@ class SiteController extends Controller
             if ($auth) { // login
                 $user = $auth->user;
                 Yii::$app->user->login($user);
+            } else {
+                Yii::$app->getSession()->setFlash('error',
+                    'Das angegebene Konto der externen Providers ist nicht mit einem Account auf unserer Plattform verbunden.<br/>'
+                    .'Wenn Sie bereits bei uns registriert sind, dann melden Sie sich bitte an und verbinden Sie dann das Konto unter "Verwalten"->"Fremdlogins".<br/>'
+                    .'Andernfalls müssen Sie sich zuerst unten registrieren (als Fallback zur Ihrer Sicherheit) und können erst dann das Konto verbinden. Bei der Registierung müssen Sie eigentlich nur Ihre Emailadresse angeben, der Rest ist bereits entsprechend vorgefüllt <br/>'
+                    .''
+                );
+                return $this->redirect(['site/signup','oauth'=>'1']);
             }
         } else { // user already logged in
             if (!$auth) { // add auth provider
@@ -195,14 +203,21 @@ class SiteController extends Controller
         return $this->render('releasehistory');
     }
 
-    public function actionSignup()
+    public function actionSignup($oauth='')
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                return $this->goHome();
+                    Yii::$app->getSession()->setFlash('success',
+                      'Nach der erfolgreichen Registrierung können sich nun gerne mit einem Konto bei einem der unten aufgelisteten OAuth-Providern verbinden.');
+                    return $this->redirect(['site/foreignlogin']);
                 }
+            }
+        } else {
+            if ($oauth == '1') {
+              $model->username = Yii::$app->security->generateRandomString(10);
+              $model->password = Yii::$app->security->generateRandomString(12);
             }
         }
 

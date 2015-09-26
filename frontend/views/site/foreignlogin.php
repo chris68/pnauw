@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <h3>Aktuell verbundene Konten</h3>
-    <p>Mit folgenden Konten der entsprechenden Provider sind sie momentan verbunden.</p>
+    <p>Sie sind mit folgenden Konten der entsprechenden Provider verbunden.</p>
     <ul class="auth-clients clear">
     <?php echo ListView::widget([
         'dataProvider' => $dataProvider,
