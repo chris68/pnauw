@@ -1,6 +1,6 @@
 <?php
 
-$oauth = parse_ini_file('/etc/apache2/oauth.key/parke-nicht-auf-unseren-wegen.de,ini', true);
+$oauth = parse_ini_file('/etc/apache2/oauth.key/parke-nicht-auf-unseren-wegen.de.ini', true);
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
