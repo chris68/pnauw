@@ -3,10 +3,13 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\LoginForm;
+use common\models\Auth;
+use common\models\User;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\data\ActiveDataProvider;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -42,7 +45,7 @@ class SiteController extends Controller
                     //    'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['userdata'],
+                        'actions' => ['userdata','foreignlogin'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -70,7 +73,50 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
         ];
+    }
+
+    public function onAuthSuccess($client)
+    {
+        $attributes = $client->getUserAttributes();
+        Yii::info($attributes);
+
+        /* @var $auth common\models\Auth */
+        $auth = Auth::find()->where([
+            'source' => $client->getId(),
+            'source_id' => $attributes['id'],
+        ])->one();
+
+        if (Yii::$app->user->isGuest) {
+            if ($auth) { // login
+                $user = $auth->user;
+                Yii::$app->user->login($user);
+            }
+        } else { // user already logged in
+            if (!$auth) { // add auth provider
+                switch ($client->getId()) {
+                    case 'google': $name = $attributes['displayName']; break;
+                    case 'facebook': $name = $attributes['name']; break;
+                }
+                $auth = new Auth([
+                    'user_id' => Yii::$app->user->id,
+                    'source' => $client->getId(),
+                    'source_id' => $attributes['id'],
+                    'source_name' => $name,
+                ]);
+                $auth->save();
+            } else {
+                if ($auth->user->id <> Yii::$app->user->id) {
+                    Yii::$app->getSession()->setFlash('error', 'Das angegebene Konto des externen Providers ist bereits mit einem anderen Account auf unserer Plattform verbunden. Logischerweise kann man jedoch immer nur genau ein Konto von uns mit genau einem Konto des externen Providers verbinden.');
+                } else {
+                    Yii::$app->getSession()->setFlash('error', 'Das angegebene Konto des externen Providers ist bereits mit diesem Account auf unserer Plattform verbunden. Zweimal geht nicht!');
+                }
+            }
+        }
     }
 
     public function actionIndex()
@@ -218,4 +264,22 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionForeignlogin($delete='')
+    {
+        if ($delete=='ALL') {
+            Auth::deleteAll("{{%auth}}.user_id = :owner", [':owner' => \Yii::$app->user->id]);
+        }
+
+        $query = Auth::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        $dataProvider->setPagination(false);
+        $dataProvider->query->andWhere("{{%auth}}.user_id = :owner", [':owner' => \Yii::$app->user->id]);
+
+        Yii::$app->getUser()->setReturnUrl(['/site/foreignlogin']);
+        return $this->render('foreignlogin', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 }

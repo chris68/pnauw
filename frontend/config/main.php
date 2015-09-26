@@ -1,4 +1,7 @@
 <?php
+
+$oauth = parse_ini_file('/etc/apache2/oauth.key/parke-nicht-auf-unseren-wegen.de,ini', true);
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -48,6 +51,24 @@ return [
             'ruleFile' => '@common/data/rules.php', 
             'defaultRoles' => ['admin','moderator','trusted','user','anonymous'],
         ],
+        'authClientCollection' => [
+            // See http://code.tutsplus.com/tutorials/programming-with-yii2-authclient-integration-with-twitter-google-and-other-networks--cms-23489
+            // and https://github.com/yiisoft/yii2-authclient/blob/master/docs/guide/quick-start.md
+             'class' => 'yii\authclient\Collection',
+             'clients' => [
+                    'google' => [
+                        'class' => 'yii\authclient\clients\GoogleOAuth',
+                        'clientId' => $oauth['google']['clientId'],
+                        'clientSecret' => $oauth['google']['clientSecret'],
+                    ],
+                    'facebook' => [
+                        'class' => 'yii\authclient\clients\Facebook',
+                        'clientId' => $oauth['facebook']['clientId'],
+                        'clientSecret' => $oauth['facebook']['clientSecret'],
+                    ],
+                 // etc.
+             ],
+         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
