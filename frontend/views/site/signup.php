@@ -1,13 +1,13 @@
 <?php
-use yii\helpers\Html;
-use frontend\helpers\Assist;
-use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\SignupForm */
 
-$this->title = \Yii::t('base','Signup');
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
+$this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
@@ -18,8 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+
                 <?= $form->field($model, 'username') ?>
+
                 <?= $form->field($model, 'email') ?>
+
                 <?= $form->field($model, 'password')->passwordInput() ?>
                 <p>
                     Ich habe die <?= Assist::linkNew('Nutzungsbedingungen',['site/terms']) ?> <b>und</b> <?= Assist::linkNew('Datenschutzregeln',['site/privacy']) ?> gelesen und akzeptiere <b>beide</b>.
@@ -29,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="form-group">
                     <?= Html::submitButton(\Yii::t('base','Signup'), ['class' => 'btn btn-primary']) ?>
                 </div>
+
             <?php ActiveForm::end(); ?>
         </div>
     </div>

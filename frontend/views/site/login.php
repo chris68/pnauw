@@ -1,12 +1,13 @@
 <?php
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = \Yii::t('base','Login');
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
+$this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
@@ -17,12 +18,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+
                 <?= $form->field($model, 'username') ?>
+
                 <?= $form->field($model, 'password')->passwordInput() ?>
+
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
+
                 <div style="color:#999;margin:1em 0">
                     <?= \Yii::t('base','If you forgot your password you can') ?> <?= Html::a(\Yii::t('base','reset it'), ['site/request-password-reset']) ?>.
                 </div>
+
                 <div class="form-group">
                     <?= Html::submitButton(\Yii::t('base','Login'), ['class' => 'btn btn-primary']) ?>
                 </div>

@@ -1,4 +1,5 @@
 <?php
+
 /* @var $this yii\web\View */
 /* @var $name string */
 /* @var $message string */
@@ -8,7 +9,6 @@ use yii\helpers\Html;
 
 $this->title = Html::encode($name);
 ?>
-
 <div class="site-error">
 
     <h1><?= $this->title ?></h1>

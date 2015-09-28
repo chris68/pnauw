@@ -1,13 +1,14 @@
 <?php
+
+/* @var $this \yii\web\View */
+/* @var $content string */
+
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
-/* @var $this \yii\web\View */
-/* @var $content string */
 
 AppAsset::register($this);
 ?>
@@ -23,6 +24,7 @@ AppAsset::register($this);
 </head>
 <body>
     <?php $this->beginBody() ?>
+
     <div class="wrap">
         <?php
             NavBar::begin([
@@ -63,6 +65,7 @@ AppAsset::register($this);
     <footer class="footer">
         <div class="container">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
