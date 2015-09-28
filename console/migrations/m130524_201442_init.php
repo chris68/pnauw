@@ -18,14 +18,18 @@ class m130524_201442_init extends \yii\db\Migration
             'password_hash' => Schema::TYPE_STRING . ' NOT NULL',
             'password_reset_token' => Schema::TYPE_STRING . ' UNIQUE',
             'email' => Schema::TYPE_STRING . ' NOT NULL UNIQUE',
-            'role' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
 
             'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
+
             // use additionally real timestamp instead of unix time save as int
             'create_time' => Schema::TYPE_TIMESTAMP.' NOT NULL',
             'update_time' => Schema::TYPE_TIMESTAMP.' NOT NULL',
+
+            // The default role the user has
+            'role' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
+
         ], $tableOptions);
     }
 
