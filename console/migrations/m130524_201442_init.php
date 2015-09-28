@@ -12,23 +12,23 @@ class m130524_201442_init extends \yii\db\Migration
         }
 
         $this->createTable('{{%user}}', [
-            'id' => Schema::primaryKey(),
-            'username' => Schema::string()->notNull()->unique(),
-            'auth_key' => Schema::string(32)->notNull(),
-            'password_hash' => Schema::string()->notNull(),
-            'password_reset_token' => Schema::string()->unique(),
-            'email' => Schema::string()->notNull()->unique(),
+            'id' => $this->primaryKey(),
+            'username' => $this->string()->notNull()->unique(),
+            'auth_key' => $this->string(32)->notNull(),
+            'password_hash' => $this->string()->notNull(),
+            'password_reset_token' => $this->string()->unique(),
+            'email' => $this->string()->notNull()->unique(),
 
-            'status' => Schema::smallInteger()->notNull()->default(10),
-            'created_at' => Schema::integer()->notNull(),
-            'updated_at' => Schema::integer()->notNull(),
+            'status' => $this->smallInteger()->notNull()->defaultValue(10),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
 
             // use additionally real timestamp instead of unix time save as int
-            'create_time' => Schema::timestamp()->notNull(),
-            'update_time' => Schema::timestamp()->notNull(),
+            'create_time' => $this->timestamp()->notNull(),
+            'update_time' => $this->timestamp()->notNull(),
 
             // The default role the user has
-            'role' => Schema::smallInteger()->notNull()->default(10),
+            'role' => $this->smallInteger()->notNull()->defaultValue(10),
         ], $tableOptions);
     }
 
