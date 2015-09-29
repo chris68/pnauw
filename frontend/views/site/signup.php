@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use frontend\helpers\Assist;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,6 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::submitButton(\Yii::t('base','Signup'), ['class' => 'btn btn-primary']) ?>
                 </div>
 
+                <p>Oder registieren Sie sich über einen der externen OAuth-Provider:</p>
+                <?= yii\authclient\widgets\AuthChoice::widget([
+                     'baseAuthUrl' => ['site/auth'],
+                     'popupMode' => false,
+                ]) ?>
             <?php ActiveForm::end(); ?>
         </div>
     </div>
