@@ -55,12 +55,12 @@ $(function() {
         if (realtarget.data('value') == 'bind') {
             event.preventDefault();
             $('#search-map-bind').prop('checked',true);
-            $('#search-form').submit();
+            $('#search-form')[0].submit();
         } 
         else if (realtarget.data('value') == 'dynamic') {
             event.preventDefault();
             $('#search-map-bind').prop('checked',false);
-            $('#search-form').submit();
+            $('#search-form')[0].submit();
         }
         else if (realtarget.data('value') == 'gps') {
             // Do not call event.preventDefault to ensure the menue is closed again!
@@ -75,12 +75,12 @@ $(function() {
     $("#search-time").on ( 'click', "a", function( event ) {
         event.preventDefault();
         $('#search-time-range').val($(event.target).closest('a').data('value'));
-        $('#search-form').submit();
+        $('#search-form')[0].submit();
     });
 
     $('#search-refresh').on( 'click', function( event ) {
         event.preventDefault();
-        $('#search-form').submit();
+        $('#search-form')[0].submit();
         return false;
     });
 
