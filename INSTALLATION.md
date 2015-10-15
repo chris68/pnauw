@@ -80,6 +80,10 @@ dirlist_enable=NO
 download_enable=NO
 # If the upload failed, delete it
 delete_failed_uploads=YES
+
+# SEE https://bugs.alpinelinux.org/issues/1607
+seccomp_sandbox=0
+
 ```
 
 Restart the service via ``sudo service vsftpd restart``
