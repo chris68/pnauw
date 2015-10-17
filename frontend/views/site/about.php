@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use frontend\helpers\Assist;
 
 $this->title = \Yii::t('base','About');
@@ -113,4 +114,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <iframe width="640" height="480" src="https://www.youtube.com/embed/RcmZpELZUB4?rel=0" frameborder="0" allowfullscreen></iframe>
     </p>
+    <h4>
+        <a name="disqus_thread">Diskussionen</a>
+    </h4>
+    <p>
+        Wenn Sie etwas generell zur Plattform kommentieren wollen, dann können Sie das gerne hier unten tun. Konkrete Vorfälle bzw. Kampagnen sollten Sie hingegen lieber direkt am Vorfall bzw. bei der Kampagne kommentieren.
+    </p>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'pnauw';
+        var disqus_identifier = '/site/about';
+        var disqus_url = '<?= Url::to(['site/about'],true)?>';
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
 </div>

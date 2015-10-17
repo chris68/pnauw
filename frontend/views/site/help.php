@@ -274,6 +274,17 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     
     <h2><a name="general">Generelles</a></h2>
+    <h3><a name="comments">Kommentare</a></h3>
+    <p>
+        Wir nutzen die Diskussionplattform <?= Assist::extlink('disqus.com', 'http://disqus.com/') ?> für die Bereitstellung einer Kommentarfunktion für die generelle Plattform sowie für konkrete Kampagnen und Vorfälle.
+        Die Kommentare werden von den Betreibern der Plattform bzw. von diesen ernannten Moderatoren nach besten Wissen und Gewissen moderiert, um das Niveau einigermaßen erträglich zu halten.
+    </p>
+    <p>
+        Es gibt jedoch keinerlei Verbindung zwischen unserer Plattform und der Diskussionplattform disqus.com und somit können auch wildfremde Leute, die mit dem Vorfall nichts zu tun haben, beliebige Kommentare abgegeben.
+    </p>
+    <p>
+        Zudem erlauben wir auch Gastkommentare <b>ohne Login</b> bei disqus.com (einfach <i>I'd rather post as a guest</i> ankreuzen), womit eine recht anonyme Kommentierung möglich ist.
+    </p>
     <h3><a name="right-to-be-forgotten">Recht auf Vergessenwerden</a></h3>
     <p>
         Die Plattform ist für aktuelle Kampagnen gegen das Gehwegparken gedacht und hier braucht es leider die Möglichkeit, die Autos auf dem Gehweg auch mal zu zeigen, um ein Undenken zu bewirken.

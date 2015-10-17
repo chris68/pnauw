@@ -106,6 +106,7 @@ $this->params['help'] = 'picture-index';
                 '</div>'
                 ;
             } else {
+                $disqus_url = Url::to(['site/about'],true);
                 return
                 '<div class="row">
                     <div class="col-sm-4 col-md-4 col-lg-4">'
@@ -131,6 +132,8 @@ $this->params['help'] = 'picture-index';
                         )
                 .
                     Html::a('Detail', ['picture/view','id'=>$model->id], ['target' => '_blank'])
+                .
+                    '&nbsp|&nbsp; <a href="'.Url::to(['picture/view','id'=>$model->id],true).'#disqus_thread" data-disqus-identifier="/picture/'.$model->id.'" target="_blank">Kommentar hinterlassen</a>'
                 .
                     ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')
                 .
@@ -164,7 +167,22 @@ $this->params['help'] = 'picture-index';
                 .
                     '</div>'
                 .
-                '</div>'
+                '</div>'.
+<<<EOT
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES * * */
+                    var disqus_shortname = 'pnauw';
+                    var disqus_identifier = '/picture/{$model->id}';
+                    var disqus_url = '{$disqus_url}';
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function () {
+                        var s = document.createElement('script'); s.async = true;
+                        s.type = 'text/javascript';
+                        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                    }());
+                </script>
+EOT;
                 ;
             }
         },
