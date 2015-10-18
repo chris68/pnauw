@@ -20,7 +20,8 @@ $this->params['help'] = 'campaign-show';
 
     
     <h1><?= $this->title ?></h1>
-    <?= Html::a('Alle Bilder zur Kampagne anschauen', PictureController::urlCampaign('index', $model->id)) ?> 
+    <a href="#disqus_thread">Diskussionen</a> |
+    <?= Html::a('Alle Bilder zur Kampagne anschauen', PictureController::urlCampaign('index', $model->id), ['target' => '_blank']) ?>
     <?= (!yii::$app->user->isGuest?(' | '.Html::a('Meine Bilder zur Kampagne bearbeiten', PictureController::urlCampaign('manage', $model->id), ['target' => '_blank'])):'') ?>
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Kampagne bearbeiten', ['campaign/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
     <!-- @Todo: Add the mother and child campaigns in a box above and below the text -->
@@ -28,7 +29,8 @@ $this->params['help'] = 'campaign-show';
     
 </div>
 
-<a name="disqus_thread"></a><div id="disqus_thread"></div>
+<h2><a name="disqus_thread">Diskussionen zur Kampagne</a></h2>
+<div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'pnauw';
