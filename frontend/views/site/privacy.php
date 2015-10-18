@@ -29,12 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
         Wenn Sie als Nutzer oder Betroffener glauben, dass ihre Datenschutzrechte in irgendeiner Form verletzt wurden, dann infomieren Sie uns doch bitte über die Kontaktseite.
     </p>
     
+    <h4>Nutzung von Cookies</h4>
+    <p>
+        Über die in der EU-Richtlinie erlaubten Nutzung von eigenen Cookies hinaus nutzen wir die Cookies von <a href="https://www.google.com/policies/privacy/partners/">Google Analytics</a> und von <a href="https://help.disqus.com/customer/portal/articles/466235-use-of-cookies">discus.com</a>.
+        Daher müssen Sie deren Nutzung zustimmen. Ohne Zustimmung können Sie unsere Seite leider nicht nutzen.
+    </p>
+
     <h4>Änderung der Datenschutzregeln</h4>
     <p>
         Alle Änderungen dieser Datenschutzregeln werden hier veröffentlicht und mit dem in bei Veröffentlichung angegebenen Gültigkeitdatum gültig. Wir werden Ihnen eine Benachrichtigungsmail an Ihre Standard Emailadresse aus dem Nutzerprofil schicken und Sie zudem auf der Startseite auf die Änderungen hinweisen. Wenn Sie mit den Änderungen nicht einverstanden sind, dann dürfen Sie den Service nicht weiter nutzen.
     </p>
 
     <p>
-        (Stand 03.12.2013; gültig ab 03.12.2013)
+        (Stand 18.10.2015; gültig ab 18.10.2015)
     </p>
 </div>

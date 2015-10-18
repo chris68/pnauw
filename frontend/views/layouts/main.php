@@ -11,6 +11,8 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
+use cinghie\cookieconsent\widgets\CookieWidget;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -26,6 +28,13 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+    <?= CookieWidget::widget([
+            'message' => 'Diese Webseite nutzt Cookies, für deren Einsatz die EU ihr Einverständis verlangt',
+            'dismiss' => 'Einverstanden',
+            'learnMore' => 'Weitere Infos',
+            'link' => Url::to(['site/privacy']),
+            'theme' => 'dark-bottom'
+    ]); ?>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

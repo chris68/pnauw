@@ -19,7 +19,8 @@
 		"yiisoft/yii2-swiftmailer": "*",
 		"yiisoft/yii2-jui": "*",
 		"kartik-v/yii2-markdown": "*",
-		"yiisoft/yii2-authclient": "*"
+		"yiisoft/yii2-authclient": "*",
+		"cinghie/yii2-cookie-consent": "*"
 	},
 	"require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "778bd8c07f8283afedf4e00bf96bf07e",
-    "content-hash": "8bef42215dcd866d0ad49b81aac71408",
+    "hash": "5b76fc72c7ae06a40cc7c4337e92a824",
+    "content-hash": "7265903448f3e9ed0305504f081c4135",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -54,6 +54,41 @@
                 "mobile-first",
                 "responsive",
                 "web"
+            ]
+        },
+        {
+            "name": "bower-asset/cookieconsent2",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silktide/cookieconsent2.git",
+                "reference": "7d77181bb5623d98d5a555cb62b1336d9cfc186a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silktide/cookieconsent2/zipball/7d77181bb5623d98d5a555cb62b1336d9cfc186a",
+                "reference": "7d77181bb5623d98d5a555cb62b1336d9cfc186a",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "cookieconsent.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Silktide's cookie consent plugin v2",
+            "keywords": [
+                "cookie",
+                "cookieconsent",
+                "law"
             ]
         },
         {
@@ -297,6 +332,52 @@
                 "markdown-extra"
             ],
             "time": "2015-03-06 05:28:07"
+        },
+        {
+            "name": "cinghie/yii2-cookie-consent",
+            "version": "v1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cinghie/yii2-cookie-consent.git",
+                "reference": "f2a20eddb60636b9175dede48e8da814c7746da7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cinghie/yii2-cookie-consent/zipball/f2a20eddb60636b9175dede48e8da814c7746da7",
+                "reference": "f2a20eddb60636b9175dede48e8da814c7746da7",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/cookieconsent2": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "cinghie\\cookieconsent\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Gogodigital.it",
+                    "email": "info@gogodigital.it",
+                    "homepage": "http://www.gogodigital.it/"
+                }
+            ],
+            "description": "Yii2 Cookie Consent to alerting users about the use of cookies on your Yii2 website.",
+            "homepage": "https://github.com/cinghie/yii2-cookie-consent",
+            "keywords": [
+                "cookie",
+                "cookie consent",
+                "cookie law",
+                "eu cookie consent",
+                "yii2"
+            ],
+            "time": "2015-10-01 21:02:29"
         },
         {
             "name": "ezyang/htmlpurifier",
