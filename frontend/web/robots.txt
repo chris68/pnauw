@@ -3,11 +3,7 @@ User-agent: *
 Disallow: /site/signup
 Disallow: /site/login
 Disallow: /site/logout
-#  Disallow all system folders
-Disallow: /css
-Disallow: /assets
 # Disallow spam affected pages
-Disallow: /site/donations
 Disallow: /site/contact
 Disallow: /site/impressum
 Disallow: /site/privacy
