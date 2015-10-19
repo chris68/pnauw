@@ -35,6 +35,7 @@ AppAsset::register($this);
             'link' => Url::to(['site/privacy']),
             'theme' => 'dark-bottom'
     ]); ?>
+    <?php if (Yii::$app->user->isGuest) : // Enable google analytics only when not logged in ?>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -45,6 +46,7 @@ AppAsset::register($this);
       ga('send', 'pageview');
 
     </script>
+    <?php endif ?>
     <?php $this->beginBody() ?>
     <div class="wrap">
         <?php
