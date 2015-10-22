@@ -18,6 +18,11 @@ use yii\helpers\Html;
                 'model' => $model,
                 'attributes' => [
                     'taken',
+                    [
+                        'label' => 'Korrektur Vorfallsdatum',
+                        'format' => 'raw',
+                        'value' => $form->field($model, 'taken_override')->label('')->widget(\yii\jui\DatePicker::className())
+                    ],
                     'name',
                     [
                         'label' => 'Beschreibung',

@@ -49,7 +49,7 @@ use frontend\widgets\Alert;
                 'items' => [
                     [
                         'label' => 'Übersicht',
-                        'content' => $this->render('_overviewtab', array('model'=>$model)),
+                        'content' => $this->render('_overviewtab', array('model'=>$model,'form'=>$form)),
                         'headerOptions' => ['id' => 'picture-tab-overview'],
                      ],
                     [

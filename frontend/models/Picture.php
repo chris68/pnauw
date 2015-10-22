@@ -72,6 +72,11 @@ class Picture extends \yii\db\ActiveRecord
     public $deleted;
 
     /**
+     * @var Date Override the taken date
+     */
+    public $taken_override;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -132,6 +137,15 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
+     * Validator to check if taken is correctly set
+     */
+    public function validateTakenDate($attribute, $params)
+    {
+        if ($this->taken=='1970-01-01 00:00:00' && empty($this->taken_override))
+            $this->addError('taken_override', "Sie müssen das Datum des Vorfalls setzen.");
+    }
+
+    /**
      * Validator to check if country is filled if reg_plate is filled 
      */
     public function validateVehiclePlateConsistency($attribute, $params)
@@ -186,6 +200,9 @@ class Picture extends \yii\db\ActiveRecord
             [['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
             [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'integer'],
             [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'filter', 'filter' => 'intval', 'skipOnEmpty' => true],
+            ['taken_override', 'date'],
+            ['taken_override', 'validateTakenDate', 'skipOnEmpty' => false, 'on' => self::SCENARIO_DEFAULT],
+
             [['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
             [['loc_lat', 'loc_lng',], 'double'],
             ['visibility_id',  'validateVisibilityConsistency', ],
@@ -221,6 +238,7 @@ class Picture extends \yii\db\ActiveRecord
             'name' => 'Bildname',
             'description' => 'Beschreibung',
             'taken' => 'Aufgenommen am',
+            'taken_override' => 'Korrektur Vorfallsdatum',
             'org_loc' => 'Originale Aufnahmeposition',
             'org_loc_lat' => 'Originale Geo-Position (Breite)',
             'org_loc_lng' => 'Originale Geo-Position (Länge)',
@@ -250,6 +268,22 @@ class Picture extends \yii\db\ActiveRecord
             'selected' => 'Auswählen',
             'deleted' => 'Löschen',
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (!empty($this->taken_override)) {
+                $this->taken = $this->taken_override;
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
