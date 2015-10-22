@@ -63,9 +63,13 @@ function geocodePosition(pos) {
     var geocode = MQ.geocode().on('success', function(e) {
         console.debug(e.result);
         var location = e.result.best.street + ', '+ e.result.best.postalCode + ' ' + e.result.best.adminArea5 + ', ' + e.result.best.adminArea1;
-
-        $('#picture-map-nearest-address-mapquest').text (location);
-        $('#picture-map-loc-formatted-addr').val(location);
+        if (location = ',  , ') {
+            $('#picture-map-nearest-address-mapquest').text ('Keine Adresse gefunden');
+            $('#picture-map-loc-formatted-addr').val('');
+        } else {
+            $('#picture-map-nearest-address-mapquest').text (location);
+            $('#picture-map-loc-formatted-addr').val(location);
+        }
     });
     geocode.reverse(L.latLng(pos.lat(),pos.lng()));
   
