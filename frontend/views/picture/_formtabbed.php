@@ -13,7 +13,11 @@ use frontend\widgets\Alert;
 ?>
 
 <div class="picture-form">
-    <?php $form = $outerform?$outerform:ActiveForm::begin(); ?>
+    <?php $form = $outerform?$outerform:ActiveForm::begin(
+[
+    'enableClientScript' => false, // See https://github.com/chris68/pnauw/issues/88
+]
+        ); ?>
     
     <?= Html::activeHiddenInput($model, 'id' ) ?>
 
@@ -22,10 +26,10 @@ use frontend\widgets\Alert;
     <div class="form-group">
         <?= $outerform?'':Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= $outerform?'':Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
-        <?php if (!isset($outerform)) : ?>
-        <button 
+        <?php if (!isset($outerform) && !$model->isNewRecord ) : ?>
+        <button type="submit"
             formaction="<?=Url::to(['delete', 'id' => $model->id, 'returl' => Yii::$app->getRequest()->getUrl()])?>"
-            formmethod="POST"
+            formmethod="post"
             class="btn btn-danger"
         >
             Löschen
