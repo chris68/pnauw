@@ -163,7 +163,7 @@ class Picture extends \yii\db\ActiveRecord
             $this->visibility_id = 'public_approval_pending';
             
             $this->addError('visibility_id', 'Sie dürfen mit ihren Rechten leider keine Bilder oder Texte direkt veröffentlichen, sondern müssen die Freigabe anfordern. Die Sichtbarkeit wurde entsprechend angepasst. Bitte speichern Sie nun erneut.');
-        } else if ($this->visibility_id != 'public_approval_pending' && \Yii::$app->user->can('anonymous')) {
+        } else if ($this->scenario != 'defval' && $this->visibility_id != 'public_approval_pending' && \Yii::$app->user->can('anonymous')) {
             // Request to approval
             $this->visibility_id = 'public_approval_pending';
             
