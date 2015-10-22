@@ -278,7 +278,7 @@ class PictureController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Picture(['scenario' => 'create']);
+        $model = new Picture();
         $post_request = $model->load(Yii::$app->request->post());
 
         if (!$post_request) {
@@ -511,7 +511,7 @@ class PictureController extends Controller
             if ($formmodel->validate()) {
                 $transaction = Yii::$app->db->beginTransaction();
                 try {
-                    $picmodel = new Picture(['scenario' => 'create']);
+                    $picmodel = new Picture(['scenario' => 'upload']);
                     $picmodel->fillFromFile($formmodel->file_handle->tempName);
                     $transaction->commit();
                 } catch (Exception $ex) {
@@ -572,7 +572,7 @@ class PictureController extends Controller
                     $transaction = Yii::$app->db->beginTransaction();
                     try {
                         foreach ($formmodel->file_handles as $file) {
-                                $picmodel = new Picture(['scenario' => 'create']);
+                                $picmodel = new Picture(['scenario' => 'upload']);
                                 $picmodel->fillFromFile($file->tempName,$defaultvalues);
                         }
                         $transaction->commit();
@@ -632,7 +632,7 @@ class PictureController extends Controller
                     $transaction = Yii::$app->db->beginTransaction();
                     try {
                         foreach ($files as $filename) {
-                            $picmodel = new Picture(['scenario' => 'create']);
+                            $picmodel = new Picture(['scenario' => 'upload']);
                             $picmodel->fillFromFile($filename,$defaultvalues);
                         }
                         $transaction->commit();
