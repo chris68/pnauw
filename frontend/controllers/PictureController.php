@@ -367,7 +367,7 @@ class PictureController extends Controller
             foreach ($pics as $id => $form_pic) {
                 $model = Picture::findOne((int) $id);
                 $model->visibility_id = $form_pic->visibility_id;
-                $model->save();
+                $model->save(false,['visibility_id']);
             }
         }
 
