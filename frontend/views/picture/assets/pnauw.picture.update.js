@@ -63,7 +63,7 @@ function geocodePosition(pos) {
     var geocode = MQ.geocode().on('success', function(e) {
         console.debug(e.result);
         var location = e.result.best.street + ', '+ e.result.best.postalCode + ' ' + e.result.best.adminArea5 + ', ' + e.result.best.adminArea1;
-        if (location = ',  , ') {
+        if (location == ',  , ') {
             $('#picture-map-nearest-address-mapquest').text ('Keine Adresse gefunden');
             $('#picture-map-loc-formatted-addr').val('');
         } else {
