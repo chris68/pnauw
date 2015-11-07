@@ -86,9 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <p>
         Mit diesen Apps kann man die Bilder direkt aus der Bildergallery auswählen und mit 2-3 Clicks an den Server übermitteln. Es besteht sogar die Möglichkeit, die Bilder vorher
-        zu verkleinern, wodurch das Hochladen deutlich schneller wird und man entsprechend weniger Datenvolumen verbraucht 
-        (Hinweis für JustResizeIt: derzeit geht leider beim Verkleinern die EXIF-Informationen mit den GPS-Infos verloren, aber das soll in einer 
-        zukünftigen Version wahrscheinlich bis Ende 2014 gefixt werden).
+        zu verkleinern, wodurch das Hochladen deutlich schneller wird und man entsprechend weniger Datenvolumen verbraucht,
     </p>
     <p>
         Diese Bilder können dann über die Funktion übernommen werden und stehen danach zur Verfügung wie wenn man diese direkt aus dem Dateisystem des Rechners oder Mobiltelefons hochgeladen 
