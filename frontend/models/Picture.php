@@ -496,7 +496,7 @@ class Picture extends \yii\db\ActiveRecord
         $image->save(false);
         $this->thumbnail_image_id = $image->id;
 
-        $rawdata->blurimage(3, 2);
+        $rawdata->blurimage(3, 3);
         $image = new Image;
         $image->rawdata = bin2hex($rawdata->getimageblob());
         $image->save(false);
@@ -511,7 +511,7 @@ class Picture extends \yii\db\ActiveRecord
         $image->save(false);
         $this->small_image_id = $image->id;
 
-        $rawdata->blurimage(3, 2);
+        $rawdata->blurimage(3, 3);
         $image = new Image;
         $image->rawdata = bin2hex($rawdata->getimageblob());
         $image->save(false);
@@ -526,7 +526,7 @@ class Picture extends \yii\db\ActiveRecord
         $image->save(false);
         $this->medium_image_id = $image->id;
 
-        $rawdata->blurimage(5, 3);
+        $rawdata->blurimage(5, 5);
         $image = new Image;
         $image->rawdata = bin2hex($rawdata->getimageblob());
         $image->save(false);
