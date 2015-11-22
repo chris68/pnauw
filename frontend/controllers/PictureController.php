@@ -613,6 +613,7 @@ class PictureController extends Controller
      */
     public function actionServerupload()
     {
+        ini_set('max_execution_time', 300); // Maximum 5 minutes 
         $defaultvalues = new Picture(['scenario' => 'defval']);
 
         $dir = Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username;
