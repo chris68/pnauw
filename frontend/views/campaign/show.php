@@ -5,6 +5,9 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
 use frontend\controllers\PictureController;
+use Imagick;
+use ImagickDraw;
+use yii\widgets\Pjax;
 
 /**
  * @var yii\web\View $this
@@ -24,7 +27,31 @@ $this->params['help'] = 'campaign-show';
     <?= Html::a('Alle Bilder zur Kampagne anschauen', PictureController::urlCampaign('index', $model->id), ['target' => '_blank']) ?>
     <?= (!yii::$app->user->isGuest?(' | '.Html::a('Meine Bilder zur Kampagne bearbeiten', PictureController::urlCampaign('manage', $model->id), ['target' => '_blank'])):'') ?>
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Kampagne bearbeiten', ['campaign/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
-    <!-- @Todo: Add the mother and child campaigns in a box above and below the text -->
+    <?php
+        $stack = new Imagick();
+        /* var $pic frontend\models\Picture */
+        foreach ($model->getPictures()->where(['is not','blurred_thumbnail_image_id',NULL])->orderBy(['random()' => SORT_ASC, ])->limit(20)->all() as $pic) {
+            $thumb = new Imagick();
+            $imageBlob = hex2bin(stream_get_contents($pic->blurredThumbnailImage->rawdata, -1, 0));
+            $thumb->readImageBlob($imageBlob);
+            $stack->addImage($thumb);
+        }
+        $montage = $stack->montageImage(new ImagickDraw(), '5x4', '', 0, '0');
+        $montage->setImageFormat('jpg');
+
+        $options = array();
+        $options['src'] = 'data:image/jpg;base64,' . base64_encode($montage->getImageBlob());
+        $options['alt'] = 'Vorfälle der Kampagne';
+    ?>
+    <?php Pjax::begin(['id' => 'samplepics', 'enablePushState' => false, 'timeout' => 10000, ]); ?>
+
+    <div style="margin-top: 10px">
+    <?= \yii\helpers\Html::tag('img','',$options) ?>
+    </div>
+    <div style="margin-top: 5px">
+    <?= Html::a('Andere Zufallsbilder generieren', '') ?>
+    </div>
+    <?php Pjax::end(); ?>
     <?= Markdown::convert(Html::encode($model->description))?>
     
 </div>
