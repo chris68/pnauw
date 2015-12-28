@@ -156,6 +156,9 @@ $(function() {
                             pointOptions.radius = 6;
                             pointOptions.fillColor = '#0000FF'; // Blue
                             break;
+                        case 20:
+                            pointOptions.radius = 4;
+                            pointOptions.fillColor = '#FA58F4'; // Pink
                         default: 
                             ;
                     }

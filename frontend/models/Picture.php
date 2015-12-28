@@ -100,6 +100,28 @@ class Picture extends \yii\db\ActiveRecord
         $this->org_loc_lng = $this->loc_lng = 0;
     }
         
+    /**
+     * Copy the default values of some attributes
+     * @param Picture $defaultsvalues Default values which will override the existing values if given
+     */
+    public function copyDefaults($defaultvalues) {
+        $this->action_id = $defaultvalues->action_id;
+        $this->campaign_id = $defaultvalues->campaign_id;
+        $this->citation_id = $defaultvalues->citation_id;
+        $this->citation_affix = $defaultvalues->citation_affix;
+        $this->description = $defaultvalues->description;
+        $this->incident_id = $defaultvalues->incident_id;
+        $this->loc_formatted_addr = $defaultvalues->loc_formatted_addr;
+        // Override geocoords only if not already set!
+        if ($this->loc_lat == 0 && $this->loc_lng == 0) {
+            $this->loc_lat = $defaultvalues->loc_lat;
+            $this->loc_lng = $defaultvalues->loc_lng;
+        }
+        $this->name = $defaultvalues->name;
+        $this->vehicle_country_code = $defaultvalues->vehicle_country_code;
+        $this->vehicle_reg_plate = $defaultvalues->vehicle_reg_plate ;
+        $this->visibility_id = $defaultvalues->visibility_id ;
+    }
 
     /**
      * {@inheritdoc}
@@ -533,22 +555,7 @@ class Picture extends \yii\db\ActiveRecord
         $this->blurred_medium_image_id = $image->id;
         
         if (isset($defaultvalues)) {
-            $this->action_id = $defaultvalues->action_id;
-            $this->campaign_id = $defaultvalues->campaign_id;
-            $this->citation_id = $defaultvalues->citation_id;
-            $this->citation_affix = $defaultvalues->citation_affix;
-            $this->description = $defaultvalues->description;
-            $this->incident_id = $defaultvalues->incident_id;
-            $this->loc_formatted_addr = $defaultvalues->loc_formatted_addr;
-            // Override geocoords only if not already set!
-            if ($this->loc_lat == 0 && $this->loc_lng == 0) {
-                $this->loc_lat = $defaultvalues->loc_lat;
-                $this->loc_lng = $defaultvalues->loc_lng;
-            }
-            $this->name = $defaultvalues->name;
-            $this->vehicle_country_code = $defaultvalues->vehicle_country_code;
-            $this->vehicle_reg_plate = $defaultvalues->vehicle_reg_plate ;
-            $this->visibility_id = $defaultvalues->visibility_id ;
+            $this->copyDefaults($defaultvalues);
         }
 
         $this->save(false);

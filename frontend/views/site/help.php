@@ -98,6 +98,21 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Funktion steht jedoch nur dafür freigeschalteten <a href="#user-level-trusted">vertrauenswürdigen Nutzern</a> zur Verfügung. Wenn Sie interessiert sind, dann
         kontaktieren Sie uns bitte über die <a href="<?= Url::to(['contact']) ?>">Kontaktmöglichkeit</a> unter Angabe ihres Nutzernamens.
     </p>
+    <h3><a name="picture-kmlupload">Vorfälle aus KML-Datei übernehmen</a></h3>
+    <p>
+        In Google Maps besteht unter "meine Karten" die Möglichkeit, in eigenen Karten Punkte oder Strecken zu zeichen und diese dann als KML-Dateien abzuspeichern.
+    </p>
+    <p>
+        Damit können Sie recht einfach die Google Satellitenkarten nutzen und schauen, wo überall auf Gehwegen geparkt wird - man sieht es gut auf den Bildern und das lustige ist, dass es meist sogar die gleichen Autos sind, die man dann auch in Realität sieht. Über das Setzen von einzelnen Punkten oder ganzen Linien mit den Gehwegparken als Eckpunkten (geht schneller) dokumentiert man die Verfälle.
+    </p>
+    <p>
+        Die exportierte KML-Datei können Sie nun in der Plattform hochladen. Ganz wichtig ist, dass Sie hierbei gescheite Vorgabewerte setzen, aus denen gut ersichtlich ist, dass es sich um Gehwegparken aus Satellitenbildern handelt.
+        Danach stehen die Vorgänge ohne Bilder zu Verfügung und Sie können diese dann ganz normal nacharbeiten. In der Regel sollte durch Setzen von gescheiten Vorgabewerten eigentlich schon alles getan sein.
+    </p>
+    <p>
+        Die Funktion steht jedoch nur dafür freigeschalteten <a href="#user-level-trusted">vertrauenswürdigen Nutzern</a> zur Verfügung. Wenn Sie interessiert sind, dann
+        kontaktieren Sie uns bitte über die <a href="<?= Url::to(['contact']) ?>">Kontaktmöglichkeit</a> unter Angabe ihres Nutzernamens.
+    </p>
     <h3><a name="picture-manage">Bilder bearbeiten</a></h3>
     <p>
         Nach dem Hochladen müssen Sie die Bilder bearbeiten. Es gibt hierzu eine Mehrfachbearbeitung, wo Sie immer mehrere Bilder gleichzeitig bearbeiten können und eine Einzelbearbeitung, wo Sie jeweils nur ein einzelnes Bild bearbeiten.

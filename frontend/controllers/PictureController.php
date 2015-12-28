@@ -8,6 +8,7 @@ use frontend\models\PictureUploadForm;
 use frontend\models\PictureCaptureForm;
 use frontend\models\PictureModerateForm;
 use frontend\models\PicturePublishForm;
+use frontend\models\KmlUploadForm;
 use common\models\User;
 use Yii;
 use yii\web\Controller;
@@ -46,6 +47,11 @@ class PictureController extends Controller
                         'allow' => true,
                         'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'capture', 'publish'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['kmlupload', ],
+                        'roles' => ['trusted'],
                     ],
                     [
                         'allow' => true,
@@ -603,6 +609,85 @@ class PictureController extends Controller
         }
 
         return $this->render('upload', [
+                'formmodel' => $formmodel,
+                'defaultvalues' => $defaultvalues,
+        ]);
+    }
+
+    /**
+      Upload a kml file
+     * @return mixed
+     */
+    public function actionKmlupload()
+    {
+        $defaultvalues = new Picture(['scenario' => 'defval']);
+        $formmodel = new KmlUploadForm();
+
+        if (Yii::$app->getRequest()->isPost) {
+            if ($defaultvalues->load(Yii::$app->request->post()) && $defaultvalues->validate() && $formmodel->load(Yii::$app->request->post())) {
+                $formmodel->file_handles = UploadedFile::getInstances($formmodel, 'file_names');
+
+                if ($formmodel->validate()) {
+                    set_time_limit(120);
+                    $transaction = Yii::$app->db->beginTransaction();
+                    try {
+                        foreach ($formmodel->file_handles as $file) {
+                            $dom = new \DOMDocument();
+                            $dom->load($file->tempName);
+                            $xpath = new \DOMXpath($dom);
+                            $xpath->registerNamespace('kml', 'http://www.opengis.net/kml/2.2');
+
+                            $places = $xpath->evaluate('//kml:Placemark', NULL, FALSE);
+                            foreach ($places as $place) {
+                                if ($xpath->evaluate('string(kml:Point)', $place, FALSE) <> '') {
+                                    $coords = [$xpath->evaluate('string(kml:Point/kml:coordinates)', $place, FALSE)];
+                                } elseif ($xpath->evaluate('string(kml:LineString)', $place, FALSE) <> '') {
+                                    $coords = explode(' ', $xpath->evaluate('string(kml:LineString/kml:coordinates)', $place, FALSE));
+                                } else {
+                                    $coords = array();
+                                }
+                                foreach ($coords as $coord) {
+
+                                    $point = explode(',', $coord, 2);
+
+                                    $model = new Picture();
+                                    $model->setDefaults();
+                                    $model->org_loc_lat = $model->loc_lat = $point[1];
+                                    $model->org_loc_lng = $model->loc_lng = $point[0];
+
+                                    // Creation date is the date of the upload!
+                                    $model->taken = date('Y-m-d') . ' 00:00:00';
+                                    
+                                    $model->copyDefaults($defaultvalues);
+
+                                    $model->save(false);
+                                }
+                            }
+                        }
+                        $transaction->commit();
+                    } catch (Exception $ex) {
+                        $transaction->rollback();
+                        throw($ex);
+                    }
+
+                    $flash = 'Die KML-Datei wurde eingelesen.<br>';
+
+                    Yii::$app->session->setFlash('success',
+                        $flash.
+                        'Sie können die entsprechenden Vorfälle nun '.
+                        Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d")]).
+                        ' weiterverarbeiten. Alternativ können Sie natürlich auch weitere KML-Dateien hochladen.');
+                    return $this->refresh();
+                }
+            }
+        }
+        else {
+            $defaultvalues->setDefaults();
+            $defaultvalues->incident_id = 20; // Satellitenerfassung
+            $defaultvalues->name = 'Erfassung über Satellitenbilder';
+        }
+
+        return $this->render('kmlupload', [
                 'formmodel' => $formmodel,
                 'defaultvalues' => $defaultvalues,
         ]);
