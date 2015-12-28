@@ -175,7 +175,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionContact()
+    public function actionContact($context=NULL)
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -187,6 +187,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         } else {
+            $model->subject = ' ['.$context.' -- Kontext bitte nicht löschen]';
             return $this->render('contact', [
                 'model' => $model,
             ]);
