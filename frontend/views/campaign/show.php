@@ -32,7 +32,9 @@ $this->params['help'] = 'campaign-show';
         /* var $pic frontend\models\Picture */
         foreach ($model->getPictures()->where(['is not','blurred_thumbnail_image_id',NULL])->orderBy(['random()' => SORT_ASC, ])->limit(20)->all() as $pic) {
             $thumb = new Imagick();
-            $imageBlob = hex2bin(stream_get_contents($pic->blurredThumbnailImage->rawdata, -1, 0));
+            if (isset($pic->blurredThumbnailImage)) {
+              $imageBlob = hex2bin(stream_get_contents($pic->blurredThumbnailImage->rawdata, -1, 0));
+            }
             $thumb->readImageBlob($imageBlob);
             $stack->addImage($thumb);
         }
