@@ -1,10 +1,17 @@
 $(function() {
     var map = L.map('overviewmap');
 
-    L.tileLayer("http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+    var mapquest = new L.tileLayer("http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
        subdomains: "1234",
        attribution: "&copy; <a href='http://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='http://www.openstreetmap.org/copyright' title='ODbL'>open license</a>. Tiles Courtesy of <a href='http://www.mapquest.com/'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>"
-    }).addTo(map);
+    });
+    var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    // Google layers from shramov/leaflet-plugins/master/layer/tile/Google.js
+    var ggl1 = new L.Google('ROADMAP'); // , ROADMAP, HYBRID, TERRAIN
+    var ggl2 = new L.Google('SATELLITE'); // , ROADMAP, HYBRID, TERRAIN
+    var ggl3 = new L.Google('HYBRID'); // , ROADMAP, HYBRID, TERRAIN
+    map.addLayer(mapquest);
+    map.addControl(new L.Control.Layers( {'Maqquest':mapquest, 'OSM':osm, 'Google Straße':ggl1, 'Google Satellite':ggl2, 'Google Hybrid':ggl3}, {}));
 
     var incidentGroup = L.featureGroup([]);
     incidentGroup.addTo(map);

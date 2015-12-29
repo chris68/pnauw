@@ -10,5 +10,6 @@ class PictureOverviewmapAsset extends AssetBundle
     ];
     public $depends = [
         '\frontend\assets\LeafletAsset',
+        '\frontend\assets\LeafletPluginGoogleTileAsset',
     ];
 }

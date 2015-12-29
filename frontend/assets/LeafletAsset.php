@@ -20,11 +20,13 @@ use yii\web\AssetBundle;
  */
 class LeafletAsset extends AssetBundle
 {
-    public $css = [
-        "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css",
+public $css = [
+        "http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css", 
+        //"http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.css" // 1.0.0 does not yet work with shramov/leaflet-plugins/master/layer/tile/Google.js
     ];
     public $js = [
-        "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js",
+        "http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js", 
+        //"http://cdn.leafletjs.com/leaflet/v1.0.0-beta.2/leaflet.js", // 1.0.0 does not yet work with shramov/leaflet-plugins/master/layer/tile/Google.js
         "http://open.mapquestapi.com/sdk/leaflet/v1.s/mq-map.js?key=Fmjtd%7Cluurnu0znq%2Cal%3Do5-9w820a",
         "http://open.mapquestapi.com/sdk/leaflet/v1.s/mq-geocoding.js?key=Fmjtd%7Cluurnu0znq%2Cal%3Do5-9w820a",
     ];

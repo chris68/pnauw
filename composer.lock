@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5b76fc72c7ae06a40cc7c4337e92a824",
-    "content-hash": "7265903448f3e9ed0305504f081c4135",
+    "hash": "22aa6b4a2a88959554acef71041086e1",
+    "content-hash": "66d757bdb8021e5f84511cbcf111ab2e",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -210,6 +210,65 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/leaflet-plugins",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shramov/leaflet-plugins.git",
+                "reference": "edd247eb0df5199aafb0e2dd13562b219e8f3856"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shramov/leaflet-plugins/zipball/edd247eb0df5199aafb0e2dd13562b219e8f3856",
+                "reference": "edd247eb0df5199aafb0e2dd13562b219e8f3856",
+                "shasum": ""
+            },
+            "require-dev": {
+                "bower-asset/jshint": "2.5.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "control/Distance.js",
+                    "control/Layers.Load.js",
+                    "control/Permalink.js",
+                    "control/Permalink.Layer.js",
+                    "control/Permalink.Line.js",
+                    "control/Permalink.Marker.js",
+                    "control/Permalink.Overlay.js",
+                    "layer/Icon.Canvas.js",
+                    "layer/Layer.Deferred.js",
+                    "layer/Marker.Rotate.js",
+                    "layer/Marker.Text.js",
+                    "layer/OpenStreetBugs.js",
+                    "layer/vector/GPX.js",
+                    "layer/vector/GPX.Speed.js",
+                    "layer/vector/KML.js",
+                    "layer/vector/OSM.js",
+                    "layer/tile/Bing.js",
+                    "layer/tile/Google.js",
+                    "layer/tile/Yandex.js"
+                ],
+                "bower-asset-ignore": [
+                    "build"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Miscellaneous plugins for Leaflet library",
+            "keywords": [
+                "bing",
+                "google",
+                "gpx",
+                "kml",
+                "leaflet",
+                "map",
+                "plugins",
+                "yandex"
             ]
         },
         {
