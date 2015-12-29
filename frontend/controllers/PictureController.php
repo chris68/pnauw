@@ -77,6 +77,8 @@ class PictureController extends Controller
         $searchModel = new PictureSearch(['scenario' => 'public']);
         $dataProvider = $searchModel->search(Yii::$app->request->get());
         $dataProvider->query->publicScope();
+        $dataProvider->query->andWhere(['not',['incident_id' => 20]]); // Do not show the satellite incidents here
+
         $dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
         $dataProvider->pagination->pageSize = 20;
 
