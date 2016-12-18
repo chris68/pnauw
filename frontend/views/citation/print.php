@@ -15,6 +15,14 @@ elseif ($model->type == 'complaint') {
     $this->title = 'Beschwerde';
 }
 ?>
+<style>
+    body {
+        width: 21cm;
+    }
+    .container {
+        width: 100%;
+    }
+</style>
 <div class="citation-print">
 
     <?php
