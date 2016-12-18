@@ -38,7 +38,7 @@ elseif ($model->type == 'complaint') {
     <?php if ($model->type == 'citation') : ?>
     <p>
         Dies ist eine Privatanzeige, die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
-        können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr mißbräuchliches Parken hinweisen und, wenn es nicht hilft
+        können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr missbräuchliches Parken hinweisen und, wenn es nicht hilft
         oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
     </p>
     <h2>Zeuge und weitere spezifische Angaben für die Anzeige</h2>
@@ -66,7 +66,7 @@ elseif ($model->type == 'complaint') {
     <?php elseif ($model->type == 'complaint') : ?>
     <p>
         Dies ist eine informelle Beschwerde (<b>keine Anzeige!</b>), die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
-        können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr mißbräuchliches Parken hinweisen und das Fehlverhalten an die entsprechenden Behörden melden. Was hiermit gerade geschieht.
+        können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr missbräuchliches Parken hinweisen und das Fehlverhalten an die entsprechenden Behörden melden. Was hiermit gerade geschieht.
     </p>
     <p>
         Die Erwartung ist, dass die entsprechende Behörde an den gemeldeten Stellen die Kontrollen intensiviert und das Fehlverhalten der Autofahrer damit abgestellt wird.

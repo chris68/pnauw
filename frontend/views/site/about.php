@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Wenn Sie ganz schnell wissen wollen, wie die Sache funktioniert, dann schauen Sie sich am besten das <a href="#video">lustige Video</a> am Ende diese Seite an.
     </p>
     <h4>
-        <a>Problem: Mißbräuchliches Parken auf Gehwegen, Radwegen oder in verkehrsberuhigten Zonen</a>
+        <a>Problem: Missbräuchliches Parken auf Gehwegen, Radwegen oder in verkehrsberuhigten Zonen</a>
     </h4>
     <p>
         Das Problem des Gehwegparkens ist nach wie vor akut und leider wird es von offiziellen Stellen eher nicht ausreichend verfolgt
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Da Politik und die offiziellen Stellen das Problem nicht gelöst bekommen, will diese Plattform betroffenen Bürgern die Möglichkeit geben, sich zu wehren und den Finger auf die Wunde zu legen.
     </p>
     <p>
-        In erster Linie durch <b>Dokumentation der Mißstände</b> und der leichten Möglichkeit, dann wieder und immer wieder bei den offiziellen Stellen nachzuhaken, warum der gut und öffentliche dokumentierte Mißstand nicht beseitigt wird.
+        In erster Linie durch <b>Dokumentation der Missstände</b> und der leichten Möglichkeit, dann wieder und immer wieder bei den offiziellen Stellen nachzuhaken, warum der gut und öffentliche dokumentierte Missstand nicht beseitigt wird.
     </p>
     <p>
         Aber in zweiter Linie soll es allen Betroffenen auch die Möglichkeit geben, das Problem durch <b>Privatanzeigen</b> anzugehen. Privatanzeigen sind eine Möglichkeit, die der Gesetzgeber ausdrücklich vorsieht, und in der Regel wird dadurch das Problem schnell gelöst. 

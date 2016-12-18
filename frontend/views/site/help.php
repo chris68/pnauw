@@ -308,7 +308,7 @@ $this->params['breadcrumbs'][] = $this->title;
         einsehen, denn eine physikalische Löschung wird erst nach weiteren Jahren durchgeführt.
     </p>
     <p>
-        Was jedoch bleibt sind die roten Punkte in der Übersichtskarte, denn für eine historische Betrachtung von Kampagnen (und deren Erfolg oder Mißerfolg) sind diese Informationen zu wertvoll.
+        Was jedoch bleibt sind die roten Punkte in der Übersichtskarte, denn für eine historische Betrachtung von Kampagnen (und deren Erfolg oder Misserfolg) sind diese Informationen zu wertvoll.
     </p>
     <h3><a name="markdown-syntax">Markdown Syntax</a></h3>
     <p>
