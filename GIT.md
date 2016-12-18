@@ -37,7 +37,7 @@ Eventually became a pull request for yii2-app-advanced
 Handling
 ========
 
-Merge in changes from yii2-app-advanced
+Merge in changes from yii2-app-advanced (via git cherry pick)
 ---------------------------------------
 
  * You want to merge changes from a *tag-from* to a *tag-to*
@@ -50,3 +50,11 @@ Merge in changes from yii2-app-advanced
  * Check the results and commit them in netbeans; due to the -x the cherrypicked sha will be included; due to the -e you have the chance to review at all!
  * Check the log and see that the commits are now on master!
 
+Merge in changes from yii2-app-advanced (via meld)
+---------------------------------------
+
+ * Execute `git fetch yii2-app-advanced`
+ * git checkout tags/<tag> # With the tag you want to merge
+ * Merge online via meld; with the shift and control key you can get more merging options
+
+ * From time to time you should also diff/merge all projects
