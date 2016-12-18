@@ -78,11 +78,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         Sollte es Probleme mit <b>aktuellen</b> Browsern geben, dann melden Sie diese bitte über die Kontaktseite.
     </p>
-    <?php if (!Yii::$app->user->isGuest) : ?>
-    <div class="col-sm-12 col-md-12 alert alert-warning">
-        Das System ist derzeit noch in Entwicklung und es wird daher noch gewisse Nutzungseinschränkungen geben!
-    </div>
-    <?php endif ?>
     <h4>
         <a name="video">Video "Wie funktioniert es?"</a>
     </h4>
