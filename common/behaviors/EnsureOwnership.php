@@ -1,12 +1,8 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
 
 namespace common\behaviors;
 
+use Yii;
 use yii\base\Behavior;
 use yii\base\Event;
 use yii\db\ActiveRecord;
@@ -25,8 +21,7 @@ class EnsureOwnership extends Behavior {
     public $ensureOnFind = true;
 
     /**
-     * Declares event handlers for the [[owner]]'s events.
-     * @return array events (array keys) and the corresponding event handler methods (array values).
+     * @inheritDoc
      */
     public function events()
     {
@@ -46,10 +41,10 @@ class EnsureOwnership extends Behavior {
      */
     public function beforeSave($event) {
         if ($this->owner->getIsNewRecord()) {
-            $this->owner->{$this->ownerAttribute} = \Yii::$app->user->getId();
+            $this->owner->{$this->ownerAttribute} = Yii::$app->user->getId();
         } else {
-            if ($this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId())
-                throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
+            if ($this->owner->{$this->ownerAttribute} !== Yii::$app->user->getId())
+                throw new HttpException(403, Yii::t('common','You are not authorized to perform this action'));
             
         }
     }
@@ -60,8 +55,8 @@ class EnsureOwnership extends Behavior {
      * @param yii\base\Event $event event parameter
      */
     public function beforeDelete($event) {
-        if ($this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId()) {
-            throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
+        if ($this->owner->{$this->ownerAttribute} !== Yii::$app->user->getId()) {
+            throw new HttpException(403, Yii::t('common','You are not authorized to perform this action'));
         }
     }
     
@@ -71,8 +66,8 @@ class EnsureOwnership extends Behavior {
      * @param yii\base\Event $event event parameter
      */
     public function afterFind($event) {
-        if ($this->ensureOnFind && $this->owner->{$this->ownerAttribute} <> \Yii::$app->user->getId()) {
-            throw new HttpException(403, \Yii::t('common','You are not authorized to perform this action'));
+        if ($this->ensureOnFind && $this->owner->{$this->ownerAttribute} !== Yii::$app->user->getId()) {
+            throw new HttpException(403, Yii::t('common','You are not authorized to perform this action'));
         }
     }
 }

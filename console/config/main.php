@@ -10,6 +10,7 @@ return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+// @chris68
     'language' => 'en-US',
     'controllerNamespace' => 'console\controllers',
     'components' => [
@@ -21,6 +22,8 @@ return [
                 ],
             ],
         ],
+
+// @chris68
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
             'itemFile' => '@common/data/items.php', 
@@ -42,11 +45,6 @@ return [
                 //],
             ],
         ],
-        'urlManager' => [
-            'baseUrl' => 'http://parke-nicht-auf-unseren-wegen.de/',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ]
     ],
     'params' => $params,
 ];

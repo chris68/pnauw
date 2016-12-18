@@ -2,19 +2,21 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\LoginForm;
-use common\models\Auth;
-use common\models\User;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
-use yii\data\ActiveDataProvider;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\LoginForm;
+use frontend\models\PasswordResetRequestForm;
+use frontend\models\ResetPasswordForm;
+use frontend\models\SignupForm;
+use frontend\models\ContactForm;
+
+// @chris68
+use common\models\Auth;
+use common\models\User;
+use yii\data\ActiveDataProvider;
 use frontend\models\UserdataForm;
 
 /**
@@ -30,20 +32,20 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+// @chris68
                 'only' => ['logout', 'signup', 'userdata', 'foreignlogin'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
                         'allow' => true,
-                    // Signup actually should be possible all the time!
-                    //    'roles' => ['?'],
+                        'roles' => ['?'],
                     ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
-                    // Logout actually should be possible all the time!
-                    //    'roles' => ['@'],
+                        'roles' => ['@'],
                     ],
+// @chris68
                     [
                         'actions' => ['userdata','foreignlogin'],
                         'allow' => true,
@@ -73,58 +75,13 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+
+// @chris68
             'auth' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
         ];
-    }
-
-    public function onAuthSuccess($client)
-    {
-        $attributes = $client->getUserAttributes();
-        Yii::info($attributes);
-
-        /* @var $auth common\models\Auth */
-        $auth = Auth::find()->where([
-            'source' => $client->getId(),
-            'source_id' => $attributes['id'],
-        ])->one();
-
-        if (Yii::$app->user->isGuest) {
-            if ($auth) { // login
-                $user = $auth->user;
-                Yii::$app->user->login($user);
-            } else {
-                Yii::$app->getSession()->setFlash('error',
-                    'Das angegebene Konto der externen Providers ist nicht mit einem Account auf unserer Plattform verbunden.<br/>'
-                    .'Wenn Sie bereits bei uns registriert sind, dann melden Sie sich bitte an und verbinden Sie dann das Konto unter "Verwalten"->"Fremdlogins".<br/>'
-                    .'Andernfalls müssen Sie sich zuerst unten registrieren (als Fallback zur Ihrer Sicherheit) und können erst dann das Konto verbinden. Bei der Registierung müssen Sie eigentlich nur Ihre Emailadresse angeben, der Rest ist bereits entsprechend vorgefüllt <br/>'
-                    .''
-                );
-                return $this->redirect(['site/signup','oauth'=>'1']);
-            }
-        } else { // user already logged in
-            if (!$auth) { // add auth provider
-                switch ($client->getId()) {
-                    case 'google': $name = $attributes['displayName']; break;
-                    case 'facebook': $name = $attributes['name']; break;
-                }
-                $auth = new Auth([
-                    'user_id' => Yii::$app->user->id,
-                    'source' => $client->getId(),
-                    'source_id' => $attributes['id'],
-                    'source_name' => $name,
-                ]);
-                $auth->save();
-            } else {
-                if ($auth->user->id <> Yii::$app->user->id) {
-                    Yii::$app->getSession()->setFlash('error', 'Das angegebene Konto des externen Providers ist bereits mit einem anderen Account auf unserer Plattform verbunden. Logischerweise kann man jedoch immer nur genau ein Konto von uns mit genau einem Konto des externen Providers verbinden.');
-                } else {
-                    Yii::$app->getSession()->setFlash('error', 'Das angegebene Konto des externen Providers ist bereits mit diesem Account auf unserer Plattform verbunden. Zweimal geht nicht!');
-                }
-            }
-        }
     }
 
     /**
@@ -144,7 +101,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!\Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -176,6 +133,7 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionContact($context=NULL)
+// @chris68
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -187,7 +145,8 @@ class SiteController extends Controller
 
             return $this->refresh();
         } else {
-            $model->subject = ' ['.$context.' -- Kontext bitte nicht löschen]';
+// @chris68
+            if ($context !== NULL) $model->subject = ' ['.$context.' -- Kontext bitte nicht löschen]';
             return $this->render('contact', [
                 'model' => $model,
             ]);
@@ -204,37 +163,13 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionTerms()
-    {
-        return $this->render('terms');
-    }
-
-    public function actionPrivacy()
-    {
-        return $this->render('privacy');
-    }
-
-    public function actionImpressum()
-    {
-        return $this->render('impressum');
-    }
-
-    public function actionHelp()
-    {
-        return $this->render('help');
-    }
-
-    public function actionReleasehistory()
-    {
-        return $this->render('releasehistory');
-    }
-
     /**
      * Signs user up.
      *
      * @return mixed
      */
     public function actionSignup($oauth='')
+// @chris68
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
@@ -304,6 +239,79 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+// @chris68
+    public function onAuthSuccess($client)
+    {
+        $attributes = $client->getUserAttributes();
+        Yii::info($attributes);
+
+        /* @var $auth common\models\Auth */
+        $auth = Auth::find()->where([
+            'source' => $client->getId(),
+            'source_id' => $attributes['id'],
+        ])->one();
+
+        if (Yii::$app->user->isGuest) {
+            if ($auth) { // login
+                $user = $auth->user;
+                Yii::$app->user->login($user);
+            } else {
+                Yii::$app->getSession()->setFlash('error',
+                    'Das angegebene Konto der externen Providers ist nicht mit einem Account auf unserer Plattform verbunden.<br/>'
+                    .'Wenn Sie bereits bei uns registriert sind, dann melden Sie sich bitte an und verbinden Sie dann das Konto unter "Verwalten"->"Fremdlogins".<br/>'
+                    .'Andernfalls müssen Sie sich zuerst unten registrieren (als Fallback zur Ihrer Sicherheit) und können erst dann das Konto verbinden. Bei der Registierung müssen Sie eigentlich nur Ihre Emailadresse angeben, der Rest ist bereits entsprechend vorgefüllt <br/>'
+                    .''
+                );
+                return $this->redirect(['site/signup','oauth'=>'1']);
+            }
+        } else { // user already logged in
+            if (!$auth) { // add auth provider
+                switch ($client->getId()) {
+                    case 'google': $name = $attributes['displayName']; break;
+                    case 'facebook': $name = $attributes['name']; break;
+                }
+                $auth = new Auth([
+                    'user_id' => Yii::$app->user->id,
+                    'source' => $client->getId(),
+                    'source_id' => $attributes['id'],
+                    'source_name' => $name,
+                ]);
+                $auth->save();
+            } else {
+                if ($auth->user->id <> Yii::$app->user->id) {
+                    Yii::$app->getSession()->setFlash('error', 'Das angegebene Konto des externen Providers ist bereits mit einem anderen Account auf unserer Plattform verbunden. Logischerweise kann man jedoch immer nur genau ein Konto von uns mit genau einem Konto des externen Providers verbinden.');
+                } else {
+                    Yii::$app->getSession()->setFlash('error', 'Das angegebene Konto des externen Providers ist bereits mit diesem Account auf unserer Plattform verbunden. Zweimal geht nicht!');
+                }
+            }
+        }
+    }
+
+    public function actionTerms()
+    {
+        return $this->render('terms');
+    }
+
+    public function actionPrivacy()
+    {
+        return $this->render('privacy');
+    }
+
+    public function actionImpressum()
+    {
+        return $this->render('impressum');
+    }
+
+    public function actionHelp()
+    {
+        return $this->render('help');
+    }
+
+    public function actionReleasehistory()
+    {
+        return $this->render('releasehistory');
     }
 
     public function actionUserdata()

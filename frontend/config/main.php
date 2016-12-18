@@ -1,5 +1,6 @@
 <?php
 
+// @chris68
 $oauth = parse_ini_file('/etc/apache2/oauth.key/parke-nicht-auf-unseren-wegen.de.ini', true);
 
 $params = array_merge(
@@ -10,27 +11,40 @@ $params = array_merge(
 );
 
 return [
+// @chris68
     'id' => 'pnauw',
     'basePath' => dirname(__DIR__),
-    'language' => 'de',
+    'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+
+// @chris68
+    'language' => 'de',
     'modules' => [
         'markdown' => [
             // the module class
             'class' => 'kartik\markdown\Module',
             // whether to use PHP SmartyPants to process Markdown output
-            'smartyPants' => false
-
+            'smartyPants' => false,
         ],
     ],
+
     'components' => [
+        'request' => [
+            'csrfParam' => '_csrf-frontend',
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+// @chris68
             'as loginLogger' => [
                 'class' => 'common\behaviors\ProtocolLogin',
                 // ... property init values ...
             ],
+        ],
+        'session' => [
+            // this is the name of the session cookie used for login on the frontend
+            'name' => 'advanced-frontend',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -44,6 +58,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+// @chris68
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ],
+        ],
+
+// @chris68
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
             'itemFile' => '@common/data/items.php', 
@@ -57,7 +80,7 @@ return [
              'class' => 'yii\authclient\Collection',
              'clients' => [
                     'google' => [
-                        'class' => 'yii\authclient\clients\GoogleOAuth',
+                        'class' => 'yii\authclient\clients\Google',
                         'clientId' => $oauth['google']['clientId'],
                         'clientSecret' => $oauth['google']['clientSecret'],
                     ],
@@ -69,10 +92,6 @@ return [
                  // etc.
              ],
          ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
         'i18n' => [
             'translations' => [
                 'common' => [

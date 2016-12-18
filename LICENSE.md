@@ -1,6 +1,6 @@
 Licence for Pnauw
 =================
-Copyright © 2013 by Christoph Toussaint
+Copyright © 2016 by Christoph Toussaint
 All rights reserved.
 
 

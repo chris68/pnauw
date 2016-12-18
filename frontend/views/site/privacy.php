@@ -8,6 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-privacy">
     <h1><?= $this->title ?></h1>
+    <h3>Datenschutzregeln</h3>
 
     <h4>Datennutzung</h4>
     <p>

@@ -6,6 +6,8 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+// @chris68
 use frontend\helpers\Assist;
 
 $this->title = 'Signup';
@@ -20,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username') ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'email') ?>
 
@@ -33,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 $form->field($model, 'acceptTerms')->checkbox() ?>
                 
                 <div class="form-group">
-                    <?= Html::submitButton(\Yii::t('base','Signup'), ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton(\Yii::t('base','Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 
                 <p>Oder registieren Sie sich über einen der externen OAuth-Provider:</p>

@@ -16,6 +16,7 @@ class ContactForm extends Model
     public $body;
     public $verifyCode;
 
+
     /**
      * @inheritdoc
      */
@@ -37,10 +38,12 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
+// @chris68
             'name' => \Yii::t('base','Name'), 
             'email' => \Yii::t('base','Email'), 
             'subject' => \Yii::t('base','Subject'), 
             'body' => \Yii::t('base', 'Body'),
+
             'verifyCode' => \Yii::t('base','Verification Code'),
         ];
     }
@@ -49,11 +52,12 @@ class ContactForm extends Model
      * Sends an email to the specified email address using the information collected by this model.
      *
      * @param  string  $email the target email address
-     * @return boolean whether the email was sent
+     * @return bool whether the email was sent
      */
     public function sendEmail($email)
     {
             return Yii::$app->mailer->compose()
+// @chris68
                 ->setTo([$this->email => $this->name])
                 ->setFrom([Yii::$app->params['noreplyEmail'] => Yii::$app->name . ' (robot)'])
                 ->setBcc(Yii::$app->params['contactEmail'])

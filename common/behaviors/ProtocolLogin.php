@@ -11,7 +11,7 @@ use common\models\Userlog;
 class ProtocolLogin extends Behavior {
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function events()
     {

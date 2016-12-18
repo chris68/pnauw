@@ -3,6 +3,7 @@ Php >= 5.4 is required
 ### Further modules ###
 The following modules are needed. Install/Activate them via
 
+```
 sudo apt-get install php5-mcrypt
 sudo php5enmod mcrypt
 

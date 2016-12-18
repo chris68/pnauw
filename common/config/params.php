@@ -1,5 +1,6 @@
 <?php
 return [
+// @chris68
     'adminEmail' => 'admin@parke-nicht-auf-diesen-wegen.de',
     'supportEmail' => 'support@parke-nicht-auf-diesen-wegen.de',
     'user.passwordResetTokenExpire' => 3600,

@@ -11,9 +11,12 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
+
+// @chris68
     public $rememberMe = false;
 
     private $_user;
+
 
     /**
      * @inheritdoc
@@ -30,6 +33,7 @@ class LoginForm extends Model
         ];
     }
 
+// @chris68
     /**
      * {@inheritdoc}
      */
@@ -54,7 +58,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError('password', \Yii::t('common','Incorrect username or password.'));
+                $this->addError($attribute, \Yii::t('common','Incorrect username or password.'));
             }
         }
     }
@@ -62,7 +66,7 @@ class LoginForm extends Model
     /**
      * Logs in a user using the provided username and password.
      *
-     * @return boolean whether the user is logged in successfully
+     * @return bool whether the user is logged in successfully
      */
     public function login()
     {

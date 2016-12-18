@@ -4,13 +4,14 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
+// @chris68
+use yii\helpers\Url;
 use cinghie\cookieconsent\widgets\CookieWidget;
 
 AppAsset::register($this);
@@ -35,6 +36,7 @@ AppAsset::register($this);
             'link' => Url::to(['site/privacy']),
             'theme' => 'dark-bottom'
     ]); ?>
+
     <?php if (Yii::$app->user->isGuest) : // Enable google analytics only when not logged in ?>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -47,6 +49,7 @@ AppAsset::register($this);
 
     </script>
     <?php endif ?>
+
     <?php $this->beginBody() ?>
     <div class="wrap">
         <?php
@@ -100,11 +103,14 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => \Yii::t('base','Signup'), 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => \Yii::t('base','Login'), 'url' => ['/site/login']];
             } else {
-                $menuItems[] = [
-                    'label' => \Yii::t('base','Logout').' (' . Yii::$app->user->identity->username .')' ,
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ];
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+                \Yii::t('base','Logout').' (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],

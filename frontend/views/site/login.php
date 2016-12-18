@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($model, 'username') ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <div class="form-group">
-                    <?= Html::submitButton(\Yii::t('base','Login'), ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton(\Yii::t('base','Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
                 <p>Oder melden Sie sich über einen der externen OAuth-Provider an:</p>
                 <?= yii\authclient\widgets\AuthChoice::widget([
