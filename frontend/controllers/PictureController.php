@@ -197,7 +197,7 @@ class PictureController extends Controller
             \yii\base\Model::validateMultiple($models);
             foreach ($models as $id => $model) {
                 if (!Yii::$app->user->can('isObjectOwner', array('model' => $model))) {
-                    throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
+                    throw new HttpException(403, \Yii::t('base', 'You are not authorized to perform this action'));
                 }
                 
                 if ($model->deleted) {
@@ -783,7 +783,7 @@ class PictureController extends Controller
             if (Yii::$app->user->can('isObjectOwner', array('model' => $model))) {
                 return $model;
             } else {
-                throw new HttpException(403, \Yii::t('common', 'You are not authorized to perform this action'));
+                throw new HttpException(403, \Yii::t('base', 'You are not authorized to perform this action'));
             }
         } else {
             throw new HttpException(404, 'The requested object does not exist or has been already deleted.');

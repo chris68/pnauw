@@ -28,22 +28,22 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => \Yii::t('common','This user name has already been taken.')],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => \Yii::t('base','This user name has already been taken.')],
 // @chris68
-            ['username', 'compare', 'operator' => '!=', 'compareValue' => 'Guest access', 'message' => \Yii::t('common','This user name is reserved.')],
+            ['username', 'compare', 'operator' => '!=', 'compareValue' => 'Guest access', 'message' => \Yii::t('base','This user name is reserved.')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => \Yii::t('common','This email address has already been taken.')],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => \Yii::t('base','This email address has already been taken.')],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
 // @chris68
-            ['acceptTerms', 'required', 'requiredValue' => true, 'message' => \Yii::t('common','You need to accept the terms.')],
+            ['acceptTerms', 'required', 'requiredValue' => true, 'message' => \Yii::t('base','You need to accept the terms.')],
         ];
     }
 
@@ -54,10 +54,10 @@ class SignupForm extends Model
 // @chris68
     {
         return [
-            'username' => \Yii::t('common','Username'),
-            'email' => \Yii::t('common','Email'),
-            'password' => \Yii::t('common','Password'),
-            'acceptTerms' => \Yii::t('common','Terms accepted'),
+            'username' => \Yii::t('base','Username'),
+            'email' => \Yii::t('base','Email'),
+            'password' => \Yii::t('base','Password'),
+            'acceptTerms' => \Yii::t('base','Terms accepted'),
         ];
     }
 

@@ -28,13 +28,13 @@ class UserdataForm extends Model
     {
         return [
             ['new_username', 'filter', 'filter' => 'trim'],
-            ['new_username', 'unique', 'targetAttribute' => 'username', 'targetClass' => '\common\models\User', 'message' => \Yii::t('common','This user name has already been taken.')],
-            ['new_username', 'compare', 'operator' => '!=', 'compareValue' => 'Guest access', 'message' => \Yii::t('common','This user name is reserved.')],
+            ['new_username', 'unique', 'targetAttribute' => 'username', 'targetClass' => '\common\models\User', 'message' => \Yii::t('base','This user name has already been taken.')],
+            ['new_username', 'compare', 'operator' => '!=', 'compareValue' => 'Guest access', 'message' => \Yii::t('base','This user name is reserved.')],
             ['new_username', 'string', 'min' => 2, 'max' => 255],
 
             ['new_email', 'filter', 'filter' => 'trim'],
             ['new_email', 'email'],
-            ['new_email', 'unique', 'targetAttribute' => 'email', 'targetClass' => '\common\models\User', 'message' => \Yii::t('common','This email address has already been taken.')],
+            ['new_email', 'unique', 'targetAttribute' => 'email', 'targetClass' => '\common\models\User', 'message' => \Yii::t('base','This email address has already been taken.')],
 
             ['new_password', 'string', 'min' => 6],
 
