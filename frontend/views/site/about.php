@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
         <li><?= Assist::extlink('Offizielle Seite "gehwege-frei.de" des Fuß eV','//www.gehwege-frei.de') ?></li>
         <li><?= Assist::extlink('Initiative "Geh weg vom Gehweg" in Karlsruhe','//geh-weg-vom-gehweg.blogspot.de') ?></li>
-        <li><?= Assist::extlink('Verkehrswende Darmstadt', '//verkehrswende-darmstadt.wikispaces.com/Gehwegparken') ?></li>
+        <li><?= Assist::extlink('Verkehrswende Darmstadt', '//www.verkehrswende-darmstadt.de/aktionen/illegales-gehwegparken') ?></li>
     </ul>
     <p>
         Dort kann sich jeder informieren, wie die rechtliche Lage aussieht ("<b>Verboten</b>, wenn nicht ausdrücklich durch Schild erlaubt!"), 
