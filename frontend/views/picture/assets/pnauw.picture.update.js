@@ -50,157 +50,121 @@ $("#picture-clip-size").on( "change", function( event, ui ) {
 
 
 /*
- * Google map functionality on tab "_maptab"
+ * Leaflet map functionality on tab "_maptab"
  */
-
-var geocoder;
-var map;
-var marker;
-var marker_org;
-
-function geocodePosition(pos) {
-    
-    var geocode = MQ.geocode().on('success', function(e) {
-        console.debug(e.result);
-        var location = e.result.best.street + ', '+ e.result.best.postalCode + ' ' + e.result.best.adminArea5 + ', ' + e.result.best.adminArea1;
-        if (location == ',  , ') {
-            $('#picture-map-nearest-address-mapquest').text ('Keine Adresse gefunden');
-            $('#picture-map-loc-formatted-addr').val('');
-        } else {
-            $('#picture-map-nearest-address-mapquest').text (location);
-            $('#picture-map-loc-formatted-addr').val(location);
-        }
-    });
-    geocode.reverse(L.latLng(pos.lat(),pos.lng()));
-  
-    geocoder.geocode({
-      latLng: pos
-    }, function(responses,status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        $('#picture-map-nearest-address-google').text (responses[0].formatted_address);
-        // Only if something relevant has been found update the model!
-        // $('#picture-map-loc-formatted-addr').val (responses[0].formatted_address);
-      } else {
-        $('#picture-map-nearest-address-google').text ("Keine Adresse gefunden (Fehlercode:" + status + ")");
-      }
-    });
-}
-
-geocoder = new google.maps.Geocoder();
 
 function getlatLng() {
-    return new google.maps.LatLng($('#picture-map-loc-lat').val(),$('#picture-map-loc-lng').val());
+    return L.latLng($('#picture-map-loc-lat').val(),$('#picture-map-loc-lng').val());
 }
 function getlatLngOrg() {
-    return new google.maps.LatLng($('#picture-map-loc-lat-org').val(),$('#picture-map-loc-lng-org').val());
+    return L.latLng($('#picture-map-loc-lat-org').val(),$('#picture-map-loc-lng-org').val());
+}
+
+var
+    map = L.map('picture-map-canvas').setView(getlatLng(),16),
+    geocoder = L.Control.Geocoder.nominatim(),
+    control = L.Control.geocoder({
+        geocoder: geocoder,
+        defaultMarkGeocode: false // disable the default handler
+    })
+    .on('markgeocode', function(result) {
+        // and define your own without the marker
+			result = result.geocode || result;
+
+			this._map.fitBounds(result.bbox);
+
+			return this;
+    })
+    .addTo(map),
+    marker,
+    marker_org;
+
+var osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   attribution: "&copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='https://www.openstreetmap.org/copyright' title='ODbL'>open license</a>."
+});
+map.addLayer(osm);
+
+marker = L.marker(getlatLng(),{draggable:true}).addTo(map);
+marker.on('dragend', function(e) {
+    geocodePosition(e.target.getLatLng());
+});
+
+var cameraIcon = L.divIcon({className: 'glyphicon glyphicon-camera'});
+marker_org = L.marker(getlatLngOrg(),{icon: cameraIcon}).addTo(map);
+
+map.on('click', function(e) {
+    geocodePosition(e.latlng);
+});
+
+if ($('#picture-map-loc-formatted-addr').val() == '') {
+    // Of the orgiginal coordinates and the current coords are the same then geocode since then it is the first time
+    geocodePosition(getlatLng());
 }
 
 
-/*
- * Adjusts the position of the map to the markers position (centered)
- */
-function adjustPosition() {
-    geocodePosition(marker.getPosition());
-    map.setCenter(marker.getPosition());
-    if (map.getZoom() < 16) {
-        map.setZoom(16);
-    }
+function geocodePosition(pos) {
+
+    // Update the model
+    $('#picture-map-loc-lat').val(pos.lat);
+    $('#picture-map-loc-lng').val(pos.lng);
+
+
+    geocoder.reverse(pos, map.options.crs.scale(map.getZoom()), function(results) {
+        console.debug(results);
+        var r = results[0];
+        if (r) {
+            // Built up the 
+            var address =  [
+                [
+                    r.properties.address.footway,
+                    r.properties.address.road,
+                    r.properties.address.house_number
+                ].filter(val => val).join(' '),
+                [
+                    r.properties.address.postcode,
+                    r.properties.address.suburb,
+                    r.properties.address.city_district,
+                    r.properties.address.town,
+                    r.properties.address.city
+                ].filter(val => val).join(' ')
+            ].filter(val => val).join(', ');
+
+            if (address=='')  {
+                $('#picture-map-nearest-address').html("<div class='alert alert-warning'>Sie müssen näher reinzoomen, damit eine Adresse ermittelt werden kann</div>");
+            } else{
+                $('#picture-map-nearest-address').text (address);
+                $('#picture-map-loc-formatted-addr').val(address);
+            }
+            
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            marker = L.marker(pos,{draggable:true}).addTo(map);
+            marker.on('dragend', function(e) {
+                geocodePosition(e.target.getLatLng());
+            });
+        } else {
+            $('#picture-map-nearest-address').html("<div class='alert alert-warning'>Es konnte keine Adresse ermittelt werden</div>");
+            $('#picture-map-loc-formatted-addr').val('');
+        }
+    });
 }
 
-map = new google.maps.Map(document.getElementById('picture-map-canvas'), {
-  zoom: 16,
-  center: getlatLng(),
-  mapTypeId: google.maps.MapTypeId.ROADMAP
-});
-
-marker = new google.maps.Marker({
-  position: getlatLng(),
-  title: 'Korrigiert',
-  map: map,
-  draggable: true
-});
-
-marker_org = new google.maps.Marker({
-  position: getlatLngOrg(),
-  title: 'Original',
-  map: map,
-  icon: {
-      url: 'http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png',
-  },
-  draggable: false
-});
-
-adjustPosition();
-
-// Add dragging event listeners.
-google.maps.event.addListener(map, 'click', function(event) {
-    // Set the new position of the marker
-    marker.setPosition(event.latLng);
-    
-    // Update the model
-    $('#picture-map-loc-lat').val(marker.getPosition().lat());
-    $('#picture-map-loc-lng').val(marker.getPosition().lng());
-    
-    // Adjust the map
-    adjustPosition();
-});
-
-// Add dragging event listeners.
-google.maps.event.addListener(marker, 'dragend', function() {
-    // Update the model
-    $('#picture-map-loc-lat').val(marker.getPosition().lat());
-    $('#picture-map-loc-lng').val(marker.getPosition().lng());
-    
-    // Adjust the map
-    adjustPosition();
-});
-
-var input = (document.getElementById('picture-map-search-address'));
-var searchBox = new google.maps.places.SearchBox(input);
-
-$('#picture-map-search-address').on( 'keydown', function( e ) {
-    if ( e.keyCode === 13 ) {
-        // You can disable the form submission this way:
-        return false
-    }
-});
-
-google.maps.event.addListener(searchBox, 'places_changed', function() {
-    var places = searchBox.getPlaces();
-
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0, place; place = places[i]; i++) {
-      bounds.extend(place.geometry.location);
-      if (place.geometry.viewport !== undefined) {
-        bounds.union(place.geometry.viewport);
-      }
-    }
-
-    map.fitBounds(bounds);
-    map.setZoom(map.getZoom()+2);
-    if (map.getZoom() > 17) {
-        map.setZoom(17);
-    }
-});
-
-google.maps.event.addListener(map, 'idle', function() {
-  var bounds = map.getBounds();
-  searchBox.setBounds(bounds);
-});
 
 $('#picture-tabs #picture-tab-map a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     // Refresh the map on active; otherwise, it will be mingled!
-    google.maps.event.trigger(map, 'resize'); 
-    adjustPosition();
-}); 
+    map.invalidateSize(false);
+
+    //adjustPosition();
+});
 
 $("form").bind("reset", function() {
     // After a form reset we need to update the position of the marker, etc. again
     // We need to wait a litte bit until the values in the form really have been reset.
     setTimeout(function(){
-        // Set the marker and then adjust the map
-        marker.setPosition(getlatLng());
-        adjustPosition();
+        // Set the marker, adjust the map 
+        marker.setLatLng(getlatLng());
+        map.panTo(getlatLng());
         
         // Update the clipping
         updatePictureClipCanvas();

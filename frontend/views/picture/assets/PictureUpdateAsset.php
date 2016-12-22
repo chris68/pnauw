@@ -8,9 +8,11 @@ use yii\web\AssetBundle;
 class PictureUpdateAsset extends AssetBundle
 {
     public $sourcePath = '@frontend/views/picture/assets';
+    public $css = [
+        'https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.5.4/Control.Geocoder.css',
+    ];
     public $js = [
-        // Geocoding in maps requires '&libraries=places'
-        'http://maps.googleapis.com/maps/api/js?sensor=false&language=de&libraries=places',
+        'https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.5.4/Control.Geocoder.js',
         'pnauw.picture.update.js',
     ];
     public $depends = [

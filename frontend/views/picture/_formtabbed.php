@@ -41,7 +41,8 @@ use frontend\widgets\Alert;
     <div>
         <?=
         // http://stackoverflow.com/questions/1428178/problems-with-google-maps-api-v3-jquery-ui-tabs        
-        // It is important, that google maps is initialized when the tab is open!
+        // It is important, that the map is initialized when the tab is open!
+        // See respective code in the js file
 
         Tabs::widget(
             [

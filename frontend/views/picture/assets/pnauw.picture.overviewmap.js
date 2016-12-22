@@ -1,17 +1,10 @@
 $(function() {
     var map = L.map('overviewmap');
 
-    var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-       attribution: "&copy; <a href='http://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='http://www.openstreetmap.org/copyright' title='ODbL'>open license</a>."
+    var osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+       attribution: "&copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='https://www.openstreetmap.org/copyright' title='ODbL'>open license</a>."
     });
-    // Google layers from shramov/leaflet-plugins/master/layer/tile/Google.js
-    var ggl1 = new L.Google('ROADMAP'); // , ROADMAP, HYBRID, TERRAIN
-    var ggl2 = new L.Google('SATELLITE'); // , ROADMAP, HYBRID, TERRAIN
-    var ggl3 = new L.Google('HYBRID'); // , ROADMAP, HYBRID, TERRAIN
-    
     map.addLayer(osm);
-
-    map.addControl(new L.Control.Layers( {'OSM':osm, 'Google Straße':ggl1, 'Google Satellite':ggl2, 'Google Hybrid':ggl3}, {}));
 
     var incidentGroup = L.featureGroup([]);
     incidentGroup.addTo(map);

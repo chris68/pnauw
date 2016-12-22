@@ -20,8 +20,7 @@
 		"yiisoft/yii2-jui": "*",
 		"kartik-v/yii2-markdown": "*",
 		"yiisoft/yii2-authclient": "*",
-		"cinghie/yii2-cookie-consent": "*",
-        "bower-asset/leaflet-plugins": "1.4.2"
+		"cinghie/yii2-cookie-consent": "*"
 	},
 	"require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
