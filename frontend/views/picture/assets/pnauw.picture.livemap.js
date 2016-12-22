@@ -11,33 +11,12 @@ positionLayerGroup.addTo(map);
 
 L.control.layers({},{"Position": positionLayerGroup}).addTo(map);
 
-var geocode = MQ.geocode().on('success', function(e) { 
-    $('#livemap-nearest-address').html(geocode.describeLocation(e.result.best)); 
-    //$('#livemap-nearest-address').html(e.result.best.postalcode + e.result.best.adminArea5); 
+map.on('locationerror', function(e) {
+    alert(e.message);
 });
 
-map.on('locationfound', function(e) { 
+map.on('locationfound', function(e) {
     positionLayerGroup.clearLayers();
     positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
-    geocode.reverse(e.latlng);
 });
 
-map.on('locationerror', function(e) { 
-    var message;
-    switch(e.code) {
-        case 1:
-            message = 'Sie haben den Zugriff auf die Geolocation verweigert';
-            break;
-        case 2:
-            message = 'Es ist keine Geolocation verfügbar';
-            break;
-        case 3:
-            message = 'Die Ermittlung der Geolocation dauerte zu lange';
-            break;
-        default:
-            message = 'Bei der Ermittlung der Geolocation ist ein unbekannter Fehler aufgetreten';
-            break;
-    }
-    $('#livemap-nearest-address').html('<i>'+message+'</i>'); 
-    // alert(e.message);
-});

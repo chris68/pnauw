@@ -32,10 +32,6 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestcapture'
             <?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
         </div>
     <?php ActiveForm::end(); ?>
-    <div class="form-group">
-    <?php echo Html::label('Standort (ermittelt via MapQuest)','livemap-nearest-address'); ?>
-    <p id="livemap-nearest-address"></p>
-    </div>
     <div id="livemap" style="height: 250px"></div>
     <div class="help-block">
         <p>Hier können Sie mit Ihrer Kamera auf der mobilen Einheit ein Bild aufnehmen, hochladen und dann gleich bearbeiten.</p>
