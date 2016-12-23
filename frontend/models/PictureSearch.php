@@ -183,11 +183,11 @@ class PictureSearch extends Model
                 ['value'=>'-365;0', 'name' => '1 Jahr zurück', 'category' => 'Vergangenheit'], 
                 ['value'=>'-730;0', 'name' => '2 Jahre zurück', 'category' => 'Vergangenheit'], 
                 ['value'=>'-1095;0', 'name' => '3 Jahre zurück', 'category' => 'Vergangenheit'], 
-                ['value'=>'2014;2014', 'name' => '2014', 'category' => 'Jahre'], 
-                ['value'=>'2013;2013', 'name' => '2013', 'category' => 'Jahre'], 
-                ['value'=>'2012;2012', 'name' => '2012', 'category' => 'Jahre'], 
-                ['value'=>'2011;2011', 'name' => '2011', 'category' => 'Jahre'], 
-                ['value'=>'2010;2010', 'name' => '2010', 'category' => 'Jahre'], 
+                ['value'=>'2018;2018', 'name' => '2018', 'category' => 'Jahre'],
+                ['value'=>'2017;2017', 'name' => '2017', 'category' => 'Jahre'],
+                ['value'=>'2016;2016', 'name' => '2016', 'category' => 'Jahre'],
+                ['value'=>'2015;2015', 'name' => '2015', 'category' => 'Jahre'],
+                ['value'=>'2014;2014', 'name' => '2014', 'category' => 'Jahre'],
             ],
             'value','name','category');
     }
