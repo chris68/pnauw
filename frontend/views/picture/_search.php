@@ -66,7 +66,7 @@ use yii\bootstrap\ActiveForm;
             <legend>Kfz &amp; Anzeigen</legend>
             <?= $form->field($model, 'vehicle_country_code')->listBox(frontend\models\VehicleCountry::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
-            <?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
+            <?= $form->field($model, 'vehicle_reg_plate')->textInput(['id'=>'search-vehicle-reg-plate', ]) ?>
             
             <?= $form->field($model, 'citation_id')->listBox(frontend\models\Citation::dropDownListSearch(), ['multiple' => true, 'unselect' => '', ]) ?>
 

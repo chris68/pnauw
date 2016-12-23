@@ -33,7 +33,7 @@ $this->params['help'] = 'picture-moderate';
        ]);
     ?>
     
-    <?= $this->render('_quicksearchbar') ?>
+    <?= $this->render('_quicksearchbar', ['model' => $searchModel]) ?>
     
     <?= $this->render('_overviewmap', ['private' => 0]) ?>
     

@@ -47,7 +47,7 @@ $(function() {
         }
     }
 
-    $("#search-map").on ( 'click', "a", function( event ) {
+    $("#quicksearch-map").on ( 'click', "a", function( event ) {
         // If we use a <b> etc. in the <a> element then the event.target is sometimes the <b>.
         //  We need to navigate up then to the actual <a>
         realtarget = $(event.target).closest('a');
@@ -72,23 +72,32 @@ $(function() {
         
     });
     
-    $("#search-time").on ( 'click', "a", function( event ) {
+    $("#quicksearch-time").on ( 'click', "a", function( event ) {
         event.preventDefault();
         $('#search-time-range').val($(event.target).closest('a').data('value'));
         $('#search-form')[0].submit();
     });
 
-    $('#search-refresh').on( 'click', function( event ) {
+    $('#quicksearch-refresh').on( 'click', function( event ) {
         event.preventDefault();
         $('#search-form')[0].submit();
         return false;
     });
 
-    $('#search-cancel').on( 'click', function( event ) {
+    $('#quicksearch-vehicle-reg-plate').on( 'keyup', function( event ) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            $('#search-vehicle-reg-plate').val($('#quicksearch-vehicle-reg-plate').val());
+            $('#search-form')[0].submit();
+            return false;
+        }
+    });
+
+    $('#quicksearch-cancel').on( 'click', function( event ) {
         event.preventDefault();
-        // It is important that we use $('#search-cancel') and not $(event.target).data('value') 
+        // It is important that we use $('#quicksearch-cancel') and not $(event.target).data('value')
         // since the event target is the span in the button and not the button itself!
-        window.location.assign($('#search-cancel').data('url'));
+        window.location.assign($('#quicksearch-cancel').data('url'));
         return false;
     });
 
