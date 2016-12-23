@@ -59,13 +59,14 @@ $this->params['breadcrumbs'][] = $this->title;
         Da Politik und die offiziellen Stellen das Problem nicht gelöst bekommen, will diese Plattform betroffenen Bürgern die Möglichkeit geben, sich zu wehren und den Finger auf die Wunde zu legen.
     </p>
     <p>
-        In erster Linie durch <b>Dokumentation der Missstände</b> und der leichten Möglichkeit, dann wieder und immer wieder bei den offiziellen Stellen nachzuhaken, warum der gut und öffentliche dokumentierte Missstand nicht beseitigt wird.
+        In <b>erster Linie</b> durch <b>Dokumentation der Missstände</b> und der leichten Möglichkeit, dann wieder und immer wieder bei den offiziellen Stellen nachzuhaken, warum der gut und öffentliche dokumentierte Missstand nicht beseitigt wird.
     </p>
     <p>
-        Aber in zweiter Linie soll es allen Betroffenen auch die Möglichkeit geben, das Problem durch <b>Privatanzeigen</b> anzugehen. Privatanzeigen sind eine Möglichkeit, die der Gesetzgeber ausdrücklich vorsieht, und in der Regel wird dadurch das Problem schnell gelöst. 
+        Aber in <b>zweiter Linie</b> soll es allen Betroffenen auch die Möglichkeit geben, das Problem durch <b>Privatanzeigen</b> anzugehen. Privatanzeigen sind eine Möglichkeit, die der Gesetzgeber ausdrücklich vorsieht, und in der Regel wird dadurch das Problem schnell gelöst.
     </p>
     <p>
-        Jeder kann dann für sich selbst entscheiden, welche der bereitgestellten Mittel er einsetzen möchte.
+        Jeder kann dann für sich selbst entscheiden, welches der beiden bereitgestellten Mittel er einsetzen möchte. <b>Tatsache ist übrigens, dass die meisten Nutzer sich direkt für den Weg einer Anzeige ohne Öffentlichkeit entscheiden.</b>
+        Anscheinend merken Sie, dass bei Gehwegparken eigentlich nur Anzeigen und Verwarnungsgelder wirken.
     </p>
     <h4>
         <a>Die Plattform "Parke nicht auf unseren Wegen"</a>
