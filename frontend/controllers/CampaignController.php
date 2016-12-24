@@ -33,7 +33,7 @@ class CampaignController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', ],
+                        'actions' => ['index', 'view', 'create', 'update', 'copy', 'delete', ],
                         'roles' => ['trusted'],
                     ],
                 ],
@@ -117,6 +117,31 @@ class CampaignController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Copy an existing Campaign model to a new one.
+     * If copy is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionCopy($id)
+    {
+        $model = new Campaign;
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model = $this->findModel($id);
+            $model->id = null;
+            $model->name = $model->name.' (Kopie)';
+            $model->isNewRecord = true;
+        }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

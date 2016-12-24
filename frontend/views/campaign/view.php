@@ -26,6 +26,7 @@ $this->params['help'] = 'campaign-crud';
             'data-confirm' => 'Sind Sie sich mit dem Löschen sicher?',
             'data-method' => 'post',
         ]); ?>
+        <?= Html::a('Kopieren', ['copy', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
     </p>
     
     <?= Html::a('Öffentliche Kampagnendarstellung zeigen',['campaign/show','id' => $model->id], ['target' => '_blank'] ) ?>

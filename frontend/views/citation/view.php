@@ -23,6 +23,7 @@ $this->params['help'] = 'citation-crud';
             'data-confirm' => 'Sind Sie sich mit dem Löschen sicher?',
             'data-method' => 'post',
         ]); ?>
+        <?= Html::a('Kopieren', ['copy', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
     </p>
 
     <?php echo DetailView::widget([

@@ -29,7 +29,7 @@ class CitationController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'print'],
+                        'actions' => ['index', 'view', 'create', 'update', 'copy', 'delete', 'print'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -114,6 +114,31 @@ class CitationController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Copy an existing Citation model to a new one.
+     * If copy is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionCopy($id)
+    {
+        $model = new Citation;
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model = $this->findModel($id);
+            $model->id = null;
+            $model->name = $model->name.' (Kopie)';
+            $model->isNewRecord = true;
+        }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
