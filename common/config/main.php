@@ -2,7 +2,7 @@
 return [
 // @chris68
     'name' => 'Parke nicht auf unseren Wegen',
-    'version' => '1.4.6',
+    'version' => '1.5.0',
 
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
