@@ -13,11 +13,7 @@ use frontend\widgets\Alert;
 ?>
 
 <div class="picture-form">
-    <?php $form = $outerform?$outerform:ActiveForm::begin(
-[
-    'enableClientScript' => false, // See https://github.com/chris68/pnauw/issues/88
-]
-        ); ?>
+    <?php $form = $outerform?$outerform:ActiveForm::begin(); ?>
     
     <?= Html::activeHiddenInput($model, 'id' ) ?>
 
