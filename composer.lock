@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc7914ed1b9d69a95ceb7e6a06775e71",
+    "content-hash": "74323a9f51483e3438d68d33e86ab1e3",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -53,44 +53,6 @@
                 "mobile-first",
                 "responsive",
                 "web"
-            ]
-        },
-        {
-            "name": "bower-asset/cookieconsent2",
-            "version": "3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/insites/cookieconsent.git",
-                "reference": "21d91ff110c394f29b2bd1a5932da82dc159b8c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/insites/cookieconsent/zipball/21d91ff110c394f29b2bd1a5932da82dc159b8c5",
-                "reference": "21d91ff110c394f29b2bd1a5932da82dc159b8c5",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "build/cookieconsent.min.js",
-                    "build/cookieconsent.min.css"
-                ],
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Insites' cookie consent plugin",
-            "keywords": [
-                "cookie",
-                "cookieconsent",
-                "law"
             ]
         },
         {
@@ -193,65 +155,6 @@
                 "jquery",
                 "mask",
                 "plugins"
-            ]
-        },
-        {
-            "name": "bower-asset/leaflet-plugins",
-            "version": "1.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/shramov/leaflet-plugins.git",
-                "reference": "edd247eb0df5199aafb0e2dd13562b219e8f3856"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/shramov/leaflet-plugins/zipball/edd247eb0df5199aafb0e2dd13562b219e8f3856",
-                "reference": "edd247eb0df5199aafb0e2dd13562b219e8f3856",
-                "shasum": ""
-            },
-            "require-dev": {
-                "bower-asset/jshint": "2.5.0"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "control/Distance.js",
-                    "control/Layers.Load.js",
-                    "control/Permalink.js",
-                    "control/Permalink.Layer.js",
-                    "control/Permalink.Line.js",
-                    "control/Permalink.Marker.js",
-                    "control/Permalink.Overlay.js",
-                    "layer/Icon.Canvas.js",
-                    "layer/Layer.Deferred.js",
-                    "layer/Marker.Rotate.js",
-                    "layer/Marker.Text.js",
-                    "layer/OpenStreetBugs.js",
-                    "layer/vector/GPX.js",
-                    "layer/vector/GPX.Speed.js",
-                    "layer/vector/KML.js",
-                    "layer/vector/OSM.js",
-                    "layer/tile/Bing.js",
-                    "layer/tile/Google.js",
-                    "layer/tile/Yandex.js"
-                ],
-                "bower-asset-ignore": [
-                    "build"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Miscellaneous plugins for Leaflet library",
-            "keywords": [
-                "bing",
-                "google",
-                "gpx",
-                "kml",
-                "leaflet",
-                "map",
-                "plugins",
-                "yandex"
             ]
         },
         {
@@ -375,52 +278,6 @@
                 "markdown-extra"
             ],
             "time": "2016-09-14T20:40:20+00:00"
-        },
-        {
-            "name": "cinghie/yii2-cookie-consent",
-            "version": "v1.4.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cinghie/yii2-cookie-consent.git",
-                "reference": "df246eba8c0f71a45b57f9a79cc616df13556d35"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cinghie/yii2-cookie-consent/zipball/df246eba8c0f71a45b57f9a79cc616df13556d35",
-                "reference": "df246eba8c0f71a45b57f9a79cc616df13556d35",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/cookieconsent2": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "cinghie\\cookieconsent\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD 3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Gogodigital.it",
-                    "email": "info@gogodigital.it",
-                    "homepage": "http://www.gogodigital.it/"
-                }
-            ],
-            "description": "Yii2 Cookie Consent to alerting users about the use of cookies on your Yii2 website.",
-            "homepage": "https://github.com/cinghie/yii2-cookie-consent",
-            "keywords": [
-                "cookie",
-                "cookie consent",
-                "cookie law",
-                "eu cookie consent",
-                "yii2"
-            ],
-            "time": "2016-06-07T16:25:09+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1169,6 +1026,103 @@
                 "parser"
             ],
             "time": "2016-10-30T11:50:56+00:00"
+        },
+        {
+            "name": "bower-asset/cookieconsent2",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/insites/cookieconsent.git",
+                "reference": "21d91ff110c394f29b2bd1a5932da82dc159b8c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/insites/cookieconsent/zipball/21d91ff110c394f29b2bd1a5932da82dc159b8c5",
+                "reference": "21d91ff110c394f29b2bd1a5932da82dc159b8c5",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "build/cookieconsent.min.js",
+                    "build/cookieconsent.min.css"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Insites' cookie consent plugin",
+            "keywords": [
+                "cookie",
+                "cookieconsent",
+                "law"
+            ]
+        },
+        {
+            "name": "bower-asset/leaflet-plugins",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shramov/leaflet-plugins.git",
+                "reference": "edd247eb0df5199aafb0e2dd13562b219e8f3856"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shramov/leaflet-plugins/zipball/edd247eb0df5199aafb0e2dd13562b219e8f3856",
+                "reference": "edd247eb0df5199aafb0e2dd13562b219e8f3856",
+                "shasum": ""
+            },
+            "require-dev": {
+                "bower-asset/jshint": "2.5.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "control/Distance.js",
+                    "control/Layers.Load.js",
+                    "control/Permalink.js",
+                    "control/Permalink.Layer.js",
+                    "control/Permalink.Line.js",
+                    "control/Permalink.Marker.js",
+                    "control/Permalink.Overlay.js",
+                    "layer/Icon.Canvas.js",
+                    "layer/Layer.Deferred.js",
+                    "layer/Marker.Rotate.js",
+                    "layer/Marker.Text.js",
+                    "layer/OpenStreetBugs.js",
+                    "layer/vector/GPX.js",
+                    "layer/vector/GPX.Speed.js",
+                    "layer/vector/KML.js",
+                    "layer/vector/OSM.js",
+                    "layer/tile/Bing.js",
+                    "layer/tile/Google.js",
+                    "layer/tile/Yandex.js"
+                ],
+                "bower-asset-ignore": [
+                    "build"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Miscellaneous plugins for Leaflet library",
+            "keywords": [
+                "bing",
+                "google",
+                "gpx",
+                "kml",
+                "leaflet",
+                "map",
+                "plugins",
+                "yandex"
+            ]
         },
         {
             "name": "bower-asset/typeahead.js",

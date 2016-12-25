@@ -19,8 +19,7 @@
 
 		"yiisoft/yii2-jui": "*",
 		"kartik-v/yii2-markdown": "*",
-		"yiisoft/yii2-authclient": "*",
-		"cinghie/yii2-cookie-consent": "*"
+		"yiisoft/yii2-authclient": "*"
 	},
 	"require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

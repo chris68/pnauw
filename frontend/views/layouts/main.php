@@ -12,11 +12,37 @@ use common\widgets\Alert;
 
 // @chris68
 use yii\helpers\Url;
-use cinghie\cookieconsent\widgets\CookieWidget;
+/*
+ * Register cooking consent according to https://cookieconsent.insites.com
+ */
+$this->registerCssFile('https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css');
+$this->registerJsFile('https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js');
+    $codeJs = '
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#eaf7f7",
+      "text": "#5c7291"
+    },
+    "button": {
+      "background": "#56cbdb",
+      "text": "#ffffff"
+    }
+  },
+  "content": {
+    "message": "Diese Webseite nutzt Cookies, für deren Einsatz die EU ihr Einverständnis verlangt",
+    "dismiss": "Verstanden",
+    "link": "Details",
+    "href": "'.Url::to(['site/privacy']).'"
+  }
+})});
+';
+$this->registerJs($codeJs);
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+    <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -29,14 +55,6 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-    <?= CookieWidget::widget([
-            'message' => 'Diese Webseite nutzt Cookies, für deren Einsatz die EU ihr Einverständis verlangt',
-            'dismiss' => 'Einverstanden',
-            'learnMore' => 'Weitere Infos',
-            'link' => Url::to(['site/privacy']),
-            'theme' => 'dark-bottom'
-    ]); ?>
-
     <?php if (Yii::$app->user->isGuest) : // Enable google analytics only when not logged in ?>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
