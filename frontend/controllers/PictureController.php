@@ -196,6 +196,7 @@ class PictureController extends Controller
             } 
         } else {
             $defaultvalues->setDefaults();
+            $defaultvalues->vehicle_country_code = '?';
         }
 
         $result = ['deleted' => ['ok' => 0, 'nok' => 0],'updated' => ['ok' => 0, 'nok' => 0]];

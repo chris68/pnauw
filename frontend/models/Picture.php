@@ -115,26 +115,60 @@ class Picture extends \yii\db\ActiveRecord
     }
         
     /**
-     * Copy the default values of some attributes
+     * Copy the overriding default values of some attributes - but only if they do not have the default empty content
      * @param Picture $defaultsvalues Default values which will override the existing values if given
      */
     public function copyDefaults($defaultvalues) {
-        $this->action_id = $defaultvalues->action_id;
-        $this->campaign_id = $defaultvalues->campaign_id;
-        $this->citation_id = $defaultvalues->citation_id;
-        $this->citation_affix = $defaultvalues->citation_affix;
-        $this->description = $defaultvalues->description;
-        $this->incident_id = $defaultvalues->incident_id;
-        $this->loc_formatted_addr = $defaultvalues->loc_formatted_addr;
-        // Override geocoords only if not already set!
-        if ($this->loc_lat == 0 && $this->loc_lng == 0) {
-            $this->loc_lat = $defaultvalues->loc_lat;
-            $this->loc_lng = $defaultvalues->loc_lng;
+        if ($defaultvalues->action_id <> -1) {
+            $this->action_id = $defaultvalues->action_id;
         }
-        $this->name = $defaultvalues->name;
-        $this->vehicle_country_code = $defaultvalues->vehicle_country_code;
-        $this->vehicle_reg_plate = $defaultvalues->vehicle_reg_plate ;
-        $this->visibility_id = $defaultvalues->visibility_id ;
+
+        if ($defaultvalues->campaign_id <> '') {
+            $this->campaign_id = $defaultvalues->campaign_id;
+        }
+
+        if ($defaultvalues->citation_id <> '') {
+            $this->citation_id = $defaultvalues->citation_id;
+        }
+        if ($defaultvalues->citation_affix <> '') {
+            $this->citation_affix = $defaultvalues->citation_affix;
+        }
+
+        if ($defaultvalues->description <> '') {
+            $this->description = $defaultvalues->description;
+        }
+
+        if ($defaultvalues->incident_id <> -1) {
+            $this->incident_id = $defaultvalues->incident_id;
+        }
+
+        if ($defaultvalues->loc_formatted_addr <> '') {
+            $this->loc_formatted_addr = $defaultvalues->loc_formatted_addr;
+        }
+
+        if ($defaultvalues->loc_lat <> 0 && $defaultvalues->loc_lng <> 0) {
+            // Override geocoords only if not already set!
+            if ($this->loc_lat == 0 && $this->loc_lng == 0) {
+                $this->loc_lat = $defaultvalues->loc_lat;
+                $this->loc_lng = $defaultvalues->loc_lng;
+            }
+        }
+
+        if ($defaultvalues->name <> '') {
+            $this->name = $defaultvalues->name;
+        }
+
+        if ($defaultvalues->vehicle_country_code <> '?') {
+            $this->vehicle_country_code = $defaultvalues->vehicle_country_code;
+        }
+
+        if ($defaultvalues->vehicle_reg_plate <> '') {
+            $this->vehicle_reg_plate = $defaultvalues->vehicle_reg_plate ;
+        }
+
+        if ($defaultvalues->visibility_id <> 'private') {
+            $this->visibility_id = $defaultvalues->visibility_id ;
+        }
     }
 
     /**
