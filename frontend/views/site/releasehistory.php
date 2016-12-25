@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
-        Version 1.5 (24.12.2016)
+        Version 1.5 (24.-25.12.2016)
     </h3>
     <p>
         Mehr Sicherheit durch SSL und Verbesserungen bei der Benutzerfreundlichkeit
@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Es werden nun nur noch die Karten und der Adressermittlung von OpenStreetMap anstatt Google Maps genutzt (Vielen Dank an die Macher!!!)</li>
         <li>Kampagnen und Anzeigen können kopiert werden</li>
         <li>Kennzeichenschnellsuche direkt über der Übersichtskarte</li>
+        <li>Massenverarbeitung beim Bearbeiten der Vorfälle</li>
     </ul>
     <h3>
         Version 1.4 (17.10.2015)
