@@ -85,6 +85,20 @@ class Picture extends \yii\db\ActiveRecord
     }
     
     /**
+     * {@inheritdoc}
+     */
+    public function formName()
+    {
+        if ($this->scenario == 'defval') {
+            // If we are in the defval scenario we must rename the form so that it can be used in parallel to the actual pictures; quite a hack but who cares....
+            return parent::formName().'__DEFVAL';
+        } else
+        {
+            return parent::formName();
+        }
+    }
+
+    /**
      * Set the default values of some attributes
      */
     public function setDefaults() {

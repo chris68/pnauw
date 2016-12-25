@@ -187,14 +187,34 @@ class PictureController extends Controller
      */
     public function actionManage($withPublish=false)
     {
+        $defaultvalues = new Picture(['scenario' => 'defval']);
+
+        if (Yii::$app->getRequest()->isPost)  {
+            if ($defaultvalues->load(Yii::$app->request->post())) {
+                if ($defaultvalues->validate()) {
+                }
+            } 
+        } else {
+            $defaultvalues->setDefaults();
+        }
+
         $result = ['deleted' => ['ok' => 0, 'nok' => 0],'updated' => ['ok' => 0, 'nok' => 0]];
         
         if (Yii::$app->request->isPost && (Yii::$app->request->post('Picture') !== NULL)) {
             
             $models= Picture::find()->where(['id' => array_keys(Yii::$app->request->post('Picture'))])->indexBy('id')->all();
             \yii\base\Model::loadMultiple($models, Yii::$app->request->post());
+
+            // Copy the defaults before validation
+            foreach ($models as $id => $model) {
+                if ($model->selected) {
+                    $model->copyDefaults($defaultvalues);
+                }
+            }
+
             // Validation necessary that default and filter validators fire; otherwise getDirtyAttributes shows bogus changes!
             \yii\base\Model::validateMultiple($models);
+            
             foreach ($models as $id => $model) {
                 if (!Yii::$app->user->can('isObjectOwner', array('model' => $model))) {
                     throw new HttpException(403, \Yii::t('base', 'You are not authorized to perform this action'));
@@ -264,6 +284,7 @@ class PictureController extends Controller
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
                 'withPublish' => $withPublish,
+                'defaultvalues' => $defaultvalues,
         ]);
     }
 

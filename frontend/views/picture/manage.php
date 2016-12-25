@@ -64,6 +64,32 @@ $this->params['help'] = 'picture-manage';
         $form = ActiveForm::begin(); 
     ?>
 
+    <?= $form->errorSummary([$defaultvalues],['class' => "alert alert-danger"]) ?>
+    <?=
+        Collapse::widget([
+            'items' => [
+                [
+                    'label' => '<span class="glyphicon glyphicon-collapse-down"></span> Vorgabewerte',
+                    'encode' => false,
+                    'content' =>
+                        $this->render('_formtabbed', [
+                            'model' => $defaultvalues,
+                            'outerform' => $form,
+                        ]),
+                ],
+            ],
+            'options' =>
+            [
+                'style' => 'margin-bottom: 10px'
+            ],
+       ]);
+    ?>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-default" onclick="$('.defval-selector').prop('checked', true);">Übernahme für alle setzen</button>
+        <button type="button" class="btn btn-default" onclick="$('.defval-selector').prop('checked', false);">Übernahme für alle löschen</button>
+    </div>
+
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'layout' => "{pager}\n{summary}\n{items}\n{pager}",
@@ -82,9 +108,9 @@ $this->params['help'] = 'picture-manage';
                     <div class="form-inline">
                         <div class="form-group">'
             .
-                        $form->field($model, "[$model->id]selected")->checkbox().'   '
+                        $form->field($model, "[$model->id]selected")->checkbox(['class'=>'defval-selector'])->label('Vorgabewerte übernehmen').'   '
             .
-                        $form->field($model, "[$model->id]deleted")->checkbox()
+                        $form->field($model, "[$model->id]deleted")->checkbox()->label('Vorfall löschen')
             .
                         '</div>
                     </div>'
@@ -146,7 +172,7 @@ $this->params['help'] = 'picture-manage';
             ;
         },
     ]); ?>
-    
+
     <div class="form-group">
         <?= Html::submitButton('Aktualisieren', ['class' => 'btn btn-primary', 'tabindex'=> 10000]) ?>
         <?= Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>

@@ -23,7 +23,7 @@ $this->params['help'] = 'picture-kmlupload';
             Collapse::widget([
                 'items' => [
                     [
-                        'label' => '<span class="glyphicon glyphicon-collapse-down"></span> Vorgabewerte setzen',
+                        'label' => '<span class="glyphicon glyphicon-collapse-down"></span> Vorgabewerte',
                         'encode' => false,
                         'content' => 
                             $this->render('_formtabbed', [
