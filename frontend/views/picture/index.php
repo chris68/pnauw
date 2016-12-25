@@ -52,6 +52,8 @@ $this->params['help'] = 'picture-index';
             if (!Yii::$app->user->isGuest) {
                 $params[0] = '/picture/massupdate';
                 echo ' | '.Html::a('Im Detail bearbeiten', Url::toRoute($params), ['target' => '_blank']);
+                $params[0] = '/picture/manage';
+                echo ' | '.Html::a('In Übersicht bearbeiten', Url::toRoute($params), ['target' => '_blank']);
             }
         }
     ?>
