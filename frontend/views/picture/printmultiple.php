@@ -3,7 +3,7 @@
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
-$this->title = 'Vorfälle';
+$this->title = 'Vorfälle - '.date('Y-m-d');
 ?>
 <style>
     body {

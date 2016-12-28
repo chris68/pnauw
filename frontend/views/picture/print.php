@@ -2,8 +2,11 @@
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
 
-
 $this->title = 'Vorfall';
+if (!empty($model->vehicle_reg_plate)) {
+    $this->title .= ' - '.$model->vehicle_reg_plate;
+}
+$this->title .= ' - '.substr($model->taken,0,10); // Add the date part
 ?>
 <style>
     body {
