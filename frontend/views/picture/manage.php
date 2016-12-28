@@ -86,8 +86,8 @@ $this->params['help'] = 'picture-manage';
     ?>
 
     <div class="form-group">
-        <button type="button" class="btn btn-default" onclick="$('.defval-selector').prop('checked', true);">Übernahme für alle setzen</button>
-        <button type="button" class="btn btn-default" onclick="$('.defval-selector').prop('checked', false);">Übernahme für alle löschen</button>
+        <button type="button" class="btn btn-default" onclick="$('.defval-selector').prop('checked', true);">Übernahme setzen</button>
+        <button type="button" class="btn btn-default" onclick="$('.defval-selector').prop('checked', false);">Zurücksetzen</button>
     </div>
 
     <?= ListView::widget([
