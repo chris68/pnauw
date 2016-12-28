@@ -2,11 +2,6 @@
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
 
-use yii\helpers\Html;
-use yii\widgets\ListView;
-use yii\widgets\DetailView;
-use kartik\markdown\Markdown;
-
 
 $this->title = 'Vorfall';
 ?>
