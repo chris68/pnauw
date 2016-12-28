@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Version 2.0 (28.12.2016)
     </h3>
     <p>
-        Riesenverbesserung der Benutzerfreundlichkeit - Webseite num mit App-Feeling!
+        Riesenverbesserung der Benutzerfreundlichkeit - die Webseite hat nun ein volles App-Feeling!
     </p>
     <ul>
         <li>Direktanlage der Vorfälle mit HTML5-Mitteln zur Bildübernahme direkt aus der Kamera</li>
