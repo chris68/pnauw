@@ -547,7 +547,6 @@ class Picture extends \yii\db\ActiveRecord
         $rawdata->readimageblob($blob);
         $rawdata->setImageFormat( "jpeg" );
         $this->autoRotateImage($rawdata);
-        $rawdata->scaleimage(0, 800);
         $image->rawdata = bin2hex($rawdata->getimageblob());
         $image->save(false);
         $this->original_image_id = $image->id;
