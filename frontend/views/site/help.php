@@ -49,6 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
         Auch den Ort des Vorfall können Sie direkt in der Karte genau dokumentieren, wobei das automatische Erkennen ihrer derzeitigen Position ungemein hilft. Sie müssen natürlich hierzu dem Browser
         die Erlaubnis erteilen, die Geoposition zu ermitteln. Aber auch ohne dieser Erlaubnis funktioniert es - Sie müssen dann halt über die Suche rechts oben in der Karte ihre derzeite Position selbst raussuchen.
     </p>
+    <p>
+        Der genaue Aufbau der Reiter ist <a href="#picture-update">hier</a> dokumentiert.
+    </p>
     <h3><a name="picture-guestcreate">Direktanlage (Gastzugang) </a></h3>
     <p>
         Es besteht die Möglichkeit, die oben erklärte <a href="#picture-create">Direktanlage</a>als <a href="#user-level-anonymous">anonymer Nutzer</a> durchzuführen.
@@ -153,36 +156,46 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <h3><a name="picture-update">Bilder detailliert bearbeiten</a></h3>
     <p>
-        Bei der Einzelbearbeitung ist die Maske hingegen auf mehrere Reiter aufgeteilt, wo in jedem Reiter ein Themengebiet abgedeckt ist.
+        Bei der Einzelbearbeitung ist die Maske auf mehrere Reiter aufgeteilt, wo in jedem Reiter ein Themengebiet abgedeckt ist.
     </p>
     <h4><a name="picture-update-imagetab">Reiter "Bild &amp; Kfz-/Vorfallsdaten"</a></h4>
+    </p>
+        Bei der <a href="#picture-create">Direktanlage</a> müssen Sie hier erst einmal ein Bild von der Kamera übernehmen, indem Sie den Button über den Bild drücken. Dann steht das Bild direkt zur Verfügung
+        sowie diese beim späteren Editieren immer gleich der Fall ist.
     <p>
-        In dem Reiter können Sie durch Klicken auf das Bild und den Ziehen des Zoom-Reglers sich das Kennzeichen genau rauszoomen. Das hilft beim Erfassen und das Detailbild kommt dann auch automatisch auf eine potentielle <a href='#citation'>Anzeige</a>.
+    <p>
+        Sie können dann durch Klicken auf das Bild und den Ziehen des Zoom-Reglers sich das Kennzeichen genau rauszoomen. Das hilft beim Erfassen und das Detailbild kommt dann auch automatisch auf eine potentielle <a href='#citation'>Anzeige</a>.
     </p>
     <p>
-        Die restlichen Felder erklären sich von selbst. Die Zuweisung zu einer Anzeige wird NIE öffentlich sein.
-        Wenn Sie jedoch als Maßnahme 'Anzeige' dokumentieren, dann machen Sie dadurch bewußt öffentlich, dass Sie eine Anzeige gestellt haben.
+        Die restlichen Felder erklären sich von selbst. Die Zuweisung zu einer Anzeige wird NIE öffentlich sein. Die Nutzung des Anzeigenkonzept ist überhaupt optional - sie können auch einfach nur die PDF erzeugen und den Text selbst schreiben.
+    </p>
+    <p>
+        Wenn Sie jedoch als Maßnahme 'Anzeige' dokumentieren, dann machen Sie bei einer gleitzigen Veröffentlichung dadurch bewußt öffentlich, dass Sie eine Anzeige gestellt haben.
         Es ist Ihre Entscheidung, wie Sie es machen wollen - eher offen und damit eventuell abschreckend oder eher nur verdeckt.
     </p>
-    <h4><a name="picture-update-maptab">Reiter "Karte &amp; Ortsdaten"</a></h4>
+    <h4><a name="picture-update-maptab">Reiter "Karte &amp; Ort"</a></h4>
     <p>
-        In dem Reiter kann Sie die Originalposition der Aufnahme sehen (blauer Pfeil) und die korrigierte Position (roter Pfeil; wird ohne Korrektur den blauen Pfeil verdecken!). Wenn das Bild keine GPS-Koordinaten erhalten hatte, dann wurde es auf die GPS-Position (0,0) am Äquator gesetzt.
-        Generell können Sie eine neue Position durck Klicken auf die Karte setzen. Die Karte wird dann automatisch auf die neue Position zentriert und es wird auch reingezoomt (da es so meist schneller geht!).
+        In dem Reiter kann Sie die Originalposition der Aufnahme sehen (kleines Photosymbol) und die korrigierte Position (blauer Pfeil). Wenn das Bild keine GPS-Koordinaten erhalten hatte, dann wurde es auf die GPS-Position (0,0) am Äquator gesetzt.
+        Generell können Sie eine neue Position durck Klicken auf die Karte setzen. 
     </p>
     <p>
-        Für die jeweilige relevante Position wird dann über den Google Maps Service die nächstliegende Adresse ermittelt. Diese wird dann auch für eine gewisse Zeit (ca. 3 Monate) zwischengespeichert, damit wir das nicht immer wieder neu ermitteln müssen (Caching). 
+        Für die jeweilige relevante Position wird dann über den OpenStreetMap Nominatim Service die nächstliegende Adresse ermittelt. Diese wird dann auch gespeichert, damit wir das nicht immer wieder neu ermitteln müssen (Caching).
     </p>
     <p>
-        Zudem besteht über die Kartensuche auch die Möglichkeit, wie von Google gewohnt in der Karte nach Straßen, etc. zu suchen. Damit das schneller geht, ist das Feld bereits vorbelegt mit der aktuellen Adresse.
+        Zudem besteht über die Kartensuche auch die Möglichkeit, wie von OpenStreetMap gewohnt in der Karte nach Straßen, etc. zu suchen.
+    </p>
+    <p>
+        Bei der <a href="#picture-create">Direktanlage</a> wird in der Karte auch immer automatisch die derzeitige Position ermittelt, damit sie schneller die genaue Position festlegen können. Wenn die
+        automatische Ermittlung stört, dann können Sie diese auch mit dem Button deaktivieren. Bei der nächsten Aufnahme ist es dann wieder aktiv.
     </p>
 
     <h4><a name="picture-update-datatab">Reiter "Grunddaten"</a></h4>
     <p>
-        In dem Reiter können Sie die Grunddaten setzen. Bei vielen Bildern werden Sie das in der Regel aber in der Mehrfachverarbeitung machen, denn dort geht es deutlich schneller!
+        In dem Reiter können Sie die Grunddaten setzen und hierbei vor allen die Sichtbarkeit definieren. Bei vielen Bildern werden Sie das in der Regel aber in der Mehrfachverarbeitung machen, denn dort geht es deutlich schneller!
     </p>
-    <h4><a name="picture-update-overviewtab">Reiter "Übersicht"</a></h4>
+    <h4><a name="picture-update-overviewtab">Reiter "Übersicht &amp; Drucken"</a></h4>
     <p>
-        In dem Reiter können Sie alle Daten genau tabellarisch sehen. Ändern können Sie hier jedoch nichts.
+        In dem Reiter können Sie alle Daten genau tabellarisch sehen. Ändern können Sie hier außer dem Aufnahmedatum jedoch nichts.
     </p>
     <p>
         Oben könnnen sie eine Druckansicht des Vorfalls erzeugen, die Sie dann ausdrucken oder als PDF speichern können. Damit können sie auch schnell die Essenz für eine Anzeige, etc. erstellen.
