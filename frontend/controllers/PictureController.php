@@ -621,7 +621,7 @@ class PictureController extends Controller
                 } else {
                     Yii::$app->session->setFlash('success', 
                         'Sie können das/die aufgenommenen Bilder nun '.
-                        Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
+                        Html::a('hier', ['manage', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
                         ' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder aufnehmen.');
                     return $this->refresh();
                 }
@@ -689,7 +689,7 @@ class PictureController extends Controller
                     Yii::$app->session->setFlash('success', 
                         $flash.
                         'Sie können diese nun '.
-                        Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
+                        Html::a('hier', ['manage', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
                         ' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
                     return $this->refresh();
                 }
@@ -766,7 +766,7 @@ class PictureController extends Controller
                     Yii::$app->session->setFlash('success',
                         $flash.
                         'Sie können die entsprechenden Vorfälle nun '.
-                        Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d")]).
+                        Html::a('hier', ['manage', 's[created_ts]'=> date("Y-m-d")]).
                         ' weiterverarbeiten. Alternativ können Sie natürlich auch weitere KML-Dateien hochladen.');
                     return $this->refresh();
                 }
@@ -824,7 +824,7 @@ class PictureController extends Controller
                     Yii::$app->session->setFlash('success', 
                         'Die '.count($files).' Bilder wurden problemlos eingelesen.<br>'.
                         'Sie können diese nun '.
-                        Html::a('hier', ['massupdate', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
+                        Html::a('hier', ['manage', 's[created_ts]'=> date("Y-m-d"), 's[visibility_id]' => 'private']).
                         ' weiterverarbeiten. Alternativ können Sie natürlich auch weitere Bilder hochladen.');
                 }
                 return $this->refresh();
