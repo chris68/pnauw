@@ -126,6 +126,11 @@ $this->params['breadcrumbs'][] = $this->title;
         Einen Nachteil hat die Mehrfachbearbeitung - <b>eventuelle Eingabefehler werden nicht detailliert angezeigt, sondern der Satz wird einfach nicht gespeichert und die Änderungen gehen verloren!</b>
         In der Regel kein Problem, weil man über die Felder in der Mehrfachbearbeitung so gut wie nie Eingabefehler erzeugen kann. Die Ausnahmen sind unter <a href='#picture-consistency'>Konsistenzprüfungen</a> erläutert.
     </p>
+    <p>
+        Bei der Mehrfachbearbeitung gibt es auch die Möglichkeit, viele Bilder auf die gleichen Vorgabewerte zu setzen. Geben Sie hierzu in dem aufklappbaren Reiter die gemeinsamen Werte vor. Und dann können Sie
+        mit den Auswahlkästchen über den Bilder sagen, für welche Bilder die Werte übernommen werden sollen. Es werden generell immer nur "echte" Werte übernommen, d.h. wenn Sie in einem Textfeld nichts eingeben oder
+        in einer Auswahlliste auf dem Standardwert bleiben, dann passiert nichts und die alten Werte bleiben erhalten.
+    </p>
     <h3><a name="picture-update">Bilder detailliert bearbeiten</a></h3>
     <p>
         Bei der Einzelbearbeitung ist die Maske hingegen auf mehrere Reiter aufgeteilt, wo in jedem Reiter ein Themengebiet abgedeckt ist.
