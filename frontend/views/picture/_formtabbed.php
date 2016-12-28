@@ -55,7 +55,7 @@ use frontend\widgets\Alert;
                         'headerOptions' => ['id' => 'picture-tab-data'],
                      ],
                     [
-                        'label' => 'Karte & Ortsdaten',
+                        'label' => 'Karte & Ort',
                         'content' => $this->render('_maptab', array('model'=>$model,'form'=>$form)),        
                         'headerOptions' => ['id' => 'picture-tab-map'],
                      ],
