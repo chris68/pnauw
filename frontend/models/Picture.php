@@ -256,7 +256,7 @@ class Picture extends \yii\db\ActiveRecord
             // Request to approval
             $this->visibility_id = 'public_approval_pending';
             
-            $this->addError('visibility_id', 'Standardmäßig vermuten wir, dass Sie Bilder veröffentlichen wollen und haben daher in dem Feld Sichtbarkeit die Veröffentlichung beantragt. Sie können das aber auch ändern und die Veröffentlichung stattdessen explizit blocken.');
+            $this->addError('visibility_id', 'Standardmäßig vermuten wir, dass Sie Bilder veröffentlichen wollen und haben daher in dem Feld Sichtbarkeit die Veröffentlichung beantragt. Sie müssen hierzu einfach noch einmal speichern. Sie können das aber auch ändern und die Veröffentlichung stattdessen explizit blocken.');
         }
         
     }
