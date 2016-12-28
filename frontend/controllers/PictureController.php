@@ -41,7 +41,7 @@ class PictureController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','geodata','guestcapture', 'guestupload', 'view', 'massview'],
+                        'actions' => ['index','geodata','guestcreate', 'guestcapture', 'guestupload', 'view', 'massview'],
                     ],
                     [
                         'allow' => true,
@@ -317,17 +317,30 @@ class PictureController extends Controller
             // If no coordinates exists set to 0,0 (nobody live there except for 'Ace Lock Service Inc' :=)
             $model->org_loc_lat = $model->loc_lat = 0;
             $model->org_loc_lng = $model->loc_lng = 0;
+
+            // Since we are on the server (UTC) we just set it to date accurray; it will be ovveridden by the loval time from the client anyway
+            $model->taken = date('Y-m-d') . ' 00:00:00';
+        } else {
+            if ($model->loc_lat == 0 && $model->loc_lng == 0) {
+                // If no user defined position is given then take the original position
+                $model->loc_lat = $model->org_loc_lat;
+                $model->loc_lng = $model->org_loc_lng;
+            }
         }
 
-        // We assume that the event was at the time of the creation of the "picture"!
-        // However, we limit the accuracy to midnight of the day
-        $model->taken = date('Y-m-d') . ' 00:00:00';
-        // Need to set the org_loc_lat another time!
-        $model->org_loc_lat = 0;
-        $model->org_loc_lng = 0;
-
-        if ($post_request && $model->save()) {
-            Yii::$app->session->setFlash('success', "Bild wurde angelegt");
+        if ($post_request && $model->validate()) {
+            $img = str_replace('data:image/jpeg;base64,', '', $model->image_dataurl);
+            $blob = base64_decode($img);
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->fillFromBinary($blob);
+                $model->save(false);
+                $transaction->commit();
+            } catch (Exception $ex) {
+                $transaction->rollback();
+                throw($ex);
+            }
+            Yii::$app->session->setFlash('success', "Vorfall wurde angelegt");
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
@@ -515,6 +528,20 @@ class PictureController extends Controller
     }
 
     /**
+      Instant Create Picture model (via anonymous user)
+     * @return mixed
+     */
+    public function actionGuestcreate()
+    {
+        if (!Yii::$app->user->can('anonymous')) {
+            return $this->enterGuestAccess();
+        }
+        else {
+            return $this->actionCreate();
+        }
+    }
+
+    /**
       Instant Capture Picture model (via anonymous user)
      * @return mixed
      */
@@ -543,6 +570,7 @@ class PictureController extends Controller
                 try {
                     $picmodel = new Picture(['scenario' => 'upload']);
                     $picmodel->fillFromFile($formmodel->file_handle->tempName);
+                    $picmodel->save(false);
                     $transaction->commit();
                 } catch (Exception $ex) {
                     $transaction->rollback();
@@ -604,6 +632,7 @@ class PictureController extends Controller
                         foreach ($formmodel->file_handles as $file) {
                                 $picmodel = new Picture(['scenario' => 'upload']);
                                 $picmodel->fillFromFile($file->tempName,$defaultvalues);
+                                $picmodel->save(false);
                         }
                         $transaction->commit();
                     } catch (Exception $ex) {
@@ -744,6 +773,7 @@ class PictureController extends Controller
                         foreach ($files as $filename) {
                             $picmodel = new Picture(['scenario' => 'upload']);
                             $picmodel->fillFromFile($filename,$defaultvalues);
+                            $picmodel->save(false);
                         }
                         $transaction->commit();
                     } catch (Exception $ex) {

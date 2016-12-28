@@ -13,6 +13,15 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
+        Version 2.0 (28.12.2016)
+    </h3>
+    <p>
+        Riesenverbesserung der Benutzerfreundlichkeit - Webseite num mit App-Feeling!
+    </p>
+    <ul>
+        <li>Direktanlage der Verfälle mit HTML5-Mitteln zur Bildübernahme direkt aus der Kamera</li>
+    </ul>
+    <h3>
         Version 1.5 (24.-25.12.2016)
     </h3>
     <p>

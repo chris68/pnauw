@@ -52,6 +52,93 @@ use \yii\helpers\Html;
             ]
         );
         ?>
+        <?php if ($model->isNewRecord):?>
+        <div class="form-group" style="margin-top: 7px;">
+            <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
+            <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
+            <?= Html::input('file', 'file_name', NULL, ['disabled', 'accept' => 'image/jpeg', 'capture' => 'camera', 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
+            <p class="help-block">Drücken Sie hier, um ein Bild mit der Kamera aufzunehmen</p>
+        </div>
+        <?php endif;?>
     </div>
 </div>
 
+
+
+
+<?php
+    if ($model->isNewRecord) {
+        $this->registerJs(
+<<<'JAVASCRIPT'
+            $(document).ready(function () {
+                // Set the taken timestamp to the local client time
+                var now = new Date();
+                var pad = function(num) {
+                    var norm = Math.abs(Math.floor(num));
+                    return (norm < 10 ? '0' : '') + norm;
+                };
+                var now_iso = now.getFullYear()
+                    + '-' + pad(now.getMonth()+1)
+                    + '-' + pad(now.getDate())
+                    + ' ' + pad(now.getHours())
+                    + ':' + pad(now.getMinutes())
+                    + ':' + pad(now.getSeconds())
+                ;
+                $("#picture-taken").val(now_iso);
+
+                if ($("#picture-image-dataurl").val() != '') {
+                    // Restore the pic from the dataurl if given
+                    $("#picture-image").attr("src", $("#picture-image-dataurl").val());
+
+                    setTimeout(function() {
+                        // The image will need some time to be display so update the canvas a little later
+                        updatePictureClipCanvas();
+
+                    }, 100);
+                }
+
+                // Resize the file upload in the internal canvas
+                $("#picture-image-upload").ImageResize(
+                    {
+                        maxWidth: 1024,
+                        onImageResized: function (imageData) {
+                            // Save the image data url in the hidden input field
+                            $("#picture-image-dataurl").val(imageData);
+
+                            // Set the picture to the resized image and update the clip canvas
+                            $("#picture-image").attr("src", imageData);
+                            setTimeout(function() {
+                                // The image will need some time to be display so update the canvas a little later
+                                updatePictureClipCanvas();
+
+                            }, 100);
+                        },
+                        onFailure: function (message) {
+                            alert(message);
+                        }
+                    }
+                );
+
+                map.locate({setView: true, watch: true, maxZoom: 16});
+                var positionLayerGroup = L.layerGroup([]);
+                positionLayerGroup.addTo(map);
+
+                map.on('locationerror', function(e) {
+                    alert(e.message);
+                });
+
+                map.on('locationfound', function(e) {
+                    positionLayerGroup.clearLayers();
+                    positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
+                    $('#picture-map-loc-lat-org').val(e.latlng.lat);
+                    $('#picture-map-loc-lng-org').val(e.latlng.lng);
+                });
+
+
+            });
+JAVASCRIPT
+            ,
+             \yii\web\View::POS_READY
+        );
+    }
+?>

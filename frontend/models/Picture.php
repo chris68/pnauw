@@ -77,6 +77,11 @@ class Picture extends \yii\db\ActiveRecord
     public $taken_override;
 
     /**
+     * @var string The dataurl of the image (used in create for direct image upload)
+     */
+    public $image_dataurl;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -267,6 +272,7 @@ class Picture extends \yii\db\ActiveRecord
             ['citation_id', 'default', 'value' => NULL],
             ['selected', 'default', 'value' => false],
             ['deleted', 'default', 'value' => false],
+            ['image_dataurl', 'string',],
             [['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
             [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'integer'],
             [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'filter', 'filter' => 'intval', 'skipOnEmpty' => true],
@@ -274,6 +280,11 @@ class Picture extends \yii\db\ActiveRecord
             ['taken_override', 'validateTakenDate', 'skipOnEmpty' => false, 'on' => self::SCENARIO_DEFAULT],
 
             [['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
+
+            // Only if the pic is niew you can set these attributes
+            [['org_loc_lat', 'org_loc_lng',], 'double', 'when' => function ($model) {return $model->isNewRecord;}],
+            [['taken', ], 'string', 'when' => function ($model) {return $model->isNewRecord;}],
+                
             [['loc_lat', 'loc_lng',], 'double'],
             ['visibility_id',  'validateVisibilityConsistency', ],
             [['loc_lat', 'loc_lng'], 'validateLocationConsistency', 'on' => self::SCENARIO_DEFAULT],
@@ -527,7 +538,75 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
-     * Fill the data from the file input and saves the data; best encapsule in transaction for atomic behavior
+     * Fill the data from the binary input; best encapsule in transaction for atomic behavior
+     * @param string $blob The binary content of the orignal image
+     */
+    public function fillFromBinary($blob) {
+        $image = new Image;
+        $rawdata = new Imagick();
+        $rawdata->readimageblob($blob);
+        $rawdata->setImageFormat( "jpeg" );
+        $this->autoRotateImage($rawdata);
+        $rawdata->scaleimage(0, 800);
+        $image->rawdata = bin2hex($rawdata->getimageblob());
+        $image->save(false);
+        $this->original_image_id = $image->id;
+
+        $rawdata = new Imagick();
+        $rawdata->readimageblob($blob);
+        $rawdata->setImageFormat( "jpeg" );
+        $this->autoRotateImage($rawdata);
+        $rawdata->profileimage('*', NULL); // Remove profile information
+        $rawdata->scaleimage(0, 100);
+        $image = new Image;
+        $image->rawdata = bin2hex($rawdata->getimageblob());
+        $image->save(false);
+        $this->thumbnail_image_id = $image->id;
+
+        $rawdata->blurimage(3, 3);
+        $image = new Image;
+        $image->rawdata = bin2hex($rawdata->getimageblob());
+        $image->save(false);
+        $this->blurred_thumbnail_image_id = $image->id;
+
+        $rawdata = new Imagick();
+        $rawdata->readimageblob($blob);
+        $rawdata->setImageFormat( "jpeg" );
+        $this->autoRotateImage($rawdata);
+        $rawdata->profileimage('*', NULL); // Remove profile information
+        $rawdata->scaleimage(0, 240);
+        $image = new Image;
+        $image->rawdata = bin2hex($rawdata->getimageblob());
+        $image->save(false);
+        $this->small_image_id = $image->id;
+
+        $rawdata->blurimage(3, 3);
+        $image = new Image;
+        $image->rawdata = bin2hex($rawdata->getimageblob());
+        $image->save(false);
+        $this->blurred_small_image_id = $image->id;
+
+        $rawdata = new Imagick();
+        $rawdata->readimageblob($blob);
+        $rawdata->setImageFormat( "jpeg" );
+        $this->autoRotateImage($rawdata);
+        $rawdata->profileimage('*', NULL); // Remove profile information
+        $rawdata->scaleimage(0, 500);
+        $image = new Image;
+        $image->rawdata = bin2hex($rawdata->getimageblob());
+        $image->save(false);
+        $this->medium_image_id = $image->id;
+
+        $rawdata->blurimage(5, 5);
+        $image = new Image;
+        $image->rawdata = bin2hex($rawdata->getimageblob());
+        $image->save(false);
+        $this->blurred_medium_image_id = $image->id;
+
+    }
+
+    /**
+     * Fill the data from the file input; best encapsule in transaction for atomic behavior
      * @param string $filename The name of the file with the image
      * @param Picture $defaultsvalues Optional default values which will override the existing values if given
      */
@@ -605,8 +684,6 @@ class Picture extends \yii\db\ActiveRecord
         if (isset($defaultvalues)) {
             $this->copyDefaults($defaultvalues);
         }
-
-        $this->save(false);
     }
 
     /**

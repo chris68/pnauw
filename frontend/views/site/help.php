@@ -40,21 +40,42 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Bei allen Verkleinerungen werden alle EXIF-Parameter gelöscht - es ist also keine Kamerakennung etc. mehr erkennbar</li>
         <li>Vorher wird noch das Aufnahmedatum und eventuell vorhandene GEO-Koordinaten aus den Bilder ausgelesen und gespeichert.</li>
     </ol>
-    <h3><a name="picture-capture">Bilder aufnehmen</a></h3>
+    <h3><a name="picture-create">Direktanlage</a></h3>
+    <p>
+        Die Direktanlage ist der beste und schnellste Weg, einen neuen Vorfall anzulegen. Sie können hier ein Bild direkt von der Kamera des Smartphones übernehmen (es geht aber auch ohne Bild!) und dann gleich alle Felder ausfüllen.
+        Das Bild wird noch auf dem Smartphone auf eine bandbreitenschonende Größe (wenige KB) komprimiert und erst danach beim Speichern hochgeladen.
+    </p>
+    <p>
+        Auch den Ort des Vorfall können Sie direkt in der Karte genau dokumentieren, wobei das automatische Erkennen ihrer derzeitigen Position ungemein hilft. Sie müssen natürlich hierzu dem Browser
+        die Erlaubnis erteilen, die Geoposition zu ermitteln. Aber auch ohne dieser Erlaubnis funktioniert es - Sie müssen dann halt über die Suche rechts oben in der Karte ihre derzeite Position selbst raussuchen.
+    </p>
+    <h3><a name="picture-guestcreate">Direktanlage (Gastzugang) </a></h3>
+    <p>
+        Es besteht die Möglichkeit, die Direktanlage als <a href="#user-level-anonymous">anonymer Nutzer</a> durchzuführen.
+    </p>
+    <p>
+        Sie müssen dann jedoch unbedingt daran denken, das Bild auch gleich zu bearbeiten und eine Veröffentlichung zu beantragen.
+        Ansonsten bringt es wenig!
+    </p>
+    <h3><a name="picture-capture">Bilder klassisch aufnehmen</a></h3>
     <p>
         Bei den meisten Kameras in Smartphone können Sie direkt aus dem Browser heraus ein Bild aufnehmen, dass dann gleich hochgeladen wird.
-        Damit Sie nicht unnötig Bandbreite vergeuden, sollte Sie die Kamera auf z.B. nur 0.3 MB große Bilder einstellen - das reicht vollkommen.
+        Damit Sie nicht unnötig Bandbreite vergeuden, sollte Sie bei diesem Weg die Kamera auf z.B. nur 0.3 MB große Bilder einstellen - das reicht vollkommen.
         Die Karte unten zeigt Ihnen den derzeitigen Standort als blauen Kreis an. Hierzu müssen Sie natürlich im Brower akzeptieren, dass wir diesen Standort ermitteln können.
     </p>
     <p>
         In der Regel funktioniert dieses direkte Aufnehmen dann auch recht gut, aber leider kann es bei der Übernahme in den Webbrowser Probleme geben. In diesem Fall müssen Sie das normale Hochladen aus dem Order, wo in dem Smartphone die Bilder abgespeichert sind, nutzen.
     </p>
+    <p>
+        Wenn Sie ein modernes Smartphone mit modernen Browsern nutzen, dann ist übrigens die <a href="#picture-create">Direktanlage</a> die bessere Lösung, weil Sie hier den Vorgang direkt
+        abschließen können und deutlich weniger Bandbreite für das Hochladen brauchen - egal auf welcher Auflösung ihre interne Kamera läuft.
+    </p>
     <h3><a name="picture-guestcapture">Bilder aufnehmen (Gastzugang)</a></h3>
     <p>
-        Es besteht auch die Möglichkeit, Bilder als <a href="#user-level-anonymous">anonymer Nutzer</a> aufzunehmen und hochzuladen.
+        Es besteht auch hier die Möglichkeit, Bilder als <a href="#user-level-anonymous">anonymer Nutzer</a> aufzunehmen und hochzuladen.
     </p>
     <p>
-        Sie müssen dann jedoch unbedingt daran denken, das Bild auch gleich zu bearbeiten und eine Veröffentlichung zu beantragen. 
+        Sie müssen dann jedoch auch hier unbedingt daran denken, das Bild auch gleich zu bearbeiten und eine Veröffentlichung zu beantragen.
         Ansonsten bringt es wenig!
     </p>
     <h3><a name="picture-upload">Bilder hochladen</a></h3>
@@ -73,10 +94,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><a name="picture-guestupload">Bilder hochladen (Gastzugang) </a></h3>
     <p>
         Auch das Hochladen von Bildern ist als <a href="#user-level-anonymous">anonymer Nutzer</a> möglich. Aber auch hier bitte daran denken, die Beantragung der Veröffentlichung der Bilder nicht zu vergessen!
-    </p>
-    <h3><a name="picture-create">Vorfall ohne Bild anlegen</a></h3>
-    <p>
-        Manchmal gibt es Situationen, wo Sie gerade keine Kamera haben bzw. kein gutes Bild machen können (z.B. Nachts). Dann können Sie trotzdem einen Vorfall ohne Bild anlegen. Der Vorfall wird dann jedoch automatisch und nicht änderbar auf den Zeitpunkt der Anlage datiert.
     </p>
     <h3><a name="picture-serverupload">Bilder von FTP übernehmen</a></h3>
     <p>

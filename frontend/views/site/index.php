@@ -58,8 +58,8 @@ $this->title = \Yii::$app->name;
                 <p>Dann melden Sie die Vorfälle doch einfach!</p>
 
                 <p>
-                    <a class="btn btn-default" href="<?= Url::to(['/picture/capture'])?>">Vorfall melden&raquo;</a>
-                    <a class="btn btn-default" href="<?= Url::to(['/picture/guestcapture'])?>">als Gast&raquo;</a>
+                    <a class="btn btn-default" href="<?= Url::to(['/picture/create'])?>">Vorfall melden&raquo;</a>
+                    <a class="btn btn-default" href="<?= Url::to(['/picture/guestcreate'])?>">als Gast&raquo;</a>
                 </p>
 
                 <p>Geht ganz schnell mit der Handykamera und mit dem <a href="<?=Url::to(['help']).'#picture-guestcapture'?>" target="_blank">Gastzugang</a>  müssen sich nicht einmal registrieren.</p>
