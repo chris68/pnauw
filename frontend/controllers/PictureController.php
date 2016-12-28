@@ -329,18 +329,24 @@ class PictureController extends Controller
         }
 
         if ($post_request && $model->validate()) {
-            $img = str_replace('data:image/jpeg;base64,', '', $model->image_dataurl);
-            $blob = base64_decode($img);
+            if (!empty($model->image_dataurl)) {
+                $img = str_replace('data:image/jpeg;base64,', '', $model->image_dataurl);
+                $blob = base64_decode($img);
+            } else {
+                $blob = NULL;
+            }
             $transaction = Yii::$app->db->beginTransaction();
             try {
-                $model->fillFromBinary($blob);
+                if (isset($blob)) {
+                    $model->fillFromBinary($blob);
+                }
                 $model->save(false);
                 $transaction->commit();
             } catch (Exception $ex) {
                 $transaction->rollback();
                 throw($ex);
             }
-            Yii::$app->session->setFlash('success', "Vorfall wurde angelegt");
+            Yii::$app->session->setFlash('success', "Vorfall wurde angelegt. ".Html::a('Weiteren Vorfall erfassen', ['create']));
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
