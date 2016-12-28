@@ -11,6 +11,14 @@ use yii\helpers\Html;
 <div class=    "row">
     <div class ="col-lg-6">
 
+    <div class="form-group">
+        <?php
+            if (!$model->isNewRecord ) {
+                echo Html::a('In Druckansicht anzeigen', ['picture/print','id'=>$model->id], ['target' => '_blank']);
+            }
+        ?>
+
+    </div>
         <?=
 
         DetailView::widget(

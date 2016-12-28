@@ -45,7 +45,7 @@ class PictureController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'capture', 'publish'],
+                        'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'print', 'capture', 'publish'],
                         'roles' => ['@'],
                     ],
                     [
@@ -393,6 +393,19 @@ class PictureController extends Controller
         else {
             return $this->redirect(['manage']);
         }
+    }
+
+    /**
+     * Prints an existing Picture model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrint($id)
+    {
+        $this->layout = 'print';
+        return $this->render('print', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**

@@ -28,7 +28,7 @@ elseif ($model->type == 'complaint') {
     <?php
         /* var $pic frontend\models\Picture */
         foreach ($model->getPictures()->all() as $pic) {
-            echo $this->render('_printpicture', [
+            echo $this->render('//picture/_printpicture', [
                 'model' => $pic,
             ]);
         }

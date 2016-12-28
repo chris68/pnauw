@@ -181,6 +181,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         In dem Reiter können Sie alle Daten genau tabellarisch sehen. Ändern können Sie hier jedoch nichts.
     </p>
+    <p>
+        Oben könnnen sie eine Druckansicht des Vorfalls erzeugen, die Sie dann ausdrucken oder als PDF speichern können. Damit können sie auch schnell die Essenz für eine Anzeige, etc. erstellen.
+        Und dann können sie das Bild theoretisch auch gleich wieder löschen und damit überhaupt keinerlei Spuren hinterlassen. Insbesondere, wenn Sie hierfür den Gastzugang als <a href="#user-level-anonymous">anonymer Nutzer</a>nutzen.
+    </p>
     <h3><a name="picture-massupdate">Mehrere Bilder detailliert bearbeiten</a></h3>
     <p>
         Hier haben Sie die Möglichkeit, eine Auswahl von mehreren Bildern nacheinander detailliert zu bearbeiten. 
