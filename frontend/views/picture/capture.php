@@ -25,7 +25,7 @@ $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestcapture'
         $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], ]); 
     ?>
         <?= $form->errorSummary([$formmodel],['class' => "alert alert-danger"]) ?>
-        <?= $form->field($formmodel, 'file_name')->fileInput(['accept' => 'image/*', 'capture', ])->hint('Drücken Sie hier, um die Kamera zu aktivieren') ?>
+        <?= $form->field($formmodel, 'file_name')->fileInput(['accept' => 'image/*', 'capture' => true, ])->hint('Drücken Sie hier, um die Kamera zu aktivieren') ?>
         <?= $form->field($formmodel, 'directEdit')->checkbox()->hint('Aktivieren Sie die Option, um nach dem Hochladen das Bild direkt zu verarbeiten ') ?>
         <div class="form-group">
             <?= Html::submitButton('Hochladen', ['class' => 'btn btn-primary']) ?>

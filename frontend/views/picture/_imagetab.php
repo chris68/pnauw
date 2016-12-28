@@ -48,7 +48,7 @@ use \frontend\models\Picture;
         <div class="form-group" style="margin-top: 7px;">
             <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
             <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
-            <?= Html::input('file', 'file_name', NULL, ['disabled', 'accept' => 'image/*', 'capture', 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
+            <?= Html::input('file', 'file_name', NULL, ['disabled' => true  , 'accept' => 'image/*', 'capture' => true, 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
             <p class="help-block">Drücken Sie hier, um ein Bild mit der Kamera aufzunehmen</p>
         </div>
         <?php endif;?>
