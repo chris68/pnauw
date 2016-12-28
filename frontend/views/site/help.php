@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <h3><a name="picture-guestcreate">Direktanlage (Gastzugang) </a></h3>
     <p>
-        Es besteht die Möglichkeit, die Direktanlage als <a href="#user-level-anonymous">anonymer Nutzer</a> durchzuführen.
+        Es besteht die Möglichkeit, die oben erklärte <a href="#picture-create">Direktanlage</a>als <a href="#user-level-anonymous">anonymer Nutzer</a> durchzuführen.
     </p>
     <p>
         Sie müssen dann jedoch unbedingt daran denken, das Bild auch gleich zu bearbeiten und eine Veröffentlichung zu beantragen.

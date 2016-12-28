@@ -13,7 +13,7 @@ $this->title = \Yii::$app->name;
     <div class="jumbotron">
         <h1>Parke nicht auf unseren Wegen!</h1>
 
-        <p class="lead">Gehwegparken nervt und ist meist unnötig. Mit der Methode <a href="http://dictionary.cambridge.org/dictionary/british/name-and-shame">Name and Shame</a> werden wir es bekämpfen. </p>
+        <p class="lead">Gehwegparken nervt und ist meist unnötig. Diese Plattform hilft, es zu bekämpfen!</p>
         <p><small><a href="<?= Url::to(['site/about']) ?>">Hintergrundsinfos</a> &ndash; <a href="<?= Url::to(['site/help']) ?>">Hilfe</a></small></p>
 
     </div>
@@ -62,7 +62,9 @@ $this->title = \Yii::$app->name;
                     <a class="btn btn-default" href="<?= Url::to(['/picture/guestcreate'])?>">als Gast&raquo;</a>
                 </p>
 
-                <p>Geht ganz schnell mit der Handykamera und mit dem <a href="<?=Url::to(['help']).'#picture-guestcapture'?>" target="_blank">Gastzugang</a>  müssen sich nicht einmal registrieren.</p>
+                <p>
+                    Geht ganz schnell mit der Handykamera und mit dem <a href="<?=Url::to(['help']).'#picture-guestcreate'?>" target="_blank">Gastzugang</a>  müssen sich nicht einmal registrieren.
+                </p>
             </div>
             <div class="col-md-4">
                 <h2>Mitarbeit</h2>
@@ -75,8 +77,10 @@ $this->title = \Yii::$app->name;
                     <a class="btn btn-default" href="<?= Url::to(['picture/guestupload'])?>">als Gast&raquo;</a>
                 </p>
                 
-                <p>Geht auch im <a href="<?=Url::to(['help']).'#picture-guestupload'?>" target="_blank">Gastzugang</a>, aber besser Sie <?= Html::a("registrieren",['/site/signup'])?> sich hierzu.
-                Und bei reger Teilnahme sollten Sie baldigst eine höhere <a href="<?=Url::to(['help']).'#user-level'?>" target="_blank">Berechtigungsstufe</a> beantragen.</p>
+                <p>
+                    Geht auch im <a href="<?=Url::to(['help']).'#picture-guestupload'?>" target="_blank">Gastzugang</a>, aber besser Sie <?= Html::a("registrieren",['/site/signup'])?> sich hierzu.
+                    Und bei reger Teilnahme sollten Sie baldigst eine höhere <a href="<?=Url::to(['help']).'#user-level'?>" target="_blank">Berechtigungsstufe</a> beantragen.
+                </p>
             </div>
         </div>
 

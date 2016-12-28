@@ -13,9 +13,20 @@ use yii\helpers\Html;
 
     <div class="form-group">
         <?php
-            if (!$model->isNewRecord ) {
-                echo Html::a('In Druckansicht anzeigen', ['picture/print','id'=>$model->id], ['target' => '_blank']);
-            }
+        if (!$model->isNewRecord ) {
+            echo Html::a('In Druckansicht anzeigen', ['picture/print','id'=>$model->id], ['target' => '_blank']);
+        } else {
+        ?>
+        <div class="alert alert-info">
+         <p>
+            <b>Zum Drucken müssen sie erst speichern.</b>
+        </p>
+        <p>
+            Dann wird auch das Aufnahmedatum auf die 100% korrekte Zeit gesetzt.
+        </p>
+        </div>
+        <?php
+        }
         ?>
 
     </div>

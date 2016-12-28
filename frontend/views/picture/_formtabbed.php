@@ -45,9 +45,15 @@ use frontend\widgets\Alert;
                 'id' => 'picture-tabs',
                 'items' => [
                     [
-                        'label' => 'Übersicht',
-                        'content' => $this->render('_overviewtab', array('model'=>$model,'form'=>$form)),
-                        'headerOptions' => ['id' => 'picture-tab-overview'],
+                        'label' => 'Bild & Kfz-/Vorfallsdaten',
+                        'content' => $this->render('_imagetab', array('model'=>$model,'form'=>$form)),
+                        'headerOptions' => ['id' => 'picture-tab-image'],
+                        'active' => true,
+                     ],
+                    [
+                        'label' => 'Karte & Ort',
+                        'content' => $this->render('_maptab', array('model'=>$model,'form'=>$form)),
+                        'headerOptions' => ['id' => 'picture-tab-map'],
                      ],
                     [
                         'label' => 'Grunddaten',
@@ -55,16 +61,10 @@ use frontend\widgets\Alert;
                         'headerOptions' => ['id' => 'picture-tab-data'],
                      ],
                     [
-                        'label' => 'Karte & Ort',
-                        'content' => $this->render('_maptab', array('model'=>$model,'form'=>$form)),        
-                        'headerOptions' => ['id' => 'picture-tab-map'],
+                        'label' => 'Übersicht & Drucken',
+                        'content' => $this->render('_overviewtab', array('model'=>$model,'form'=>$form)),
+                        'headerOptions' => ['id' => 'picture-tab-overview'],
                      ],
-                    [
-                        'label' => 'Bild & Kfz-/Vorfallsdaten',
-                        'content' => $this->render('_imagetab', array('model'=>$model,'form'=>$form)),        
-                        'headerOptions' => ['id' => 'picture-tab-image'],
-                        'active' => true,
-                     ],        
                 ],
                 'itemOptions' => [
                     'style' => 'margin-top:10px; margin-bottom:10px;',

@@ -63,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <p>
         Aber in <b>zweiter Linie</b> soll es allen Betroffenen auch die Möglichkeit geben, das Problem durch <b>Privatanzeigen</b> anzugehen. Privatanzeigen sind eine Möglichkeit, die der Gesetzgeber ausdrücklich vorsieht, und in der Regel wird dadurch das Problem schnell gelöst.
+        Die notwendige Dokumentation hierfür lässt sich über die Plattform ganz schnell als PDF erstellen, indem man die Druckansicht im Browser druckt/Als PDF speichert (findet sich in Android unter <i>Teilen</i>). <b>Auch ohne Anmelden und damit ganz anonyom!</b>
     </p>
     <p>
         Jeder kann dann für sich selbst entscheiden, welches der beiden bereitgestellten Mittel er einsetzen möchte. <b>Tatsache ist übrigens, dass die meisten Nutzer sich direkt für den Weg einer Anzeige ohne Öffentlichkeit entscheiden.</b>
@@ -104,7 +105,11 @@ $this->params['breadcrumbs'][] = $this->title;
     </ul>
     <p>
         Das Video ist auf dem PC erstellt, aber es wurde eine Auflösung ähnlich wie auf dem Smartphone gewählt, damit Sie besser sehen, wie 
-        gut die Sache mit dem Smartphone funktioniert. 
+        gut die Sache mit dem Smartphone funktioniert.
+    </p>
+    <p>
+        In dem Video wird noch der alte klassiche Weg mit "Erst Hochladen des Bild und dann im zweiten Schritt bearbeiten" gezeigt. Der aktuelle Weg
+        über die Direktanlage ist hier viel intuitiver, weil man das Bild direkt von der Kamera übernehmen kann - ohne Zwischenschritt.
     </p>
     <p>
         Zum Betrachten des Videos auf einem Smartphone sollten Sie aber in den Vollbildmodus von Youtube wechseln, da es sonst deutlich zu klein wird.
