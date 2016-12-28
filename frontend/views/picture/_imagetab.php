@@ -4,6 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm  */
 
 use \yii\helpers\Html;
+use \frontend\models\Picture;
 
 ?>
 <div class="row">
@@ -67,7 +68,7 @@ use \yii\helpers\Html;
 
 
 <?php
-    if ($model->isNewRecord) {
+    if ($model->isNewRecord && $model->scenario == Picture::SCENARIO_DEFAULT) {
         $this->registerJs(
 <<<'JAVASCRIPT'
             $(document).ready(function () {
