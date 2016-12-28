@@ -43,6 +43,14 @@ use \yii\helpers\Html;
     </div>
     
     <div class="col-lg-3">
+        <?php if ($model->isNewRecord):?>
+        <div class="form-group" style="margin-top: 7px;">
+            <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
+            <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
+            <?= Html::input('file', 'file_name', NULL, ['disabled', 'accept' => 'image/*', 'capture', 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
+            <p class="help-block">Drücken Sie hier, um ein Bild mit der Kamera aufzunehmen</p>
+        </div>
+        <?php endif;?>
         <?=
         frontend\widgets\ImageRenderer::widget(
             [
@@ -52,14 +60,6 @@ use \yii\helpers\Html;
             ]
         );
         ?>
-        <?php if ($model->isNewRecord):?>
-        <div class="form-group" style="margin-top: 7px;">
-            <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
-            <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
-            <?= Html::input('file', 'file_name', NULL, ['disabled', 'accept' => 'image/*', 'capture', 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
-            <p class="help-block">Drücken Sie hier, um ein Bild mit der Kamera aufzunehmen</p>
-        </div>
-        <?php endif;?>
     </div>
 </div>
 
