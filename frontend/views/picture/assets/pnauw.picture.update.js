@@ -195,8 +195,10 @@ $("form").bind("reset", function() {
             control.addEventListener('change', function(event) {
                 // First retrieve the exif orientation
                 getOrientation(event.target.files[0], function(orientation) {
-                    // And then
+                    // And then resize
                     handleResize(event.target.files[0],orientation);
+                    // Reset the file input; otherwise the files might be uploaded
+                    selector.val("");
                 })
             });
         });
