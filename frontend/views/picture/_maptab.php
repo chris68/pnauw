@@ -9,7 +9,7 @@ use \yii\helpers\Html;
 <div class="row">
     <div class="col-lg-4">
         <div class ="form-group">
-        <?php echo Html::label('Nächstliegende Adresse (ermittelt OSM Nominatim)','picture-map-nearest-address'); ?>
+        <?php echo Html::label('Nächstliegende Adresse (ermittelt via OSM Nominatim)','picture-map-nearest-address'); ?>
             <p id="picture-map-nearest-address"><i>Repositionieren Sie den blauen Pfeil für eine erneute Adressermittlung</i></p>
         </div>
         <?= $form->field($model,'loc_formatted_addr')->textInput(['id'=>'picture-map-loc-formatted-addr', ]) ?>
@@ -18,6 +18,12 @@ use \yii\helpers\Html;
         <?= Html::activeInput('text', $model,'loc_lng',['id'=>'picture-map-loc-lng', 'style' => 'display:none', ]) ?>
         <?= Html::activeHiddenInput($model,'org_loc_lat', ['id'=>'picture-map-loc-lat-org', ]) ?>
         <?= Html::activeHiddenInput($model,'org_loc_lng',['id'=>'picture-map-loc-lng-org', ]) ?>
+        <?php if ($model->isNewRecord):?>
+        <div class="form-group">
+            <button type="button" class="btn btn-default" onclick="map.stopLocate();">Automatisches Geopositionieren aufhören</button>
+        </div>
+
+        <?php endif; ?>
     </div>
     <div class="col-lg-4">
         <div style="width: 300px; height: 300px;" id="picture-map-canvas"></div>
