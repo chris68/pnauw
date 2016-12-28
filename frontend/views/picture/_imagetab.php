@@ -119,7 +119,7 @@ use \yii\helpers\Html;
                     }
                 );
 
-                map.locate({setView: true, watch: true, enableHighAccuracy: true, maxZoom: 17});
+                map.locate({setView: true, watch: true, enableHighAccuracy: true, maxZoom: 18});
                 var positionLayerGroup = L.layerGroup([]);
                 positionLayerGroup.addTo(map);
 
