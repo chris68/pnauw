@@ -45,7 +45,7 @@ class PictureController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'print', 'capture', 'publish'],
+                        'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'print', 'capture', 'publish', 'printmultiple', ],
                         'roles' => ['@'],
                     ],
                     [
@@ -543,6 +543,25 @@ class PictureController extends Controller
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
                 'updatedmodel' => $model,
+        ]);
+    }
+
+    /**
+     * Print picture models according to search.
+     * @return mixed
+     */
+    public function actionPrintmultiple()
+    {
+        $searchModel = new PictureSearch(['scenario' => 'private']);
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+        $dataProvider->query->ownerScope();
+        $dataProvider->sort->defaultOrder = ['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ];
+        $dataProvider->pagination->pageSize = 50;
+
+        $this->layout = 'print';
+        return $this->render('printmultiple', [
+                'dataProvider' => $dataProvider,
+                'searchModel' => $searchModel,
         ]);
     }
 

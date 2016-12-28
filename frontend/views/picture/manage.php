@@ -55,6 +55,9 @@ $this->params['help'] = 'picture-manage';
             echo ' | ';
             $params[0] = '/picture/publish';
             echo Html::a('Bilder veröffentlichen', Url::toRoute($params), ['target' => '_blank']);
+            echo ' | ';
+            $params[0] = '/picture/printmultiple';
+            echo Html::a('Bilder drucken', Url::toRoute($params), ['target' => '_blank']);
         }
     ?>
     </div>

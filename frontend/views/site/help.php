@@ -148,6 +148,9 @@ $this->params['breadcrumbs'][] = $this->title;
         mit den Auswahlkästchen über den Bilder sagen, für welche Bilder die Werte übernommen werden sollen. Es werden generell immer nur "echte" Werte übernommen, d.h. wenn Sie in einem Textfeld nichts eingeben oder
         in einer Auswahlliste auf dem Standardwert bleiben, dann passiert nichts und die alten Werte bleiben erhalten.
     </p>
+    <p>
+        Oben gibt es noch Absprünge, um mit der Auswahl in andere Modus zu springen oder eine Druckansicht der Auswahl zu erzeugen. Die Druckansicht ist auf eine Maximalanzahl von Bilder beschränkt, weil unbedarfte Nutzer es sonst mit einer zu großen Auswahl aufrufen.
+    </p>
     <h3><a name="picture-update">Bilder detailliert bearbeiten</a></h3>
     <p>
         Bei der Einzelbearbeitung ist die Maske hingegen auf mehrere Reiter aufgeteilt, wo in jedem Reiter ein Themengebiet abgedeckt ist.

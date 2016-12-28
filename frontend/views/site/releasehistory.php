@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <ul>
         <li>Direktanlage der Verfälle mit HTML5-Mitteln zur Bildübernahme direkt aus der Kamera</li>
-        <li>Druckansicht eines Einzelbildes, was ein direktes Drucken/Speichern als PDF auch im Gastmodus ermöglicht und womit eine Einzelanzeige sehr schnell und komplett anonym erstellt werden kann</li>
+        <li>Druckansicht eines Einzelbildes oder einer Bildauswahl, was ein direktes Drucken/Speichern als PDF auch im Gastmodus ermöglicht und womit eine Einzelanzeige sehr schnell und komplett anonym erstellt werden kann</li>
     </ul>
     <h3>
         Version 1.5 (24.-25.12.2016)
