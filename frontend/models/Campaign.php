@@ -12,7 +12,6 @@ namespace frontend\models;
  * @property string $running_from
  * @property string $running_until
  * @property string $visibility_id
- * @property string $loc_path
  * @property string $created_ts
  * @property string $modified_ts
  * @property string $released_ts
@@ -78,7 +77,7 @@ class Campaign extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'description', 'visibility_id', 'availability_id', 'running_from', 'running_until'], 'required'],
-            [['name', 'description', 'visibility_id', 'availability_id', /*'loc_path',*/ ], 'string'],
+            [['name', 'description', 'visibility_id', 'availability_id', ], 'string'],
             ['visibility_id',  'validateVisibilityConsistency', ],
             [['running_from', 'running_until'], 'default', 'value' => NULL],
             [['running_from', 'running_until'], 'date']
@@ -99,7 +98,6 @@ class Campaign extends \yii\db\ActiveRecord
             'running_until' => 'Enddatum',
             'visibility_id' => 'Sichtbarkeit',
             'availability_id' => 'Verfügbarkeit',
-            'loc_path' => 'Ort (Pfad)',
             'created_ts' => 'Angelegt am',
             'modified_ts' => 'Verändert am',
             'released_ts' => 'Freigegeben am',
@@ -128,7 +126,7 @@ class Campaign extends \yii\db\ActiveRecord
      */
     public function getOwner()
     {
-        return $this->hasOne(User::className(), ['id' => 'owner_id']);
+        return $this->hasOne(\common\models\User::className(), ['id' => 'owner_id']);
     }
 
     /**

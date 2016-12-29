@@ -29,8 +29,6 @@ use yii\bootstrap\ActiveForm;
 
         <?= $form->field($model, 'visibility_id') ?>
 
-        <?php // echo $form->field($model, 'loc_path') ?>
-
         <?php // echo $form->field($model, 'created_ts') ?>
 
         <?php // echo $form->field($model, 'modified_ts') ?>

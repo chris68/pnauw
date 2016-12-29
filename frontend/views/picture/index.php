@@ -137,7 +137,7 @@ $this->params['help'] = 'picture-index';
                 .
                     '&nbsp|&nbsp; <a href="'.Url::to(['picture/view','id'=>$model->id],true).'#disqus_thread" data-disqus-identifier="/picture/'.$model->id.'" target="_blank">Kommentar hinterlassen</a>'
                 .
-                    '&nbsp|&nbsp;'.Html::a('Kontakt aufnehmen', ['site/contact','context'=>'Bild: '.$model->id], ['target' => '_blank'])
+                    '&nbsp|&nbsp;'.Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank'])
                 .
                     "&nbsp|&nbsp; <a href=\"https://www.google.de/maps/@$model->loc_lat,$model->loc_lng,80m/data=!3m1!1e3\" target=\"_blank\">Satellitenkarte</a>"
                 .

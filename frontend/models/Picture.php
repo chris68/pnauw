@@ -19,7 +19,6 @@ use Imagick;
  * @property string $org_loc_lng
  * @property string $loc_lat
  * @property string $loc_lng
- * @property string $loc_path
  * @property string $loc_formatted_addr
  * @property integer $original_image_id
  * @property integer $small_image_id
@@ -279,7 +278,7 @@ class Picture extends \yii\db\ActiveRecord
             ['taken_override', 'date'],
             ['taken_override', 'validateTakenDate', 'skipOnEmpty' => false, 'on' => self::SCENARIO_DEFAULT],
 
-            [['name', 'description', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
+            [['name', 'description', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 
             // Only if the pic is niew you can set these attributes
             [['org_loc_lat', 'org_loc_lng',], 'double', 'when' => function ($model) {return $model->isNewRecord;}],
@@ -326,7 +325,6 @@ class Picture extends \yii\db\ActiveRecord
             'loc' => 'Aufnahmeposition',
             'loc_lat' => 'Geo-Position (Breite)',
             'loc_lng' => 'Geo-Position (Länge)',
-            'loc_path' => 'Ort (Pfad)',
             'loc_formatted_addr' => 'Ortsangabe',
             'original_image_id' => 'Original Image',
             'small_image_id' => 'Small Image',
@@ -380,7 +378,7 @@ class Picture extends \yii\db\ActiveRecord
      */
     public function getOwner()
     {
-        return $this->hasOne(User::className(), ['id' => 'owner_id']);
+        return $this->hasOne(\common\models\User::className(), ['id' => 'owner_id']);
     }
 
     /**

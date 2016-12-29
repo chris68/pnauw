@@ -29,7 +29,7 @@ class CampaignController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['show', ],
+                        'actions' => ['show', 'contact'],
                     ],
                     [
                         'allow' => true,
@@ -78,7 +78,7 @@ class CampaignController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModelOwn($id),
         ]);
     }
 
@@ -108,7 +108,7 @@ class CampaignController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModelOwn($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -134,7 +134,7 @@ class CampaignController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
-            $model = $this->findModel($id);
+            $model = $this->findModelOwn($id);
             $model->id = null;
             $model->name = $model->name.' (Kopie)';
             $model->isNewRecord = true;
@@ -152,8 +152,20 @@ class CampaignController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModelOwn($id)->delete();
         return $this->redirect(['index']);
+    }
+
+    use ContactTrait;
+    /**
+     * Displays contact page for contacting the owner of the Flyer model
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionContact($id)
+    {
+        return $this->contact($id,"Kampagne");
     }
 
     /**
@@ -171,4 +183,6 @@ class CampaignController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    use FindModelOwnTrait;
 }

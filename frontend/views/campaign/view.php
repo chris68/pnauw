@@ -48,7 +48,6 @@ $this->params['help'] = 'campaign-crud';
                 'label' => 'Sichtbarkeit',
                 'value' => $model->visibility->name,
             ],
-            /*'loc_path',*/
             'created_ts',
             'modified_ts',
             'released_ts',

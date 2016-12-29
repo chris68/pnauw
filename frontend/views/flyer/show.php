@@ -14,17 +14,16 @@ use yii\widgets\Pjax;
  * @var frontend\models\Flyer $model
  */
 
-$this->title = Html::encode($model->name);
+$this->title = 'Zettel '.Html::encode($model->secret);
 $this->params['breadcrumbs'][] = 'Zettel';
-$this->params['breadcrumbs'][] = Html::encode($model->name);
+$this->params['breadcrumbs'][] = Html::encode($model->secret);
 $this->params['help'] = 'flyer-show';
 ?>
 <div class="flyer-view">
 
     
-    <h1><?= $this->title ?></h1>
     <a href="#disqus_thread">Diskussionen</a> |
-    <?= Html::a('Kontakt aufnehmen', ['site/contact','context'=>'Zettel: '.$model->id], ['target' => '_blank']) ?> |
+    <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?>
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Zettel bearbeiten', ['flyer/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
     <?= Markdown::convert(Html::encode($model->description))?>
     

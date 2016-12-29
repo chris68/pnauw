@@ -132,21 +132,18 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionContact($context=NULL)
-// @chris68
+    public function actionContact()
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+            if ($model->sendEmail(Yii::$app->params['contactEmail'])) {
                 Yii::$app->session->setFlash('success', \Yii::t('base','Thank you for contacting us. We will respond to you as soon as possible.'));
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending email.');
+                Yii::$app->session->setFlash('error', \Yii::t('base','There was an error sending email.'));
             }
 
             return $this->refresh();
         } else {
-// @chris68
-            if ($context !== NULL) $model->subject = ' ['.$context.' -- Kontext bitte nicht löschen]';
             return $this->render('contact', [
                 'model' => $model,
             ]);

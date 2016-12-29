@@ -17,8 +17,6 @@ CREATE TABLE {{%flyer}}
   secret text not null unique,
   running_from date,
   running_until date,
-  loc_path ltree, -- not used yet
-  visibility_id text not null references {{%visibility}}(id),
   created_ts timestamp not null default current_timestamp, -- use with http://www.yiiframework.com/wiki/10/
   modified_ts timestamp not null default current_timestamp,
   released_ts timestamp,

@@ -25,11 +25,11 @@ use yii\bootstrap\ActiveForm;
 
         <?= $form->field($model, 'flyertext') ?>
 
+        <?= $form->field($model, 'secret') ?>
+
         <?= $form->field($model, 'running_from') ?>
 
         <?= $form->field($model, 'running_until') ?>
-
-        <?= $form->field($model, 'visibility_id') ?>
 
         <div class="form-group">
             <?= Html::submitButton('Suchen', ['class' => 'btn btn-primary']) ?>

@@ -20,7 +20,6 @@ class PictureSearch extends Model
     public $org_loc_lng;
     public $loc_lat;
     public $loc_lng;
-    public $loc_path;
     public $loc_formatted_addr;
     public $original_image_id;
     public $small_image_id;
@@ -71,7 +70,7 @@ class PictureSearch extends Model
                 'safe'
             ],
             [
-                ['name', 'description', 'org_loc_lat', 'org_loc_lng', 'loc_lat', 'loc_lng', 'loc_path', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix', ], 
+                ['name', 'description', 'org_loc_lat', 'org_loc_lng', 'loc_lat', 'loc_lng', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix', ], 
                 'safe'
             ],
             [
@@ -134,7 +133,6 @@ class PictureSearch extends Model
             'org_loc_lng' => 'Org Loc Lng',
             'loc_lat' => 'Breite (lat.)',
             'loc_lng' => 'Länge (long.)',
-            'loc_path' => 'Ort (Pfad)',
             'loc_formatted_addr' => 'Ortsangabe',
             'original_image_id' => 'Original Image',
             'small_image_id' => 'Small Image',

@@ -62,8 +62,6 @@ use yii\bootstrap\ActiveForm;
 
         <?= $form->field($model, 'loc_lng')->textInput() ?>
 
-        <?= $form->field($model, 'loc_path')->textInput() ?>
-
         <?= $form->field($model, 'loc_formatted_addr')->textarea(['rows' => 3]) ?>
 
         <?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>

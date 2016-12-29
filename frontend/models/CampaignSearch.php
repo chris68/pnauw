@@ -18,7 +18,6 @@ class CampaignSearch extends Model
     public $running_from;
     public $running_until;
     public $visibility_id;
-    public $loc_path;
     public $created_ts;
     public $modified_ts;
     public $released_ts;
@@ -30,7 +29,7 @@ class CampaignSearch extends Model
     {
         return [
             [['id', /*'owner_id'*/], 'integer'],
-            [['name', 'description', 'running_from', 'running_until', 'visibility_id', /*'loc_path', */ 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'safe'],
+            [['name', 'description', 'running_from', 'running_until', 'visibility_id', 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'safe'],
         ];
     }
 
@@ -47,7 +46,6 @@ class CampaignSearch extends Model
             'running_from' => 'Startdatum',
             'running_until' => 'Enddatum',
             'visibility_id' => 'Sichtbarkeit',
-            'loc_path' => 'Ort (Pfad)',
             'created_ts' => 'Angelegt am',
             'modified_ts' => 'Verändert am',
             'released_ts' => 'Freigegeben am',
@@ -89,7 +87,6 @@ class CampaignSearch extends Model
             $this->addCondition($query, 'running_from');
             $this->addCondition($query, 'running_until');
             $this->addCondition($query, 'visibility_id');
-            //$this->addCondition($query, 'loc_path', true);
             $this->addCondition($query, 'created_ts');
             $this->addCondition($query, 'modified_ts');
             $this->addCondition($query, 'released_ts');

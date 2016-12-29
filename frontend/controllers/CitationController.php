@@ -62,7 +62,7 @@ class CitationController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModelOwn($id),
         ]);
     }
 
@@ -75,7 +75,7 @@ class CitationController extends Controller
     {
         $this->layout = 'print';
         return $this->render('print', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModelOwn($id),
         ]);
     }
 
@@ -105,7 +105,7 @@ class CitationController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModelOwn($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -131,7 +131,7 @@ class CitationController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
-            $model = $this->findModel($id);
+            $model = $this->findModelOwn($id);
             $model->id = null;
             $model->name = $model->name.' (Kopie)';
             $model->isNewRecord = true;
@@ -149,7 +149,7 @@ class CitationController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModelOwn($id)->delete();
         return $this->redirect(['index']);
     }
 
@@ -168,4 +168,6 @@ class CitationController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    use FindModelOwnTrait;
 }

@@ -24,7 +24,7 @@ $this->params['help'] = 'campaign-show';
     
     <h1><?= $this->title ?></h1>
     <a href="#disqus_thread">Diskussionen</a> |
-    <?= Html::a('Kontakt aufnehmen', ['site/contact','context'=>'Kampagne: '.$model->id], ['target' => '_blank']) ?> |
+    <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?> |
     <?= Html::a('Alle Bilder zur Kampagne anschauen', PictureController::urlCampaign('index', $model->id), ['target' => '_blank']) ?>
     <?= (!yii::$app->user->isGuest?(' | '.Html::a('Meine Bilder zur Kampagne bearbeiten', PictureController::urlCampaign('manage', $model->id), ['target' => '_blank'])):'') ?>
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Kampagne bearbeiten', ['campaign/update','id'=>$model->id], ['target' => '_blank'])):'') ?>

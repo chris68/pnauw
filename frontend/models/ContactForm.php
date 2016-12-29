@@ -60,7 +60,7 @@ class ContactForm extends Model
 // @chris68
                 ->setTo([$this->email => $this->name])
                 ->setFrom([Yii::$app->params['noreplyEmail'] => Yii::$app->name . ' (robot)'])
-                ->setBcc(Yii::$app->params['contactEmail'])
+                ->setBcc($email)
                 ->setSubject($this->subject)
                 ->setTextBody($this->body)
                 ->send();

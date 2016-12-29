@@ -45,7 +45,6 @@ use frontend\helpers\Assist;
         <div class="help-block">
             Sie können bald die Kampagne auch örtlich einschränken, damit die Auswahllisten bei der Zuordnung der Bilder zu einer Kampagne über diesen Ortsbereich beschränkt werden können. Derzeit ist das jedoch leider noch nicht möglich.
         </div>
-        <?php /*$form->field($model, 'loc_path')->textInput() */ ?>
 
         </fieldset>
         <fieldset>

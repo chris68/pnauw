@@ -45,7 +45,7 @@ class Citation extends \yii\db\ActiveRecord
             'EnsureOwnership' => [
                 'class' => 'common\behaviors\EnsureOwnership',
                 'ownerAttribute' => 'owner_id',
-                'ensureOnFind' => true,
+                'ensureOnFind' => false,
             ],
         ];
     }
@@ -101,7 +101,7 @@ class Citation extends \yii\db\ActiveRecord
      */
     public function getOwner()
     {
-        return $this->hasOne(User::className(), ['id' => 'owner_id']);
+        return $this->hasOne(\common\models\User::className(), ['id' => 'owner_id']);
     }
     
     /**

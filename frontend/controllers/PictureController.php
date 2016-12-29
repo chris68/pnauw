@@ -41,7 +41,7 @@ class PictureController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','geodata','guestcreate', 'guestcapture', 'guestupload', 'view', 'massview'],
+                        'actions' => ['index','geodata','guestcreate', 'guestcapture', 'guestupload', 'view', 'massview', 'contact'],
                     ],
                     [
                         'allow' => true,
@@ -297,7 +297,7 @@ class PictureController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-                'model' => $this->findPublicModel($id),
+                'model' => $this->findModel($id),
         ]);
     }
 
@@ -363,11 +363,11 @@ class PictureController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModelOwn($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             // Reload after save to make sure that all changes triggered in the db are incorporated
-            $model = $this->findModel($id);
+            $model = $this->findModelOwn($id);
             Yii::$app->session->setFlash('success', "Änderung wurde übernommen");
         }
 
@@ -386,7 +386,7 @@ class PictureController extends Controller
      */
     public function actionDelete($id, $returl)
     {
-        $this->findModel($id)->delete();
+        $this->findModelOwn($id)->delete();
         if (strpos($returl,'/picture/massupdate') !== false) {
             return $this->redirect($returl);
         } 
@@ -404,7 +404,7 @@ class PictureController extends Controller
     {
         $this->layout = 'print';
         return $this->render('print', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModelOwn($id),
         ]);
     }
 
@@ -523,7 +523,7 @@ class PictureController extends Controller
     public function actionMassupdate()
     {
         if (Yii::$app->request->isPost && (Yii::$app->request->post('Picture') !== NULL)) {
-            $model = $this->findModel(Yii::$app->request->post('Picture')['id']); 
+            $model = $this->findModelOwn(Yii::$app->request->post('Picture')['id']);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 // Model has been saved => we can reload!
@@ -859,6 +859,18 @@ class PictureController extends Controller
         return ["picture/$action", 's[vehicle_reg_plate]' => $vehicle_reg_plate];
     }
     
+    use ContactTrait;
+    /**
+     * Displays contact page for contacting the owner of the Picture model
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionContact($id)
+    {
+        return $this->contact($id,"Bild/Vorfall");
+    }
+        
     /**
      * Finds the Picture model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -870,32 +882,13 @@ class PictureController extends Controller
     protected function findModel($id)
     {
         if (($model = Picture::findOne($id)) !== null) {
-            if (Yii::$app->user->can('isObjectOwner', array('model' => $model))) {
-                return $model;
-            } else {
-                throw new HttpException(403, \Yii::t('base', 'You are not authorized to perform this action'));
-            }
+            return $model;
         } else {
-            throw new HttpException(404, 'The requested object does not exist or has been already deleted.');
+            throw new HttpException(404, \Yii::t('The requested object does not exist or has been already deleted.'));
         }
     }
 
-    /**
-     * Finds the Picture model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * All models regardless of the ownership are found
-     * @param integer $id
-     * @return Picture the loaded model
-     * @throws HttpException if the model cannot be found
-     */
-    protected function findPublicModel($id)
-    {
-        if (($model = Picture::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new HttpException(404, 'The requested page does not exist.');
-        }
-    }
+    use FindModelOwnTrait;
 
     /**
       Enter the guest access and then return the refreshed page

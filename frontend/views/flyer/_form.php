@@ -25,7 +25,7 @@ use frontend\helpers\Assist;
             [
                 'showExport' => false,
             ])->
-            hint('Geben Sie hier eine beliebig lange Beschreibung für die Zettel an, die dann auf der Infoseite zu dem Zettels angezeigt wird. Den Text können Sie hierbei mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.')
+            hint('Geben Sie hier eine beliebig lange Beschreibung für den Zettel an, der dann auf der Infoseite zu dem Zettel angezeigt wird.<br/>Den Text können Sie hierbei mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.')
         ?>
         </fieldset>
 
@@ -35,27 +35,21 @@ use frontend\helpers\Assist;
             [
                 'showExport' => false,
             ])->
-            hint('Geben Sie hier eine kurzen Text für den Zettel selbst an, der auf den Zettel gedruckt wird. Den Text können Sie hierbei mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.')
+            hint('Geben Sie hier eine <strong>kurzen</strong> Text für den Zettel selbst an, der dann auf den Zettel gedruckt wird.<br/>Den Text können Sie hierbei mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Die Überschriftsebenen 1 und 2 sollten Sie jedoch nicht nutzen, sondern nur Ebene 3 und darunter.')
         ?>
 
-        <?= $form->field($model, 'secret')->hint('Hier können Sie den vorgenerierten Zugangscode anpassen. Dieser wird im Link erscheinen und gibt den Zugang zu dem Zettel frei') ?>
+        <?= $form->field($model, 'secret')->textInput(['style'=>'size:10','disabled' => !$model->isNewRecord])->hint('Hier können Sie bei der Anlage den vorgenerierten Zugangscode anpassen. Dieser wird im Link erscheinen und gibt den Zugang zu dem Zettel frei. In der Regel sollten Sie aber einfach den Code belassen') ?>
 
         </fieldset>
 
         <fieldset>
         <legend>Zeitrahmen</legend>
         <div class="help-block">
-            Sie können den Zettel zeitlich einschränken
+            Sie können den Zettel optional zeitlich einschränken, damit Sie selbst besser wissen, wann der Zettel aktuell ist/war.
         </div>
-        <?= $form->field($model, 'running_from')->widget(\yii\jui\DatePicker::className())->hint('Geben Sie hier optional ein Anfangsdatum an.') ?>
+        <?= $form->field($model, 'running_from')->widget(\yii\jui\DatePicker::className()) ?>
 
-        <?= $form->field($model, 'running_until')->widget(\yii\jui\DatePicker::className())->hint('Geben Sie hier optional ein Endedatum an.') ?>
-        </fieldset>
-
-        <fieldset>
-        <legend>Sichtbarkeit und Verfügbarkeit</legend>
-        <?= $form->field($model, 'visibility_id')->dropDownList(frontend\models\Visibility::dropDownList())->hint('Derzeit wird die Sichtbarkeitssteuerung noch nicht unterstützt, sondern alle Zetteln sind immer voll sichtbar.') ?>
-        <?= $form->field($model, 'availability_id')->dropDownList(['' => '', 'public' => 'Alle Nutzer dürfen die Zettel nutzen', 'trusted' => 'Alle vertrauenswürdige Nutzer dürfen die Zettel nutzen', 'private' => 'Nur ich selbst darf die Zettel nutzen'])->hint('Derzeit wird die Verfügbarkeitssteuerung noch nicht unterstützt, sondern alle Zettel können immer nur von Ihnen selbst genutzt werden.') ?>
+        <?= $form->field($model, 'running_until')->widget(\yii\jui\DatePicker::className()) ?>
         </fieldset>
 
         <div class="form-group">

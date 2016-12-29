@@ -73,7 +73,6 @@ use yii\helpers\Html;
                         'format' => 'raw',
                         'value' => nl2br(Html::encode($model->citation_affix)),
                     ],
-                    'loc_path',
                     'loc_formatted_addr',
                     [
                         'label' => 'GPS (Relevant)',

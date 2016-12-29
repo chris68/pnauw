@@ -52,11 +52,6 @@ $this->params['help'] = 'flyer-crud';
             'secret',
             'running_from',
             'running_until',
-            [
-                'label' => 'Sichtbarkeit',
-                'value' => $model->visibility->name,
-            ],
-            /*'loc_path',*/
             'created_ts',
             'modified_ts',
             'released_ts',

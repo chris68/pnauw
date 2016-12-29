@@ -16,10 +16,9 @@ class FlyerSearch extends Model
     public $name;
     public $description;
     public $flyertext;
+    public $secret;
     public $running_from;
     public $running_until;
-    public $visibility_id;
-    public $loc_path;
     public $created_ts;
     public $modified_ts;
     public $released_ts;
@@ -31,7 +30,7 @@ class FlyerSearch extends Model
     {
         return [
             [['id', /*'owner_id'*/], 'integer'],
-            [['name', 'description', 'flyertext','running_from', 'running_until', 'visibility_id', /*'loc_path', */ 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'safe'],
+            [['name', 'description', 'flyertext','running_from', 'secret', 'running_until', 'created_ts', 'modified_ts', 'released_ts', 'deleted_ts'], 'safe'],
         ];
     }
 
@@ -46,10 +45,9 @@ class FlyerSearch extends Model
             'name' => 'Name',
             'description' => 'Beschreibung',
             'flyertext' => 'Zetteltext',
+            'secret' => 'Zettelzugangscode',
             'running_from' => 'Startdatum',
             'running_until' => 'Enddatum',
-            'visibility_id' => 'Sichtbarkeit',
-            'loc_path' => 'Ort (Pfad)',
             'created_ts' => 'Angelegt am',
             'modified_ts' => 'Verändert am',
             'released_ts' => 'Freigegeben am',
@@ -89,10 +87,9 @@ class FlyerSearch extends Model
             $this->addCondition($query, 'name', true);
             $this->addCondition($query, 'description', true);
             $this->addCondition($query, 'flyertext', true);
+            $this->addCondition($query, 'secret');
             $this->addCondition($query, 'running_from');
             $this->addCondition($query, 'running_until');
-            $this->addCondition($query, 'visibility_id');
-            //$this->addCondition($query, 'loc_path', true);
             $this->addCondition($query, 'created_ts');
             $this->addCondition($query, 'modified_ts');
             $this->addCondition($query, 'released_ts');

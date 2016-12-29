@@ -18,6 +18,8 @@ use kartik\markdown\Markdown;
     }
 </style>
 <?php
+$this->title = 'Zettel '.$model->name;
+
 for ($p=0;$p<1;$p++) :
 ?>
 <div class="site-test">
