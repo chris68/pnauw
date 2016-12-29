@@ -68,6 +68,16 @@ return [
                     'pattern' => 'f/<secret>',
                     'route' => 'flyer/show',
                 ],
+                [
+                    // Short form for campaigns
+                    'pattern' => 'c/<id>',
+                    'route' => 'campaign/show',
+                ],
+                [
+                    // Short form for pictures
+                    'pattern' => 'p/<id>',
+                    'route' => 'picture/view',
+                ],
             ],
         ],
 
