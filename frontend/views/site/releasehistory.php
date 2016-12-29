@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
-        Version 2.0 (28.12.2016)
+        Version 2.0 (29.12.2016)
     </h3>
     <p>
         Riesenverbesserung der Benutzerfreundlichkeit - die Webseite hat nun ein volles App-Feeling!
@@ -21,6 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
         <li>Direktanlage der Vorfälle mit HTML5-Mitteln zur Bildübernahme direkt aus der Kamera</li>
         <li>Druckansicht eines Einzelbildes oder einer Bildauswahl, was ein direktes Drucken/Speichern als PDF auch im Gastmodus ermöglicht und womit die Unterlagen für eine Einzelanzeige sehr schnell und komplett anonym erstellt werden kann</li>
+        <li>Es gibt nur die Möglichkeit, Zettel zu herstellen, dann auszudrucken und über einen QR-Code wird dann der Autofahrer oder Fußgänger auf die Webseite geleitet, wo man dann weitere Bechreibungen hinterlegen kann</li>
+        <li>Die Mail bei einer Kontaktaufnahme zu Vorfällen/Bildern, Kampagnen und Zetteln geht nun an den Eigner des Objekts</li>
     </ul>
     <h3>
         Version 1.5 (24.-25.12.2016)

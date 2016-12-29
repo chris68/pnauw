@@ -304,12 +304,40 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         Das Verwalten von <a href='#campaign'>Kampagnen bzw. Hotspots</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Kampagnen/Hotspots sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
     </p>
+    <p>
+        Die Anlage und Nutzung von Kampagnen ist <a href="#user-level-trusted">vertrauenswürdigen Nutzern</a> vorbehalten.
+    </p>
     
     <h3><a name="campaign-show">Öffentliche Darstellung von Kampagnen &amp; Hotspots </a></h2>
     <p>
         Hier sehen Sie die öffentliche Darstellung zu <a href='#campaign'>einer Kampagne bzw. einem Hotspot</a>. Diese Inhalte wurden von einem Nutzer eingestellt, um klarer zu dokumentieren, warum er sich konkret an dem Gehwegparken stört und was er eventuell gedenkt, dagegen zu unternehmen.
     </p>
     
+    <h2><a name="flyer">Zettel</a></h2>
+    <p>
+        Das Konzept eines Zettels ist zweigeteilt: es gibt erstens den echten Zettel, den man ausgedruckt hat und in der Regel an den Scheibenwischer des Autos hängt. Auf dem Zettel
+        ist dann eine kleine Nachricht, aber vor allen ein QR-Code und Link auf die Webplattform.
+    </p>
+    <p>
+        Dort stehen dann noch weitere Inhalte, die auch sehr ausführlich sein können. Damit kann man mit den Finder des Zettels in Kontakt treten und über die objektbezogene
+        Kontaktmöglichkeit kann er mit dem Ersteller des Zettels in Kontakt treten. Zudem bestehen auch hier natürlich die üblichen Diskussionsmöglichkeiten.
+    </p>
+    <p>
+        Ein Zettel ist damit so etwas wie der kleine Bruder einer <a href='#campaign'>Kampagne</a>. Denn eigentlich es schon eher so, dass die Kampagne für größere Ziele ist und der Zettel das Mittel ist, um
+        auf die Kampagne hinzuweisen. Man kann beispielsweise auch über die Kurzlinks (z.B. https://parke-nicht-auf-unseren-wegen.de/c/1526) auf eine Kampagnen verweisen. Man kann aber Zettel auch ganz ohne
+        Kampagnen nutzen und für neue Nutzer geht es ja auch gar nicht anders, weil Zettel immer freigeschaltet sind und Kamapgnen erst für <a href="#user-level-trusted">vertrauenswürdiger Nutzer</a>.
+    </p>
+
+    <h3><a name="flyer-crud">Verwalten von Zetteln </a></h2>
+    <p>
+        Das Verwalten von <a href='#flyer'>Zetteln</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Zettel sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
+    </p>
+
+    <h3><a name="campaign-show">Öffentliche Darstellung von Zetteln </a></h2>
+    <p>
+        Hier sehen Sie die öffentliche Darstellung zu einem <a href='#flyer'>Zettel</a>. Diese Inhalte wurden von einem Nutzer eingestellt, um über den Zettel hinaus mit dem Finder des Zettels in Kontakt zu treten und ihm irgendwelche Informationen zu übermitteln.
+    </p>
+
     <h2><a name="citation">Anzeigen &amp; Beschwerden</a></h2>
     <p>
         Anzeigen bzw. Beschwerden sind wahrscheinlich die einzigen Möglichkeiten, die Sie haben, wenn eine <a href='#campaign'>Kampagne</a> alleine nicht ausreichend Wirkung zeigt.
