@@ -116,6 +116,7 @@ AppAsset::register($this);
                     'label' => 'Verwalten', 
                     'visible' => !Yii::$app->user->isGuest,
                     'items' => [
+                        ['label' => 'Zettel', 'url' => ['/flyer/index']],
                         ['label' => 'Kampagnen', 'url' => ['/campaign/index'], 'visible' => Yii::$app->user->can('trusted')],
                         ['label' => 'Anzeigen', 'url' => ['/citation/index']],
                         '<li class="divider"></li>',

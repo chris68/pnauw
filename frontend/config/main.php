@@ -63,6 +63,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    // Short form for flyers
+                    'pattern' => 'f/<secret>',
+                    'route' => 'flyer/show',
+                ],
             ],
         ],
 

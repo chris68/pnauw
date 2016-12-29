@@ -19,7 +19,8 @@
 
 		"yiisoft/yii2-jui": "*",
 		"kartik-v/yii2-markdown": "*",
-		"yiisoft/yii2-authclient": "*"
+		"yiisoft/yii2-authclient": "*",
+		"2amigos/yii2-qrcode-helper": "~1.0"
 	},
 	"require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
