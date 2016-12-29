@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <legend>Derzeitige Werte</legend>
                 <p>Nutzername: <?= $model->getUser()->username ?></p>
                 <p>Email: <?= $model->getUser()->email ?> </p>
+                <p>Status: <?= $model->getUser()->status ?> </p>
                 </fieldset>
                 <fieldset>
                 <legend>Neue Werte</legend>
