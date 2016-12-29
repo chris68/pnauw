@@ -28,7 +28,7 @@ class VehicleIncidentHistory extends \yii\base\Widget
         parent::init();
 
         if (!empty($this->picture->vehicle_reg_plate)) {
-            $count = Picture::find()->where(['vehicle_reg_plate' => $this->picture->vehicle_reg_plate])->count();
+            $count = Picture::find()->where(['vehicle_reg_plate' => $this->picture->vehicle_reg_plate])->ownerScope()->count();
 
             if ($count > 3) {
                 $content = 'Bereits <b style="color:red">'.$count.' Vorfälle</b>';
