@@ -131,6 +131,20 @@ $requirements = array(
     ),
 // @chris68
     // Pnauw specific
+    array(
+        'name' => 'GD extension',
+        'mandatory' => true,
+        'condition' => (extension_loaded('gd')),
+        'by' => 'QR Codes',
+        'memo' => 'Install via sudo apt-get install php5-gd',
+    ),
+    array(
+        'name' => 'Imagick extension',
+        'mandatory' => true,
+        'condition' => (extension_loaded('imagick')),
+        'by' => 'Pictures',
+        'memo' => 'Install via sudo apt-get install php5-imagick',
+    ),
     'phpFileUploadAllowed' => array(
         'name' => 'PHP file upload allowed',
         'mandatory' => true,

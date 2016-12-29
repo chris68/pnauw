@@ -27,7 +27,6 @@ $this->params['help'] = 'flyer-show';
     <?= Html::a('Kontakt aufnehmen', ['site/contact','context'=>'Zettel: '.$model->id], ['target' => '_blank']) ?> |
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Zettel bearbeiten', ['flyer/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
     <?= Markdown::convert(Html::encode($model->description))?>
-    <img src="<?= Url::to(['qrcode','id'=>$model->id])?>" style="float: left; margin-right: 10px" /> <br>Weitere Infos über Einscannen des QR-Codes oder manuelles Aufrufen des Links unten
     
 </div>
 
