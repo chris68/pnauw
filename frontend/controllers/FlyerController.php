@@ -190,7 +190,7 @@ class FlyerController extends Controller
      */
     public function actionContact($id)
     {
-        return $this->contact($id,"Bild/Vorfall");
+        return $this->contact($id,"Zettel");
     }
 
     /**
