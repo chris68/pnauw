@@ -139,6 +139,7 @@ class FlyerController extends Controller
             $model = $this->findModelOwn($id);
             $model->id = null;
             $model->name = $model->name.' (Kopie)';
+            $model->secret = Yii::$app->security->generateRandomString(4);
             $model->isNewRecord = true;
         }
         return $this->render('create', [
