@@ -265,7 +265,7 @@ class PictureSearch extends Model
                 $query->andWhere(['in',$attribute,'']);
         } else {
             if ($partialMatch) {
-                $query->andWhere(['like', $attribute, $value]);
+                $query->andWhere(['SIMILAR TO', $attribute, $value]);
             } else {
                 $query->andWhere([$attribute => $value]);
             }

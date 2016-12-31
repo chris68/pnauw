@@ -108,7 +108,7 @@ class FlyerSearch extends Model
         $this->filter_count++;
         
         if ($partialMatch) {
-            $query->andWhere(['like', $attribute, $value]);
+            $query->andWhere(['SIMILAR TO', $attribute, $value]);
         } else {
             $query->andWhere([$attribute => $value]);
         }
