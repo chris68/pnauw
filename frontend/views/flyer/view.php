@@ -50,6 +50,7 @@ $this->params['help'] = 'flyer-crud';
             'secret',
             'running_from',
             'running_until',
+            'loc_filter',
             'created_ts',
             'modified_ts',
             'released_ts',

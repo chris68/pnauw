@@ -43,13 +43,27 @@ use frontend\helpers\Assist;
         </fieldset>
 
         <fieldset>
-        <legend>Zeitrahmen</legend>
+        <legend>Zeitliche Einschränkung</legend>
         <div class="help-block">
-            Sie können den Zettel optional zeitlich einschränken, damit Sie selbst besser wissen, wann der Zettel aktuell ist/war.
+            Sie können den Zettel optional zeitlich einschränken, indem Sie ein Start- und Enddatum definieren, mit denen das Vorfallsdatum bei der Ermittlung der Verfälle eingeschrämkt wird.
         </div>
-        <?= $form->field($model, 'running_from')->widget(\yii\jui\DatePicker::className()) ?>
+        <?= $form->field($model, 'running_from')->widget(\yii\jui\DatePicker::className())->hint('Geben Sie hier das Datum ein, an dem Sie angefangen haben, den Zettel zu verteilen') ?>
 
-        <?= $form->field($model, 'running_until')->widget(\yii\jui\DatePicker::className()) ?>
+        <?= $form->field($model, 'running_until')->widget(\yii\jui\DatePicker::className())->hint('Geben Sie hier das Datum ein, an dem Sie aufgehört haben, den Zettel zu verteilen') ?>
+        </fieldset>
+
+        <fieldset>
+        <legend>Örtliche Einschränkung</legend>
+        <div class="help-block">
+            Sie können den Zettel optional örtlich einschränken, indem Sie einen Suchausdruck definieren, mit dem in der Ortsangabe bei der Ermittlung der Verfälle gesucht werden soll.
+        </div>
+        <?= $form->field($model, 'loc_filter')->textInput()->hint('Geben Sie hier den Suchausdruck für den Ort ein, wobei das % hierbei für beliebig viele Zeichen steht, das | Alternativen trennt und Teilausdücke geklammert werden. Die Sonderzeichen <b>*+?{}</b> sind hingegen verboten. Bei der Suche ist die Unterscheidung zwischen Groß- und Kleinschreibung wichtig.')?>
+        <div class="alert alert-info">
+            <strong>Beispiele</strong><br/>
+            <i>%(70173|70174)%Stuttgart%</i> findet zwei Postleitzahlen in Stuttgart<br/>
+            <i>(Bolz|Stephan|König)%70173%Stuttgart%</i> findet die drei entsprechenden Straßen in Stuttgart Mitte
+
+        </div>
         </fieldset>
 
         <div class="form-group">

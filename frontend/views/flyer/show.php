@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
 use frontend\controllers\PictureController;
+use frontend\models\PictureSearch;
 use Imagick;
 use ImagickDraw;
 use yii\widgets\Pjax;
@@ -22,7 +23,52 @@ $this->params['help'] = 'flyer-show';
     
     <a href="#disqus_thread">Diskussionen</a>
     | <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?>
+    <?= (!empty($model->running_from)&&!empty($model->loc_filter))?' | '.Html::a('Alle Vorfälle zum Zettel anschauen', ['picture/index', 's[time_range]' => $model->running_from.';'.$model->running_until, 's[loc_formatted_addr]' => $model->loc_filter, 's[map_bind]' => '1'], ['target' => '_blank']):'' ?>
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Zettel bearbeiten', ['flyer/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
+    <?php
+        if ((!empty($model->running_from)&&!empty($model->loc_filter))) {
+            $stack = new Imagick();
+            /* var $pic frontend\models\Picture */
+            $searchModel = new PictureSearch(['scenario' => 'public']);
+            $searchModel->loc_formatted_addr = $model->loc_filter;
+            $searchModel->time_range = $model->running_from.';'.$model->running_until;
+            $dataProvider = $searchModel->search(NULL);
+            $dataProvider->query->andWhere(['is not','blurred_thumbnail_image_id',NULL]);
+            $dataProvider->query->limit(9);
+
+            $dataProvider->query->orderBy(['random()' => SORT_DESC,]);
+
+            $stack_count = 0;
+            foreach ($dataProvider->getModels() as $pic) {
+                $thumb = new Imagick();
+                if (isset($pic->blurredThumbnailImage)) {
+                    $imageBlob = hex2bin(stream_get_contents($pic->blurredThumbnailImage->rawdata, -1, 0));
+                    $thumb->readImageBlob($imageBlob);
+                    $stack->addImage($thumb); ++$stack_count;
+                }
+            }
+            if ($stack_count > 0) {
+                $montage = $stack->montageImage(new ImagickDraw(), '3x3', '', 0, '0');
+                $montage->setImageFormat('jpg');
+                
+                $montage_options = array();
+                $montage_options['src'] = 'data:image/jpg;base64,' . base64_encode($montage->getImageBlob());
+                $montage_options['alt'] = 'Vorfälle zum Zettel';
+    ?>
+    <?php Pjax::begin(['id' => 'samplepics', 'enablePushState' => false, 'timeout' => 10000, ]); ?>
+
+    <div style="margin-top: 10px">
+    <?= \yii\helpers\Html::tag('img','',$montage_options) ?>
+    </div>
+    <div style="margin-top: 5px">
+    <?= Html::a('Andere Zufallsbilder generieren', '') ?>
+    </div>
+    <?php Pjax::end(); ?>
+    <?php
+            } 
+        }
+    ?>
+
     <?= Markdown::convert(Html::encode($model->description))?>
     
 </div>

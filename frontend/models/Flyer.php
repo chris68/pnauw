@@ -62,7 +62,10 @@ class Flyer extends \yii\db\ActiveRecord
             [['name', 'description', 'flyertext', 'secret', ], 'string'],
             [['secret', ], 'unique'],
             [['running_from', 'running_until'], 'default', 'value' => NULL],
-            [['running_from', 'running_until'], 'date']
+            [['running_from', 'running_until'], 'date'],
+            [['loc_filter',], 'default', 'value' => NULL],
+            [['loc_filter'], 'string'],
+            [['loc_filter'], 'match', 'pattern' => '/^[^*+?{}]*$/'],
         ];
     }
 
@@ -80,6 +83,7 @@ class Flyer extends \yii\db\ActiveRecord
             'secret' => 'Zettelzugangscode',
             'running_from' => 'Startdatum',
             'running_until' => 'Enddatum',
+            'loc_filter' => 'Ortsfilter',
             'created_ts' => 'Angelegt am',
             'modified_ts' => 'Verändert am',
             'released_ts' => 'Freigegeben am',
