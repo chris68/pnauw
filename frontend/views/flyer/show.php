@@ -9,11 +9,9 @@ use Imagick;
 use ImagickDraw;
 use yii\widgets\Pjax;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Flyer $model
- */
-
+ /* @var $this yii\web\View */
+ /* @var $model frontend\models\Flyer */
+ 
 $this->title = 'Zettel '.Html::encode($model->secret);
 $this->params['breadcrumbs'][] = 'Zettel';
 $this->params['breadcrumbs'][] = Html::encode($model->secret);
@@ -22,8 +20,8 @@ $this->params['help'] = 'flyer-show';
 <div class="flyer-view">
 
     
-    <a href="#disqus_thread">Diskussionen</a> |
-    <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?>
+    <a href="#disqus_thread">Diskussionen</a>
+    | <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?>
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Zettel bearbeiten', ['flyer/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
     <?= Markdown::convert(Html::encode($model->description))?>
     
@@ -34,8 +32,8 @@ $this->params['help'] = 'flyer-show';
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'pnauw';
-    var disqus_identifier = '/flyer/<?= $model->id ?>';
-    var disqus_url = '<?= Url::to(['flyer/show','id'=> $model->id],true)?>';
+    var disqus_identifier = '/flyer/<?= $model->secret ?>';
+    var disqus_url = '<?= Url::to(['flyer/show','secret'=> $model->secret],true)?>';
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
