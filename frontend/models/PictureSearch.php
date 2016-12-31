@@ -293,16 +293,19 @@ class PictureSearch extends Model
                 break;
             case 'TIMERANGE':
                 $range = explode(';',$value);
-                if ((substr_count($range[0], '-') == 2) && (substr_count($range[1], '-') == 2)) {
-                    $low = date_format(date_create($range[0]),'Y-m-d');
-                    $high = date_format(date_create($range[1]),'Y-m-d');
+                if (((substr_count($range[0], '-') == 2) || empty($range[0])) && ((substr_count($range[1], '-') == 2) || empty($range[1]))) {
+                    // If either side contains a date in the ISO format or is empty
+
+                    // If empty then take a very low/high date
+                    $low = date_format(date_create(empty($range[0])?'1970-01-01':$range[0]),'Y-m-d');
+                    $high = date_format(date_create(empty($range[1])?'9999-01-01':$range[1]),'Y-m-d');
                     // absolute date; absolute date
                     $query->andWhere('date({{%picture}}.'.$params['attr'].') >= \''.$low.'\'');
                     $query->andWhere('date({{%picture}}.'.$params['attr'].') <= \''.$high.'\'');
                 } 
                 else {
-                    $low = (int)$range[0];
-                    $high = (int)$range[1];
+                    $low = (int)empty($range[0])?'1970':$range[0];
+                    $high = (int)empty($range[1])?'9999':$range[1];
                     if ($low > 0 || $high > 0) {
                         // year;year
                         $query->andWhere('extract( isoyear from {{%picture}}.'.$params['attr'].') between '.$low.' and '.$high);
