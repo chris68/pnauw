@@ -33,6 +33,7 @@ $this->params['help'] = 'flyer-show';
             $searchModel->loc_formatted_addr = $model->loc_filter;
             $searchModel->time_range = $model->running_from.';'.$model->running_until;
             $dataProvider = $searchModel->search(NULL);
+            $dataProvider->query->publicScope();
             $dataProvider->query->andWhere(['is not','blurred_thumbnail_image_id',NULL]);
             $dataProvider->query->limit(9);
 

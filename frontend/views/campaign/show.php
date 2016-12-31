@@ -29,7 +29,7 @@ $this->params['help'] = 'campaign-show';
     <?php
         $stack = new Imagick();
         /* var $pic frontend\models\Picture */
-        foreach ($model->getPictures()->andWhere(['is not','blurred_thumbnail_image_id',NULL])->orderBy(['random()' => SORT_ASC, ])->limit(20)->all() as $pic) {
+        foreach ($model->getPictures()->publicScope()->andWhere(['is not','blurred_thumbnail_image_id',NULL])->orderBy(['random()' => SORT_ASC, ])->limit(20)->all() as $pic) {
             $thumb = new Imagick();
             if (isset($pic->blurredThumbnailImage)) {
               $imageBlob = hex2bin(stream_get_contents($pic->blurredThumbnailImage->rawdata, -1, 0));
