@@ -2,10 +2,10 @@
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Citation $model
- */
+
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Citation */
+
 
 $this->title = 'Anzeige bearbeiten: ' . Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];

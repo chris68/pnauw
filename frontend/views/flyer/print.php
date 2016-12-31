@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var frontend\models\Flyer $model */
+/* @var $model frontend\models\Flyer */
 
 use yii\helpers\Html;
 use yii\helpers\Url;

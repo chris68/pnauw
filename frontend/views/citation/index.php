@@ -4,11 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
 
-/**
- * @var yii\web\View $this
- * @var yii\data\ActiveDataProvider $dataProvider
- * @var frontend\models\CitationSearch $searchModel
- */
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $searchModel frontend\models\CitationSearch */
 
 $this->title = 'Anzeigen';
 $this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];

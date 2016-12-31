@@ -5,10 +5,8 @@ use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
 use frontend\controllers\PictureController;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Flyer $model
- */
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Flyer */
 
 $this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Zettel', 'url' => ['index']];

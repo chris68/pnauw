@@ -9,10 +9,8 @@ use Imagick;
 use ImagickDraw;
 use yii\widgets\Pjax;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Campaign $model
- */
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Campaign */
 
 $this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = 'Kampagne';

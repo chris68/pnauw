@@ -3,10 +3,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use frontend\assets\AppAsset;
 
-/**
- * @var \yii\web\View $this
- * @var string $content
- */
+/* @var $this \yii\web\View */
+/* @var $content string */
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

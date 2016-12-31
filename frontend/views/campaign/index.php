@@ -4,12 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\bootstrap\Collapse;
 
-/**
- * @var yii\web\View $this
- * @var yii\data\ActiveDataProvider $dataProvider
- * @var frontend\models\CampaignSearch $searchModel
- */
-
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $searchModel frontend\models\CampaignSearch */
+ 
 $this->title = 'Kampagnen';
 $this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 $this->params['help'] = 'campaign-crud';

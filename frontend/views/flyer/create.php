@@ -2,10 +2,8 @@
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Flyer $model
- */
+/* @var $this yii\web\View */
+/* @var $model frontend\models\Flyer */
 
 $this->title = 'Zettel anlegen';
 $this->params['breadcrumbs'][] = ['label' => 'Zettel', 'url' => ['index']];

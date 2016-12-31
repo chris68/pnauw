@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\FlyerSearch $model
- * @var yii\bootstrap\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model frontend\models\FlyerSearch  */
+/* @var $form yii\bootstrap\ActiveForm */
 ?>
 
 <div class="flyer-search">

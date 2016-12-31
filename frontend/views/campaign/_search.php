@@ -3,11 +3,10 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\CampaignSearch $model
- * @var yii\bootstrap\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model frontend\models\CampaignSearch */
+/* @var $form yii\bootstrap\ActiveForm */
+ 
 ?>
 
 <div class="campaign-search">

@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\CitationSearch $model
- * @var yii\bootstrap\ActiveForm $form
- */
+/* @var $this yii\web\View */
+/* @var $model frontend\models\CitationSearch */
+/* @var $form yii\bootstrap\ActiveForm */
 ?>
 
 <div class="citation-search">

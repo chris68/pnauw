@@ -2,11 +2,9 @@
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var frontend\models\Campaign $model
- */
-
+/* $this @var yii\web\View */
+/* $model @var frontend\models\Campaign */
+ 
 $this->title = 'Kampagne anlegen';
 $this->params['breadcrumbs'][] = ['label' => 'Kampagnen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
