@@ -23,7 +23,7 @@ class PictureController extends Controller
         where
             role = 11 and
             not exists (select 1 from tbl_picture p where p.owner_id = u.id) and
-            created_time <= current_date - interval '5' day
+            create_time <= current_date - interval '5' day
 SQL
         );
 
