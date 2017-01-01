@@ -83,23 +83,27 @@ $this->params['help'] = 'picture-index';
                 .
                     '</p><p>'
                 .
+                       frontend\widgets\ImageRenderer::widget(
+                            [
+                                'image' => $model->blurredThumbnailImage,
+                                'size' => 'thumbnail',
+                                'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:10px'],
+                            ]
+                        )
+                .
+                    '</p><p>'
+                .
                     '<i>(Der Vorfall wurde vor über einem Jahr dokumentiert und daher werden hierzu keine Details mehr veröffentlicht)</i>'
                 .
                     '</p><p>'
                 .
                     (!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
                 .
-                    '</p>'
-                .
-                    '<p>'
-                .
                     '</p><p>'
                 .
                     ((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')
                 .
                     '</p>'
-                .
-                    '<p></p>'
                 .
                     '<hr>'
                 .
@@ -119,17 +123,17 @@ $this->params['help'] = 'picture-index';
                 .
                     Html::encode($model->name)
                 .
-                    '</b></p>'
+                    '</b></p><p>'
                 .
                     nl2br(Html::encode($model->description))
                 .
-                    '</p>'
+                    '</p><p>'
                 .
                         frontend\widgets\ImageRenderer::widget(
                             [
                                 'image' => $model->blurredSmallImage,
                                 'size' => 'small',
-                                'options' => ['class' => 'img-responsive', 'style' => 'min-width:80%; margin-bottom:10px'],
+                                'options' => ['class' => 'img-responsive', 'style' => 'margin-bottom:10px'],
                             ]
                         )
                 .
@@ -143,13 +147,11 @@ $this->params['help'] = 'picture-index';
                 .
                     ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Bearbeiten', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')
                 .
-                    '<p>'
+                    '</p><p>'
                 .
                     (!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
                 .
-                    '</p>'
-                .
-                    '<p>'
+                    '</p><p>'
                 .
                     (($model->incident_id != -1)?('<b>'.Html::encode($model->incident->name).'</b>'):'<i>Der Vorfall wurde leider nicht klassifiziert</i>')
                 .
@@ -157,15 +159,13 @@ $this->params['help'] = 'picture-index';
                 .
                         'Vorfall am <b>'.date_format(date_create($model->taken),'d.m.Y').'</b>'
                 .
-                    '<p>'
+                    '</p><p>'
                 .
                     (($model->action_id != -1)?('<b>Maßnahme:</b> '.Html::encode($model->action->name)):'')
                 .
                     '</p><p>'
                 .
                     ((isset($model->campaign_id))?('<b>Kampagne:</b> '.Html::a(Html::encode($model->campaign->name),['campaign/show','id' => $model->campaign_id], ['target' => '_blank'] )):'')
-                .
-                    '</p><p>'
                 .
                     '</p>'
                 .
