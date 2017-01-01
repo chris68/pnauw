@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Druckansicht eines Einzelbildes oder einer Bildauswahl, was ein direktes Drucken/Speichern als PDF auch im Gastmodus ermöglicht und womit die Unterlagen für eine Einzelanzeige sehr schnell und komplett anonym erstellt werden kann</li>
         <li>Es gibt nur die Möglichkeit, Zettel zu herstellen, dann auszudrucken und über einen QR-Code wird dann der Autofahrer oder Fußgänger auf die Webseite geleitet, wo man dann weitere Bechreibungen hinterlegen kann</li>
         <li>Die Mail bei einer Kontaktaufnahme zu Vorfällen/Bildern, Kampagnen und Zetteln geht nun an den Eigner des Objekts</li>
+        <li>Bei alten Vorfällen werden nun automatisch die Bilder weiter verkleinert und zudem wird die Veröffentlichung irgendwann automatisch zurückgesetzt</li>
     </ul>
     <h3>
         Version 1.5 (24.-25.12.2016)

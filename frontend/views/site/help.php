@@ -380,6 +380,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         Was jedoch bleibt sind die roten Punkte in der Übersichtskarte, denn für eine historische Betrachtung von Kampagnen (und deren Erfolg oder Misserfolg) sind diese Informationen zu wertvoll.
     </p>
+    <p>
+        Nach einem Jahr werden die großen und mittleren Formate der Bilder gelöscht, nach drei Jahren auch die kleinen und es bleibem dann nur noch die Thumnails. Zudem wird nach drei Jahren ohne Änderungen
+        die Veröffentlichung wieder zurückgesetzt. Man kann dies jedoch auch wieder anpassen, wenn man es will, und dann bleiben die Bilder (in diesem Fall wegen der Löschung natürlich nur die Thumbnails!) wieder drei Jahre öffentlich.
+    </p>
     <h3><a name="markdown-syntax">Markdown Syntax</a></h3>
     <p>
         Bei Webapplikationen will man seine eingestellten Inhalte möglichst schön formatieren. Hier kann man mit HTML zwar alles machen, aber HTML ist meist zu kompliziert und es wäre zudem gefährlich, den Nutzer HTML direkt ein-/ausgeben zu lassen
