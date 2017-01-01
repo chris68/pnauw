@@ -34,6 +34,7 @@ SQL
 
     /**
      * Hide all pics not modified since the last 3 years
+     * Consolidate the larger formats to smaller ones (to small 1 year and to thumbnail 3 years after creation)
      */
     public function actionPurgePictures()
     {
