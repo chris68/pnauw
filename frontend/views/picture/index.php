@@ -87,7 +87,7 @@ $this->params['help'] = 'picture-index';
                 .
                     '</p><p>'
                 .
-                    (!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
+                    (!trim($model->loc_formatted_addr)==''?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
                 .
                     '</p>'
                 .
@@ -145,7 +145,7 @@ $this->params['help'] = 'picture-index';
                 .
                     '<p>'
                 .
-                    (!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
+                    (!trim($model->loc_formatted_addr)==''?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')
                 .
                     '</p>'
                 .

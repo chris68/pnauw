@@ -119,7 +119,7 @@ class PictureController extends Controller
         }
 
         // Retrieve the center of the current map bounds
-        if (!empty($searchModel->map_bounds)) {
+        if (!trim($searchModel->map_bounds)=='') {
             $corners = explode(',',$searchModel->map_bounds); // Format: "lng_lo,lat_lo,lng_hi,lat_hi"
             $lat = ((float)$corners[1]+(float)$corners[3])/2;
             $lng = ((float)$corners[0]+(float)$corners[2])/2;
@@ -329,7 +329,7 @@ class PictureController extends Controller
         }
 
         if ($post_request && $model->validate()) {
-            if (!empty($model->image_dataurl)) {
+            if (!trim($model->image_dataurl)=='') {
                 $img = str_replace('data:image/jpeg;base64,', '', $model->image_dataurl);
                 $blob = base64_decode($img);
             } else {

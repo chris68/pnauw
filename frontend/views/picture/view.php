@@ -52,7 +52,7 @@ $this->params['help'] = 'picture-view';
                 ]);
             ?>
             <a href="https://www.google.de/maps/@<?=$model->loc_lat?>,<?=$model->loc_lng?>,80m/data=!3m1!1e3" target="_blank">Satellitenkarte</a>
-            <p><?=(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')?></p>
+            <p><?=(!trim($model->loc_formatted_addr)==''?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')?></p>
         </div>
         <a name="disqus_thread"></a><div class="col-sm-4 col-md-4 col-lg-4">
             <div id="disqus_thread"></div>

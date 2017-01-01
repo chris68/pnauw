@@ -14,7 +14,7 @@ trait ContactTrait {
     {
         $model = new ContactForm();
         $owner = $this->findModel($id)->owner;
-        if (empty($owner->email)) {
+        if (trim($owner->email)=='') {
             Yii::$app->session->setFlash('info',"Das entsprechende Objekt ($object) wurde anonym angelegt. Daher ginge die Mail nur an den Betreiber der Webseite");
             $bcc = Yii::$app->params['contactEmail'];
         } else {

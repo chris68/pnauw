@@ -296,8 +296,8 @@ class PictureSearch extends Model
                 if (((substr_count($range[0], '-') == 2) || trim($range[0])=='') && ((substr_count($range[1], '-') == 2) || trim($range[1])=='')) {
                     // If either side contains a date in the ISO format or is empty
                     // If empty then take a very low/high date
-                    $low = date_format(date_create(empty($range[0])?'1970-01-01':$range[0]),'Y-m-d');
-                    $high = date_format(date_create(empty($range[1])?'9999-01-01':$range[1]),'Y-m-d');
+                    $low = date_format(date_create(trim($range[0])==''?'1970-01-01':$range[0]),'Y-m-d');
+                    $high = date_format(date_create(trim($range[1])==''?'9999-01-01':$range[1]),'Y-m-d');
                     // absolute date; absolute date
                     $query->andWhere('date({{%picture}}.'.$params['attr'].') >= \''.$low.'\'');
                     $query->andWhere('date({{%picture}}.'.$params['attr'].') <= \''.$high.'\'');
