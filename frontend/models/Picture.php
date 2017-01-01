@@ -215,7 +215,7 @@ class Picture extends \yii\db\ActiveRecord
      */
     public function validateTakenDate($attribute, $params)
     {
-        if ($this->taken=='1970-01-01 00:00:00' && trim($this->taken_override)=='')
+        if ($this->taken=='1970-01-01 00:00:00' && empty($this->taken_override))
             $this->addError('taken_override', "Sie müssen das Datum des Vorfalls setzen.");
     }
 
@@ -224,7 +224,7 @@ class Picture extends \yii\db\ActiveRecord
      */
     public function validateVehiclePlateConsistency($attribute, $params)
     {
-        if (!trim($this->vehicle_reg_plate)=='' and $this->vehicle_country_code=='?')
+        if (!empty($this->vehicle_reg_plate) and $this->vehicle_country_code=='?')
             $this->addError('vehicle_country_code', 'Das Land des eingetragenen Kfz-Kennzeichens muss angegeben werden.');
     }
 
@@ -355,7 +355,7 @@ class Picture extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            if (!trim($this->taken_override)=='') {
+            if (!empty($this->taken_override)) {
                 $this->taken = $this->taken_override;
             }
 
@@ -514,8 +514,8 @@ class Picture extends \yii\db\ActiveRecord
             \Yii::$app->user->can('moderator')
             )
         ) {
-            $this->name = trim($this->name)==''?'':'[Der Titel wurde leider noch nicht von einem Moderator freigebeben]';
-            $this->description = trim($this->description)==''?'':'[Die Beschreibung leider noch nicht von Moderator freigebeben]';
+            $this->name = empty($this->name)?'':'[Der Titel wurde leider noch nicht von einem Moderator freigebeben]';
+            $this->description = empty($this->description)?'':'[Die Beschreibung leider noch nicht von Moderator freigebeben]';
             $this->original_image_id = null;
             $this->small_image_id = null;
             $this->medium_image_id = null;
