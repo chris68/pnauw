@@ -6,7 +6,7 @@ use yii\console\Controller;
 use yii\helpers\Console;
 
 /**
- * Some internal commands to manage the pictures
+ * Some internal commands to manage the pictures and users
  */
 class PictureController extends Controller
 {
