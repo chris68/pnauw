@@ -30,11 +30,11 @@ class FlyerController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['show','contact' ],
+                        'actions' => ['show','contact', 'print', 'qrcode' ],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'copy', 'delete', 'print', 'qrcode'],
+                        'actions' => ['index', 'view', 'create', 'update', 'copy', 'delete',],
                         'roles' => ['@'],
                     ],
                 ],
@@ -171,14 +171,14 @@ class FlyerController extends Controller
 
     /**
      * Prints an existing Flyer model
-     * @param integer $id
+     * @param string $secret
      * @return mixed
      */
-    public function actionPrint($id)
+    public function actionPrint($secret)
     {
         $this->layout = 'print';
         return $this->render('print', [
-            'model' => $this->findModelOwn($id),
+            'model' => $this->findModelBySecret($secret),
         ]);
     }
 

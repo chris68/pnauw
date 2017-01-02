@@ -29,7 +29,7 @@ $this->params['help'] = 'flyer-crud';
     
     <?= Html::a('Öffentliche Zetteldarstellung zeigen',['flyer/show','secret' => $model->secret], ['target' => '_blank'] ) ?>
     |
-    <?= Html::a('Zettel drucken',['flyer/print','id' => $model->id], ['target' => '_blank'] ) ?>
+    <?= Html::a('Zettel drucken',['flyer/print','secret' => $model->secret], ['target' => '_blank'] ) ?>
     
 
     <?php echo DetailView::widget([

@@ -22,9 +22,7 @@ $this->params['help'] = 'flyer-show';
 
     
     <a href="#disqus_thread">Diskussionen</a>
-    | <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?>
-    <?= (!empty($model->running_from)&&!empty($model->loc_filter))?' | '.Html::a('Alle Vorfälle zum Zettel anschauen', ['picture/index', 's[time_range]' => $model->running_from.';'.$model->running_until, 's[loc_formatted_addr]' => $model->loc_filter, 's[map_bind]' => '1'], ['target' => '_blank']):'' ?>
-    <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Zettel bearbeiten', ['flyer/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
+
     <?php
         if ((!empty($model->running_from)&&!empty($model->loc_filter))) {
             $stack = new Imagick();
@@ -72,6 +70,12 @@ $this->params['help'] = 'flyer-show';
 
     <?= Markdown::convert(Html::encode($model->description))?>
     
+    <div style="margin-top: 5px">
+    <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?>
+    <?= (!empty($model->running_from)&&!empty($model->loc_filter))?' | '.Html::a('Alle Vorfälle zum Zettel anschauen', ['picture/index', 's[time_range]' => $model->running_from.';'.$model->running_until, 's[loc_formatted_addr]' => $model->loc_filter, 's[map_bind]' => '1'], ['target' => '_blank']):'' ?>
+    <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Zettel bearbeiten', ['flyer/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
+    | <?= Html::a('Zettel drucken',['flyer/print','secret' => $model->secret], ['target' => '_blank'] ) ?>
+    </div>
 </div>
 
 <h2><a name="disqus_thread">Diskussionen zum Zettel</a></h2>
