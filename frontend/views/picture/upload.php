@@ -6,9 +6,9 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Collapse;
 
-$this->title = 'Bilder hochladen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->title = 'Bilder hochladen'.(Yii::$app->user->can('anonymous')?' (Anonym)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
-$this->params['breadcrumbs'][] = 'Hochladen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->params['breadcrumbs'][] = 'Hochladen'.(Yii::$app->user->can('anonymous')?' (Anonym)':'');
 $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestupload':'picture-upload';
 ?>
 

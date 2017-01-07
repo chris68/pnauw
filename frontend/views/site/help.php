@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         Der genaue Aufbau der Reiter ist <a href="#picture-update">hier</a> dokumentiert.
     </p>
-    <h3><a name="picture-guestcreate">Direktanlage (Gastzugang) </a></h3>
+    <h3><a name="picture-guestcreate">Direktanlage (Anonym) </a></h3>
     <p>
         Es besteht die Möglichkeit, die oben erklärte <a href="#picture-create">Direktanlage</a>als <a href="#user-level-anonymous">anonymer Nutzer</a> durchzuführen.
     </p>
@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Wenn Sie ein modernes Smartphone mit modernen Browsern nutzen, dann ist übrigens die <a href="#picture-create">Direktanlage</a> die bessere Lösung, weil Sie hier den Vorgang direkt
         abschließen können und deutlich weniger Bandbreite für das Hochladen brauchen - egal auf welcher Auflösung ihre interne Kamera läuft.
     </p>
-    <h3><a name="picture-guestcapture">Bilder aufnehmen (Gastzugang)</a></h3>
+    <h3><a name="picture-guestcapture">Bilder aufnehmen (Anonym)</a></h3>
     <p>
         Es besteht auch hier die Möglichkeit, Bilder als <a href="#user-level-anonymous">anonymer Nutzer</a> aufzunehmen und hochzuladen.
     </p>
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Sie können in dem aufklappbaren Bereich Vorgabewerte (z.B. Vorfall 'Gehwegparken', Aktion 'Zettel angehängt') für die hochgeladenen Bilder setzen, um die Verfälle schneller zu klassifizieren.         
         Hierbei werden jedoch bereits in den Bilder enthaltene Geokoordinaten sinnigerweise nie überschrieben, sondern es wird maximal eine textuelle Ortangabe übernommen (z.B. 'Berlin, Deutschland').
     </p>
-    <h3><a name="picture-guestupload">Bilder hochladen (Gastzugang) </a></h3>
+    <h3><a name="picture-guestupload">Bilder hochladen (Anonym) </a></h3>
     <p>
         Auch das Hochladen von Bildern ist als <a href="#user-level-anonymous">anonymer Nutzer</a> möglich. Aber auch hier bitte daran denken, die Beantragung der Veröffentlichung der Bilder nicht zu vergessen!
     </p>

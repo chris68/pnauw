@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Direktanlage'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->title = 'Direktanlage'.(Yii::$app->user->can('anonymous')?' (Anonym)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bild', 'url' => ['manage']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['help'] = 'picture-create';

@@ -9,9 +9,9 @@ use frontend\views\picture\assets\PictureLivemapAsset;
 
 PictureLivemapAsset::register($this);
 
-$this->title = 'Bild aufnehmen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->title = 'Bild aufnehmen'.(Yii::$app->user->can('anonymous')?' (Anonym)':'');
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['manage']];
-$this->params['breadcrumbs'][] = 'Aufnehmen'.(Yii::$app->user->can('anonymous')?' (Gastzugang)':'');
+$this->params['breadcrumbs'][] = 'Aufnehmen'.(Yii::$app->user->can('anonymous')?' (Anonym)':'');
 $this->params['help'] = Yii::$app->user->can('anonymous')?'picture-guestcapture':'picture-capture';
 ?>
 
