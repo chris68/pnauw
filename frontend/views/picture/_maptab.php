@@ -9,10 +9,10 @@ use \yii\helpers\Html;
 <div class="row">
     <div class="col-lg-4">
         <div class ="form-group">
-        <?php echo Html::label('Nächstliegende Adresse (ermittelt via OSM Nominatim)','picture-map-nearest-address'); ?>
+        <?php echo Html::label('Nächstliegende Adresse (ermittelt via OpenStreetMap Nominatim)','picture-map-nearest-address'); ?>
             <p id="picture-map-nearest-address"><i>Repositionieren Sie den blauen Pfeil für eine erneute Adressermittlung</i></p>
         </div>
-        <?= $form->field($model,'loc_formatted_addr')->textInput(['id'=>'picture-map-loc-formatted-addr', ]) ?>
+        <?= $form->field($model,'loc_formatted_addr')->textInput(['id'=>'picture-map-loc-formatted-addr','placeholder' => 'Wird gemäß Marker autom. ermittelt']) ?>
         <!-- Hidden fields are not reset upon a form reset; therefore, we need to use normal fields which we hide -->
         <?= Html::activeInput('text', $model,'loc_lat', ['id'=>'picture-map-loc-lat', 'style' => 'display:none', ]) ?>
         <?= Html::activeInput('text', $model,'loc_lng',['id'=>'picture-map-loc-lng', 'style' => 'display:none', ]) ?>
@@ -20,7 +20,7 @@ use \yii\helpers\Html;
         <?= Html::activeHiddenInput($model,'org_loc_lng',['id'=>'picture-map-loc-lng-org', ]) ?>
         <?php if ($model->isNewRecord):?>
         <div class="form-group">
-            <button type="button" class="btn btn-default" onclick="map.stopLocate();">Automatisches Geopositionieren aufhören</button>
+            <button type="button" class="btn btn-secondary" onclick="map.stopLocate();">Automatisches Geopositionieren stoppen</button>
         </div>
 
         <?php endif; ?>

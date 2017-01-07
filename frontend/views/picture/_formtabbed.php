@@ -22,6 +22,7 @@ use frontend\widgets\Alert;
     <div class="form-group">
         <?= $outerform?'':Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= $outerform?'':Html::resetButton('Abbrechen', ['class' => 'btn btn-default', ]) ?>
+        <?= $outerform||!$model->isNewRecord?'':Html::Button('Bild aufnehmen', ['class' => 'btn btn-secondary', 'onclick' => '$("#picture-image-upload").click();']) ?>
         <?php if (!isset($outerform) && !$model->isNewRecord ) : ?>
         <button type="submit"
             formaction="<?=Url::to(['delete', 'id' => $model->id, 'returl' => Yii::$app->getRequest()->getUrl()])?>"

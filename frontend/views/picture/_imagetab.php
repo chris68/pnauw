@@ -17,8 +17,8 @@ use \frontend\models\Picture;
             )
         ?>
         <?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
-        <?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList()) ?>
-        <?= $form->field($model, 'vehicle_reg_plate')->textInput() ?>
+        <?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList())->hint('Anzeigen müssen Sie vorher anlegen') ?>
+        <?= $form->field($model, 'vehicle_reg_plate')->textInput(['placeholder' => 'Optionale Erfassung (nicht öffentlich)']) ?>
         <?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
     </div>
 
@@ -49,7 +49,7 @@ use \frontend\models\Picture;
             <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
             <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
             <?= Html::input('file', 'file_name', NULL, ['accept' => 'image/*', 'capture' => true, 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
-            <p class="help-block">Drücken Sie hier, um ein Bild mit der Kamera aufzunehmen</p>
+            <p class="help-block">Drücken Sie hier, um ein Bild mit der Kamera aufzunehmen. Setzem Sie dann den Bildausschnitt durch Antippen des Nummernschilds und Anpassen des Zooms</p>
         </div>
         <?php endif;?>
         <?=
