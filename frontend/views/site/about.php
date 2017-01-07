@@ -40,11 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
         Was aber viele Leute gar nicht wissen, sondern wie selbstverständlich lieber auf dem Gehweg parken als korrekt auf der Straße.
     </p>
     <p>
-        Doch auf dieser Seite soll gar nicht versucht werden, dies genauer zu beleuchten, sondern nur auf andere relevante Seiten zu dem Thema verwiesen werden
+       Doch auf dieser Seite soll gar nicht versucht werden, dies genauer zu beleuchten, sondern nur auf andere relevante Seiten zu dem Thema verwiesen werden
     </p>
     <ul>
         <li><?= Assist::extlink('Offizielle Seite "gehwege-frei.de" des Fuß eV','http://www.gehwege-frei.de') ?></li>
-        <li><?= Assist::extlink('Initiative "Geh weg vom Gehweg" in Karlsruhe','/https:/geh-weg-vom-gehweg.blogspot.de') ?></li>
+        <li><?= Assist::extlink('Initiative "Geh weg vom Gehweg" in Karlsruhe','https:/geh-weg-vom-gehweg.blogspot.de') ?></li>
         <li><?= Assist::extlink('Verkehrswende Darmstadt', 'http://www.verkehrswende-darmstadt.de/aktionen/illegales-gehwegparken') ?></li>
     </ul>
     <p>
@@ -52,6 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
         wann Gehwegparken eventuell toleriert werden kann ("Bei <b>echter</b> Parknot und dann mit <b>mindestens</b> 1,20 m Restbreite auf dem Gehweg") und 
         wie teuer Verstöße sind ("Verwarnungsgeld von <b>20,- EUR bis 35,- EUR</b>").
     </p>
+    <p>
+       Wir haben die Zusammenhänge zudem in unserem <?= Assist::extlink('Standardhinweiszettel "Parke nicht auf unseren Wegen"', 'https://parke-nicht-auf-unseren-wegen.de/f/pnauw') ?> zusammengefasst,
+       auch damit es neue Nutzer leichter haben, sich eigene Zettel mit dieser Kopiervorlage zu erstellen.
+    </p>
+
     <h4>
         <a>Hilfe zur Selbsthilfe</a>
     </h4>
@@ -88,13 +93,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <ul>
         <li>
-            Sie am auf dem Gehweg parkenden Auto einen "Parke-nicht-auf-unseren-Wegen"-Zettel anbringen (Zettel über <?= Assist::linkNew('Kontaktseite',['site/contact']) ?> bestellen),
+            Sie am auf dem Gehweg parkenden Auto einen "Parke-nicht-auf-unseren-Wegen"-Zettel anbringen (gedruckte Zettel entweder über <?= Assist::linkNew('Kontaktseite',['site/contact']) ?> bestellen oder nutzen Sie unseren <?=Assist::help('Zettelassistenten', 'flyer')?>),
         </li>
         <li>
-            mit Ihrem Smartphone ein Photo machen (vorher GPS Tagging für Photos einstellen!),
-        </li>
-        <li>
-            das Photo am besten gleich an Ort und Stelle auf die Webseite hochladen,
+            mit Ihrem Smartphone den Vorfall aufnehmen, am besten inklusive Photo,
         </li>
         <li>
             der Moderator das Photo und die Texte freigibt (nur für neue/unbekannte Nutzer erforderlich),
@@ -104,15 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </li>
     </ul>
     <p>
-        Das Video ist auf dem PC erstellt, aber es wurde eine Auflösung ähnlich wie auf dem Smartphone gewählt, damit Sie besser sehen, wie 
-        gut die Sache mit dem Smartphone funktioniert.
-    </p>
-    <p>
-        In dem Video wird noch der alte klassiche Weg mit "Erst Hochladen des Bild und dann im zweiten Schritt bearbeiten" gezeigt. Der aktuelle Weg
-        über die Direktanlage ist hier viel intuitiver, weil man das Bild direkt von der Kamera übernehmen kann - ohne Zwischenschritt.
-    </p>
-    <p>
-        Zum Betrachten des Videos auf einem Smartphone sollten Sie aber in den Vollbildmodus von Youtube wechseln, da es sonst deutlich zu klein wird.
+        Zum Betrachten des Videos auf einem Smartphone sollten Sie in den Vollbildmodus von Youtube wechseln.
     </p>
     <p>
         <iframe width="640" height="480" src="https://www.youtube.com/embed/RcmZpELZUB4?rel=0" frameborder="0" allowfullscreen></iframe>
