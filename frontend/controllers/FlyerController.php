@@ -124,10 +124,10 @@ class FlyerController extends Controller
     /**
      * Copy an existing Flyer model to a new one.
      * If copy is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $secret
      * @return mixed
      */
-    public function actionCopy($id)
+    public function actionCopy($secret)
     {
         $model = new Flyer;
 
@@ -136,8 +136,9 @@ class FlyerController extends Controller
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
-            $model = $this->findModelOwn($id);
+            $model = $this->findModelBySecret($secret);
             $model->id = null;
+            $model->owner_id = null;
             $model->name = $model->name.' (Kopie)';
             $model->secret = Yii::$app->security->generateRandomString(4);
             $model->isNewRecord = true;

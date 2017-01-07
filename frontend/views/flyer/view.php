@@ -24,7 +24,7 @@ $this->params['help'] = 'flyer-crud';
             'data-confirm' => 'Sind Sie sich mit dem Löschen sicher?',
             'data-method' => 'post',
         ]); ?>
-        <?= Html::a('Kopieren', ['copy', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('Kopieren', ['copy', 'secret' => $model->secret], ['class' => 'btn btn-default']) ?>
     </p>
     
     <?= Html::a('Öffentliche Zetteldarstellung zeigen',['flyer/show','secret' => $model->secret], ['target' => '_blank'] ) ?>

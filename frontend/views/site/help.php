@@ -337,6 +337,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         Hier sehen Sie die öffentliche Darstellung zu einem <a href='#flyer'>Zettel</a>. Diese Inhalte wurden von einem Nutzer eingestellt, um über den Zettel hinaus mit dem Finder des Zettels in Kontakt zu treten und ihm irgendwelche Informationen zu übermitteln.
     </p>
+    <p>
+        Wenn Sie angemeldet sind, dann können Sie einen existierenden Zettel übrigens auch als Kopiervorlage für einen eigenen Zettel nehmen. Ein gutes Beispiel ist immer unser Standardzettel (https://parke-nicht-auf-unseren-wegen.de/f/pnauw)
+    </p>
 
     <h2><a name="citation">Anzeigen &amp; Beschwerden</a></h2>
     <p>

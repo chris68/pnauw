@@ -75,6 +75,7 @@ $this->params['help'] = 'flyer-show';
     <?= (!empty($model->running_from)&&!empty($model->loc_filter))?' | '.Html::a('Alle Vorfälle zum Zettel anschauen', ['picture/index', 's[time_range]' => $model->running_from.';'.$model->running_until, 's[loc_formatted_addr]' => $model->loc_filter, 's[map_bind]' => '1'], ['target' => '_blank']):'' ?>
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Zettel bearbeiten', ['flyer/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
     | <?= Html::a('Zettel drucken',['flyer/print','secret' => $model->secret], ['target' => '_blank'] ) ?>
+    <?= !Yii::$app->user->isGuest?(' | '.Html::a('Zettel kopieren', ['copy', 'secret' => $model->secret] )):'' ?>
     </div>
 </div>
 
