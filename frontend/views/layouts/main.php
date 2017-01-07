@@ -106,9 +106,9 @@ AppAsset::register($this);
                     'label' => 'Bilder',
                     'visible' => Yii::$app->user->isGuest,
                     'items' => [
-                        ['label' => 'Direktanlage (als Gast)', 'url' => ['/picture/guestcreate']],
-                        ['label' => 'Aufnehmen (als Gast)', 'url' => ['/picture/guestcapture']],
-                        ['label' => 'Hochladen (als Gast)', 'url' => ['/picture/guestupload']],
+                        ['label' => 'Direktanlage (Anonym)', 'url' => ['/picture/guestcreate']],
+                        ['label' => 'Aufnehmen (Anonym)', 'url' => ['/picture/guestcapture']],
+                        ['label' => 'Hochladen (Anonym)', 'url' => ['/picture/guestupload']],
                         ['label' => 'Anschauen', 'url' => ['/picture/index']],
                     ],
                 ],

@@ -59,7 +59,7 @@ $this->title = \Yii::$app->name;
 
                 <p>
                     <a class="btn btn-default" href="<?= Url::to(['/picture/create'])?>">Vorfall melden&raquo;</a>
-                    <a class="btn btn-default" href="<?= Url::to(['/picture/guestcreate'])?>">als Gast&raquo;</a>
+                    <a class="btn btn-default" href="<?= Url::to(['/picture/guestcreate'])?>">als Gast (Anonym)&raquo;</a>
                 </p>
 
                 <p>
@@ -74,7 +74,7 @@ $this->title = \Yii::$app->name;
 
                 <p>
                     <a class="btn btn-default" href="<?= Url::to(['picture/upload'])?>">Bilder hochladen&raquo;</a>
-                    <a class="btn btn-default" href="<?= Url::to(['picture/guestupload'])?>">als Gast&raquo;</a>
+                    <a class="btn btn-default" href="<?= Url::to(['picture/guestupload'])?>">als Gast (Anonym)&raquo;</a>
                 </p>
                 
                 <p>
