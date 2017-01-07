@@ -23,7 +23,7 @@ $this->params['help'] = 'flyer-show';
     
     <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Wenn Sie das erste Mal hier sind, dann lesen Sie sich am besten auch die <a href="<?= Url::to(['site/about']) ?>">Hintergrundsinfos</a> durch. Dort ist knackig erklärt, was es mit dieser Webseite auf sich hat.
+        Wenn Sie das erste Mal hier sind, dann lesen Sie sich am besten auch die <a href="<?= Url::to(['site/about']) ?>">Hintergrundsinfos</a> durch. Dort ist kurz und knackig erklärt, was es mit dieser Webseite auf sich hat.
     </div>
     <a href="#disqus_thread">Diskussionen</a>
 
