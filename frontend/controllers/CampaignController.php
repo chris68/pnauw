@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 
 /**
  * CampaignController implements the CRUD actions for Campaign model.
@@ -165,7 +166,7 @@ class CampaignController extends Controller
      */
     public function actionContact($id)
     {
-        return $this->contact($id,"Kampagne");
+        return $this->contact($id,Url::to(['campaign/show','id'=>$id],true));
     }
 
     /**

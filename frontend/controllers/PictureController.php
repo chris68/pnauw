@@ -20,6 +20,7 @@ use yii\helpers\Html;
 use yii\helpers\FileHelper;
 use yii\base\InvalidParamException;
 use frontend\helpers\Assist;
+use yii\helpers\Url;
 
 /**
  * PictureController implements CRUD actions and much more for Picture model.
@@ -868,7 +869,7 @@ class PictureController extends Controller
      */
     public function actionContact($id)
     {
-        return $this->contact($id,"Bild/Vorfall");
+        return $this->contact($id,Url::to(['picture/view','id'=>$id],true));
     }
         
     /**

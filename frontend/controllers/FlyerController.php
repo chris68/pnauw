@@ -192,7 +192,7 @@ class FlyerController extends Controller
      */
     public function actionContact($id)
     {
-        return $this->contact($id,"Zettel");
+        return $this->contact($id,Url::to(['flyer/show','secret'=>$this->findModel($id)->secret],true));
     }
 
     /**
