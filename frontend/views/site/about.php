@@ -72,14 +72,15 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <p>
         Jeder kann dann für sich selbst entscheiden, welches der beiden bereitgestellten Mittel er einsetzen möchte. <b>Tatsache ist übrigens, dass die meisten Nutzer sich direkt für den Weg einer Anzeige ohne Öffentlichkeit entscheiden.</b>
-        Anscheinend merken Sie, dass bei Gehwegparken eigentlich nur Anzeigen und Verwarnungsgelder wirken.
+        Anscheinend merken Sie, dass bei Gehwegparken eigentlich nur Anzeigen und Verwarnungsgelder wirken. Und mit dieser Plattform ist ja auch sehr gut sichergestellt, dass die Anzeige von den Ämtern gewürdigt wird, weil alle rechtlichen Voraussetzungen
+        (Papierform, eindeutige Beweismittel, etc.) 100% erfüllt sind. 
     </p>
     <h4>
         <a>Die Plattform "Parke nicht auf unseren Wegen"</a>
     </h4>
     <p>
         Die Plattform ist eine Webapplikation (<?= Assist::linkNew('Releasehistorie',['site/releasehistory']) ?>), die voll auf HTML5 und den damit verbundenen Möglichkeiten setzt. Die Webseiten sind hierbei 
-        speziell für den Einsatz auf mobilen Geräten optimiert. Ältere Browser (vor allem nicht ältere Internet Exlorer!) werden als Konsequenz 
+        speziell für den Einsatz auf mobilen Geräten optimiert und funktionieren besser als so manche "richtige" App. Ältere Browser (vor allem nicht ältere Internet Exlorer!) werden als Konsequenz
         nicht unterstützt und es wird ausdrücklich empfohlen, einen aktuellen und HTML5-kompatiblen Browser einzusetzen.
     </p>
     <p>
