@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Zum Betrachten des Videos auf einem Smartphone sollten Sie in den Vollbildmodus von Youtube wechseln. Das Video zeigt übrigens einen veralteten Releasestand - neuerdings ist es deutlich leichter.
     </p>
     <p>
-        <iframe width="640" height="480" src="https://www.youtube.com/embed/RcmZpELZUB4?rel=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="640" height="480" src="https://www.youtube.com/embed/RcmZpELZUB4?rel=0&hl=de&cc_lang_pref=de&cc_load_policy=1"  frameborder="0" allowfullscreen></iframe>
     </p>
     <h4>
         <a name="disqus_thread">Diskussionen</a>
