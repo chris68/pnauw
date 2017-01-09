@@ -11,7 +11,7 @@ use yii\helpers\Console;
 class PictureController extends Controller
 {
     /**
-     * Delete all guest users created more than 5 days ago but w/o pictures
+     * Delete all guest users created more than 5 days ago but w/o public pictures
      */
     public function actionPurgeGuestUsers()
     {
@@ -22,7 +22,7 @@ class PictureController extends Controller
             tbl_user u
         where
             role = 11 and
-            not exists (select 1 from tbl_picture p where p.owner_id = u.id) and
+            not exists (select 1 from tbl_picture p where p.owner_id = u.id and p.visibility_id='public') and
             create_time <= current_date - interval '5' day
 SQL
         );
