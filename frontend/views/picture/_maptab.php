@@ -20,7 +20,8 @@ use \yii\helpers\Html;
         <?= Html::activeHiddenInput($model,'org_loc_lng',['id'=>'picture-map-loc-lng-org', ]) ?>
         <?php if ($model->isNewRecord):?>
         <div class="form-group">
-            <button type="button" class="btn btn-secondary" onclick="map.stopLocate();">Automatisches Geopositionieren stoppen</button>
+            <label for="picture-map-geopositioning">Automatisches Geopositionieren</label>
+            <input type="checkbox" onclick="toggleLocate(map,$('#picture-map-geopositioning').prop('checked'))" id="picture-map-geopositioning" value="on" checked/>
         </div>
 
         <?php endif; ?>

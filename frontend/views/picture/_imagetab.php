@@ -120,7 +120,7 @@ use \frontend\models\Picture;
                     }
                 );
 
-                map.locate({setView: true, watch: true, enableHighAccuracy: true, maxZoom: 18});
+                toggleLocate(map,true);
                 var positionLayerGroup = L.layerGroup([]);
                 positionLayerGroup.addTo(map);
 
@@ -133,6 +133,7 @@ use \frontend\models\Picture;
                     positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
                     $('#picture-map-loc-lat-org').val(e.latlng.lat);
                     $('#picture-map-loc-lng-org').val(e.latlng.lng);
+                    updateMarkerOrg();
                 });
 
 

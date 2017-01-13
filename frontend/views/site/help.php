@@ -186,7 +186,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <p>
         Bei der <a href="#picture-create">Direktanlage</a> wird in der Karte auch immer automatisch die derzeitige Position ermittelt, damit sie schneller die genaue Position festlegen können. Wenn die
-        automatische Ermittlung stört, dann können Sie diese auch mit dem Button deaktivieren. Bei der nächsten Aufnahme ist es dann wieder aktiv.
+        automatische Ermittlung stört, dann können Sie diese auch mit der Checkbox deaktivieren und später auch wieder reaktivieren. Bei der nächsten Aufnahme ist es auf jeden Fall wieder aktiv.
     </p>
 
     <h4><a name="picture-update-datatab">Reiter "Grunddaten"</a></h4>

@@ -89,12 +89,29 @@ marker.on('dragend', function(e) {
     geocodePosition(e.target.getLatLng());
 });
 
-var cameraIcon = L.divIcon({className: 'glyphicon glyphicon-camera'});
-marker_org = L.marker(getlatLngOrg(),{icon: cameraIcon}).addTo(map);
+function updateMarkerOrg() {
+    if (marker_org) {
+        map.removeLayer(marker_org);
+    }
+
+    var cameraIcon = L.divIcon({className: 'glyphicon glyphicon-camera'});
+    marker_org = L.marker(getlatLngOrg(),{icon: cameraIcon}).addTo(map);
+}
+
+updateMarkerOrg();
 
 map.on('click', function(e) {
     geocodePosition(e.latlng);
 });
+
+function toggleLocate(map,isOn) {
+    $('#picture-map-geopositioning').prop('checked',isOn);
+    if (isOn) {
+        map.locate({setView: true, watch: true, enableHighAccuracy: true, maxZoom: 18});
+    } else {
+        map.stopLocate();
+    }
+}
 
 if ($('#picture-map-loc-formatted-addr').val() == '') {
     // Of the orgiginal coordinates and the current coords are the same then geocode since then it is the first time
