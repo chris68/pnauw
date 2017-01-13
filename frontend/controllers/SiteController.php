@@ -123,6 +123,10 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+        
+// @chris68
+        Yii::$app->session->setFlash('success','Sie haben sich erfolgreich abgemeldet.');
+        
 
         return $this->goHome();
     }
