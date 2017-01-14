@@ -21,9 +21,9 @@ upload_max_filesize = 10M
 memory_limit = 128M
 ```
 ## Postgres ##
-Postgres 9.3 is used.
+Postgres 9.5 is used.
 ### Install postgis ###
-``sudo apt-get install postgresql-9.3-postgis-2.1``
+``sudo apt-get install postgresql-9.5-postgis-2.2``
 ## Migrate postgres ##
 If you need to migrate postgres from e.g. 9.1 to 9.3 then make sure that postgis is installed first.
 
