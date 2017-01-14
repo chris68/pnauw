@@ -4,11 +4,11 @@ Php >= 5.4 is required
 The following modules are needed. Install/Activate them via
 
 ```
-sudo apt-get install php5-mcrypt
-sudo phpenmod mcrypt
-
-sudo apt-get install php5-imagick
+sudo apt-get install php-imagick
 sudo phpenmod imagick
+
+sudo apt-get install php-gd
+sudo phpenmod gd
 ```
 ### php.ini ###
 Add the following to the end of php.ini
