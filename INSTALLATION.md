@@ -5,10 +5,10 @@ The following modules are needed. Install/Activate them via
 
 ```
 sudo apt-get install php5-mcrypt
-sudo php5enmod mcrypt
+sudo phpenmod mcrypt
 
 sudo apt-get install php5-imagick
-sudo php5enmod imagick
+sudo phpenmod imagick
 ```
 ### php.ini ###
 Add the following to the end of php.ini
