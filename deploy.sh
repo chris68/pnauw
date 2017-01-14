@@ -71,7 +71,7 @@ git clone https://github.com/chris68/pnauw /home/mailwitch/pnauw$suffix
 { cd /home/mailwitch/pnauw$suffix; git checkout $branch; }
 # psql postgres #create the database (see migration)
 # psql postgres #CREATE DATABASE pnauw_dev WITH TEMPLATE pnauw; (for Development test)
-sudo composer self-update
+sudo -H composer self-update
 composer global require "fxp/composer-asset-plugin:^1.2.0"
 # composer global update fxp/composer-asset-plugin --no-plugins # Excecute this if composer is totally broken
 composer create-project -d /home/mailwitch/pnauw$suffix 
