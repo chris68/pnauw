@@ -136,14 +136,14 @@ $requirements = array(
         'mandatory' => true,
         'condition' => (extension_loaded('gd')),
         'by' => 'QR Codes',
-        'memo' => 'Install via sudo apt-get install php5-gd',
+        'memo' => 'Install via sudo apt-get install php-gd',
     ),
     array(
         'name' => 'Imagick extension',
         'mandatory' => true,
         'condition' => (extension_loaded('imagick')),
         'by' => 'Pictures',
-        'memo' => 'Install via sudo apt-get install php5-imagick',
+        'memo' => 'Install via sudo apt-get install php-imagick',
     ),
     'phpFileUploadAllowed' => array(
         'name' => 'PHP file upload allowed',
