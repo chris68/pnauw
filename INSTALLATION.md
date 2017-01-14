@@ -9,6 +9,7 @@ sudo php5enmod mcrypt
 
 sudo apt-get install php5-imagick
 sudo php5enmod imagick
+```
 ### php.ini ###
 Add the following to the end of php.ini
 ```
