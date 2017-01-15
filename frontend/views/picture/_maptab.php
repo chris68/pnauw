@@ -38,7 +38,7 @@ use \yii\helpers\Html;
             Verschieben Sie den blauen Pfeil oder klicken Sie auf die gewünschte Stelle, um den blauen Pfeil für die relevante Aufnahmeposition zu setzen. Das kleine Kamerasymbol gibt
             weiterhin die originale Aufnahmeposition an (falls im Photo vorhanden). <br><br>
 
-            Die nächstliegende Adresse wird dann automatisch von OpenStreetMap Nominatim ermittelt und als Ortsangabe übernommen. Je weiter Sie reinzommn, desto
+            Die nächstliegende Adresse wird dann automatisch von OpenStreetMap Nominatim ermittelt und als Ortsangabe übernommen. Je weiter Sie reinzommen, desto
             genauer wird die Adresse ermittelt (bis auf Hausnummern genau). Sie können die einmal ermittelte Adresse auch noch verbessern/anpassen.
         </p>
     </div>
