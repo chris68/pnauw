@@ -189,6 +189,29 @@ $("form").bind("reset", function() {
 });
 
 /*
+ * Execute the alpr ajax call and set the respective fields
+ */
+function excuteAlpr() {
+    $.ajax({
+        method: "POST",
+        url: baseUrl+'/picture/alpr',
+        data: {
+            image: $("#picture-image").attr("src").split(',')[1], // Need to split of the mime type
+            country_code: $('#picture-vehicle_country_code').val() 
+        },
+        dataType:'json'
+    })
+    .done(function( data ) {
+        //alert(JSON.stringify(data));
+        $('#picture-vehicle_reg_plate').val(data.plate); 
+        $('#picture-clip-x').val(data.clip_x); 
+        $('#picture-clip-y').val(data.clip_y); 
+        $('#picture-clip-size').val(data.clip_size); 
+        updatePictureClipCanvas();
+    });
+}
+
+/*
  * Aquire image directly ob the client side
  */
 

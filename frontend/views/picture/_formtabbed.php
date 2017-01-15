@@ -77,5 +77,13 @@ use frontend\widgets\Alert;
 
     <?php $outerform?'':ActiveForm::end(); ?>
     
-    <?php \frontend\views\picture\assets\PictureUpdateAsset::register($this); ?>
+    <?php 
+        \frontend\views\picture\assets\PictureUpdateAsset::register($this); 
+        // The baseUrl is needed in script; so output it into a variable
+        $this->registerJs(
+            "var baseUrl = '".Yii::$app->getUrlManager()->getBaseUrl()."';",
+            \yii\web\View::POS_END
+        );
+     ?>
+    
 </div>

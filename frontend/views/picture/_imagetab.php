@@ -26,6 +26,7 @@ use \frontend\models\Picture;
         <div>
             <div class="form-group">
             <?= Html::label('Bildausschnitt (Nummernschild)','picture-clip-canvas') ?>
+            <button style="margin-bottom: 5px" onclick="excuteAlpr(); return false;">Kennzeichen automatisch ermitteln</button>
             <canvas id="picture-clip-canvas" class="img-responsive" style = "margin-bottom: 7px;">
             <?php
                 $this->registerJs("updatePictureClipCanvas();", \yii\web\View::POS_READY);

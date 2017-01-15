@@ -90,6 +90,8 @@ seccomp_sandbox=0
 
 Restart the service via ``sudo service vsftpd restart``
 
+## ALPR ##
+We use http://www.openalpr.com/ for the automatic licence plate recognition. Starting with Ubuntu 16.04 this is part of the distribution. See https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux) for instruction on how to install it.
 ## Editing markdown (*.md) file ##
 Use http://dillinger.io to verify the correctness of the syntax!
 ## Crontab ##

@@ -13,6 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
+        Version 2.1 (15.01.2017)
+    </h3>
+    <p>
+        Automatische Erkennung der Kfz-Kennzeichen
+    </p>
+    <ul>
+        <li>Die automatische Erkennung von Kfz-Kennzeichen (engl. ALPR - automatic licence plate recognition) ist nun ausreichend ausgereift</li>
+        <li>Daher wurde diese nun auch in Parke-nicht-auf-unseren-Wegen eingebaut und es besteht nun die Möglichkeit, sich das Kennzeichen automatisch ermitteln zu lassen</li>
+    </ul>
+    <h3>
         Version 2.0 (29.12.2016)
     </h3>
     <p>

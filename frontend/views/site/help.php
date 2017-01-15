@@ -167,6 +167,13 @@ $this->params['breadcrumbs'][] = $this->title;
         Sie können dann durch Klicken auf das Bild und den Ziehen des Zoom-Reglers sich das Kennzeichen genau rauszoomen. Das hilft beim Erfassen und das Detailbild kommt dann auch automatisch auf eine potentielle <a href='#citation'>Anzeige</a>.
     </p>
     <p>
+        Zudem besteht die Möglichkeit, die Lage des Kennzeichens und das Kennzeichen selbst automatisch ermitteln zu lassen. Die Ergebnisse sind erstaunlich gut. 
+    </p>
+    <p>
+        In Deutschland ist jedoch der Leerraum nach ersten Teil (Stadt,Landkreis, etc.) extrem wichtig (international einmalig!) und das erkennt das verwendete Erkennungsprogramm OPENALPR im Backend nicht. Daher muss man hier den 
+        Leerraum im Zweifel selbst einfügen. Die Ziffern am Ende hingegen werden meist korrekt mit einem Leerzeichen abgetrennt. 
+    </p>
+    <p>
         Die restlichen Felder erklären sich von selbst. Die Zuweisung zu einer Anzeige wird NIE öffentlich sein. Die Nutzung des Anzeigenkonzept ist überhaupt optional - sie können auch einfach nur die PDF erzeugen und den Text selbst schreiben.
     </p>
     <p>

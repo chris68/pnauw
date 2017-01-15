@@ -46,7 +46,7 @@ class PictureController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'print', 'capture', 'publish', 'printmultiple', ],
+                        'actions' => ['manage', 'create', 'update', 'delete', 'massupdate', 'upload', 'print', 'capture', 'publish', 'printmultiple', 'alpr'],
                         'roles' => ['@'],
                     ],
                     [
@@ -870,6 +870,75 @@ class PictureController extends Controller
     public function actionContact($id)
     {
         return $this->contact($id,Url::to(['picture/view','id'=>$id],true));
+    }
+
+    /**
+     * Action to make the automatic licence plate recognition
+     * Two post parameter image (base64 encoded jpeg image) and country_code ('D','A', etc.) reguired
+     * @return mixed The json response with {plate: xxxx} giving the plate or '?' if not sucessfull; errors are reported as {plate:"?", error:xxx}
+     */
+    public function actionAlpr() 
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $image=Yii::$app->request->post('image');
+        $country_code=Yii::$app->request->post('country_code');
+
+        if (empty($image)) {
+            return ['error' => 'Base64 encoded image expected and not found','plate'=> '?'];
+        }
+
+        $file = tempnam(sys_get_temp_dir(), 'pnauw_alpr.');
+        $file_jpeg = $file.'.jpeg';
+
+        if( ! file_put_contents($file_jpeg, base64_decode($image) ) ){
+            unlink($file);
+            unlink($file_jpeg);
+            return ['error' => 'Failed to save','plate'=> '?'];
+        }
+
+        $result = array();
+        exec('alpr --country eu --json -n 1 '.$file_jpeg,$result);
+
+        /* Delete both files */
+        unlink($file);
+        unlink($file_jpeg);
+
+        /**
+         * Check result.
+         */
+        if( empty( $result[0] ) ){
+            return ['plate' => '?'];
+        } else {
+            $result_array = json_decode( $result[0], TRUE);
+            $plate = isset($result_array['results'][0]['plate'])?$result_array['results'][0]['plate']:'?';
+            $coordinates = isset($result_array['results'][0]['coordinates'])?$result_array['results'][0]['coordinates']:NULL;
+            $img_width = $result_array['img_width'];
+            $img_height = $result_array['img_height'];
+
+            if ($coordinates) {
+                // Calculate the middle point of the clip area as percentage and also the size
+                $clip_x = (int)((min(array_column($coordinates , 'x'))+max(array_column($coordinates , 'x')))/$img_width*50);
+                $clip_y = (int)((min(array_column($coordinates , 'y'))+max(array_column($coordinates , 'y')))/$img_height*50);
+                $clip_size = (int)((max(array_column($coordinates , 'x'))-min(array_column($coordinates , 'x')))/$img_width*100)+3;
+            } else {
+                // If nothing found center with a quarter size
+                $clip_x = 50; $clip_y = 50; $clip_size = 25;
+            }
+            
+            switch ($country_code) {
+                case 'D':
+                    // Insert space before trailing digits
+                    $plate = preg_replace('/([0-9]+)$/',' $1',$plate); 
+                    // Insert space after some well known "Unterscheidungkennzeichen" near Karlsruhe (see http://www.kba.de/SharedDocs/Publikationen/DE/Presse/kfz_kennzeichenliste_faltblatt_pdf.pdf?__blob=publicationFile&v=33)
+                    // Todo: Give the user the freedom to define his own list of well known "Unterscheidungskennzeichen"; currently this is only for testing
+                    $plate = preg_replace('/^(KA|PF|GER|SÜW|LD|HD|OG)/','$1 ',$plate); 
+                    break;
+                
+            }
+            
+            return ['plate' => $plate,'clip_x'=>$clip_x, 'clip_y'=>$clip_y, 'clip_size'=>$clip_size, ];
+        }
     }
         
     /**
