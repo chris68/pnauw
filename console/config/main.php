@@ -25,7 +25,7 @@ return [
 
 // @chris68
         'urlManager' => [
-            'scriptUrl' => 'https://parke-nicht-auf-unseren-wegen.com/' // See http://stackoverflow.com/questions/33298305/createabsoluteurl-does-not-work-in-console-app
+            'scriptUrl' => 'https://parke-nicht-auf-unseren-wegen.de/' // See http://stackoverflow.com/questions/33298305/createabsoluteurl-does-not-work-in-console-app
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
