@@ -928,11 +928,16 @@ class PictureController extends Controller
             
             switch ($country_code) {
                 case 'D':
+                    // Insert space after the reg_codes of the user
+                    /* @var $user User */
+                    $user = User::findIdentity(Yii::$app->user->getId());
+                    $reg_codes = explode(';',$user->reg_codes);
+                    // Make sure we split of only correct plates (K AX 1333 vs KA X 13)
+                    $reg_codes = array_map(function($value) { return '/^('.$value.')([A-ZÖÄÜ]{1,2}[0-9]{1,4})/'; },$reg_codes);
+                    $plate = preg_replace($reg_codes,'$1 $2',$plate,1); 
+                    
                     // Insert space before trailing digits
                     $plate = preg_replace('/([0-9]+)$/',' $1',$plate); 
-                    // Insert space after some well known "Unterscheidungkennzeichen" near Karlsruhe (see http://www.kba.de/SharedDocs/Publikationen/DE/Presse/kfz_kennzeichenliste_faltblatt_pdf.pdf?__blob=publicationFile&v=33)
-                    // Todo: Give the user the freedom to define his own list of well known "Unterscheidungskennzeichen"; currently this is only for testing
-                    $plate = preg_replace('/^(KA|PF|GER|SÜW|LD|HD|OG)/','$1 ',$plate); 
                     break;
                 
             }

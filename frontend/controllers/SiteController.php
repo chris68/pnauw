@@ -18,6 +18,7 @@ use common\models\Auth;
 use common\models\User;
 use yii\data\ActiveDataProvider;
 use frontend\models\UserdataForm;
+use frontend\models\UserappdataForm;
 
 /**
  * Site controller
@@ -33,7 +34,7 @@ class SiteController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
 // @chris68
-                'only' => ['logout', 'signup', 'userdata', 'foreignlogin'],
+                'only' => ['logout', 'signup', 'userdata', 'userappdata', 'foreignlogin'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -47,7 +48,7 @@ class SiteController extends Controller
                     ],
 // @chris68
                     [
-                        'actions' => ['userdata','foreignlogin'],
+                        'actions' => ['userdata','userappdata', 'foreignlogin'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -349,4 +350,21 @@ class SiteController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    public function actionUserappdata()
+    {
+        $model = UserappdataForm::findIdentity(Yii::$app->user->getId());
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                $model->save();
+                Yii::$app->getSession()->setFlash('success', 'Die Änderungen wurden übernommen');
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('userappdata', [
+            'model' => $model,
+        ]);
+    }
+
 }

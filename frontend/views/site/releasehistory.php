@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
         <li>Die automatische Erkennung von Kfz-Kennzeichen (engl. ALPR - automatic licence plate recognition) ist nun ausreichend ausgereift</li>
         <li>Daher wurde diese nun auch in Parke-nicht-auf-unseren-Wegen eingebaut und es besteht nun die Möglichkeit, sich das Kennzeichen automatisch ermitteln zu lassen</li>
+        <li>Damit das auch in Deutschland mit den notwendigen Leerzeichen gescheit funktioniert, muss man in den Applikationseinstellungen die häufig auftretenden Stadt bzw. Landkreiskennungen pflegen (z.B. KA;PF;GER)</li>
     </ul>
     <h3>
         Version 2.0 (29.12.2016)

@@ -121,6 +121,7 @@ AppAsset::register($this);
                         ['label' => 'Anzeigen', 'url' => ['/citation/index']],
                         '<li class="divider"></li>',
                         ['label' => 'Nutzerdaten', 'url' => ['/site/userdata']],
+                        ['label' => 'Applikationseinstellungen', 'url' => ['/site/userappdata']],
                         ['label' => 'Fremdlogins', 'url' => ['/site/foreignlogin']],
                     ],
                 ],
