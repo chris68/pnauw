@@ -49,7 +49,7 @@ use \frontend\models\Picture;
             <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
             <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
             <?= Html::input('file', 'file_name', NULL, ['accept' => 'image/*', 'capture' => true, 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
-            <p class="help-block">Drücken Sie hier, um ein Bild mit der Kamera aufzunehmen. Setzem Sie dann den Bildausschnitt durch Antippen des Nummernschilds und Anpassen des Zooms</p>
+            <p class="help-block">Drücken Sie hier oder oben, um ein Bild mit der Kamera aufzunehmen. Setzem Sie dann den Bildausschnitt durch Antippen des Nummernschilds und Anpassen des Zooms</p>
         </div>
         <?php endif;?>
         <?=
