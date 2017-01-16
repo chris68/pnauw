@@ -40,7 +40,7 @@ class ImageRenderer extends \yii\base\Widget
             $rawdata = bin2hex($image->getimageblob());
             
             $this->options['src'] = 'data:image/jpg;base64,' . base64_encode(hex2bin($rawdata));
-            $this->options['alt'] = 'Standardbild, weil kein Bild des Vorfalls vorhanden oder dies noch Genehmigung ist';
+            $this->options['alt'] = 'Standardbild (kein Bild des Vorfalls vorhanden oder noch in Genehmigung)';
         }
     
         echo \yii\helpers\Html::tag('img','',$this->options);
