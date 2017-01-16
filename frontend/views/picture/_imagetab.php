@@ -45,14 +45,6 @@ use \frontend\models\Picture;
     </div>
     
     <div class="col-lg-3">
-        <?php if ($model->isNewRecord):?>
-        <div class="form-group" style="margin-top: 7px;">
-            <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
-            <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
-            <?= Html::input('file', 'file_name', NULL, ['accept' => 'image/*', 'capture' => true, 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
-            <p class="help-block">Drücken Sie hier oder oben, um ein Bild mit der Kamera aufzunehmen. Setzem Sie dann den Bildausschnitt durch Antippen des Nummernschilds und Anpassen des Zooms</p>
-        </div>
-        <?php endif;?>
         <?=
         frontend\widgets\ImageRenderer::widget(
             [
@@ -62,6 +54,15 @@ use \frontend\models\Picture;
             ]
         );
         ?>
+        <?php if ($model->isNewRecord):?>
+        <div class="form-group" style="margin-top: 7px;">
+            <?= Html::activeInput('text', $model, 'taken', ['id'=>'picture-taken', 'style' => 'display:none', ]) ?>
+            <?= Html::activeInput('text', $model, 'image_dataurl', ['id'=>'picture-image-dataurl', 'style' => 'display:none', ]) ?>
+            <?= Html::input('file', 'file_name', NULL, ['accept' => 'image/*', 'capture' => true, 'id' => 'picture-image-upload', 'hint' => 'Drücken Sie hier, um die Kamera zu aktivieren']); ?>
+            <p class="help-block">Drücken Sie optional hier oder den Button "Bild aufnehmen" oben, um ein eigenes Bild mit der Kamera aufzunehmen.</p>
+        </div>
+        <?php endif;?>
+        <p class="help-block">Setzen Sie den Bildausschnitt durch Antippen des Nummernschilds und Anpassen des Zooms<br/>Oder nutzen Sie am besten die automatische Erkennung</p>
     </div>
 </div>
 
