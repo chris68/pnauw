@@ -282,7 +282,7 @@ class Picture extends \yii\db\ActiveRecord
 
             // Only if the pic is niew you can set these attributes
             [['org_loc_lat', 'org_loc_lng',], 'double', 'when' => function ($model) {return $model->isNewRecord;}],
-            [['taken', ], 'string', 'when' => function ($model) {return $model->isNewRecord;}],
+            [['taken', ], 'date', 'format' => 'yyyy-MM-dd HH:mm:ss', 'when' => function ($model) {return $model->isNewRecord;}],
                 
             [['loc_lat', 'loc_lng',], 'double'],
             ['visibility_id',  'validateVisibilityConsistency', ],
