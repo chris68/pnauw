@@ -933,8 +933,11 @@ class PictureController extends Controller
                     $user = User::findIdentity(Yii::$app->user->getId());
                     $reg_codes = explode(';',$user->reg_codes);
                     // Make sure we split of only correct plates (K AX 1333 vs KA X 13)
-                    $reg_codes = array_map(function($value) { return '/^('.$value.')([A-ZÖÄÜ]{1,2}[0-9]{1,4})/'; },$reg_codes);
-                    $plate = preg_replace($reg_codes,'$1 $2',$plate,1); 
+                    $reg_codes_regexp = array_map(function($value) { return '/^('.$value.')([A-ZÖÄÜ]{1,2}[0-9]{1,4})/'; },$reg_codes);
+                    $plate = preg_replace($reg_codes_regexp,'$1 $2',$plate,1); 
+                    // This handles the temp licence plates like GER 12345, etc. or police like BWL 4 4444 
+                    $reg_codes_regexp = array_map(function($value) { return '/^('.$value.')([0-9]{1,6})/'; },$reg_codes);
+                    $plate = preg_replace($reg_codes_regexp,'$1 $2',$plate,1); 
                     
                     // Insert space before trailing digits
                     $plate = preg_replace('/([0-9]+)$/',' $1',$plate); 

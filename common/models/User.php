@@ -54,7 +54,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         parent::init();
         // Currently many users come from the Karlsruhe area; therefore, we default with helpful values for those guys. Baden rulez!
-        $this->reg_codes = 'KA;PF;GER;SÜW;HD;LD;OG;RP;S';
+        $this->reg_codes = 'KA;PF;GER;SÜW;RP;LD;HD;RA;OG;S';
     }
 
     /**
