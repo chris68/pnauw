@@ -18,8 +18,17 @@ use yii\bootstrap\ActiveForm;
         'id' => 'search-form', 
     ]); ?>
         <div class="form-group">
-            <?= Html::submitButton('Suchen', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Suchen', ['class' => 'btn btn-primary', 'onClick' => '$(\'#search-batch-ts\').val(\'\');']) ?>
+        <?php if ($model->scenario == 'private') : ?>
+            <?= Html::submitButton('Als Arbeitsvorrat durcharbeiten', ['class' => 'btn btn-secondary', 'onClick' => '$(\'#search-batch-ts\').val(\''.$model->now_utc.'\');']) ?>
+        <?php endif; ?>
+            <?= Html::activeHiddenInput($model, 'batch_ts', ['id'=>'search-batch-ts', ]) ?>
         </div>
+        <?php if (!empty($model->batch_ts)) : ?>
+            <div class="alert alert-info">
+                Sie arbeiten gerade einen Arbeitsvorat ab. <br/>Sobald Sie einen Satz geändert haben, wird dieser automatisch aus dem Arbeitsvorat verschwinden.<br/>Durch Drücken von Suche brechen Sie dies ab.
+            </div>            
+        <?php endif; ?>
         
             <?= $form->errorSummary($model,['class' => "alert alert-danger"]);?>
 
@@ -36,7 +45,7 @@ use yii\bootstrap\ActiveForm;
             <fieldset>
             <legend>Ort &amp; Zeit</legend>
             
-            <?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className()) ?>
+            <?= $form->field($model, 'taken')->widget(\yii\jui\DatePicker::className(),['options' => ['class' => 'form-control']]) ?>
 
             <?= $form->field($model, 'loc_formatted_addr')->hint('Eine Suche nach der Adresse ist eher unzuverlässig, da die Adresse nur sporadisch ausgefüllt ist. Suchen Sie am besten über die Karte.') ?>
             </fieldset>
@@ -53,9 +62,9 @@ use yii\bootstrap\ActiveForm;
         <?php if ($model->scenario == 'private' || $model->scenario == 'admin' || $model->scenario == 'moderator') : ?>
             <fieldset>
             <legend>Verarbeitung</legend>
-            <?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className()) ?>
+            <?= $form->field($model, 'created_ts')->widget(\yii\jui\DatePicker::className(),['options' => ['class' => 'form-control']]) ?>
 
-            <?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className()) ?>
+            <?= $form->field($model, 'modified_ts')->widget(\yii\jui\DatePicker::className(),['options' => ['class' => 'form-control']]) ?>
             
             <?= $form->field($model, 'visibility_id')->listBox(frontend\models\Visibility::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
             </fieldset>

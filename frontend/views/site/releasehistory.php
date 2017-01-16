@@ -13,15 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
-        Version 2.1 (15.01.2017)
+        Version 2.1 (15.-16.01.2017)
     </h3>
     <p>
-        Automatische Erkennung der Kfz-Kennzeichen
+        Automatische Erkennung der Kfz-Kennzeichen und Arbeitsvorräte
     </p>
     <ul>
         <li>Die automatische Erkennung von Kfz-Kennzeichen (engl. ALPR - automatic licence plate recognition) ist nun ausreichend ausgereift</li>
         <li>Daher wurde diese nun auch in Parke-nicht-auf-unseren-Wegen eingebaut und es besteht nun die Möglichkeit, sich das Kennzeichen automatisch ermitteln zu lassen</li>
         <li>Damit das auch in Deutschland mit den notwendigen Leerzeichen gescheit funktioniert, muss man in den Applikationseinstellungen die häufig auftretenden Stadt bzw. Landkreiskennungen pflegen (z.B. KA;PF;GER)</li>
+        <li>Bei der Bearbeitung besteht zudem nun die Möglichkeit, sich in der Suche einen Arbeitsvorrat zu definieren. Wenn man ein Bild bearbeitet hat, denn verschwindet es automatisch aus dem Arbeitsvorrat</li>
     </ul>
     <h3>
         Version 2.0 (29.12.2016)

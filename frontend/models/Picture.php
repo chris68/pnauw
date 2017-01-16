@@ -187,7 +187,7 @@ class Picture extends \yii\db\ActiveRecord
                     \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_ts', 'modified_ts'],
                     \yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_ts',
                 ],
-                'value' => new \yii\db\Expression('NOW()'),
+                'value' => new \yii\db\Expression ('NOW() at time zone \'UTC\''),
             ],
             'EnsureOwnership' => [
                 'class' => 'common\behaviors\EnsureOwnershipWithModeration',
@@ -342,9 +342,9 @@ class Picture extends \yii\db\ActiveRecord
             'incident_id' => 'Vorfall',
             'citation_id' => 'Anzeige',
             'campaign_id' => 'Kampagne',
-            'created_ts' => 'Hochgeladen am',
-            'modified_ts' => 'Geändert am',
-            'deleted_ts' => 'Gelöscht am',
+            'created_ts' => 'Hochgeladen am (UTC)',
+            'modified_ts' => 'Geändert am (UTC)',
+            'deleted_ts' => 'Gelöscht am (UTC)',
             'selected' => 'Auswählen',
             'deleted' => 'Löschen',
         ];

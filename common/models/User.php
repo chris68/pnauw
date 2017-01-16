@@ -70,8 +70,8 @@ class User extends ActiveRecord implements IdentityInterface
                     ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
                 ],
-                // use real timestamps instead of the unix time saved as int
-                'value' => new \yii\db\Expression ('NOW()'),
+                // use real timestamps instead of the unix time saved as int; make sure it is in UTC
+                'value' => new \yii\db\Expression ('NOW() at time zone \'UTC\''),
             ],
             TimestampBehavior::className(),
         ];

@@ -43,6 +43,13 @@ class PictureSearch extends Model
     public $modified_ts;
     public $deleted_ts;
 
+    /* 
+     * If this timestamp is set then only items last modified before the timestamp are considered
+     */
+    public $batch_ts; 
+    // The current timestamp in utc that is needed for the initialisation in thejavascript view
+    public $now_utc; 
+
     // @todo: Separate these attributes into a separate search class/form; and then the form name here will became ps instead of s.
     // See https://github.com/chris68/pnauw/issues/22
     public $map_state;
@@ -61,6 +68,13 @@ class PictureSearch extends Model
     {
         return 's';
     }
+    
+    public function init() {
+        parent::init();
+        
+        // It is almost impossible to geht the correct utc time in javascript; therefore, it is better the server sends it
+        $this->now_utc = date('Y-m-d H:i:s');
+    }
 
     public function rules()
     {
@@ -74,11 +88,15 @@ class PictureSearch extends Model
                 'safe'
             ],
             [
-                ['taken', 'created_ts', 'modified_ts', 'deleted_ts' ],
+                ['taken', 'created_ts', 'modified_ts', 'deleted_ts', 'batch_ts' ],
                 'default', 'value' => NULL],
             [
                 ['taken', 'created_ts', 'modified_ts', 'deleted_ts' ], 
                 'date', 
+            ],
+            [
+                ['batch_ts', ], 
+                'date', 'format' => 'yyyy-MM-dd HH:mm:ss'
             ],
             [    ['map_bind', 'map_limit_points', ],
                 'boolean',
@@ -112,7 +130,9 @@ class PictureSearch extends Model
                 'action_id', 'incident_id', 'campaign_id' , 'loc_formatted_addr',
                 'map_bind', 'map_bounds', 'map_limit_points', 'time_range', 'map_state', 'map_gps',
                 'created_ts', 'modified_ts', 'deleted_ts',  'visibility_id', 
-                'vehicle_country_code', 'vehicle_reg_plate', 'citation_id', ],
+                'vehicle_country_code', 'vehicle_reg_plate', 'citation_id', 
+                'batch_ts'
+             ],
             'admin' => parent::scenarios()[self::SCENARIO_DEFAULT], // admin may do everthing
         ];
     }
@@ -149,9 +169,9 @@ class PictureSearch extends Model
             'incident_id' => 'Vorfall',
             'citation_id' => 'Anzeige',
             'campaign_id' => 'Kampagne',
-            'created_ts' => 'Hochgeladen am',
-            'modified_ts' => 'Geändert am',
-            'deleted_ts' => 'Gelöscht am',
+            'created_ts' => 'Hochgeladen am (UTC)',
+            'modified_ts' => 'Geändert am (UTC)',
+            'deleted_ts' => 'Gelöscht am (UTC)',
             
             'map_bounds' => 'Kartengrenzen',
             'map_state' => 'Kartenstatus',
@@ -159,6 +179,8 @@ class PictureSearch extends Model
             'map_bind' => 'Suche durch den Kartenbereich begrenzen',
             'map_limit_points' => 'Auch Ermittlung der Übersichtskarte auf den Kartenbereich beschränken',
             'time_range' => 'Zeitraum',
+            
+            'batch_ts' => 'Anfangszeitstempel des Bearbeitungslaufs',
         ];
     }
 
@@ -248,6 +270,8 @@ class PictureSearch extends Model
                 // Clear the map bounds to retrigger the map boundary calculation
                 $this->map_bounds = '';
             }
+            
+            $this->addCondition2($query, 'batch_ts', '<', ['attr' => 'modified_ts']);
         }
         return $dataProvider;
     }
@@ -333,6 +357,11 @@ class PictureSearch extends Model
                 }
                 $query->andWhere($condition);
                 break;
+            case '<':
+                $query->andWhere(['<', '{{%picture}}.'.$params['attr'], $value]);
+                break;
+            default:
+                throw new \yii\base\Exception( "Unknown type $type" );
         }
     }
     

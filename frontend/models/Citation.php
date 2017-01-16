@@ -40,7 +40,7 @@ class Citation extends \yii\db\ActiveRecord
                     \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_ts', 'modified_ts'],
                     \yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'modified_ts',
                 ],
-                'value' => new \yii\db\Expression('NOW()'),
+                'value' => new \yii\db\Expression ('NOW() at time zone \'UTC\''),
             ],
             'EnsureOwnership' => [
                 'class' => 'common\behaviors\EnsureOwnership',
@@ -72,10 +72,10 @@ class Citation extends \yii\db\ActiveRecord
             'name' => 'Name',
             'description' => 'Zusatzinformationen',
             'type' => 'Anzeigentyp',
-            'created_ts' => 'Angelegt am',
-            'modified_ts' => 'Verändert am',
-            'released_ts' => 'Freigegeben am',
-            'deleted_ts' => 'Gelöscht am',
+            'created_ts' => 'Angelegt am (UTC)',
+            'modified_ts' => 'Verändert am (UTC)',
+            'released_ts' => 'Freigegeben am (UTC)',
+            'deleted_ts' => 'Gelöscht am (UTC)',
         ];
     }
 

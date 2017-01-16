@@ -71,7 +71,7 @@ class Userlog extends \yii\db\ActiveRecord
         }
 
         $userlog->owner_id = $user;
-        $userlog->ts = new \yii\db\Expression ('NOW()');
+        $userlog->ts = new \yii\db\Expression ('NOW() at time zone \'UTC\'');
         $userlog->event = $event;
         $userlog->log = $log;
         $userlog->save();

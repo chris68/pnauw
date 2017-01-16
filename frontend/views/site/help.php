@@ -274,6 +274,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <li>Die Suche in den Textfeldern ist eine Teiltextsuche, bei der zwischen Groß- und Kleinschreibung unterschieden wird. Eine Suche nach <i>straße</i> findet also <i>Kriegsstraße</i>, aber nicht <i>Straße des 17.Juni</i></li>
         <li>Bei der Suche in den Textfeldern kann über Eingabe von <i>#</i> nach leeren Feldern gesucht werden (z.B. Finden von Anzeigen, wo keine Autonummer eingegeben wurde, etc)</li>
     </ul>
+    <p>
+        Auch bei der Bearbeitung gibt es die gleiche Suche, aber mit mehr Feldern. Zudem besteht hier die Möglichkeit, die bestehende Suche als Arbeitsvorrat zu definieren. Damit verschwindet ein Satz, den man geändert hat, 
+        nach der Änderung automatisch aus dem Arbeitsvorrat. Das hilft beim schnellen Durcharbeiten von Bildern nach bestimmten Kriterien, denn man muss nach dem Speichern nicht immer 
+        zum nächsten Bild wechseln, sondern man kommt automatisch einmal durch alle Bilder durch.
+    </p>
     
     <h3><a name="picture-quicksearch">Schnellsuche</a></h3>
     <p>

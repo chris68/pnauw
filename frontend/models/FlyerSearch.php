@@ -48,10 +48,10 @@ class FlyerSearch extends Model
             'secret' => 'Zettelzugangscode',
             'running_from' => 'Startdatum',
             'running_until' => 'Enddatum',
-            'created_ts' => 'Angelegt am',
-            'modified_ts' => 'Verändert am',
-            'released_ts' => 'Freigegeben am',
-            'deleted_ts' => 'Gelöscht am',
+            'created_ts' => 'Angelegt am (UTC)',
+            'modified_ts' => 'Verändert am (UTC)',
+            'released_ts' => 'Freigegeben am (UTC)',
+            'deleted_ts' => 'Gelöscht am (UTC)',
         ];
     }
 
