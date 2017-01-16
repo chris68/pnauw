@@ -20,7 +20,7 @@ use yii\bootstrap\ActiveForm;
         <div class="form-group">
             <?= Html::submitButton('Suchen', ['class' => 'btn btn-primary', 'onClick' => '$(\'#search-batch-ts\').val(\'\');']) ?>
         <?php if ($model->scenario == 'private') : ?>
-            <?= Html::submitButton('Als Arbeitsvorrat durcharbeiten', ['class' => 'btn btn-secondary', 'onClick' => '$(\'#search-batch-ts\').val(\''.$model->now_utc.'\');']) ?>
+            <?= Html::submitButton('Als Arbeitsvorrat festlegen', ['class' => 'btn btn-secondary', 'onClick' => '$(\'#search-batch-ts\').val(\''.$model->now_utc.'\');']) ?>
         <?php endif; ?>
             <?= Html::activeHiddenInput($model, 'batch_ts', ['id'=>'search-batch-ts', ]) ?>
         </div>

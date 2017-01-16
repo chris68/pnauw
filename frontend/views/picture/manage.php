@@ -17,8 +17,6 @@ $this->params['help'] = 'picture-manage';
 ?>
 <div class="picture-manage">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?=
         Collapse::widget([
             'items' => [
