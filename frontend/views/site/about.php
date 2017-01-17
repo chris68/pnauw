@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <ul>
         <li><?= Assist::extlink('Offizielle Seite "gehwege-frei.de" des Fuß eV','http://www.gehwege-frei.de') ?></li>
+        <li><?= Assist::extlink('Bußgeldkatalog "Parken auf dem Gehweg"','https://www.bussgeldkatalog.org/halten-parken/auf-dem-gehweg') ?></li>
         <li><?= Assist::extlink('Initiative "Geh weg vom Gehweg" in Karlsruhe','https:/geh-weg-vom-gehweg.blogspot.de') ?></li>
         <li><?= Assist::extlink('Verkehrswende Darmstadt', 'http://www.verkehrswende-darmstadt.de/aktionen/illegales-gehwegparken') ?></li>
     </ul>
