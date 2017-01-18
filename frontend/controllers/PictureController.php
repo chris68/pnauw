@@ -931,7 +931,7 @@ class PictureController extends Controller
                     // Insert space after the reg_codes of the user
                     /* @var $user User */
                     $user = User::findIdentity(Yii::$app->user->getId());
-                    $reg_codes = explode(';',$user->reg_codes);
+                    $reg_codes = explode(',',$user->reg_codes);
                     // Make sure we split of only correct plates (K AX 1333 vs KA X 13)
                     $reg_codes_regexp = array_map(function($value) { return '/^('.$value.')([A-ZÖÄÜ]{1,2}[0-9]{1,4})/'; },$reg_codes);
                     $plate = preg_replace($reg_codes_regexp,'$1 $2',$plate,1); 

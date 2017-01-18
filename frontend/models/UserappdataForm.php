@@ -17,7 +17,7 @@ class UserappdataForm extends User
         return [
             [['reg_codes'],'string'],
             [['reg_codes'], 'filter', 'filter' => 'mb_strtoupper', 'skipOnEmpty' => true],
-            [['reg_codes'], 'match', 'pattern' => '/^([A-ZÖÄÜ])+(;([A-ZÖÄÜ])+)*$/i', 'skipOnEmpty' => true, 'message'=>'Sie müssen eine mit Semikolon separierte Liste von Unterscheidungskennzeichen eingeben'],
+            [['reg_codes'], 'match', 'pattern' => '/^([A-ZÖÄÜ])+(,([A-ZÖÄÜ])+)*$/i', 'skipOnEmpty' => true, 'message'=>'Sie müssen eine mit Komma separierte Liste von Unterscheidungskennzeichen eingeben'],
         ];
     }
 
