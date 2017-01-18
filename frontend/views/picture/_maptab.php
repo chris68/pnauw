@@ -4,6 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 
 use \yii\helpers\Html;
+use \frontend\models\Picture;
 ?>
 
 <div class="row">
@@ -18,7 +19,7 @@ use \yii\helpers\Html;
         <?= Html::activeInput('text', $model,'loc_lng',['id'=>'picture-map-loc-lng', 'style' => 'display:none', ]) ?>
         <?= Html::activeHiddenInput($model,'org_loc_lat', ['id'=>'picture-map-loc-lat-org', ]) ?>
         <?= Html::activeHiddenInput($model,'org_loc_lng',['id'=>'picture-map-loc-lng-org', ]) ?>
-        <?php if ($model->isNewRecord):?>
+        <?php if ($model->isNewRecord && $model->scenario == Picture::SCENARIO_DEFAULT):?>
         <div class="form-group">
             <label for="picture-map-geopositioning">Automatisches Geopositionieren</label>
             <input type="checkbox" onclick="toggleLocate(map,$('#picture-map-geopositioning').prop('checked'))" id="picture-map-geopositioning" value="on" checked/>

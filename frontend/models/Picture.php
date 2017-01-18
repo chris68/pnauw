@@ -173,6 +173,10 @@ class Picture extends \yii\db\ActiveRecord
         if ($defaultvalues->visibility_id <> 'private') {
             $this->visibility_id = $defaultvalues->visibility_id ;
         }
+        
+        if ($defaultvalues->taken_override <> '') {
+            $this->taken = $defaultvalues->taken_override;
+        }
     }
 
     /**
@@ -271,25 +275,25 @@ class Picture extends \yii\db\ActiveRecord
             ['citation_id', 'default', 'value' => NULL],
             ['selected', 'default', 'value' => false],
             ['deleted', 'default', 'value' => false],
-            ['image_dataurl', 'string',],
-            [['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required'],
-            [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'integer'],
-            [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'filter', 'filter' => 'intval', 'skipOnEmpty' => true],
+            ['image_dataurl', 'string', 'on' => self::SCENARIO_DEFAULT,],
+            [['clip_x', 'clip_y', 'clip_size', 'visibility_id'], 'required', 'on' => self::SCENARIO_DEFAULT],
+            [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'integer', 'on' => self::SCENARIO_DEFAULT],
+            [['clip_x', 'clip_y', 'clip_size', 'action_id', 'incident_id', 'citation_id', ], 'filter', 'filter' => 'intval', 'skipOnEmpty' => true, 'on' => self::SCENARIO_DEFAULT],
             ['taken_override', 'date'],
             ['taken_override', 'validateTakenDate', 'skipOnEmpty' => false, 'on' => self::SCENARIO_DEFAULT],
 
             [['name', 'description', 'loc_formatted_addr', 'visibility_id', 'vehicle_country_code', 'vehicle_reg_plate', 'citation_affix',], 'string'],
 
-            // Only if the pic is niew you can set these attributes
-            [['org_loc_lat', 'org_loc_lng',], 'double', 'when' => function ($model) {return $model->isNewRecord;}],
-            [['taken', ], 'date', 'format' => 'yyyy-MM-dd HH:mm:ss', 'when' => function ($model) {return $model->isNewRecord;}],
+            // Only if the pic is new you can set these attributes
+            [['org_loc_lat', 'org_loc_lng',], 'double', 'when' => function ($model) {return $model->isNewRecord;}, 'on' => self::SCENARIO_DEFAULT],
+            [['taken', ], 'date', 'format' => 'yyyy-MM-dd HH:mm:ss', 'when' => function ($model) {return $model->isNewRecord;}, 'on' => self::SCENARIO_DEFAULT],
                 
             [['loc_lat', 'loc_lng',], 'double'],
             ['visibility_id',  'validateVisibilityConsistency', ],
             [['loc_lat', 'loc_lng'], 'validateLocationConsistency', 'on' => self::SCENARIO_DEFAULT],
             [['vehicle_reg_plate'], 'filter', 'filter' => 'mb_strtoupper', 'skipOnEmpty' => true],
             [['vehicle_reg_plate'], 'match', 'not'=>true, 'pattern' => '/[?]/', 'skipOnEmpty' => true, ],
-            ['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false,],
+            ['vehicle_country_code', 'validateVehiclePlateConsistency', 'skipOnEmpty' => false, 'on' => self::SCENARIO_DEFAULT,],
             // Only trusted users currently may assign to a campaign
             ['campaign_id', 'default', 'value' => NULL, 'when' => function ($model) {return Yii::$app->user->can('trusted');}],
             ['campaign_id', 'integer', 'when' => function ($model) {return Yii::$app->user->can('trusted');}],

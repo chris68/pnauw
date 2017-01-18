@@ -10,17 +10,21 @@ use \frontend\models\Picture;
 <div class="row">
     <div class="col-lg-3">
         <?= $form->field($model, 'incident_id')->dropDownList(frontend\models\Incident::dropDownList()) ?>
+        <?php if ($model->scenario == Picture::SCENARIO_DEFAULT) : ?>
         <?= frontend\widgets\VehicleIncidentHistory::widget(
                 [
                     'picture' => $model,
                 ]
             )
         ?>
+        <?php endif;?>
         <?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
         <?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList())->hint('Anzeigen müssen Sie vorher anlegen') ?>
         <?= $form->field($model, 'vehicle_reg_plate')->textInput(['placeholder' => 'Optionale Erfassung (nicht öffentlich)']) ?>
         <?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
     </div>
+
+    <?php if ($model->scenario == Picture::SCENARIO_DEFAULT) : ?>
 
     <div class ="col-lg-3">
         <div>
@@ -64,6 +68,7 @@ use \frontend\models\Picture;
         <?php endif;?>
         <p class="help-block">Setzen Sie den Bildausschnitt durch Antippen des Nummernschilds und Anpassen des Zooms<br/>Oder nutzen Sie am besten die automatische Erkennung</p>
     </div>
+    <?php endif;?>
 </div>
 
 

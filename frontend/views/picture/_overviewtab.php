@@ -5,12 +5,14 @@
 
 use yii\widgets\DetailView;
 use yii\helpers\Html;
+use \frontend\models\Picture;
 
 ?>
 
 <div class=    "row">
     <div class ="col-lg-6">
 
+    <?php if ($model->scenario == Picture::SCENARIO_DEFAULT) : ?>
     <div class="form-group">
         <?php
         if (!$model->isNewRecord ) {
@@ -28,8 +30,10 @@ use yii\helpers\Html;
         <?php
         }
         ?>
-
     </div>
+    <?php endif;?>
+        
+    <?php if ($model->scenario == Picture::SCENARIO_DEFAULT) : ?>
         <?=
 
         DetailView::widget(
@@ -92,6 +96,24 @@ use yii\helpers\Html;
             ]
         );
         ?>
+    <?php else: ?>
+        <?=
+
+        DetailView::widget(
+            [
+                'model' => $model,
+                'attributes' => [
+                    [
+                        'label' => 'Vorfallsdatum',
+                        'format' => 'raw',
+                        'value' => $form->field($model, 'taken_override')->label('')->widget(\yii\jui\DatePicker::className())
+                    ],
+                ]
+            ]
+        );
+        ?>
+        
+    <?php endif;?>
     </div>
 </div>
 
