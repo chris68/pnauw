@@ -118,6 +118,10 @@ use \frontend\models\Picture;
                             setTimeout(function() {
                                 // The image will need some time to be display so update the canvas a little later
                                 updatePictureClipCanvas();
+                                // Switch off geopositining since after the photo as been taken people continue to walk on
+                                // and you want the position where the photo was taken and not where you continued to document
+                                $('#picture-map-geopositioning').prop('checked',false);
+                                toggleLocate(map,false);
 
                             }, 100);
                         },
