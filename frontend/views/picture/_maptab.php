@@ -23,6 +23,9 @@ use \frontend\models\Picture;
         <div class="form-group">
             <label for="picture-map-geopositioning">Automatisches Geopositionieren</label>
             <input type="checkbox" onclick="toggleLocate(map,$('#picture-map-geopositioning').prop('checked'))" id="picture-map-geopositioning" value="on" checked/>
+            <p class="help-block">
+                Hier können Sie die automatische Geopositionierung jederzeit selbst anschalten oder aussschalten.
+            </p>
         </div>
 
         <?php endif; ?>
@@ -33,6 +36,14 @@ use \frontend\models\Picture;
     </div>
     <div class="col-lg-3">
         <p class="help-block">
+            <?php if ($model->isNewRecord && $model->scenario == Picture::SCENARIO_DEFAULT) :?>
+            Hier müssen Sie die Aufnahmeposition des Bilds setzen. Hierbei hilft Ihnen die automatische Positionierung, welche ihr mobiles Gerät 
+            ermittelt hat (sie müssen dafür die Freigabe im Browser erteilen). Ihre Position wird mit einer Kamera angezeigt, die Genauigkeit mit einem 
+            blauen Kreis. <br/>
+            
+            Wenn Sie ein Photo aufgenommen haben und die Genauigkeit ausreichend ist, dann stoppt die automatische Ermittlung (siehe Checkbox). Sie müssen dann den 
+            genauen Ort mit dem Finger setzen (=> blauer Pfeil erscheint). Daraufhin wird dann die Adresse ermittelt.<br/>
+            <?php else :?>
             Hier können Sie die Aufnahmeposition des Bilds angeben bzw. korrigieren. 
             Mit der Suchlupe oben rechts in der Karte können Sie den gewünschten Kartenausschnitt suchen.<br><br>
             
@@ -41,6 +52,7 @@ use \frontend\models\Picture;
 
             Die nächstliegende Adresse wird dann automatisch von OpenStreetMap Nominatim ermittelt und als Ortsangabe übernommen. Je weiter Sie reinzommen, desto
             genauer wird die Adresse ermittelt (bis auf Hausnummern genau). Sie können die einmal ermittelte Adresse auch noch verbessern/anpassen.
+            <?php endif;?>
         </p>
     </div>
-</div>
+</div>  
