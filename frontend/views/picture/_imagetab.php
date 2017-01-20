@@ -5,6 +5,7 @@
 
 use \yii\helpers\Html;
 use \frontend\models\Picture;
+use \common\models\User;
 
 ?>
 <div class="row">
@@ -76,8 +77,10 @@ use \frontend\models\Picture;
 
 <?php
     if ($model->isNewRecord && $model->scenario == Picture::SCENARIO_DEFAULT) {
+        $accuracy = User::findIdentity(Yii::$app->user->getId())->geo_accuracy;
+        $accuracy = (int)(empty($accuracy)?0:$accuracy);
         $this->registerJs(
-<<<'JAVASCRIPT'
+<<<JAVASCRIPT
             // After a picture has been captured and a proper location has been found we want to toggle of the auto geopositioning
             // This variable tracks whether a pic has been actually taken
             var picture_captured = false;
@@ -154,7 +157,7 @@ use \frontend\models\Picture;
                 $('#picture-map-loc-lng-org').val(e.latlng.lng);
                 updateMarkerOrg();
 
-                if (picture_captured && e.accuracy < 10 ) {
+                if (picture_captured && e.accuracy < {$accuracy} ) {
                     // Switch off geopositining when a reasonably accurate location has been found after the photo as been taken 
                     // Reason: people continue to walk on and you want the position where the photo was taken and not where you continued to document
                     $('#picture-map-geopositioning').prop('checked',false);

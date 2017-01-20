@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-userappdata']); ?>
+                <fieldset>
                 <legend>Automatische Kennzeichenerkennung</legend>
                     <div class="help-block">
                         Das Kfz-Kennzeichen in Deutschland besteht am Anfang in der Regel aus zwei Buchstabensegmenten, die unbedingt durch einen Leerraum getrennt werden müssen. 
@@ -28,6 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         ->hint('Geben Sie hier die für Sie wichtigen Kennungen immer zuerst in der Liste an (also KA vor K, wenn Ihnen Karlsruhe wichtiger als Köln ist)') ?>
                 </fieldset>
                 <fieldset>
+                <legend>Automatische Geopositionierung</legend>
+                    <div class="help-block">
+                        Wenn Sie einen Vorfall direkt mit dem Smartphone aufnehmen, dann werden Sie durch die automatische Geopositionierung unterstützt. 
+                        Es ist aber von Smartphone zu Smartphone sehr unterschiedlich, welche Genauigkeit hier in der Regel erreichbar ist. Daher 
+                        können Sie hier einen Schwellwert eingeben, der angibt, ab wann Sie mit der erreichten Genauigkeit zufrieden sind.
+                    </div>
+                    <?= $form->field($model, 'geo_accuracy')
+                        ->input('text')
+                        ->hint('Geben Sie hier optional an, ab welcher Genauigkeit (in Meter) sich die automatische Geopositionierung nach der Bildaufnahme abschalten soll') ?>
+                </fieldset>
                 <div class="form-group">
                     <?= Html::submitButton('Speichern', ['class' => 'btn btn-primary']) ?>
                 </div>

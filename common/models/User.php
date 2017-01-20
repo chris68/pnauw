@@ -26,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property integer $update_time // additional field as timestamp instead of unix time
  * @property integer $role
  * @property string $reg_codes
+ * @property integer $geo_accuracy
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -55,6 +56,7 @@ class User extends ActiveRecord implements IdentityInterface
         parent::init();
         // Currently many users come from the Karlsruhe area; therefore, we default with helpful values for those guys. Baden rulez!
         $this->reg_codes = 'KA,PF,GER,SÜW,RP,LD,HD,RA,OG,S';
+        $this->geo_accuracy = '15';
     }
 
     /**
