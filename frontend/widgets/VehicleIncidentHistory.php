@@ -27,7 +27,11 @@ class VehicleIncidentHistory extends \yii\base\Widget
     {
         parent::init();
 
-        if (!empty($this->picture->vehicle_reg_plate) && $this->picture->vehicle_reg_plate <> '-') {
+        if (empty($this->picture->vehicle_reg_plate)) {
+            $content = 'Kein Kennzeichen erfasst';
+        } else if ($this->picture->vehicle_reg_plate = '-') {
+            $content = 'Ohne Kennzeichen';
+        } else {
             $count = Picture::find()->ownerScope()->andWhere(['vehicle_reg_plate' => $this->picture->vehicle_reg_plate])->count();
 
             if ($count > 3) {
@@ -40,8 +44,9 @@ class VehicleIncidentHistory extends \yii\base\Widget
             }
             $content = $content.' bei <a target = "_blank" href="'.Url::to(PictureController::urlVehicleRegPlate('manage',$this->picture->vehicle_reg_plate)).'">'.Html::encode($this->picture->vehicle_reg_plate).'</a>';
 
-            echo \yii\helpers\Html::tag('p',$content,$this->options);
-        }
+        } 
+
+        echo \yii\helpers\Html::tag('p',$content,$this->options);
     }
  
 };
