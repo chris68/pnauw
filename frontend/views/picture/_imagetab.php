@@ -78,75 +78,89 @@ use \frontend\models\Picture;
     if ($model->isNewRecord && $model->scenario == Picture::SCENARIO_DEFAULT) {
         $this->registerJs(
 <<<'JAVASCRIPT'
-            $(document).ready(function () {
-                // Set the taken timestamp to the local client time
+            // After a picture has been captured and a proper location has been found we want to toggle of the auto geopositioning
+            // This variable tracks whether a pic has been actually taken
+            var picture_captured = false;
+                
+            function now_iso() {
+                // Return the timestamp in the local client time
                 var now = new Date();
                 var pad = function(num) {
                     var norm = Math.abs(Math.floor(num));
                     return (norm < 10 ? '0' : '') + norm;
                 };
-                var now_iso = now.getFullYear()
+                return now.getFullYear()
                     + '-' + pad(now.getMonth()+1)
                     + '-' + pad(now.getDate())
                     + ' ' + pad(now.getHours())
                     + ':' + pad(now.getMinutes())
                     + ':' + pad(now.getSeconds())
                 ;
-                $("#picture-taken").val(now_iso);
+            }
 
-                if ($("#picture-image-dataurl").val() != '') {
-                    // Restore the pic from the dataurl if given
-                    $("#picture-image").attr("src", $("#picture-image-dataurl").val());
+            $("#picture-taken").val(now_iso());
+            
+            if ($("#picture-image-dataurl").val() != '') {
+                // Restore the pic from the dataurl if given
+                $("#picture-image").attr("src", $("#picture-image-dataurl").val());
 
-                    setTimeout(function() {
-                        // The image will need some time to be display so update the canvas a little later
-                        updatePictureClipCanvas();
+                setTimeout(function() {
+                    // The image will need some time to be display so update the canvas a little later
+                    updatePictureClipCanvas();
 
-                    }, 100);
-                }
+                }, 100);
+            }
 
-                // Resize the file upload in the internal canvas
-                $("#picture-image-upload").ImageResize(
-                    {
-                        longestEdge: 1024,
-                        onImageResized: function (imageData) {
-                            // Save the image data url in the hidden input field
-                            $("#picture-image-dataurl").val(imageData);
+            // Resize the file upload in the internal canvas
+            $("#picture-image-upload").ImageResize(
+                {
+                    longestEdge: 1024,
+                    onImageResized: function (imageData) {
+                        // Set the time when the picture has been taken
+                        $("#picture-taken").val(now_iso());
 
-                            // Set the picture to the resized image and update the clip canvas
-                            $("#picture-image").attr("src", imageData);
-                            setTimeout(function() {
-                                // The image will need some time to be display so update the canvas a little later
-                                updatePictureClipCanvas();
-                                // Switch off geopositining since after the photo as been taken people continue to walk on
-                                // and you want the position where the photo was taken and not where you continued to document
-                                $('#picture-map-geopositioning').prop('checked',false);
-                                toggleLocate(map,false);
+                        // Log that the pic has been taken
+                        picture_captured = true;
 
-                            }, 100);
-                        },
-                        onFailure: function (message) {
-                            alert(message);
-                        }
+                        // Save the image data url in the hidden input field
+                        $("#picture-image-dataurl").val(imageData);
+
+                        // Set the picture to the resized image and update the clip canvas
+                        $("#picture-image").attr("src", imageData);
+                        setTimeout(function() {
+                            // The image will need some time to be display so update the canvas a little later
+                            updatePictureClipCanvas();
+
+                        }, 100);
+                    },
+                    onFailure: function (message) {
+                        alert(message);
                     }
-                );
+                }
+            );
 
-                toggleLocate(map,true);
-                var positionLayerGroup = L.layerGroup([]);
-                positionLayerGroup.addTo(map);
+            toggleLocate(map,true);
+            var positionLayerGroup = L.layerGroup([]);
+            positionLayerGroup.addTo(map);
 
-                map.on('locationerror', function(e) {
-                    alert(e.message);
-                });
+            map.on('locationerror', function(e) {
+                alert(e.message);
+            });
 
-                map.on('locationfound', function(e) {
-                    positionLayerGroup.clearLayers();
-                    positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
-                    $('#picture-map-loc-lat-org').val(e.latlng.lat);
-                    $('#picture-map-loc-lng-org').val(e.latlng.lng);
-                    updateMarkerOrg();
-                });
+            map.on('locationfound', function(e) {
+                positionLayerGroup.clearLayers();
+                positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
+                $('#picture-map-loc-lat-org').val(e.latlng.lat);
+                $('#picture-map-loc-lng-org').val(e.latlng.lng);
+                updateMarkerOrg();
 
+                if (picture_captured && e.accuracy < 10 ) {
+                    // Switch off geopositining when a reasonably accurate location has been found after the photo as been taken 
+                    // Reason: people continue to walk on and you want the position where the photo was taken and not where you continued to document
+                    $('#picture-map-geopositioning').prop('checked',false);
+                    picture_captured = false;
+                    toggleLocate(map,false);
+                }
 
             });
 JAVASCRIPT
