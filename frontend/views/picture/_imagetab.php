@@ -165,12 +165,9 @@ use \common\models\User;
                     $('#picture-map-geopositioning').prop('checked',false);
                     picture_captured = false;
                     toggleLocate(map,false);
-                    geocodePosition(getlatLng());
-
-                } else {
-                    updateMarker();
-                }
-
+                } 
+                
+                updateMarker();
             });
 JAVASCRIPT
             ,

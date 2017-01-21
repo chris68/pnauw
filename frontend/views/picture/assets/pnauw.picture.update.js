@@ -18,8 +18,7 @@ function updatePictureClipCanvas() {
 $('#picture-image').click(function (e) {
     // Calcuation of offsetX/offsetY according to http://www.jacklmoore.com/notes/mouse-position/
 
-    e = e || window.event;
-    var target = e.target || e.srcElement,
+    var target = e.target,
         rect = target.getBoundingClientRect(),
         offsetX = e.clientX - rect.left,
         offsetY = e.clientY - rect.top;
@@ -179,8 +178,8 @@ function geocodePosition(pos) {
 $('#picture-tabs #picture-tab-map a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     // Refresh the map on active; otherwise, it will be mingled!
     map.invalidateSize(false);
-
-    //adjustPosition();
+    // And center it with an appropriate zoom, at least 16
+    map.setView(getlatLng(),Math.max(16,map.getZoom()));
 });
 
 $("form").bind("reset", function() {

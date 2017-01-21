@@ -42,7 +42,7 @@ use \frontend\models\Picture;
             blauen Kreis. <br/>
             
             Wenn Sie ein Photo aufgenommen haben und die Genauigkeit ausreichend ist, dann stoppt die automatische Ermittlung (siehe Checkbox). Sie können dann den 
-            genauen Ort durch Verschieben des blauen Pfeil korrigieren. Dann wird auch die Adresse neu ermittelt.<br/>
+            genauen Ort durch Verschieben des blauen Pfeil korrigieren. Dann wird auch die Adresse ermittelt.<br/>
             <?php else :?>
             Hier können Sie die Aufnahmeposition des Bilds angeben bzw. korrigieren. 
             Mit der Suchlupe oben rechts in der Karte können Sie den gewünschten Kartenausschnitt suchen.<br><br>
