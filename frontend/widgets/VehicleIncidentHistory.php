@@ -29,7 +29,7 @@ class VehicleIncidentHistory extends \yii\base\Widget
 
         if (empty($this->picture->vehicle_reg_plate)) {
             $content = 'Kein Kennzeichen erfasst';
-        } else if ($this->picture->vehicle_reg_plate = '-') {
+        } else if ($this->picture->vehicle_reg_plate == '-') {
             $content = 'Ohne Kennzeichen';
         } else {
             $count = Picture::find()->ownerScope()->andWhere(['vehicle_reg_plate' => $this->picture->vehicle_reg_plate])->count();
