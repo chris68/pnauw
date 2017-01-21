@@ -130,7 +130,8 @@ function geocodePosition(pos) {
         console.debug(results);
         var r = results[0];
         if (r) {
-            // Built up the 
+            //alert(JSON.stringify(r));
+            // Built up the address
             var address =  [
                 [
                     r.properties.address.footway,
@@ -139,7 +140,9 @@ function geocodePosition(pos) {
                 ].filter(val => val).join(' '),
                 [
                     r.properties.address.postcode,
-                    r.properties.address.suburb,
+                    // suburb is only used in the context of town and city; otherwise it is a misdocumentation and results in weird addresses
+                    r.properties.address.town||r.properties.address.city?r.properties.address.suburb:'', 
+                    r.properties.address.village,
                     r.properties.address.city_district,
                     r.properties.address.town,
                     r.properties.address.city
