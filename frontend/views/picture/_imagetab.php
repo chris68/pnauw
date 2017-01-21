@@ -155,6 +155,8 @@ use \common\models\User;
                 positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
                 $('#picture-map-loc-lat-org').val(e.latlng.lat);
                 $('#picture-map-loc-lng-org').val(e.latlng.lng);
+                $('#picture-map-loc-lat').val(e.latlng.lat);
+                $('#picture-map-loc-lng').val(e.latlng.lng);
                 updateMarkerOrg();
 
                 if (picture_captured && e.accuracy < {$accuracy} ) {
@@ -163,6 +165,10 @@ use \common\models\User;
                     $('#picture-map-geopositioning').prop('checked',false);
                     picture_captured = false;
                     toggleLocate(map,false);
+                    geocodePosition(getlatLng());
+
+                } else {
+                    updateMarker();
                 }
 
             });

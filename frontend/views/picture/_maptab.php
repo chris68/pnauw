@@ -41,8 +41,8 @@ use \frontend\models\Picture;
             ermittelt hat (sie müssen dafür die Freigabe im Browser erteilen). Ihre Position wird mit einer Kamera angezeigt, die Genauigkeit mit einem 
             blauen Kreis. <br/>
             
-            Wenn Sie ein Photo aufgenommen haben und die Genauigkeit ausreichend ist, dann stoppt die automatische Ermittlung (siehe Checkbox). Sie müssen dann den 
-            genauen Ort mit dem Finger setzen (=> blauer Pfeil erscheint). Daraufhin wird dann die Adresse ermittelt.<br/>
+            Wenn Sie ein Photo aufgenommen haben und die Genauigkeit ausreichend ist, dann stoppt die automatische Ermittlung (siehe Checkbox). Sie können dann den 
+            genauen Ort durch Verschieben des blauen Pfeil korrigieren. Dann wird auch die Adresse neu ermittelt.<br/>
             <?php else :?>
             Hier können Sie die Aufnahmeposition des Bilds angeben bzw. korrigieren. 
             Mit der Suchlupe oben rechts in der Karte können Sie den gewünschten Kartenausschnitt suchen.<br><br>

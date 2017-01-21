@@ -98,6 +98,17 @@ function updateMarkerOrg() {
     marker_org = L.marker(getlatLngOrg(),{icon: cameraIcon}).addTo(map);
 }
 
+function updateMarker() {
+    if (marker) {
+        map.removeLayer(marker);
+    }
+    marker = L.marker(getlatLng(),{draggable:true}).addTo(map);
+    marker.on('dragend', function(e) {
+        geocodePosition(e.target.getLatLng());
+    });
+}
+
+
 updateMarkerOrg();
 
 map.on('click', function(e) {
@@ -114,7 +125,7 @@ function toggleLocate(map,isOn) {
 }
 
 if ($('#picture-map-loc-formatted-addr').val() == '') {
-    // Of the orgiginal coordinates and the current coords are the same then geocode since then it is the first time
+    // If no address then try to geocode
     geocodePosition(getlatLng());
 }
 
@@ -124,6 +135,8 @@ function geocodePosition(pos) {
     // Update the model
     $('#picture-map-loc-lat').val(pos.lat);
     $('#picture-map-loc-lng').val(pos.lng);
+    
+    updateMarker();
 
 
     geocoder.reverse(pos, map.options.crs.scale(map.getZoom()), function(results) {
@@ -155,14 +168,6 @@ function geocodePosition(pos) {
                 $('#picture-map-nearest-address').text (address);
                 $('#picture-map-loc-formatted-addr').val(address);
             }
-            
-            if (marker) {
-                map.removeLayer(marker);
-            }
-            marker = L.marker(pos,{draggable:true}).addTo(map);
-            marker.on('dragend', function(e) {
-                geocodePosition(e.target.getLatLng());
-            });
         } else {
             $('#picture-map-nearest-address').html("<div class='alert alert-warning'>Es konnte keine Adresse ermittelt werden</div>");
             $('#picture-map-loc-formatted-addr').val('');
