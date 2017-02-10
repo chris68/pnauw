@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 // @chris68
 use frontend\helpers\Assist;
 
-$this->title = 'Signup';
+$this->title = \Yii::t('base','Signup');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">

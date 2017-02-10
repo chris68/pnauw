@@ -144,7 +144,7 @@ class SiteController extends Controller
             if ($model->sendEmail(Yii::$app->params['contactEmail'])) {
                 Yii::$app->session->setFlash('success', \Yii::t('base','Thank you for contacting us. We will respond to you as soon as possible.'));
             } else {
-                Yii::$app->session->setFlash('error', \Yii::t('base','There was an error sending email.'));
+                Yii::$app->session->setFlash('error', \Yii::t('base','There was an error sending your message.'));
             }
 
             return $this->refresh();
@@ -208,7 +208,7 @@ class SiteController extends Controller
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', \Yii::t('base','There was an error sending email.'));
+                Yii::$app->session->setFlash('error', \Yii::t('base','Sorry, we are unable to reset password for the provided email address.'));
             }
         }
 
@@ -233,7 +233,7 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', \Yii::t('base','New password was saved.'));
+            Yii::$app->session->setFlash('success', \Yii::t('base','New password saved.'));
 
             return $this->goHome();
         }
