@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4319f61e3181788b2bf702c1132f396",
+    "content-hash": "0d82c5edc61ae8b1eaaf62cd3f20b958",
     "packages": [
         {
             "name": "2amigos/yii2-qrcode-helper",
@@ -582,6 +582,52 @@
                 "typography"
             ],
             "time": "2016-12-13T01:01:17+00:00"
+        },
+        {
+            "name": "paulzi/yii2-json-behavior",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paulzi/yii2-json-behavior.git",
+                "reference": "5040341b7253bd958720fb9ab93d05813a24ba64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paulzi/yii2-json-behavior/zipball/5040341b7253bd958720fb9ab93d05813a24ba64",
+                "reference": "5040341b7253bd958720fb9ab93d05813a24ba64",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "paulzi\\jsonBehavior\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PaulZi",
+                    "email": "pavel.zimakoff@gmail.com"
+                }
+            ],
+            "description": "Yii2 json attribute behavior",
+            "keywords": [
+                "Behavior",
+                "json",
+                "validator",
+                "yii2"
+            ],
+            "time": "2016-12-12T07:54:33+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

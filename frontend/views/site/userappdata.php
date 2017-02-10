@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         Das schafft die automatische Erkennung derzeit nicht und daher muss man hier die Unterscheidungszeichen (d.h. die Stadt- und Kreiskennungen) als 
                         kommaseparierte Liste eingeben, damit diese sauber getrennt werden
                     </div>
-                    <?= $form->field($model, 'reg_codes')
+                    <?= $form->field($model, 'appdata__reg_codes')
                         ->textarea(['rows' => 3, 'placeholder' => 'Beispiel für Großraum Karlsruhe: KA,PF,GER,SÜW,RP,LD,HD,RA,OG,S'])
                         ->hint('Geben Sie hier die für Sie wichtigen Kennungen immer zuerst in der Liste an (also KA vor K, wenn Ihnen Karlsruhe wichtiger als Köln ist)') ?>
                 </fieldset>
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         Es ist aber von Smartphone zu Smartphone sehr unterschiedlich, welche Genauigkeit hier in der Regel erreichbar ist. Daher 
                         können Sie hier einen Schwellwert eingeben, der angibt, ab wann Sie mit der erreichten Genauigkeit zufrieden sind.
                     </div>
-                    <?= $form->field($model, 'geo_accuracy')
+                    <?= $form->field($model, 'appdata__geo_accuracy')
                         ->input('text')
                         ->hint('Geben Sie hier optional an, ab welcher Genauigkeit (in Meter) sich die automatische Geopositionierung nach der Bildaufnahme abschalten soll') ?>
                 </fieldset>

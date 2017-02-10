@@ -6,6 +6,8 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use paulzi\jsonBehavior\JsonBehavior;
+use paulzi\jsonBehavior\JsonField;
 
 /**
  * User model
@@ -25,8 +27,7 @@ use yii\web\IdentityInterface;
  * @property integer $create_time // additional field as timestamp instead of unix time
  * @property integer $update_time // additional field as timestamp instead of unix time
  * @property integer $role
- * @property string $reg_codes
- * @property integer $geo_accuracy
+ * @property JsonField $appdata
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -51,17 +52,6 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function init()
-    {
-        parent::init();
-        // Currently many users come from the Karlsruhe area; therefore, we default with helpful values for those guys. Baden rulez!
-        $this->reg_codes = 'KA,PF,GER,SÜW,RP,LD,HD,RA,OG,S';
-        $this->geo_accuracy = '15';
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function behaviors() 
     {
         return [
@@ -76,6 +66,10 @@ class User extends ActiveRecord implements IdentityInterface
                 'value' => new \yii\db\Expression ('NOW() at time zone \'UTC\''),
             ],
             TimestampBehavior::className(),
+            'json' => [
+                'class' => JsonBehavior::className(),
+                'attributes' => ['appdata'],
+            ],
         ];
     }
 

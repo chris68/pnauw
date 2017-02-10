@@ -77,7 +77,7 @@ use \common\models\User;
 
 <?php
     if ($model->isNewRecord && $model->scenario == Picture::SCENARIO_DEFAULT) {
-        $accuracy = User::findIdentity(Yii::$app->user->getId())->geo_accuracy;
+        $accuracy = User::findIdentity(Yii::$app->user->getId())->appdata['geo_accuracy'];
         $accuracy = (int)(empty($accuracy)?0:$accuracy);
         $this->registerJs(
 <<<JAVASCRIPT
