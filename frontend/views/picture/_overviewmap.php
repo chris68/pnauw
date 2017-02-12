@@ -14,7 +14,7 @@ use yii\bootstrap\ActiveForm;
 
     
 <script type="text/javascript">
-        var overviewmapSource =
+        var overviewmapInteractive=true, overviewmapSource =
         "<?php 
             {
                 echo Url::toRoute(array_replace_recursive(['picture/geodata'], Yii::$app->getRequest()->get(), ['private' => $private]));

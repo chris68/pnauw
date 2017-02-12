@@ -3,6 +3,7 @@
 /* @var $model frontend\models\Citation */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
@@ -35,6 +36,37 @@ elseif ($model->type == 'complaint') {
 </style>
 <div class="citation-print">
 
+    <?php if ($model->type == 'complaint') : ?>
+    <h1><?= $this->title ?></h1>
+    <p>
+        Dies ist eine informelle Beschwerde (<b>keine Anzeige!</b>), die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
+        können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr missbräuchliches Parken hinweisen und das Fehlverhalten an die entsprechenden Behörden melden. Was hiermit gerade geschieht.
+    </p>
+    <p>
+        Die Erwartung ist, dass die entsprechende Behörde an den gemeldeten Stellen die Kontrollen intensiviert und das Fehlverhalten der Autofahrer damit abgestellt wird.
+    </p>
+    <h2>Spezifische Angaben für die Beschwerde</h2>
+    <p><?=Markdown::convert(Html::encode($model->description))?></p>
+    <div style="page-break-before: always;"></div>
+    
+    <?php
+      \frontend\views\picture\assets\PictureOverviewmapAsset::register($this);
+    ?>
+    <script type="text/javascript">
+            var overviewmapInteractive=false, overviewmapSource =
+            "<?php 
+                {
+                    echo Url::toRoute(['picture/geodata','s[citation_id]'=>$model->id,'private' => true]);
+                }
+              ?>";
+    </script>
+    <div class="row">
+        <div class="col-sm-10 col-md-10 col-lg-10 form-group" style="margin-top: 10px; margin-bottom: 10px;">
+            <div id="overviewmap" style="height: 800px;"></div>
+        </div>
+    </div>
+    <div style="page-break-before: always;"></div>
+    <?php endif; ?>
     <?php
         /* var $pic frontend\models\Picture */
         foreach ($model->getPictures()->all() as $pic) {
@@ -50,9 +82,8 @@ elseif ($model->type == 'complaint') {
             } 
         }
     ?>
-    <!-- The header intentionally comes at the end to support better two side printing! -->
-    <h1 style="page-break-before: always;"><?= $this->title ?></h1>
     <?php if ($model->type == 'citation') : ?>
+    <h1><?= $this->title ?></h1>
     <p>
         Dies ist eine Privatanzeige, die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
         können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr missbräuchliches Parken hinweisen und, wenn es nicht hilft
@@ -80,15 +111,5 @@ elseif ($model->type == 'complaint') {
         Und daher muss sichergestellt sein, dass die Anzeigen nicht einfach und in großen Stil ohne weitere Benachrichtigung eingestellt werden.
         Denn der Anzeiger macht die Sache ja meist nicht aus Spass, sondern eher aus Notwehr, weil es die offiziellen Stellen nicht machen!
     </p>
-    <?php elseif ($model->type == 'complaint') : ?>
-    <p>
-        Dies ist eine informelle Beschwerde (<b>keine Anzeige!</b>), die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
-        können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr missbräuchliches Parken hinweisen und das Fehlverhalten an die entsprechenden Behörden melden. Was hiermit gerade geschieht.
-    </p>
-    <p>
-        Die Erwartung ist, dass die entsprechende Behörde an den gemeldeten Stellen die Kontrollen intensiviert und das Fehlverhalten der Autofahrer damit abgestellt wird.
-    </p>
-    <h2>Spezifische Angaben für die Beschwerde</h2>
-    <p><?=Markdown::convert(Html::encode($model->description))?></p>
     <?php endif; ?>
 </div>

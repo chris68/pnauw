@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <ul>
         <li>Bisher wurden bei Beschwerden und dem normalen Drucken die sehr platzraubende Ausgabe von Anzeigen genutzt - da gab es viel Kritik</li>
         <li>Deswegen gibt es nun eine kompromierte Ausgabe, die auch automatisch umbricht</li>
+        <li>Zudem gibt es bei der Druckausgabe von Beschwerden nun eine schöne Übersichtskarte</li>
     </ul>
     <h3>
         Version 2.1 (15.-16.01.2017)

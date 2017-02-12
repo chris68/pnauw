@@ -9,98 +9,100 @@ $(function() {
     var incidentGroup = L.featureGroup([]);
     incidentGroup.addTo(map);
 
-    var positionLayerGroup = L.layerGroup([]);
-    positionLayerGroup.addTo(map);
+    if (overviewmapInteractive) {
+        var positionLayerGroup = L.layerGroup([]);
+        positionLayerGroup.addTo(map);
 
-    L.control.layers({},{"Position": positionLayerGroup, "Vorfälle": incidentGroup}).addTo(map);
+        L.control.layers({},{"Position": positionLayerGroup, "Vorfälle": incidentGroup}).addTo(map);
 
-    map.on('moveend', function(e) {
-         $('#search-map-bounds').val(map.getBounds().toBBoxString());
-         var mapstate = {center:map.getCenter(), zoom:map.getZoom()};
-         $('#search-map-state').val(JSON.stringify(mapstate));
-         //console.debug('#search-map-bounds updated ('+$('#search-map-bounds').val()+')');
-         //console.debug('#search-map-state updated ('+$('#search-map-state').val()+')');
-    });
+        map.on('moveend', function(e) {
+             $('#search-map-bounds').val(map.getBounds().toBBoxString());
+             var mapstate = {center:map.getCenter(), zoom:map.getZoom()};
+             $('#search-map-state').val(JSON.stringify(mapstate));
+             //console.debug('#search-map-bounds updated ('+$('#search-map-bounds').val()+')');
+             //console.debug('#search-map-state updated ('+$('#search-map-state').val()+')');
+        });
 
-    map.on('locationerror', function(e) {
-        alert(e.message);
-    });
+        map.on('locationerror', function(e) {
+            alert(e.message);
+        });
 
-    map.on('locationfound', function(e) {
-        positionLayerGroup.clearLayers();
-        positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
-    });
+        map.on('locationfound', function(e) {
+            positionLayerGroup.clearLayers();
+            positionLayerGroup.addLayer(L.circle(e.latlng, e.accuracy / 2, {opacity:0.2}));
+        });
 
-    if ($('#search-map-gps').val() == 'locate-once') {
-        $('#search-map-gps').val('');
-        
-        map.locate({setView: true, watch: false, maxZoom: 16}); 
-    }
+        if ($('#search-map-gps').val() == 'locate-once') {
+            $('#search-map-gps').val('');
 
-    if ($('#search-map-bounds').val() != '') {
-        // 
-        if ($('#search-map-state').val() != '') {
-            // Restore previous map state if set
-            // console.debug('#search-map-state restored ('+$('#search-map-state').val()+')');
-            var mapstate = JSON.parse($('#search-map-state').val());
-            map.setView(mapstate.center, mapstate.zoom);
+            map.locate({setView: true, watch: false, maxZoom: 16}); 
         }
-    }
 
-    $("#quicksearch-map").on ( 'click', "a", function( event ) {
-        // If we use a <b> etc. in the <a> element then the event.target is sometimes the <b>.
-        //  We need to navigate up then to the actual <a>
-        realtarget = $(event.target).closest('a');
+        if ($('#search-map-bounds').val() != '') {
+            // 
+            if ($('#search-map-state').val() != '') {
+                // Restore previous map state if set
+                // console.debug('#search-map-state restored ('+$('#search-map-state').val()+')');
+                var mapstate = JSON.parse($('#search-map-state').val());
+                map.setView(mapstate.center, mapstate.zoom);
+            }
+        }
 
-        if (realtarget.data('value') == 'bind') {
+        $("#quicksearch-map").on ( 'click', "a", function( event ) {
+            // If we use a <b> etc. in the <a> element then the event.target is sometimes the <b>.
+            //  We need to navigate up then to the actual <a>
+            realtarget = $(event.target).closest('a');
+
+            if (realtarget.data('value') == 'bind') {
+                event.preventDefault();
+                $('#search-map-bind').prop('checked',true);
+                $('#search-form')[0].submit();
+            } 
+            else if (realtarget.data('value') == 'dynamic') {
+                event.preventDefault();
+                $('#search-map-bind').prop('checked',false);
+                $('#search-form')[0].submit();
+            }
+            else if (realtarget.data('value') == 'gps') {
+                // Do not call event.preventDefault to ensure the menue is closed again!
+                map.locate({setView: true, watch: false, maxZoom: 16});
+            }
+            else {
+                // Uupps. That one we don't know...
+            }
+
+        });
+
+        $("#quicksearch-time").on ( 'click', "a", function( event ) {
             event.preventDefault();
-            $('#search-map-bind').prop('checked',true);
+            $('#search-time-range').val($(event.target).closest('a').data('value'));
             $('#search-form')[0].submit();
-        } 
-        else if (realtarget.data('value') == 'dynamic') {
-            event.preventDefault();
-            $('#search-map-bind').prop('checked',false);
-            $('#search-form')[0].submit();
-        }
-        else if (realtarget.data('value') == 'gps') {
-            // Do not call event.preventDefault to ensure the menue is closed again!
-            map.locate({setView: true, watch: false, maxZoom: 16});
-        }
-        else {
-            // Uupps. That one we don't know...
-        }
-        
-    });
-    
-    $("#quicksearch-time").on ( 'click', "a", function( event ) {
-        event.preventDefault();
-        $('#search-time-range').val($(event.target).closest('a').data('value'));
-        $('#search-form')[0].submit();
-    });
+        });
 
-    $('#quicksearch-refresh').on( 'click', function( event ) {
-        event.preventDefault();
-        $('#search-form')[0].submit();
-        return false;
-    });
-
-    $('#quicksearch-vehicle-reg-plate').on( 'keyup', function( event ) {
-        if (event.keyCode == 13) {
+        $('#quicksearch-refresh').on( 'click', function( event ) {
             event.preventDefault();
-            $('#search-vehicle-reg-plate').val($('#quicksearch-vehicle-reg-plate').val());
             $('#search-form')[0].submit();
             return false;
-        }
-    });
+        });
 
-    $('#quicksearch-cancel').on( 'click', function( event ) {
-        event.preventDefault();
-        // It is important that we use $('#quicksearch-cancel') and not $(event.target).data('value')
-        // since the event target is the span in the button and not the button itself!
-        window.location.assign($('#quicksearch-cancel').data('url'));
-        return false;
-    });
+        $('#quicksearch-vehicle-reg-plate').on( 'keyup', function( event ) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                $('#search-vehicle-reg-plate').val($('#quicksearch-vehicle-reg-plate').val());
+                $('#search-form')[0].submit();
+                return false;
+            }
+        });
 
+        $('#quicksearch-cancel').on( 'click', function( event ) {
+            event.preventDefault();
+            // It is important that we use $('#quicksearch-cancel') and not $(event.target).data('value')
+            // since the event target is the span in the button and not the button itself!
+            window.location.assign($('#quicksearch-cancel').data('url'));
+            return false;
+        });
+    }
+    
     $.getJSON(overviewmapSource, function( data ) {
         var pointDefaultOptions = {
             radius: 6,
@@ -176,7 +178,7 @@ $(function() {
             }
         }));
 
-        if ($('#search-map-bounds').val() == '') {
+        if (!overviewmapInteractive || $('#search-map-bounds').val() == '') {
             // If we do not have any other information about the map state, we need to calculate the bounds from the data
             if (data.length > 0) {
                 map.fitBounds(incidentGroup.getBounds());
