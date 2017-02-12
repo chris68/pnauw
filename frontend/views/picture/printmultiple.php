@@ -30,7 +30,7 @@ $this->title = 'Vorfälle - '.date('Y-m-d');
     <?php
         /* var $pic frontend\models\Picture */
         foreach ($models as $pic) {
-            echo $this->render('//picture/_printpicture', [
+            echo $this->render('//picture/_printpicture_complaint', [
                 'model' => $pic,
             ]);
         }

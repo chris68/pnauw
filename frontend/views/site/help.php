@@ -359,7 +359,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Anzeigen bzw. Beschwerden sind wahrscheinlich die einzigen Möglichkeiten, die Sie haben, wenn eine <a href='#campaign'>Kampagne</a> alleine nicht ausreichend Wirkung zeigt.
     </p>
     <p>
-        Eine Beschwerde ist hierbei eine nette Zusammenfassung von vielen Falschparkern zum Ausdrucken oder Versand als PDF-Datei an die Polizei oder das Ordnungsamt. Eine Beschwerde ist rechtlich unverbindlich und Sie können auch darum bitten, das Ihr Name nicht öffentlich genannt wird. 
+        Eine Beschwerde ist hierbei eine nette Zusammenfassung von vielen Falschparkern zum Ausdrucken oder Versand als PDF-Datei (papiersparend!) an die Polizei oder das Ordnungsamt. Eine Beschwerde ist rechtlich unverbindlich und Sie können auch darum bitten, das Ihr Name nicht öffentlich genannt wird. 
         Die Hoffnung einer solchen Beschwerde ist, dass die Behörde die nicht tolerierbare Lage erkennt und dann entsprechend selbst tätig wird.
     </p>
     <p>

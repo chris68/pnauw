@@ -13,6 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
+        Version 2.3 (12.02.2017)
+    </h3>
+    <p>
+        Bessere Unterstützung für Beschwerden und beim Drucken
+    </p>
+    <ul>
+        <li>Bisher wurden bei Beschwerden und dem normalen Drucken die sehr platzraubende Ausgabe von Anzeigen genutzt - da gab es viel Kritik</li>
+        <li>Deswegen gibt es nun eine kompromierte Ausgabe, die auch automatisch umbricht</li>
+    </ul>
+    <h3>
         Version 2.1 (15.-16.01.2017)
     </h3>
     <p>

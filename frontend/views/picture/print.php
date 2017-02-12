@@ -19,7 +19,7 @@ $this->title .= ' - '.substr($model->taken,0,10); // Add the date part
 <div class="picture-print">
 
     <?php
-        echo $this->render('_printpicture', [
+        echo $this->render('_printpicture_complaint', [
             'model' => $model,
         ]);
     ?>

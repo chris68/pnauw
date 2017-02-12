@@ -92,8 +92,13 @@ class Citation extends \yii\db\ActiveRecord
      */
     public function getPictures()
     {
-        return $this->hasMany(Picture::className(), ['citation_id' => 'id'])->
-            orderBy(['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ]);
+        $return = $this->hasMany(Picture::className(), ['citation_id' => 'id']);
+        if ($this->type == 'citation') {
+           $return = $return->orderBy(['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ]);
+        } elseif ($this->type == 'complaint') {
+           $return = $return->orderBy(['loc_formatted_addr' => SORT_ASC , 'taken' => SORT_ASC, ]);
+        }
+        return $return;
     }
 
     /**

@@ -557,7 +557,7 @@ class PictureController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->get());
         $dataProvider->query->ownerScope();
         $dataProvider->sort->defaultOrder = ['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ];
-        $dataProvider->pagination->pageSize = 50;
+        $dataProvider->pagination->pageSize = 500;
 
         $this->layout = 'print';
         return $this->render('printmultiple', [

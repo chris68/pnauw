@@ -10,7 +10,7 @@ $(function() {
         map.dragging.disable();
 
         var osm = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-           attribution: "&copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> and contributors, under an <a href='https://www.openstreetmap.org/copyright' title='ODbL'>open license</a>."
+           attribution: "&copy; OpenStreetMap contributors, under an <a href='www.openstreetmap.org/copyright' title='ODbL'>open license</a>."
     });
     osm.addTo(map);
 

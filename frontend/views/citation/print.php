@@ -22,19 +22,36 @@ elseif ($model->type == 'complaint') {
     .container {
         width: 100%;
     }
+    @media print {
+        .citation-print .leaflet-control-attribution {
+            font-size: 7px;
+        }   
+    }
+    @media screen {
+        .citation-print .leaflet-control-attribution {
+            font-size: 9px;
+        }   
+    }
 </style>
 <div class="citation-print">
 
     <?php
         /* var $pic frontend\models\Picture */
         foreach ($model->getPictures()->all() as $pic) {
-            echo $this->render('//picture/_printpicture', [
-                'model' => $pic,
-            ]);
+            if ($model->type == 'citation') {
+                echo $this->render('//picture/_printpicture_citation', [
+                    'model' => $pic,
+                ]);
+            } elseif ($model->type == 'complaint') {
+                echo $this->render('//picture/_printpicture_complaint', [
+                    'model' => $pic,
+                ]);
+                echo '<div style="page-break-after: auto;"></div>';
+            } 
         }
     ?>
     <!-- The header intentionally comes at the end to support better two side printing! -->
-    <h1><?= $this->title ?></h1>
+    <h1 style="page-break-before: always;"><?= $this->title ?></h1>
     <?php if ($model->type == 'citation') : ?>
     <p>
         Dies ist eine Privatanzeige, die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
