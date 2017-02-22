@@ -73,6 +73,19 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+   /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        //@chris68
+        $this->appdata = [
+        // Currently many users come from the Karlsruhe area; therefore, we default with helpful values for those guys. Baden rulez!
+            'reg_codes' => 'KA,PF,GER,SÜW,RP,LD,HD,RA,OG,S',
+            'geo_accuracy' => '25'
+        ];
+    }
+
     /**
      * @inheritdoc
      */

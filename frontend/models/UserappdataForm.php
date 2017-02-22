@@ -10,17 +10,6 @@ use paulzi\jsonBehavior\JsonValidator;
  */
 class UserappdataForm extends User
 {
-   /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        // Currently many users come from the Karlsruhe area; therefore, we default with helpful values for those guys. Baden rulez!
-        $this->setAppdata__reg_codes('KA,PF,GER,SÜW,RP,LD,HD,RA,OG,S');
-        $this->setAppdata__geo_accuracy('15');
-    }
-
      /**
      * @inheritdoc
      */
@@ -52,10 +41,45 @@ class UserappdataForm extends User
         $this->appdata['reg_codes'] = $value;
     }
 
+    public function getAppdata__reg_codes_autoupdate() {
+        return $this->appdata['reg_codes_autoupdate'];
+    }
+    public function setAppdata__reg_codes_autoupdate($value) {
+        $this->appdata['reg_codes_autoupdate'] = $value;
+    }
+
+    public function getAppdata__reg_plate_purge_latency() {
+        return $this->appdata['reg_plate_purge_latency'];
+    }
+    public function setAppdata__reg_plate_purge_latency($value) {
+        $this->appdata['reg_plate_purge_latency'] = $value;
+    }
+
     public function getAppdata__geo_accuracy() {
         return $this->appdata['geo_accuracy'];
     }
     public function setAppdata__geo_accuracy($value) {
         $this->appdata['geo_accuracy'] = $value;
+    }
+    
+    public function getAppdata__geo_timeout() {
+        return $this->appdata['geo_timeout'];
+    }
+    public function setAppdata__geo_timeout($value) {
+        $this->appdata['geo_timeout'] = $value;
+    }
+    
+    public function getAppdata__map_zoom() {
+        return $this->appdata['map_zoom'];
+    }
+    public function setAppdata__map_zoom($value) {
+        $this->appdata['map_zoom'] = $value;
+    }
+    
+    public function getAppdata__citation_visibility() {
+        return $this->appdata['citation_visibility'];
+    }
+    public function setAppdata__citation_visibility($value) {
+        $this->appdata['citation_visibility'] = $value;
     }
 }
