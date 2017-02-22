@@ -11,7 +11,7 @@ PictureLocationmapAsset::register($this);
 
 <div class="picture-print" style="page-break-after: always;">
     <div class="row">
-    <div class="col-sm-10 col-md-10 col-lg-10">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
     
     <h1>
         <?=Html::encode($model->vehicle_reg_plate.' / '.date_format(date_create($model->taken),'d.m.Y'))?>

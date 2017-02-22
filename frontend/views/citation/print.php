@@ -46,7 +46,7 @@ elseif ($model->type == 'complaint') {
         Die Erwartung ist, dass die entsprechende Behörde an den gemeldeten Stellen die Kontrollen intensiviert und das Fehlverhalten der Autofahrer damit abgestellt wird.
     </p>
     <h2>Spezifische Angaben für die Beschwerde</h2>
-    <p><?=Markdown::convert(Html::encode($model->description))?></p>
+    <?=Markdown::convert(Html::encode($model->description))?>
     <div style="page-break-before: always;"></div>
     
     <?php
@@ -61,7 +61,7 @@ elseif ($model->type == 'complaint') {
               ?>";
     </script>
     <div class="row">
-        <div class="col-sm-10 col-md-10 col-lg-10 form-group" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 form-group" style="margin-top: 10px; margin-bottom: 10px;">
             <div id="overviewmap" style="height: 800px;"></div>
         </div>
     </div>

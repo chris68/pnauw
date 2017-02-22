@@ -11,7 +11,7 @@ PictureLocationmapAsset::register($this);
 
 <div class="picture-print">
     <div class="row" style="page-break-inside: avoid;">
-    <div class="col-sm-10 col-md-10 col-lg-10">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
     
     <h4>
         <?= Html::encode($model->loc_formatted_addr.' ['.date_format(date_create($model->taken),'d.m.Y').'] ') ?>
@@ -22,7 +22,7 @@ PictureLocationmapAsset::register($this);
         <p><b><?= Html::encode($model->name) ?></b></p>
         <p><?= nl2br(Html::encode($model->description)) ?></p>
         <div class="row">
-        <div class="col-sm-5 col-md-5 col-lg-5">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <p>
         <?=
         frontend\widgets\ImageRenderer::widget(
@@ -37,7 +37,7 @@ PictureLocationmapAsset::register($this);
         <p><b><?= Html::encode($model->incident->name) ?> </b></p>
         <p><?= nl2br(Html::encode($model->citation_affix)) ?></p>
         </div>
-        <div class="col-sm-5 col-md-5 col-lg-5">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <?=
             Html::tag('div','', [
               'style' => 'height: 200px;',
@@ -50,7 +50,6 @@ PictureLocationmapAsset::register($this);
               ]
             ])
         ?> 
-        </p>                    
         <p><?= Html::encode($model->loc_formatted_addr) ?></p>
         </div>
         </div>

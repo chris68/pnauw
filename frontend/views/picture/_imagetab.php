@@ -158,7 +158,7 @@ use \common\models\User;
                 $('#picture-map-loc-lat').val(e.latlng.lat);
                 $('#picture-map-loc-lng').val(e.latlng.lng);
                 updateMarkerOrg();
-
+                
                 if (picture_captured && e.accuracy < {$accuracy} ) {
                     // Switch off geopositining when a reasonably accurate location has been found after the photo as been taken 
                     // Reason: people continue to walk on and you want the position where the photo was taken and not where you continued to document
