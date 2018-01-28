@@ -97,6 +97,6 @@ Use http://dillinger.io to verify the correctness of the syntax!
 ## Crontab ##
 Edit the crontab (``via crontab -e``) and add
 ```
-0 5 * * * {/home/mailwitch/pnauw/yii picture/purge-guest-users;/home/mailwitch/pnauw/yii picture/purge-pictures;}
+0 5 * * * { /home/mailwitch/pnauw/yii picture/purge-guest-users; /home/mailwitch/pnauw/yii picture/purge-pictures; }
 ```
 The time should be well after the backup
