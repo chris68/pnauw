@@ -63,6 +63,7 @@ AppAsset::register($this);
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-46784417-1', 'parke-nicht-auf-unseren-wegen.de');
+      ga('set', 'anonymizeIp', true);
       ga('send', 'pageview');
 
     </script>

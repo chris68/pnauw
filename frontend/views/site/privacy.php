@@ -36,12 +36,23 @@ $this->params['breadcrumbs'][] = $this->title;
         Daher müssen Sie deren Nutzung zustimmen. Ohne Zustimmung können Sie unsere Seite leider nicht nutzen.
     </p>
 
+    <h4>Verarbeitung personenbezogener Daten (Datenschutzrichtlinie EU)</h4>
+    <p>
+        Über Google Analytics verarbeiten wir nur Zugriffs, wenn Sie NICHT angemeldet sind, und hierbei wird die IP-Adresse anonymisiert. Die Daten werden nur genutzt, um die Anzahl und 
+        ungefähre geographische Verteilung der Nutzer zu sehen. Es gibt keinerlei personenbezogenen Analysen.
+    </p>
+    <p>
+        Wir speichern als administrativen Serverlog den Zeitpunkt von einer Anmeldung bei unseren System, um missbräuchliche Attaken zu entdecken. Aus den gleichen Grund speichern wir die 
+        HTTP-Request-Headerdaten (access.log), um missbräuchliche Zugriffe auf unser System zu entdecken. Die Daten werden unter keinen Umständen - außer wenn es das Gesetz verlangt - herausgegeben
+        oder mit anderen Daten in Verbindung gebracht.
+    </p>
+
     <h4>Änderung der Datenschutzregeln</h4>
     <p>
-        Alle Änderungen dieser Datenschutzregeln werden hier veröffentlicht und mit dem in bei Veröffentlichung angegebenen Gültigkeitdatum gültig. Wir werden Ihnen eine Benachrichtigungsmail an Ihre Standard Emailadresse aus dem Nutzerprofil schicken und Sie zudem auf der Startseite auf die Änderungen hinweisen. Wenn Sie mit den Änderungen nicht einverstanden sind, dann dürfen Sie den Service nicht weiter nutzen.
+        Alle Änderungen dieser Datenschutzregeln werden hier veröffentlicht und mit dem in bei Veröffentlichung angegebenen Gültigkeitdatum gültig. Wenn Sie mit den Änderungen nicht einverstanden sind, dann dürfen Sie den Service nicht weiter nutzen.
     </p>
 
     <p>
-        (Stand 18.10.2015; gültig ab 18.10.2015)
+        (Stand 20.05.2018; gültig ab 25.05.2018)
     </p>
 </div>
