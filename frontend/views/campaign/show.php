@@ -28,6 +28,7 @@ $this->params['help'] = 'campaign-show';
     <?= ((yii::$app->user->can('isObjectOwner', array('model' => $model)))?(' | '.Html::a('Kampagne bearbeiten', ['campaign/update','id'=>$model->id], ['target' => '_blank'])):'') ?>
     <?php
         $stack = new Imagick();
+        $pics_found = false;
         /* var $pic frontend\models\Picture */
         foreach ($model->getPictures()->publicScope()->andWhere(['is not','blurred_thumbnail_image_id',NULL])->orderBy(['random()' => SORT_ASC, ])->limit(20)->all() as $pic) {
             $thumb = new Imagick();
@@ -36,7 +37,15 @@ $this->params['help'] = 'campaign-show';
             }
             $thumb->readImageBlob($imageBlob);
             $stack->addImage($thumb);
+            $pics_found = true;
         }
+        
+        if (!$pics_found) {
+            $thumb = new \Imagick(\Yii::getAlias('@webroot').'/img/pnauw.jpeg');
+            $thumb ->scaleimage(0, 200);
+            $stack->addImage($thumb);
+        } 
+        
         $montage = $stack->montageImage(new ImagickDraw(), '5x4', '', 0, '0');
         $montage->setImageFormat('jpg');
 
