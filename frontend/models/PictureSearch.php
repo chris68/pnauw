@@ -286,7 +286,7 @@ class PictureSearch extends Model
         $attribute = "{{%picture}}.".$attribute ;
         // '#' means generally: look for empty value
         if (trim($value) === '#') {
-                $query->andWhere(['in',$attribute,'']);
+                $query->andWhere(['in',"coalesce($attribute,'')",'']);
         } else {
             if ($partialMatch) {
                 $query->andWhere(['SIMILAR TO', $attribute, $value]);
