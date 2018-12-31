@@ -167,7 +167,13 @@ class FlyerController extends Controller
      */
     public function actionQrcode($secret)
     {
-        return \dosamigos\qrcode\QrCode::png(Url::to(['flyer/show','secret'=>$secret],true));
+        $qrCode = (new \Da\QrCode\QrCode(Url::to(['flyer/show','secret'=>$secret],true)))
+            ->setSize(150)
+            ->setMargin(5)
+            ->useForegroundColor(0, 0, 0);
+
+        header('Content-Type: '.$qrCode->getContentType());
+        echo $qrCode->writeString();
     }
 
     /**
