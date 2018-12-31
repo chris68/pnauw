@@ -4,6 +4,10 @@ return [
     'name' => 'Parke nicht auf unseren Wegen',
     'version' => '2.2.3',
 
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+    ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
