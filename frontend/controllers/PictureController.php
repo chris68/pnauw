@@ -19,7 +19,6 @@ use yii\web\UploadedFile;
 use yii\helpers\Html;
 use yii\helpers\FileHelper;
 use yii\base\InvalidParamException;
-use yii\data\Sort;
 use frontend\helpers\Assist;
 use yii\helpers\Url;
 
@@ -81,15 +80,7 @@ class PictureController extends Controller
         $dataProvider->query->publicScope();
         $dataProvider->query->andWhere(['not',['incident_id' => 20]]); // Do not show the satellite incidents here
 
-        //$dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
-        $sort = new Sort([
-            'attributes'=> [
-                'id',
-                'loc_formatted_addr',
-                'vehicle_reg_plate'
-            ]
-        ]);
-        $dataProvider->sort = $sort;
+        $dataProvider->sort->defaultOrder = ['id' => SORT_DESC,];
         $dataProvider->pagination->pageSize = 20;
 
         return $this->render('index', [

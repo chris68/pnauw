@@ -59,8 +59,6 @@ $this->params['help'] = 'picture-index';
     ?>
     </div>
     
-    <?= $dataProvider->sort->link('id') .' | '. $dataProvider->sort->link('loc_formatted_addr').' | '. $dataProvider->sort->link('vehicle_reg_plate') ?>
-    
     <?php Pjax::begin(['id' => 'main', 'enablePushState' => TRUE, 'timeout' => 10000, 'linkSelector' => '.pagination a', 'formSelector' => '', ]); ?>
 
     <?= ListView::widget([
