@@ -15,7 +15,7 @@
 		"php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
 
 		"yiisoft/yii2-jui": "*",
 		"kartik-v/yii2-markdown": "*",
@@ -29,15 +29,15 @@
         "yiisoft/yii2-faker": "~2.0.0"
 	},
 	"config": {
-		"process-timeout": 1800
-	},
-	"extra": {
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
         }
     },
-    "scripts": {
-        "post-install-cmd": "php init --env=Development --overwrite=n"
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
 	}
+    ]
 }
