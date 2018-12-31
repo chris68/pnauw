@@ -1,7 +1,12 @@
 <?php
 
+use yii\base\InvalidConfigException;
+
 // @chris68
 $oauth = parse_ini_file('/etc/apache2/oauth.key/parke-nicht-auf-unseren-wegen.de.ini', true);
+if (!$oauth) {
+    throw new InvalidConfigException("/etc/apache2/oauth.key/mailwitch.com.ini missing or corrupted");
+}
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
