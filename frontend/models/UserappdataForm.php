@@ -24,7 +24,7 @@ class UserappdataForm extends User
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {

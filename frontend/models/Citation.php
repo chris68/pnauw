@@ -21,7 +21,7 @@ namespace frontend\models;
 class Citation extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -29,7 +29,7 @@ class Citation extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -51,7 +51,7 @@ class Citation extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -62,7 +62,7 @@ class Citation extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {
@@ -80,7 +80,7 @@ class Citation extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function find()
     {

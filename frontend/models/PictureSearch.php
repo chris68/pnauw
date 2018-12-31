@@ -62,7 +62,7 @@ class PictureSearch extends Model
     protected $filter_count;
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function formName()
     {
@@ -109,7 +109,7 @@ class PictureSearch extends Model
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -139,7 +139,7 @@ class PictureSearch extends Model
 
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {

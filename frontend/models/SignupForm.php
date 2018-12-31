@@ -48,7 +48,7 @@ class SignupForm extends Model
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
 // @chris68

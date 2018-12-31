@@ -81,7 +81,7 @@ class Picture extends \yii\db\ActiveRecord
     public $image_dataurl;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -89,7 +89,7 @@ class Picture extends \yii\db\ActiveRecord
     }
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function formName()
     {
@@ -180,7 +180,7 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -265,7 +265,7 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -302,7 +302,7 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -355,7 +355,7 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function beforeSave($insert)
     {
@@ -371,7 +371,7 @@ class Picture extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function find()
     {

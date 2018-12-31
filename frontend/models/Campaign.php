@@ -29,7 +29,7 @@ class Campaign extends \yii\db\ActiveRecord
     public $availability_id = 'trusted';
     
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -37,7 +37,7 @@ class Campaign extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -71,7 +71,7 @@ class Campaign extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -85,7 +85,7 @@ class Campaign extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {
@@ -106,7 +106,7 @@ class Campaign extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function find()
     {

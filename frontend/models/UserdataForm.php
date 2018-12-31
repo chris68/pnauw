@@ -52,7 +52,7 @@ class UserdataForm extends Model
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {

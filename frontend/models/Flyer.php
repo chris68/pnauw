@@ -23,7 +23,7 @@ namespace frontend\models;
 class Flyer extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -31,7 +31,7 @@ class Flyer extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -53,7 +53,7 @@ class Flyer extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -70,7 +70,7 @@ class Flyer extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {
@@ -92,7 +92,7 @@ class Flyer extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function find()
     {

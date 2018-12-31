@@ -22,7 +22,7 @@ class PicturePublishForm extends Model
     public $visibility_id;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules() {
         return [
@@ -32,7 +32,7 @@ class PicturePublishForm extends Model
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels() {
         return [

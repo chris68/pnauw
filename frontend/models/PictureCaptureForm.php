@@ -27,7 +27,7 @@ class PictureCaptureForm extends Model
     public $file_handle;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules() {
         return [
@@ -37,7 +37,7 @@ class PictureCaptureForm extends Model
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels() {
         return [

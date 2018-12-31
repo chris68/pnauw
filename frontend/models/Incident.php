@@ -21,7 +21,7 @@ namespace frontend\models;
 class Incident extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -29,7 +29,7 @@ class Incident extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -41,7 +41,7 @@ class Incident extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {

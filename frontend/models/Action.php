@@ -18,7 +18,7 @@ namespace frontend\models;
 class Action extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -26,7 +26,7 @@ class Action extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -37,7 +37,7 @@ class Action extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {

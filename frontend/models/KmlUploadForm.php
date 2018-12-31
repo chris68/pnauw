@@ -22,7 +22,7 @@ class KmlUploadForm extends Model
     public $file_handles;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules() {
         return [
@@ -31,7 +31,7 @@ class KmlUploadForm extends Model
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels() {
         return [
