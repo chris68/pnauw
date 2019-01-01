@@ -16,12 +16,12 @@ class m190101_195505_user_with_empty_email_and_username extends Migration
     {
        
 $sql = <<<'EOT'
-drop index if exists tbl_user_username_key;
+alter table tbl_user drop constraint if exists tbl_user_username_key;
 EOT;
 $this->execute($sql);
 
 $sql = <<<'EOT'
-drop index if exists tbl_user_email_key;
+alter table tbl_user drop constraint if exists tbl_user_email_key;
 EOT;
 $this->execute($sql);
 
