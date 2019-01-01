@@ -180,7 +180,7 @@ class SiteController extends Controller
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
                     Yii::$app->getSession()->setFlash('success',
-                      'Nach der erfolgreichen Registrierung können sich nun gerne mit einem Konto bei einem der unten aufgelisteten OAuth-Providern verbinden.');
+                      'Nach der erfolgreichen Registrierung können sich nun gerne optional mit einem Konto bei einem der unten aufgelisteten OAuth-Providern verbinden. Wenn Sie dort kein Konto haben oder die Verbindung nicht wollen, dann gehen Sie einfach auf Home oben im Menü');
                     return $this->redirect(['site/foreignlogin']);
                 }
             }
