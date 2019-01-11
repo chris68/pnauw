@@ -33,8 +33,8 @@ Finally you need to fix the port for 9.3 again to listen to 5432 (it listens to 
 ## FTP ##
 The ftp server ``vsftpd`` is best used for the ftp access.
 ### Install package ###
-Install the package via ``sudo apt-get vsftpd``
-### Set up file stucture ###
+Install the package via ``sudo apt-get install vsftpd``
+### Set up file structure ###
 Set up the file structure as follows:
 ```
 /srv/ftp/pnauw:
@@ -59,6 +59,23 @@ and that the permissions are exactly as indicated with **not giving write access
 users folders ``user_a``, ``user_b``, etc. 
 
 Of course, you need to fill in the actual user names you want to give access to the ftp server instead of the template names shown here.
+### Migrate file structure ###
+Usually you will migrate it from another server:
+
+```
+# On the source server
+cd /srv/ftp
+sudo tar -cvzpf pnauw.tar.gz pnauw
+```
+
+```
+# On the destination server
+cd /srv/ftp
+sudo scp mailwitch@mailwitch.com:/srv/ftp/pnauw.tar.gz /srv/ftp/.
+sudo tar -xvzf /srv/ftp/pnauw.tar.gz
+sudo rm pnauw.tar.gz
+```
+
 ### Adapt the configuration ###
 Add the following to the end of ``\etc\vsftpd.conf``
 
