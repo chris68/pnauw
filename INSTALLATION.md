@@ -107,6 +107,10 @@ seccomp_sandbox=0
 
 Restart the service via ``sudo service vsftpd restart``
 
+Check via ``sudo service vsftpd status`` the status.
+
+If the server fails to start try to start it from command line via ``sudo /usr/sbin/vsftpd /etc/vsftpd.conf´´and check the error.
+
 ## ALPR ##
 We use http://www.openalpr.com/ for the automatic licence plate recognition. Starting with Ubuntu 16.04 this is part of the distribution. See https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux) for instruction on how to install it.
 ## Editing markdown (*.md) file ##
