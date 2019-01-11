@@ -18,10 +18,10 @@ use yii\web\AssetBundle;
 class LeafletAsset extends AssetBundle
 {
     public $css = [
-        "https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+        "https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     ];
     public $js = [
-        "https://unpkg.com/leaflet@1.0.3/dist/leaflet.js",
+        "https://unpkg.com/leaflet@1.4.0/dist/leaflet.js",
     ];
     public $depends = [
         'yii\web\YiiAsset',

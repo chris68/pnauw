@@ -31,7 +31,8 @@ use \frontend\models\Picture;
         <?php endif; ?>
     </div>
     <div class="col-lg-4">
-        <div style="width: 300px; height: 300px;" id="picture-map-canvas"></div>
+        <?php /* @todo See https://github.com/perliedman/leaflet-control-geocoder/issues/191; must prevent the enter key from bubbling up until new release is published */ ?>
+        <div style="width: 300px; height: 300px;" id="picture-map-canvas" onkeydown="if (event.which == 13) {event.preventDefault();}"></div>
         
     </div>
     <div class="col-lg-3">

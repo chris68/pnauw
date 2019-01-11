@@ -9,10 +9,10 @@ class PictureUpdateAsset extends AssetBundle
 {
     public $sourcePath = '@frontend/views/picture/assets';
     public $css = [
-        'https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.5.4/Control.Geocoder.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.6.0/Control.Geocoder.css',
     ];
     public $js = [
-        'https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.5.4/Control.Geocoder.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/1.6.0/Control.Geocoder.js',
         'pnauw.picture.update.js',
     ];
     public $depends = [
