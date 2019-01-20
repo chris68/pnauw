@@ -6,4 +6,5 @@ return [
     'user.passwordResetTokenExpire' => 3600,
     'noreplyEmail' => 'noreply@parke-nicht-auf-unseren-wegen.de',
     'contactEmail' => 'gehwegvomgehweg@gmail.com',
+    'alpr.secretKey' => $oauth['alpr']['secretKey'] // Dirty hack; $oauth is loaded in main.php
 ];

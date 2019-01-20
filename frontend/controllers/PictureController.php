@@ -898,7 +898,10 @@ class PictureController extends Controller
         }
 
         $result = array();
-        exec('alpr --country eu --json -n 1 '.$file_jpeg,$result);
+        // Since calling alpr locally does not work anymore (since ubuntu 18.04) we use the web api in a quite dirty fashion - but it works...
+        // @todo: Should be improved though...
+        // exec('alpr --country eu --json -n 1 '.$file_jpeg,$result);
+        exec("curl -X POST -F image=@".$file_jpeg." 'https://api.openalpr.com/v2/recognize?country=eu&output=json&secret_key=".Yii::$app->params['alpr.secretKey']."' ",$result);
 
         /* Delete both files */
         unlink($file);

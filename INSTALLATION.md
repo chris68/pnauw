@@ -112,9 +112,28 @@ Check via ``sudo service vsftpd status`` the status.
 If the server fails to start try to start it from command line via ``sudo /usr/sbin/vsftpd /etc/vsftpd.conf´´and check the error.
 
 ## ALPR ##
-We use http://www.openalpr.com/ for the automatic licence plate recognition. Starting with Ubuntu 16.04 this is part of the distribution. See https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux) for instruction on how to install it.
+We use http://www.openalpr.com/ for the automatic licence plate recognition. 
+
+Starting with Ubuntu 16.04 this was part of the distribution. See https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux) for instruction on how to install it.
+
+Starting with Ubuntu 18.04 the local alpr installation unfortunately no longer works. Therefore, the web api is used (see section oauth)
 ## Editing markdown (*.md) file ##
 Use http://dillinger.io to verify the correctness of the syntax!
+### OAUTH ###
+The oauth file looks as follows. The <> has to be replaced by the respective credentials
+
+```
+[google]
+clientId="<>"
+clientSecret="<>"
+[facebook]
+clientId="<>"
+clientSecret="<>"
+[alpr]
+; The secret key from the alpr api - not really oauth but in the same file....
+secretKey="<>"
+```
+
 ## Crontab ##
 Edit the crontab (``via crontab -e``) and add
 ```
