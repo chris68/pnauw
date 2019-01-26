@@ -46,13 +46,17 @@ $this->params['breadcrumbs'][] = $this->title;
         HTTP-Request-Headerdaten (access.log), um missbräuchliche Zugriffe auf unser System zu entdecken. Die Daten werden unter keinen Umständen - außer wenn es das Gesetz verlangt - herausgegeben
         oder mit anderen Daten in Verbindung gebracht.
     </p>
-
+    <p>
+        Für diese Kennzeichenerkennungsfunktion wird ein Service der Internetseite <a href="<?= Url::to(['https://www.openalpr.com']) ?>">OpenALPR</a> genutzt. 
+        Wenn Sie mit den auf dieser Seite veröffentlichen <a href="<?= Url::to(['https://cloud.openalpr.com/account/privacy']) ?>">Datenschutzbedingungen</a> nicht einverstanden sind, dann dürfen Sie die automatische Erkennung der Kennzeichen nicht nutzen.
+    </p>
+ 
     <h4>Änderung der Datenschutzregeln</h4>
     <p>
         Alle Änderungen dieser Datenschutzregeln werden hier veröffentlicht und mit dem in bei Veröffentlichung angegebenen Gültigkeitdatum gültig. Wenn Sie mit den Änderungen nicht einverstanden sind, dann dürfen Sie den Service nicht weiter nutzen.
     </p>
 
     <p>
-        (Stand 20.05.2018; gültig ab 25.05.2018)
+        (Stand 27.01.2019; gültig ab 27.01.2019)
     </p>
 </div>
