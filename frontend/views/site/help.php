@@ -170,6 +170,10 @@ $this->params['breadcrumbs'][] = $this->title;
         Zudem besteht die Möglichkeit, die Lage des Kennzeichens und das Kennzeichen selbst automatisch ermitteln zu lassen. Die Ergebnisse sind erstaunlich gut. 
     </p>
     <p>
+        Für diese Erkennungsfunktion wird ein Service der Internetseite <a href="<?= Url::to(['https://www.openalpr.com']) ?>">OpenALPR</a> genutzt. Wenn Sie mit den auf dieser Seite veröffentlichen Bedingungen nicht einverstanden sind, 
+        dann dürfen Sie die automatische Erkennung der Kennzeichen nicht nutzen.
+    </p>
+    <p>
         In Deutschland ist jedoch der Leerraum nach ersten Teil (Stadt,Landkreis, etc.) extrem wichtig (international einmalig!) und das erkennt das verwendete Erkennungsprogramm OPENALPR im Backend erst mal nicht. 
         Es besteht aber die Möglichkeit, in den <a href="<?= Url::to(['userappdata']) ?>">Applikationseinstellungen</a> eine Liste der für Sie hauptsächlich relevanten Werte zu pflegen, damit es trotzdem richtig 
         getrennt wird. Ansonsten muss man hier den Leerraum halt selbst einfügen. Die Ziffern am Ende hingegen werden meist korrekt mit einem Leerzeichen abgetrennt. 
