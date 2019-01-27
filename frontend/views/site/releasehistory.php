@@ -13,6 +13,18 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
+        Version 2.3 (10.01.2019)
+    </h3>
+    <p>
+        Umstellung der Technik
+    </p>
+    <ul>
+        <li>Neuer Server mit aktueller Betriebsumgebung (Webserver, Datenbank, etc.)</li>
+        <li>Unterstützung von HTTP/2</li>
+        <li>Unterstützung von IPV6</li>
+        <li>ALPR läuft nicht mehr lokal, sondern es wird der Webservice genutzt</li>
+    </ul>
+    <h3>
         Version 2.2 (12.02.2017)
     </h3>
     <p>
