@@ -2,7 +2,6 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 $this->title = 'Datenschutz';
 $this->params['breadcrumbs'][] = $this->title;
@@ -48,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
         oder mit anderen Daten in Verbindung gebracht.
     </p>
     <p>
-        Für diese Kennzeichenerkennungsfunktion wird ein Service der Internetseite <a href="<?= Url::to(['https://www.openalpr.com']) ?>">OpenALPR</a> genutzt. 
-        Wenn Sie mit den auf dieser Seite veröffentlichen <a href="<?= Url::to(['https://cloud.openalpr.com/account/privacy']) ?>">Datenschutzbedingungen</a> nicht einverstanden sind, dann dürfen Sie die automatische Erkennung der Kennzeichen nicht nutzen.
+        Für diese Kennzeichenerkennungsfunktion wird ein Service der Internetseite <a href="https://www.openalpr.com">OpenALPR</a> genutzt. 
+        Wenn Sie mit den auf dieser Seite veröffentlichen <a href="https://cloud.openalpr.com/account/privacy">Datenschutzbedingungen</a> nicht einverstanden sind, dann dürfen Sie die automatische Erkennung der Kennzeichen nicht nutzen.
     </p>
  
     <h4>Änderung der Datenschutzregeln</h4>
