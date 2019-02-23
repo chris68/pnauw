@@ -96,7 +96,7 @@ class Citation extends \yii\db\ActiveRecord
         if ($this->type == 'citation') {
            $return = $return->orderBy(['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ]);
         } elseif ($this->type == 'complaint') {
-           $return = $return->orderBy(['loc_formatted_addr' => SORT_ASC , 'taken' => SORT_ASC, ]);
+           $return = $return->orderBy(['(select regexp_matches(loc_formatted_addr , \'[0-9]{5}\'))[1]' => SORT_ASC,'loc_formatted_addr' => SORT_ASC , 'taken' => SORT_ASC, ]);
         }
         return $return;
     }
