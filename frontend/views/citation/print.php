@@ -44,7 +44,7 @@ elseif ($model->type == 'complaint') {
             <li>mit zwei Seiten pro Blatt, einseitig oder doppelseitig (dann Details und Bild auf einer Seite), oder </li>
             <li>mit 4,8 oder 16 Seiten pro Blatt, einseitig oder doppelseitig, für eine Miniaturübersicht </li>
         </ul>
-        <br/><br/>
+        <br/>
         Sie sollten mit der Skalierung ein bisschen spielen und die Größte nehmen, sodass alles noch draufpasst. 140% liefert meist gut Werte.
         <br/><br/>
         Bei vielen Vorfällen hat es sich bewährt, der Bußgeldstelle eine kompakte Miniaturübersicht mit 8 Vorfällen pro Seite ausgedruckt in 
