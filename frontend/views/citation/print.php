@@ -36,6 +36,8 @@ elseif ($model->type == 'complaint') {
 </style>
 <div class="citation-print">
 
+    <?php if ($model->type == 'citation') : ?>
+    
     <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         Drucken Sie diese Seiten nun auf dem Drucker oder speichern Sie es als PDF. Sie können es 
@@ -49,12 +51,20 @@ elseif ($model->type == 'complaint') {
         <br/><br/>
         Bei vielen Vorfällen hat es sich bewährt, der Bußgeldstelle eine kompakte Miniaturübersicht mit 8 Vorfällen pro Seite ausgedruckt in 
         Papierform zur Verfügung zu stellen und die Originale mit einem Vorfall pro Seite im Internet hochzuladen und den Zugriffslink (am 
-        besten mit <a href='tinyurl.com'>tinyurl.com<a/> verkürzen) dann im Anschrieben mitzuteilen
+        besten mit <a href='tinyurl.com'>tinyurl.com</a> verkürzen) dann im Anschrieben mitzuteilen
         <br/><br/>
         <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
     </div>    
     
-    <?php if ($model->type == 'complaint') : ?>
+    <?php elseif ($model->type == 'complaint') : ?>
+    
+    <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Drucken Sie diese Seiten nun auf dem Drucker oder speichern Sie es als PDF.
+        <br/><br/>
+        <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
+    </div>    
+    
     <h1><?= $this->title ?></h1>
     <p>
         Dies ist eine informelle Beschwerde (<b>keine Anzeige!</b>), die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
