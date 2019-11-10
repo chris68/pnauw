@@ -36,6 +36,21 @@ elseif ($model->type == 'complaint') {
 </style>
 <div class="citation-print">
 
+    <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Drucken Sie diese Seiten nun auf dem Drucker oder speichern Sie es als PDF. Sie können es 
+        <ol>
+            <li>mit einer Seite pro Blatt  doppelseitig ausdrucken (dann vorne die Details, hinten das Bild), oder </li>
+            <li>mit zwei Seiten pro Blatt, einseitig oder doppelseitig (dann Details und Bild auf einer Seite), oder </li>
+            <li>mit 4,8 oder 16 Seiten pro Blatt, einseitig oder doppelseitig, für eine Miniaturübersicht </li>
+        </ol>
+        Sie sollten mit der Skalierung ein bisschen spielen und die Größte nehmen, sodass alles noch draufpasst. 140% liefert meist gut Werte.
+        <br/>
+        Das Drucken funktioniert nur mit aktuellen Browsern (Firefox, Chrome getestet), Microsofts Edge versteht leider HTML 5 immer noch nicht korrekt und bricht nicht korrekt um.
+        <br/><br/>
+        <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
+    </div>    
+    
     <?php if ($model->type == 'complaint') : ?>
     <h1><?= $this->title ?></h1>
     <p>
