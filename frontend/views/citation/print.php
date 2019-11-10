@@ -44,9 +44,12 @@ elseif ($model->type == 'complaint') {
             <li>mit zwei Seiten pro Blatt, einseitig oder doppelseitig (dann Details und Bild auf einer Seite), oder </li>
             <li>mit 4,8 oder 16 Seiten pro Blatt, einseitig oder doppelseitig, für eine Miniaturübersicht </li>
         </ul>
+        <br/><br/>
         Sie sollten mit der Skalierung ein bisschen spielen und die Größte nehmen, sodass alles noch draufpasst. 140% liefert meist gut Werte.
-        <br/>
-        Das Drucken funktioniert nur mit aktuellen Browsern (Firefox, Chrome getestet), Microsofts Edge versteht leider HTML 5 immer noch nicht korrekt und bricht nicht korrekt um.
+        <br/><br/>
+        Bei vielen Vorfällen hat es sich bewährt, der Bußgeldstelle eine kompakte Miniaturübersicht mit 8 Vorfällen pro Seite ausgedruckt in 
+        Papierform zur Verfügung zu stellen und die Originale mit einem Vorfall pro Seite im Internet hochzuladen und den Zugriffslink (am 
+        besten mit <a href='tinyurl.com'>tinyurl.com<a/> verkürzen) dann im Anschrieben mitzuteilen
         <br/><br/>
         <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
     </div>    
