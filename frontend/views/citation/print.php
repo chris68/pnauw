@@ -11,9 +11,11 @@ use kartik\markdown\Markdown;
 
 if ($model->type == 'citation') {
     $this->title = 'Privatanzeige';
+    $this->title .= ' - '.$model->name;
 }
 elseif ($model->type == 'complaint') {
     $this->title = 'Beschwerde';
+    $this->title .= ' - '.$model->name;
 }
 ?>
 <style>
