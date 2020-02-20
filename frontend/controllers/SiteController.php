@@ -143,7 +143,7 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['contactEmail'])) {
+            if (false && $model->sendEmail(Yii::$app->params['contactEmail'])) { // todo: integrate https://github.com/himiklab/yii2-recaptcha-widget
                 Yii::$app->session->setFlash('success', \Yii::t('base','Thank you for contacting us. We will respond to you as soon as possible.'));
             } else {
                 Yii::$app->session->setFlash('error', \Yii::t('base','There was an error sending your message.'));
