@@ -238,6 +238,13 @@ class PictureController extends Controller
                         } else {
                             $result['updated']['ok']++;
                         }
+                    } else {
+                        /* Make sure that even unmodified models are touched, since otherwise they will not disappear from the worklist */
+                        $model->touch('modified_ts');
+                        $success = $model->save();
+                        if ($success === false) {
+                            $result['updated']['nok']++;
+                        }                         
                     }
                 }
             }
@@ -801,8 +808,10 @@ class PictureController extends Controller
             )) == 0)) {
             Yii::$app->session->setFlash('info', 'Es liegen keine Dateien auf dem Server vor');
         } else {
-            Yii::$app->session->setFlash('info', 'Es liegen '.count($files).' Dateien auf dem Server vor');
+            Yii::$app->session->setFlash('info', 'Es liegen '.count($files).' Dateien auf dem Server vor. Die ersten 50 werden hochgeladen');
         }
+        
+        $files = array_slice($files, 0, 50); /* Limit to 50 files per upload */
         
         if (Yii::$app->getRequest()->isPost) {
             if ($defaultvalues->load(Yii::$app->request->post()) && $defaultvalues->validate()) {
