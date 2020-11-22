@@ -69,11 +69,11 @@ use \frontend\models\Picture;
                         'value' => ($model->campaign)?$model->campaign->name:'(nicht gesetzt)',
                     ],
                     [
-                        'label' => 'Anzeige',
+                        'label' => 'Anzeige/Beschwerde',
                         'value' => ($model->citation)?$model->citation->name:'(nicht gesetzt)',
                     ],
                     [
-                        'label' => 'Anzeigenzusatz',
+                        'label' => 'Interner Zusatz',
                         'format' => 'raw',
                         'value' => nl2br(Html::encode($model->citation_affix)),
                     ],

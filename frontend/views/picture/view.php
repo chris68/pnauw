@@ -13,7 +13,7 @@ PictureLocationmapAsset::register($this);
 $this->title = 'Vorfall ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Bilder', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Anzeigen';
+$this->params['breadcrumbs'][] = 'Anzeigen/Beschwerden';
 $this->params['help'] = 'picture-view';
 ?>
 <div class="picture-view">

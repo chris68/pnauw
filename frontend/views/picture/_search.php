@@ -72,7 +72,7 @@ use yii\bootstrap\ActiveForm;
         <?php endif; ?>
         <?php if ($model->scenario == 'private' || $model->scenario == 'admin' ): ?>
             <fieldset>
-            <legend>Kfz &amp; Anzeigen</legend>
+            <legend>Kfz &amp; Anzeigen/Beschwerden</legend>
             <?= $form->field($model, 'vehicle_country_code')->listBox(frontend\models\VehicleCountry::dropDownList(), ['multiple' => true, 'unselect' => '', ]) ?>
 
             <?= $form->field($model, 'vehicle_reg_plate')->textInput(['id'=>'search-vehicle-reg-plate', ]) ?>

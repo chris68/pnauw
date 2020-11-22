@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 
 $this->title = 'Anzeige bearbeiten: ' . Html::encode($model->name);
-$this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Anzeigen/Beschwerden', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Bearbeiten';
 $this->params['help'] = 'citation-crud';

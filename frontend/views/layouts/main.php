@@ -120,7 +120,7 @@ AppAsset::register($this);
                     'items' => [
                         ['label' => 'Zettel', 'url' => ['/flyer/index']],
                         ['label' => 'Kampagnen', 'url' => ['/campaign/index'], 'visible' => Yii::$app->user->can('trusted')],
-                        ['label' => 'Anzeigen', 'url' => ['/citation/index']],
+                        ['label' => 'Anzeigen/Beschwerden', 'url' => ['/citation/index']],
                         '<li class="divider"></li>',
                         ['label' => 'Nutzerdaten', 'url' => ['/site/userdata']],
                         ['label' => 'Applikationseinstellungen', 'url' => ['/site/userappdata']],

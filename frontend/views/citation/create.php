@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Citation */
  
-$this->title = 'Anzeige anlegen';
-$this->params['breadcrumbs'][] = ['label' => 'Anzeigen', 'url' => ['index']];
+$this->title = 'Anzeige/Beschwerde anlegen';
+$this->params['breadcrumbs'][] = ['label' => 'Anzeigen/Beschwerden', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['help'] = 'citation-crud';
 ?>

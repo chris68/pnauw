@@ -20,7 +20,7 @@ use \common\models\User;
         ?>
         <?php endif;?>
         <?= $form->field($model, 'action_id')->dropDownList(frontend\models\Action::dropDownList()) ?>
-        <?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList())->hint('Anzeigen müssen Sie vorher anlegen') ?>
+        <?= $form->field($model, 'citation_id')->dropDownList(frontend\models\Citation::dropDownList())->hint('Anzeigen/Beschwerden müssen Sie vorher anlegen') ?>
         <?= $form->field($model, 'vehicle_reg_plate')->textInput(['placeholder' => 'Optionale Erfassung (nicht öffentlich)']) ?>
         <?= $form->field($model, 'vehicle_country_code')->dropDownList(frontend\models\VehicleCountry::dropDownList()) ?>
     </div>
@@ -45,7 +45,7 @@ use \common\models\User;
             <!-- A range field seems not to be reset upon a form reset; but what can we do? -->
             <?= Html::activeInput('range', $model, 'clip_size', ['id'=>'picture-clip-size', 'min' => 5, 'max' => 70, ]) ?>
             </div>
-            <?= $form->field($model,'citation_affix')->textarea(['rows' => 5, 'placeholder' => 'Hier können sie weitere Angaben für eine potentielle Anzeige machen (Nicht öffentlich, sondern nur für den Empfänger der Anzeige)']) ?>
+            <?= $form->field($model,'citation_affix')->textarea(['rows' => 5, 'placeholder' => 'Hier können sie weitere Angaben für eine potentielle Anzeige/Beschwerde machen (Nicht öffentlich, sondern nur für den Empfänger der Anzeige/Beschwerde)']) ?>
         </div>
     </div>
     
