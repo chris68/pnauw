@@ -13,6 +13,17 @@ $this->params['breadcrumbs'][] = $this->title;
         Die Plattform wird laufend weiterentwickelt und damit Sie schnell erkennen können, wann was neu hinzugekommen ist, haben wir hier die Releasehistorie veröffentlicht. Kleinere Änderungsrelease mit Fehlerkorrekturen werden hier jedoch nicht aufgeführt.
     </p>
     <h3>
+        Version 2.4 (November 2020)
+    </h3>
+    <p>
+        Erweiterung zum Reklamieren von unsinnigen Verkehrszeichen und für total andere Sachen (z.B. Wanderschilder, etc)
+    </p>
+    <ul>
+        <li>Vorfallkategorie Verkehrzeichen und systemfremde Nutzung</li>
+        <li>Es gibt nun die Möglichkeit, eine freiformatierte Zusammenfassung von Vorfällen mit einer Karte zu machen (Öffentliche und interne Blankovorlage)</li>
+        <li>Anpassung der AGB für die neue Nutzungen</li>
+    </ul>
+    <h3>
         Version 2.3 (27.01.2019)
     </h3>
     <p>

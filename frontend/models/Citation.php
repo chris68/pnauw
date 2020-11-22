@@ -8,7 +8,7 @@ namespace frontend\models;
  * @property integer $id
  * @property integer $owner_id
  * @property string $name
- * @property string $type Either 'citation' or 'complaint'
+ * @property string $type Either 'citation','complaint','public','protected'
  * @property string $description
  * @property string $created_ts
  * @property string $modified_ts
@@ -71,7 +71,7 @@ class Citation extends \yii\db\ActiveRecord
             'owner_id' => 'Besitzer',
             'name' => 'Name',
             'description' => 'Zusatzinformationen',
-            'type' => 'Anzeigentyp',
+            'type' => 'Typ/Vorlage',
             'created_ts' => 'Angelegt am (UTC)',
             'modified_ts' => 'Verändert am (UTC)',
             'released_ts' => 'Freigegeben am (UTC)',
@@ -96,6 +96,8 @@ class Citation extends \yii\db\ActiveRecord
         if ($this->type == 'citation') {
            $return = $return->orderBy(['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ]);
         } elseif ($this->type == 'complaint') {
+           $return = $return->orderBy(['(select regexp_matches(loc_formatted_addr , \'[0-9]{5}\'))[1]' => SORT_ASC,'loc_formatted_addr' => SORT_ASC , 'taken' => SORT_ASC, ]);
+        } elseif ($this->type == 'protected' || $this->type == 'public') {
            $return = $return->orderBy(['(select regexp_matches(loc_formatted_addr , \'[0-9]{5}\'))[1]' => SORT_ASC,'loc_formatted_addr' => SORT_ASC , 'taken' => SORT_ASC, ]);
         }
         return $return;
@@ -133,7 +135,7 @@ class Citation extends \yii\db\ActiveRecord
      */
     public static function dropDownListForType()
     {
-        return ['' => '(nicht gesetzt)', 'citation' => 'rechtsverbindliche Anzeige', 'complaint' => 'unverbindliche Beschwerde'];
+        return ['' => '(nicht gesetzt)', 'citation' => 'rechtsverbindliche Anzeige (Gehwegparken)', 'complaint' => 'unverbindliche Beschwerde (Gehwegparken)', 'public' => 'Blankovorlage (öffentliche Darstellung)', 'protected' => 'Blankovorlage (interne Darstellung)'];
     }
     
     /**

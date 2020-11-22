@@ -21,12 +21,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h4>Nutzungseinschränkung</h4>
     <p>
-        Es ist ausdrücklich verboten, den Service für irgendetwas anderes zu nutzen als für das Dokumentieren, Veröffentlichen, Nutzen für Privatanzeigen von <b>parkenden</b> Fahrzeugen (= ruhender Verkehr) jedlicher Art. Es ist ausdrücklich NICHT für eine ähnliche Dokumentation von <b>fahrenden</b> Fahrzeugen (= fließender Verkehr) freigegeben.
+        Der Service kann genutzt werden für 
+        <ul>
+            <li>das Dokumentieren, Veröffentlichen, Nutzen für Privatanzeigen oder Beschwerden von <b>parkenden</b> Fahrzeugen (= ruhender Verkehr) jedlicher Art</li>
+            <li>das Dokumentieren, Veröffentlichen, Nutzen für Widersprüche oder Beschwerden gegen Verkehrszeichen</li>
+            <li>das Dokumentieren, Veröffentlichen, Nutzen für Aufmerksammachen oder Beschwerden gegen andere Dinge, wo die Plattform hilfreich erscheint</li>
+        </ul>
+            
+        Der Service ist ausdrücklich NICHT freigegeben für 
+        <ul>
+            <li>eine ähnliche und vor allem <b>öffentliche</b> Dokumentation von <b>fahrenden</b> Fahrzeugen (= fließender Verkehr)</li>
+            <li>das öffentliche Anpragern von Lebenwesen</li>
+        </ul>
+        
+        Es können also auch beispielsweise falsche oder fehlende Wandermarkierungen an einen Wanderverein gemeldet werden oder Hundekotbeutel, Müll, etc. Aber eben 
+        nicht einen Hundebesitzer, der den Kotbeutel irgendwo hinschmeißt, oder ein Hund, der irgendwo seinen Haufen macht. Der Grund für die Einschränkung ist das 
+        Persönlichkeitsrecht von Lebewesen und negative Erfahrung in anderen Plattformen, wo die Menschen einfach keine Grenzen kennen.
     </p>
 
     <h4>Einhaltung der Datenschutzrechte</h4>
     <p>
-        Das Veröffentlichen von Autonummern, Namen von Besitzern oder irgendwelchen Personen in öffentlichen Beschreibungstexten ist ausdrücklich verboten. Solche sensitiven Daten dürfen nur in den dafür vorgesehenen Feldern (Autonummer in Kfz-Nummer) und Personen/Zeugen/bekannte Halter in den Zusatztext zur einer Anzeige angegeben werden.
+        Das Veröffentlichen von Autonummern, Namen von Besitzern oder irgendwelchen Personen in öffentlichen Beschreibungstexten ist ausdrücklich verboten. Solche sensitiven Daten dürfen nur in den dafür vorgesehenen Feldern (Autonummer in Kfz-Nummer) und Personen/Zeugen/bekannte Halter in den Zusatztext zur einer Anzeige/Besschwerde angegeben werden.
+        Die öffentliche Nutzung des Ausdrucks läge dann in der Verantwortung des Erstellers und nicht mehr der Plattform, sollte aber definitiv unterbleiben. Die Daten
+        sollten nur an Behörden etc. gehen, wo deren Nutzung dann in der Regel natürlich legitim ist.
     </p>
     
     <h4>Verantwortlichkeit für die eingestellten Inhalte</h4>
@@ -53,6 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <p>
-        (Stand 26.12.2013; gültig ab 26.12.2013)
+        (Stand 22.11.2020; gültig ab 01.12.2020)
     </p>
 </div>

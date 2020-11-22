@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Wenn Sie ganz schnell wissen wollen, wie die Sache funktioniert, dann schauen Sie sich am besten das <a href="#video">lustige Video</a> am Ende diese Seite an.
     </p>
     <h4>
-        <a>Problem: Missbräuchliches Parken auf Gehwegen, Radwegen oder in verkehrsberuhigten Zonen</a>
+        <a>Hauptproblem: Missbräuchliches Parken auf Gehwegen, Radwegen oder in verkehrsberuhigten Zonen</a>
     </h4>
     <p>
         Das Problem des Gehwegparkens ist nach wie vor akut und leider wird es von offiziellen Stellen eher nicht ausreichend verfolgt
@@ -76,6 +76,30 @@ $this->params['breadcrumbs'][] = $this->title;
         Jeder kann dann für sich selbst entscheiden, welches der beiden bereitgestellten Mittel er einsetzen möchte. <b>Tatsache ist übrigens, dass die meisten Nutzer sich direkt für den Weg einer Anzeige ohne Öffentlichkeit entscheiden.</b>
         Anscheinend merken Sie, dass bei Gehwegparken eigentlich nur Anzeigen und Verwarnungsgelder wirken. Und mit dieser Plattform ist ja auch sehr gut sichergestellt, dass die Anzeige von den Ämtern gewürdigt wird, weil alle rechtlichen Voraussetzungen
         (Papierform, eindeutige Beweismittel, etc.) 100% erfüllt sind. 
+    </p>
+    <h4>
+        <a>Nebenschauplatz: Verkehrschilder und die Ignoranz der Behörden für die Belange von Fußgängern und Radfahren</a>
+    </h4>
+    <p>
+        Parallel zu dem Hauptproblem, der Tolerierung des Gehwegparkens, gibt es aber auch immer wieder <?= Assist::linkNew('Verkehrszeichen',['https://de.wikipedia.org/wiki/Verkehrszeichen']) ?> (also Verkehrsschilder, aber auch Markierungen auf 
+        der Straße!), die den Belangen von Fußgängern und Radfahrern nicht gerecht werden. Der Klassiker ist das Aussperren von Radfahrern auf Wirtschafts- oder Waldwegen,
+        wo hierfür keinerlei Notwendigkeit besteht, sondern meist der Bauhof oder die Behörde einfach nur das falsche Schild genommen haben. Es kann aber auch eine
+        Freigabe von Gehwegparken sein an Stellen, wo es dadurch einfach zu eng wird für die Fußgänger und Kleinkinder auf dem Fahrrad. Oder die Einrichtung eines Radwegs mit 
+        Benutzungspflicht vs. der Freigabe für Radfahrer (Zusatz "Radfahrer frei").
+    </p>
+    <p>
+        Es gibt Städte und Gemeinden, wo man solche Sachen einfach im Internet oder per App melden kann und es dann überlicherweise auch korrigiert wird. 
+        Aber nicht alle Städte und Gemeinden haben hier moderne Mittel, um sowas schnell und effizient zu melden. 
+        Und es gibt leider auch immer wieder Städte und Gemeinden, wo eine solche Meldung einfach nicht beantwortet wird oder auf Widerstände stößt, entweder aus Ignoranz oder Überlastung. 
+        Es gibt hier dann bei Mißerfolg einer solchen reinen Mitteilung zwei Möglichkeiten, 
+        einen Antrag auf Neuverbescheidung und einen Widerspruch gemäß  <?= Assist::linkNew('§70 VwGO',['https://dejure.org/gesetze/VwGO/70.html']) ?>.
+        Der Antrag auf Neuverbescheidung sollte kostenlos sein und damit für normale Bürger der Weg der Wahl, der Widerspruch ist ein offizieller Akt, der durchaus in 
+        nicht unerheblichen Kosten münden kann und sollte daher nur von rechtskundigen Bürgern beschritten werden. Manchmal wirkt aber halt nur der zweite Weg.
+    </p>
+    <p>
+        Die Plattform unterstützt alle Wege durch entsprechende Vorfälle (Kategorie "Sonstiges") und die Möglichkeit, die Verkehrszeichen mit Ort und Kommentar schnell als PDF auszudrucken für einen Emailversand.
+        Diese sehr generischen Möglichkeiten können übrigens auch für ganz andere Zwecke genutzt werden, z.B. für Wanderzeichen, Müll auf der Straße oder was auch immer, wo ein Bild mit einem Ort
+        und ein schönes PDF hilft.
     </p>
     <h4>
         <a>Die Plattform "Parke nicht auf unseren Wegen"</a>

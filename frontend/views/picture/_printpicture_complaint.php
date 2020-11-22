@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
+/* @var $model_type string*/
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -27,7 +28,7 @@ PictureLocationmapAsset::register($this);
         <?=
         frontend\widgets\ImageRenderer::widget(
             [
-                'image' => $model->smallImage,
+                'image' => $model_type=='public'?$model->blurredSmallImage:$model->smallImage,
                 'size' => 'small',
                 'options' => ['class'=>'img-responsive', 'id' => 'picture-image-'.$model->id],
             ]
@@ -35,7 +36,7 @@ PictureLocationmapAsset::register($this);
         ?>
         </p>
         <p><b><?= Html::encode($model->incident->name) ?> </b></p>
-        <p><?= nl2br(Html::encode($model->citation_affix)) ?></p>
+        <p><?= $model_type=='public'?'':nl2br(Html::encode($model->citation_affix)) ?></p>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <?=
@@ -46,7 +47,7 @@ PictureLocationmapAsset::register($this);
                   'map' => 1,
                   'lat' => $model->loc_lat,
                   'lng' => $model->loc_lng,
-                  'zoom' => 17,
+                  'zoom' => 15,
               ]
             ])
         ?> 

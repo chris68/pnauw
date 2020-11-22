@@ -10,12 +10,15 @@ use kartik\markdown\Markdown;
 
 
 if ($model->type == 'citation') {
-    $this->title = 'Privatanzeige';
+    $this->title = 'Privatanzeige Gehwegparken';
     $this->title .= ' - '.$model->name;
 }
 elseif ($model->type == 'complaint') {
-    $this->title = 'Beschwerde';
+    $this->title = 'Beschwerde Gehwegparken';
     $this->title .= ' - '.$model->name;
+}
+elseif ($model->type == 'protected' || $model->type == 'public') {
+    $this->title = $model->name;
 }
 ?>
 <style>
@@ -58,7 +61,7 @@ elseif ($model->type == 'complaint') {
         <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
     </div>    
     
-    <?php elseif ($model->type == 'complaint') : ?>
+    <?php else : ?>
     
     <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -68,6 +71,7 @@ elseif ($model->type == 'complaint') {
     </div>    
     
     <h1><?= $this->title ?></h1>
+    <?php if ($model->type == 'complaint') : ?>
     <p>
         Dies ist eine informelle Beschwerde (<b>keine Anzeige!</b>), die über die Plattform <b>Parke-nicht-auf-unseren-Wegen.de</b> erstellt wurde. Mit dieser Plattform 
         können betroffene Bürger Gehwegparker dokumentieren, die Autofahrer auf ihr missbräuchliches Parken hinweisen und das Fehlverhalten an die entsprechenden Behörden melden. Was hiermit gerade geschieht.
@@ -76,6 +80,7 @@ elseif ($model->type == 'complaint') {
         Die Erwartung ist, dass die entsprechende Behörde an den gemeldeten Stellen die Kontrollen intensiviert und das Fehlverhalten der Autofahrer damit abgestellt wird.
     </p>
     <h2>Spezifische Angaben für die Beschwerde</h2>
+    <?php endif; ?>
     <?=Markdown::convert(Html::encode($model->description))?>
     <div style="page-break-before: always;"></div>
     
@@ -90,8 +95,9 @@ elseif ($model->type == 'complaint') {
                 }
               ?>";
     </script>
+    <h2>Übersichtskarte</h2>
     <div class="row">
-        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 form-group" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" style="margin-top: 10px; margin-bottom: 10px;">
             <div id="overviewmap" style="height: 800px;"></div>
         </div>
     </div>
@@ -104,9 +110,10 @@ elseif ($model->type == 'complaint') {
                 echo $this->render('//picture/_printpicture_citation', [
                     'model' => $pic,
                 ]);
-            } elseif ($model->type == 'complaint') {
+            } else {
                 echo $this->render('//picture/_printpicture_complaint', [
                     'model' => $pic,
+                    'model_type' => $model->type
                 ]);
                 echo '<div style="page-break-after: auto;"></div>';
             } 
@@ -136,7 +143,9 @@ elseif ($model->type == 'complaint') {
         gemäß  § 46 Abs. 1 OWiG i.V.m. § 171 S.1 StPO um eine kurze Info</b> z.B. an die in der Regel ja angegebene Emailadresse mit einer <b>nachvollziehbaren Begründung für die Nichtumsetzung</b>.
     </p>
     <p>
-        Dies gilt weniger bei Nichtumsetzen von vereinzelten Anzeigen/Vorfällen - hier soll aus Effizienzgründen auf die Korrektheit der Entscheidung vertraut werden. Sondern es geht vielmehr darum, dass ein Nichtumsetzen aller oder sehr vieler Anzeigen rechtlich eher nicht durch das Opportunitätsprinzip
+        Dies gilt in der Regel (d.h. wenn dem nicht indiviudell und ausdrücklich wiedersprochen wird) weniger bei Nichtumsetzen von vereinzelten Anzeigen/Vorfällen - 
+        hier soll in der Regel aus Effizienzgründen auf die Korrektheit der Entscheidung vertraut werden. 
+        Sondern es geht vielmehr darum, dass ein Nichtumsetzen <b>aller oder sehr vieler Anzeigen</b> rechtlich eher nicht durch das Opportunitätsprinzip
         abgedeckt wäre. Und dann will der Anzeiger eventuell die Möglichkeit des Rechtsweges oder der Dienstaufsichtsbeschwerde einschlagen.
         Und daher muss sichergestellt sein, dass die Anzeigen nicht einfach und in großen Stil ohne weitere Benachrichtigung eingestellt werden.
         Denn der Anzeiger macht die Sache ja meist nicht aus Spass, sondern eher aus Notwehr, weil es die offiziellen Stellen nicht machen!
