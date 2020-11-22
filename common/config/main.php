@@ -2,7 +2,7 @@
 return [
 // @chris68
     'name' => 'Parke nicht auf unseren Wegen',
-    'version' => '2.3.1',
+    'version' => '2.4.0',
 
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
