@@ -136,11 +136,13 @@ $(function() {
                             break;
                         case 1:
                         case 16:
+                        case 21:
                             pointOptions.radius = 6;
                             pointOptions.fillColor = '#FFA500'; // orange
                             break;
                         case 14:
                         case 15:
+                        case 22:
                             pointOptions.radius = 9;
                             pointOptions.fillColor = '#FF0000'; // red
                             break;
@@ -170,7 +172,13 @@ $(function() {
                         case 20:
                             pointOptions.radius = 4;
                             pointOptions.fillColor = '#FA58F4'; // Pink
+                            break;
+                        case 23:
+                            pointOptions.radius = 6;
+                            pointOptions.fillColor = '##5860fa'; // Dark blue
+                            break;
                         default: 
+                            break;
                             ;
                     }
                 }
