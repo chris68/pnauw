@@ -35,7 +35,10 @@ PictureLocationmapAsset::register($this);
         )
         ?>
         </p>
-        <p><b><?= Html::encode($model->incident->name) ?> </b></p>
+        <p>
+            <b><?= Html::encode($model->incident->name) ?> </b> 
+            <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?> 
+        </p>
         <p><?= $model_type=='public'?'':nl2br(Html::encode($model->citation_affix)) ?></p>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -51,6 +54,7 @@ PictureLocationmapAsset::register($this);
               ]
             ])
         ?> 
+        <a href="https://www.google.de/maps/@<?=$model->loc_lat?>,<?=$model->loc_lng?>,80m/data=!3m1!1e3" target="_blank">Satellitenkarte</a>
         <p><?= Html::encode($model->loc_formatted_addr) ?></p>
         </div>
         </div>
