@@ -15,7 +15,7 @@ PictureLocationmapAsset::register($this);
     
     <h1>
         <?=Html::encode($model->vehicle_reg_plate.' / '.date_format(date_create($model->taken),'d.m.Y'))?>
-        <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil btn-sm"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?>
+        <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil btn-sm delete-before-printing"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?>
             
     </h1>
         <?php \frontend\views\picture\assets\PicturePrintAsset::register($this); ?>

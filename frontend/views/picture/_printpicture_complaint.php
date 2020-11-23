@@ -37,7 +37,7 @@ PictureLocationmapAsset::register($this);
         </p>
         <p>
             <b><?= Html::encode($model->incident->name) ?> </b> 
-            <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?> 
+            <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil delete-before-printing"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?> 
         </p>
         <p><?= $model_type=='public'?'':nl2br(Html::encode($model->citation_affix)) ?></p>
         </div>

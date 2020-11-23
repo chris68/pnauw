@@ -44,7 +44,7 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
     <?php if ($model->type == 'citation') : ?>
     
     <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="var paras = document.getElementsByClassName('delete-before-printing');while(paras[0]) {paras[0].parentNode.removeChild(paras[0]);}" >&times;</a>
         Drucken Sie diese Seiten nun auf dem Drucker oder speichern Sie es als PDF. Sie können es 
         <ul>
             <li>mit einer Seite pro Blatt  doppelseitig ausdrucken (dann vorne die Details, hinten das Bild), oder </li>
@@ -64,7 +64,7 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
     <?php else : ?>
     
     <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="var paras = document.getElementsByClassName('delete-before-printing');while(paras[0]) {paras[0].parentNode.removeChild(paras[0]);}" >&times;</a>
         Drucken Sie diese Seiten nun auf dem Drucker oder speichern Sie es als PDF.
         <br/><br/>
         <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
@@ -87,6 +87,8 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
     <?php
       \frontend\views\picture\assets\PictureOverviewmapAsset::register($this);
     ?>
+
+
     <script type="text/javascript">
             var overviewmapInteractive=false, overviewmapSource =
             "<?php 
