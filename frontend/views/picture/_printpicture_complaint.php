@@ -16,7 +16,7 @@ PictureLocationmapAsset::register($this);
     
     <h4>
         <?= Html::encode($model->loc_formatted_addr.' ['.date_format(date_create($model->taken),'d.m.Y').'] ') ?>
-        <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil delete-before-printing"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?> 
+        <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['picture/update','id'=>$model->id], ['class' => 'delete-before-printing', 'target' => '_blank'])):'')?> 
                     
     </h4>
         <?php \frontend\views\picture\assets\PicturePrintAsset::register($this); ?>
