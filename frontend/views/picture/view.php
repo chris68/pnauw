@@ -51,7 +51,10 @@ $this->params['help'] = 'picture-view';
                   ]
                 ]);
             ?>
-            <a href="https://www.google.de/maps/@<?=$model->loc_lat?>,<?=$model->loc_lng?>,80m/data=!3m1!1e3" target="_blank">Satellitenkarte</a>
+            <p>
+                <a href="https://www.google.de/maps/@<?=$model->loc_lat?>,<?=$model->loc_lng?>,80m/data=!3m1!1e3" target="_blank">Satellitenkarte</a>
+                <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil btn-sm"></span>', ['picture/update','id'=>$model->id])):'')?>
+            </p>
             <p><?=(!empty($model->loc_formatted_addr)?Html::encode($model->loc_formatted_addr):'<i>Der Ort wurde leider noch nicht ermittelt</i>')?></p>
         </div>
         <a name="disqus_thread"></a><div class="col-sm-4 col-md-4 col-lg-4">
