@@ -58,7 +58,7 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
         Papierform zur Verfügung zu stellen und die Originale mit einem Vorfall pro Seite im Internet hochzuladen und den Zugriffslink (am 
         besten mit <a href='tinyurl.com'>tinyurl.com</a> verkürzen) dann im Anschrieben mitzuteilen
         <br/><br/>
-        <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
+        <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen. Dann verschwinden auch die Edit-Buttons</i></b>
     </div>    
     
     <?php else : ?>
@@ -67,7 +67,7 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
         <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="var paras = document.getElementsByClassName('delete-before-printing');while(paras[0]) {paras[0].parentNode.removeChild(paras[0]);}" >&times;</a>
         Drucken Sie diese Seiten nun auf dem Drucker oder speichern Sie es als PDF.
         <br/><br/>
-        <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
+        <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen. Dann verschwinden auch die Edit-Buttons</i></b>
     </div>    
     
     <h1><?= $this->title ?></h1>

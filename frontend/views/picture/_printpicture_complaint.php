@@ -16,6 +16,7 @@ PictureLocationmapAsset::register($this);
     
     <h4>
         <?= Html::encode($model->loc_formatted_addr.' ['.date_format(date_create($model->taken),'d.m.Y').'] ') ?>
+        <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil delete-before-printing"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?> 
                     
     </h4>
         <?php \frontend\views\picture\assets\PicturePrintAsset::register($this); ?>
@@ -37,7 +38,6 @@ PictureLocationmapAsset::register($this);
         </p>
         <p>
             <b><?= Html::encode($model->incident->name) ?> </b> 
-            <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil delete-before-printing"></span>', ['picture/update','id'=>$model->id], ['target' => '_blank'])):'')?> 
         </p>
         <p><?= $model_type=='public'?'':nl2br(Html::encode($model->citation_affix)) ?></p>
         </div>
