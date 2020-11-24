@@ -18,9 +18,17 @@ $this->title .= ' - '.substr($model->taken,0,10); // Add the date part
 </style>
 <div class="picture-print">
 
+    <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" onclick="var paras = document.getElementsByClassName('delete-before-printing');while(paras[0]) {paras[0].parentNode.removeChild(paras[0]);}" >&times;</a>
+        Drucken Sie diese Seiten nun auf dem Drucker oder speichern Sie es als PDF.
+        <br/><br/>
+        <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen. Dann verschwinden auch die Edit-Buttons</i></b>
+    </div>    
+    
     <?php
         echo $this->render('_printpicture_complaint', [
             'model' => $model,
+            'model_type' => 'protected',
         ]);
     ?>
 </div>
