@@ -51,8 +51,6 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
             <li>mit zwei Seiten pro Blatt, einseitig oder doppelseitig (dann Details und Bild auf einer Seite), oder </li>
             <li>mit 4,8 oder 16 Seiten pro Blatt, einseitig oder doppelseitig, für eine Miniaturübersicht </li>
         </ul>
-        <br/>
-        Sie können mit der Skalierung ein bisschen spielen und die Größte nehmen, sodass alles noch draufpasst und nichts vom Text abgeschnitten wird. 140% liefert meist gut Werte.
         <br/><br/>
         Bei vielen Vorfällen hat es sich bewährt, der Bußgeldstelle eine kompakte Miniaturübersicht mit 8 Vorfällen pro Seite ausgedruckt in 
         Papierform zur Verfügung zu stellen und die Originale mit einem Vorfall pro Seite im Internet hochzuladen und den Zugriffslink (am 
