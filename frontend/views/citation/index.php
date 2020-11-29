@@ -8,8 +8,8 @@ use yii\bootstrap\Collapse;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $searchModel frontend\models\CitationSearch */
 
-$this->title = 'Anzeigen/Beschwerden';
-$this->params['breadcrumbs'][] = ['label' => 'Anzeigen/Beschwerden', 'url' => ['index']];
+$this->title = 'Meldungen';
+$this->params['breadcrumbs'][] = ['label' => 'Meldungen', 'url' => ['index']];
 $this->params['help'] = 'citation-crud';
 ?>
 <div class="citation-index">
@@ -33,7 +33,7 @@ $this->params['help'] = 'citation-crud';
     ?>
 
     <p>
-        <?= Html::a('Anzeige/Beschwerde anlegen', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Meldung anlegen', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo ListView::widget([

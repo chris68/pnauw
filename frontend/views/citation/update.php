@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $model frontend\models\Citation */
 
 
-$this->title = 'Anzeige bearbeiten: ' . Html::encode($model->name);
-$this->params['breadcrumbs'][] = ['label' => 'Anzeigen/Beschwerden', 'url' => ['index']];
+$this->title = 'Meldung bearbeiten: ' . Html::encode($model->name);
+$this->params['breadcrumbs'][] = ['label' => 'Meldungen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Bearbeiten';
 $this->params['help'] = 'citation-crud';

@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
 
 $this->title = Html::encode($model->name);
-$this->params['breadcrumbs'][] = ['label' => 'Anzeigen/Beschwerden', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Meldungen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['help'] = 'citation-crud';
 ?>
@@ -46,7 +46,7 @@ $this->params['help'] = 'citation-crud';
         ],
     ]); ?>
     
-    <?=Html::a('Vorfälle der Anzeige bearbeiten',['picture/manage', 's[citation_id]' => $model->id,'sort' => 'vehicle_reg_plate'],['target' => '_blank']) ?>
-     | <?=Html::a('Anzeige drucken (als Druckansicht darstellen)',['print', 'id' => $model->id, ],['target' => '_blank']) ?>
+    <?=Html::a('Vorfälle der Meldung bearbeiten',['picture/manage', 's[citation_id]' => $model->id,'sort' => 'vehicle_reg_plate'],['target' => '_blank']) ?>
+     | <?=Html::a('Meldung drucken (als Druckansicht darstellen)',['print', 'id' => $model->id, ],['target' => '_blank']) ?>
 
 </div>

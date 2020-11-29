@@ -69,7 +69,7 @@ use \frontend\models\Picture;
                         'value' => ($model->campaign)?$model->campaign->name:'(nicht gesetzt)',
                     ],
                     [
-                        'label' => 'Anzeige/Beschwerde',
+                        'label' => 'Meldung',
                         'value' => ($model->citation)?$model->citation->name:'(nicht gesetzt)',
                     ],
                     [

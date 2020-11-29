@@ -167,7 +167,7 @@ class PictureSearch extends Model
             'citation_affix' => 'Interner Zusatz',
             'action_id' => 'Maßnahme',
             'incident_id' => 'Vorfall',
-            'citation_id' => 'Anzeige/Beschwerde',
+            'citation_id' => 'Meldung',
             'campaign_id' => 'Kampagne',
             'created_ts' => 'Hochgeladen am (UTC)',
             'modified_ts' => 'Geändert am (UTC)',

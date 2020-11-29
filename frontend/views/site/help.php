@@ -358,7 +358,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Wenn Sie angemeldet sind, dann können Sie einen existierenden Zettel übrigens auch als Kopiervorlage für einen eigenen Zettel nehmen. Ein gutes Beispiel ist immer unser Standardzettel (https://parke-nicht-auf-unseren-wegen.de/f/pnauw)
     </p>
 
-    <h2><a name="citation">Anzeigen &amp; Beschwerden</a></h2>
+    <h2><a name="citation">Anzeigen &amp; Beschwerden (Meldungen)</a></h2>
     <p>
         Anzeigen bzw. Beschwerden sind wahrscheinlich die einzigen Möglichkeiten, die Sie haben, wenn eine <a href='#campaign'>Kampagne</a> alleine nicht ausreichend Wirkung zeigt.
     </p>
@@ -371,9 +371,9 @@ $this->params['breadcrumbs'][] = $this->title;
         genannt und für den betroffenen Halter des angezeigten Fahrzeugs wird dies auch erkenntlich sein. Darüber sollten Sie sich auf jeden Fall im Klaren sein. Die Anzeigen werden in der Regel dann auch umgesetzt, weil wir (zumindest in Deutschland) immer noch in einem Rechtsstaat leben.
     </p>
     
-    <h3><a name="citation-crud">Verwalten von Anzeigen &amp; Beschwerden</a></h2>
+    <h3><a name="citation-crud">Verwalten von Meldungen (meist Anzeigen &amp; Beschwerden)</a></h2>
     <p>
-        Das Verwalten von <a href='#citation'>Anzeigen bzw. Beschwerden</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Anzeigen/Beschwerden sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
+        Das Verwalten von <a href='#citation'>Meldungen</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Meldungen sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
     </p>
     
     <h2><a name="general">Generelles</a></h2>
