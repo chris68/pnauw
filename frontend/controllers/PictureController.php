@@ -8,6 +8,7 @@ use frontend\models\PictureUploadForm;
 use frontend\models\PictureCaptureForm;
 use frontend\models\PictureModerateForm;
 use frontend\models\PicturePublishForm;
+use frontend\models\PicturePrintForm;
 use frontend\models\KmlUploadForm;
 use common\models\User;
 use Yii;
@@ -565,11 +566,16 @@ class PictureController extends Controller
         $dataProvider->query->ownerScope();
         $dataProvider->sort->defaultOrder = ['vehicle_country_code' => SORT_ASC ,'vehicle_reg_plate'  => SORT_ASC, 'taken' => SORT_ASC, ];
         $dataProvider->pagination->pageSize = 500;
+        
+        $printParameters = new PicturePrintForm();
+        $printParameters->load(Yii::$app->request->get());
+
 
         $this->layout = 'print';
         return $this->render('printmultiple', [
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
+                'printParameters' => $printParameters,
         ]);
     }
 

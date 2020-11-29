@@ -4,6 +4,7 @@
 
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
 
@@ -46,7 +47,90 @@ $this->params['help'] = 'citation-crud';
         ],
     ]); ?>
     
-    <?=Html::a('Vorfälle der Meldung bearbeiten',['picture/manage', 's[citation_id]' => $model->id,'sort' => 'vehicle_reg_plate'],['target' => '_blank']) ?>
-     | <?=Html::a('Meldung drucken (als Druckansicht darstellen)',['print', 'id' => $model->id, ],['target' => '_blank']) ?>
+    <?=Html::a('Vorfälle der Meldung bearbeiten',['picture/manage', 's[citation_id]' => $model->id,'sort' => $model->type == 'citation'?'vehicle_reg_plate':'zip_location'],['target' => '_blank']) ?>
+     | 
+    <!-- Button trigger modal -->
+    <a href="#print" data-toggle="modal" data-target="#print">Meldung drucken (als Druckansicht darstellen)</a>
+<!-- Modal -->
+    <div class="modal fade" id="print" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="printform" action="<?= Url::toRoute('print') ?>" method="get" target ='_blank'>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" 
+                           data-dismiss="modal">
+                               <span aria-hidden="true">&times;</span>
+                               <span class="sr-only">Schließen</span>
+                        </button>
+                        <h3 class="modal-title">
+                            Druckoptionen
+                        </h3>
+                    </div>
+
+                    <!-- Modal Body -->
+    
+                    <div class="modal-body">
+                      <fieldset>
+                        <legend>Übersichtskarte</legend>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_none" value="none">
+                            <label class="form-check-label" for="p_v_none">
+                              Keine
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_before" value="before" <?=$model->type!='citation'?'checked':''?>>
+                            <label class="form-check-label" for="p_v_before">
+                              Am Anfang
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_after" value="after" <?=$model->type=='citation'?'checked':''?>>
+                            <label class="form-check-label" for="p_v_after">
+                              Am Ende
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <fieldset>
+                        <legend>Sichtbarkeit</legend>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[visibility]" id="p_v_unchanged" value="unchanged" checked>
+                            <label class="form-check-label" for="p_v_unchanged">
+                              Unverschleiert
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[visibility]" id="p_v_blurred" value="blurred">
+                            <label class="form-check-label" for="p_v_blurred">
+                              Verschleiert
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    
+                    <!-- Hidden Parameters -->
+                    <?php
+                        echo Html::hiddenInput('id',$model->id);
+                        echo Html::hiddenInput('s[citation_id]',$model->id); // Needed for the overview map!
+                    ?>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">
+                                    Schließen
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Druckansicht erzeugen
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </div>

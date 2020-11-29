@@ -232,7 +232,16 @@ class PictureSearch extends Model
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        // Additional sort parameter, first according to zip code, then the location
+        $dataProvider->sort->attributes = array_merge($dataProvider->sort->attributes, [
+            'zip_location' => [
 
+                'asc' => ['(select regexp_matches(loc_formatted_addr , \'[0-9]{5}\'))[1]' => SORT_ASC,'loc_formatted_addr' => SORT_ASC , 'taken' => SORT_ASC, ],
+
+                'desc' => ['(select regexp_matches(loc_formatted_addr , \'[0-9]{5}\'))[1]' => SORT_DESC,'loc_formatted_addr' => SORT_DESC , 'taken' => SORT_DESC, ],
+            ]
+        ]);
+        
         if ($params !== NULL) {
             $this->load($params);
         }

@@ -18,17 +18,17 @@ use frontend\models\Citation;
         <?= $form->errorSummary($model) ?>
         <fieldset>
         <legend>Typ</legend>
-        <?= $form->field($model, 'type')->dropDownList(Citation::dropDownListForType())->hint('Geben Sie hier bitte an, ob Sie gegen das Gehwegparken eine richtige rechtsverbindliche Anzeige machen wollen oder nur eine unverbindliche Beschwerde. Alternativ können Sie auch eine der Blankovorlagen für andere Zwecke (z.B. das Melden von unsinnigen Verkehrszeichen, fehlenden Wanderzeichen, etc.) nutzen.') ?>
+        <?= $form->field($model, 'type')->dropDownList(Citation::dropDownListForType())->hint('Geben Sie hier bitte an, ob Sie gegen das Gehwegparken eine richtige rechtsverbindliche Anzeige machen wollen oder nur eine unverbindliche Beschwerde. Alternativ können Sie auch die Blankovorlage für andere Zwecke (z.B. das Melden von unsinnigen Verkehrszeichen, fehlenden Wanderzeichen, Müllablagerungen, Astbruch, etc.) nutzen.') ?>
         </fieldset>
         <fieldset>
         <legend>Name und Zusatzinformationen</legend>
-        <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'name')->hint('Geben Sie hier den Namen/Titel ein, der dann zur Überschrift wird und später beim Erzeugen des PDF als Dateiname verwendet wird.') ?>
 
         <?= $form->field($model, 'description')->widget('\kartik\markdown\MarkdownEditor', 
             [
                 'showExport' => false,
             ])->
-            hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Sie sollten aber außer bei der Blankovorlage nur Fettmachungen, etc. einsetzen.') 
+            hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Kursiv gesetzte Textteile werden beim verschleierten Drucken durch einen Hinweis auf die Verschleierung ersetzt.') 
         ?>
         </fieldset>
     

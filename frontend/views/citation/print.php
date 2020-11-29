@@ -7,6 +7,7 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use frontend\models\PicturePrintForm;
 
 
 if ($model->type == 'citation') {
@@ -17,9 +18,12 @@ elseif ($model->type == 'complaint') {
     $this->title = 'Beschwerde Gehwegparken';
     $this->title .= ' - '.$model->name;
 }
-elseif ($model->type == 'protected' || $model->type == 'public') {
+elseif ($model->type == 'empty') {
     $this->title = $model->name;
 }
+
+$printParameters = new PicturePrintForm();
+$printParameters->load(Yii::$app->request->get());
 ?>
 <style>
     body {
@@ -29,12 +33,12 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
         width: 100%;
     }
     @media print {
-        .citation-print .leaflet-control-attribution {
+        .leaflet-control-attribution {
             font-size: 7px;
         }   
     }
     @media screen {
-        .citation-print .leaflet-control-attribution {
+        .leaflet-control-attribution {
             font-size: 9px;
         }   
     }
@@ -79,22 +83,25 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
     </p>
     <h2>Spezifische Angaben für die Beschwerde</h2>
     <?php endif; ?>
-    <?=Markdown::convert(Html::encode($model->description))?>
+    <?=Markdown::convert(Html::encode($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','(Passage wurde verschleiert)',$model->description)))?> 
     <div style="page-break-before: always;"></div>
     
+    <?php endif; ?>
+    <?php if ($printParameters->overviewmap != 'none'): ?>
     <?php
       \frontend\views\picture\assets\PictureOverviewmapAsset::register($this);
     ?>
-
-
     <script type="text/javascript">
             var overviewmapInteractive=false, overviewmapSource =
             "<?php 
                 {
-                    echo Url::toRoute(['picture/geodata','s[citation_id]'=>$model->id,'private' => true]);
+                    echo Url::toRoute(['picture/geodata','private' => true,'s' => Yii::$app->getRequest()->get('s')]);
                 }
               ?>";
     </script>
+    <?php endif ?>
+    <?php if ($printParameters->overviewmap == 'before'): ?>
+    
     <h2>Übersichtskarte</h2>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" style="margin-top: 10px; margin-bottom: 10px;">
@@ -102,18 +109,19 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
         </div>
     </div>
     <div style="page-break-before: always;"></div>
-    <?php endif; ?>
+    <?php endif ?>
     <?php
         /* var $pic frontend\models\Picture */
         foreach ($model->getPictures()->all() as $pic) {
             if ($model->type == 'citation') {
                 echo $this->render('//picture/_printpicture_citation', [
                     'model' => $pic,
+                    'printParameters' => $printParameters,
                 ]);
             } else {
                 echo $this->render('//picture/_printpicture_complaint', [
                     'model' => $pic,
-                    'model_type' => $model->type,
+                    'printParameters' => $printParameters,
                 ]);
                 echo '<div style="page-break-after: auto;"></div>';
             } 
@@ -127,7 +135,7 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
         oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
     </p>
     <h2>Zeuge und weitere spezifische Angaben für die Anzeige</h2>
-    <p><?=Markdown::convert(Html::encode($model->description))?></p>
+    <p><?=Markdown::convert(Html::encode($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','(Passage wurde verschleiert)',$model->description)))?></p>
     <h2>Generelle Erläuterungen</h2>
     <p>
         Unter Vorfall ist genau dokumentiert, wie der Anzeiger die Lage entschätzt. Wenn es dort heißt <b>Gehwegparken (mit Behinderung)</b>, 
@@ -151,4 +159,13 @@ elseif ($model->type == 'protected' || $model->type == 'public') {
         Denn der Anzeiger macht die Sache ja meist nicht aus Spass, sondern eher aus Notwehr, weil es die offiziellen Stellen nicht machen!
     </p>
     <?php endif; ?>
+    <?php if ($printParameters->overviewmap == 'after'): ?>
+    <div style="page-break-before: always;"></div>
+    <h2>Übersichtskarte</h2>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" style="margin-top: 10px; margin-bottom: 10px;">
+            <div id="overviewmap" style="height: 800px;"></div>
+        </div>
+    </div>
+    <?php endif ?>
 </div>

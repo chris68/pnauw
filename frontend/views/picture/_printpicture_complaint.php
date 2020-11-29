@@ -1,10 +1,11 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
-/* @var $model_type string*/
+/* @var $printParameters frontend\models\PicturePrintForm */
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use frontend\models\PicturePrintForm;
 use frontend\views\picture\assets\PictureLocationmapAsset;
 
 PictureLocationmapAsset::register($this);
@@ -29,7 +30,7 @@ PictureLocationmapAsset::register($this);
         <?=
         frontend\widgets\ImageRenderer::widget(
             [
-                'image' => $model_type=='public'?$model->blurredSmallImage:$model->smallImage,
+                'image' => $printParameters->visibility=='unchanged'?$model->smallImage:$model->blurredSmallImage,
                 'size' => 'small',
                 'options' => ['class'=>'img-responsive', 'id' => 'picture-image-'.$model->id],
             ]
@@ -39,7 +40,7 @@ PictureLocationmapAsset::register($this);
         <p>
             <b><?= Html::encode($model->incident->name) ?> </b> 
         </p>
-        <p><?= $model_type=='public'?'':nl2br(Html::encode($model->citation_affix)) ?></p>
+        <p><?= $printParameters->visibility=='unchanged'?'':nl2br(Html::encode($model->citation_affix)) ?></p>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <?=

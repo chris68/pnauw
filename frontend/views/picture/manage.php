@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
+use yii\web\View;
 use yii\bootstrap\Collapse;
 use yii\bootstrap\ActiveForm;
 use frontend\controllers\PictureController;
@@ -37,6 +38,7 @@ $this->params['help'] = 'picture-manage';
     
     <?= $this->render('_overviewmap', ['private' => 1]) ?>
     
+          
     <div style="margin-top: 10px;">
     <?php
         {
@@ -54,12 +56,92 @@ $this->params['help'] = 'picture-manage';
             $params[0] = '/picture/publish';
             echo Html::a('Bilder veröffentlichen', Url::toRoute($params), ['target' => '_blank']);
             echo ' | ';
-            $params[0] = '/picture/printmultiple';
-            echo Html::a('Bilder drucken', Url::toRoute($params), ['target' => '_blank']);
         }
     ?>
-    </div>
+    <!-- Button trigger modal -->
+    <a href="#print" data-toggle="modal" data-target="#print">Drucken</a>
+<!-- Modal -->
+    <div class="modal fade" id="print" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="printform" action="<?= Url::toRoute('/picture/printmultiple') ?>" method="get" target ='_blank'>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" 
+                           data-dismiss="modal">
+                               <span aria-hidden="true">&times;</span>
+                               <span class="sr-only">Schließen</span>
+                        </button>
+                        <h3 class="modal-title">
+                            Druckoptionen
+                        </h3>
+                    </div>
+
+                    <!-- Modal Body -->
     
+                    <div class="modal-body">
+                      <fieldset>
+                        <legend>Übersichtskarte</legend>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_none" value="none">
+                            <label class="form-check-label" for="p_v_none">
+                              Keine
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_before" value="before" checked>
+                            <label class="form-check-label" for="p_v_before">
+                              Am Anfang
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_after" value="after">
+                            <label class="form-check-label" for="p_v_after">
+                              Am Ende
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <fieldset>
+                        <legend>Sichtbarkeit</legend>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[visibility]" id="p_v_unchanged" value="unchanged" checked>
+                            <label class="form-check-label" for="p_v_unchanged">
+                              Unverschleiert
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[visibility]" id="p_v_blurred" value="blurred">
+                            <label class="form-check-label" for="p_v_blurred">
+                              Verschleiert
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    
+                    <!-- Hidden Parameters -->
+                    <?php
+                        foreach((Yii::$app->getRequest()->get('s')??[]) as $key => $value) {
+                            echo Html::hiddenInput('s['.$key.']' , $value);
+                        }
+                    ?>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">
+                                    Schließen
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Druckansicht erzeugen
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <?php 
         /* @var $form yii\bootstrap\ActiveForm */
         $form = ActiveForm::begin(); 

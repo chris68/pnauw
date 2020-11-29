@@ -2,6 +2,8 @@
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
 
+use frontend\models\PicturePrintForm;
+
 $this->title = 'Vorfall';
 if (!empty($model->vehicle_reg_plate)) {
     $this->title .= ' - '.$model->vehicle_reg_plate;
@@ -28,7 +30,7 @@ $this->title .= ' - '.substr($model->taken,0,10); // Add the date part
     <?php
         echo $this->render('_printpicture_complaint', [
             'model' => $model,
-            'model_type' => 'protected',
+            'printParameters' => new PicturePrintForm(),
         ]);
     ?>
 </div>

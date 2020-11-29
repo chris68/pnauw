@@ -1,9 +1,11 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Picture */
+/* @var $printParameters frontend\models\PicturePrintForm */
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use frontend\models\PicturePrintForm;
 use frontend\views\picture\assets\PictureLocationmapAsset;
 
 PictureLocationmapAsset::register($this);
@@ -14,7 +16,7 @@ PictureLocationmapAsset::register($this);
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     
     <h1>
-        <?=Html::encode($model->vehicle_reg_plate.' / '.date_format(date_create($model->taken),'d.m.Y'))?>
+        <?=Html::encode(($printParameters->visibility=='unchanged'?$model->vehicle_reg_plate:substr($model->vehicle_reg_plate,0,3).' ... '.substr($model->vehicle_reg_plate,-2)).' / '.date_format(date_create($model->taken),'d.m.Y'))?>
         <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['picture/update','id'=>$model->id], ['class' => 'delete-before-printing', 'target' => '_blank'])):'')?>
             
     </h1>
@@ -28,11 +30,11 @@ PictureLocationmapAsset::register($this);
                     'taken',
                     [
                         'label' => 'Kennzeichen',
-                        'value' => $model->vehicle_reg_plate,
+                        'value' => $printParameters->visibility=='unchanged'?$model->vehicle_reg_plate:'',
                     ],
                     [
                         'label' => 'Kennzeichen (Ausschnitt)',
-                        'value' =>     "<canvas data-image-id='picture-image-{$model->id}' data-clip-x='{$model->clip_x}' data-clip-y='{$model->clip_y}' data-clip-size='{$model->clip_size}' style='width:300px; heigth:200px;'>",
+                        'value' =>  $printParameters->visibility=='unchanged'?("<canvas data-image-id='picture-image-{$model->id}' data-clip-x='{$model->clip_x}' data-clip-y='{$model->clip_y}' data-clip-size='{$model->clip_size}' style='width:300px; heigth:200px;'>"):'',
                         'format' => 'raw',
                     ],
                     [
@@ -42,7 +44,7 @@ PictureLocationmapAsset::register($this);
                     [
                         'label' => 'Details zum Vorfall',
                         'format' => 'raw',
-                        'value' => nl2br(Html::encode($model->citation_affix)),
+                        'value' => $printParameters->visibility=='unchanged'?nl2br(Html::encode($model->citation_affix)):'',
                     ],
                     'loc_formatted_addr',
                     [
@@ -67,9 +69,9 @@ PictureLocationmapAsset::register($this);
         <?=
         frontend\widgets\ImageRenderer::widget(
             [
-                'image' => $model->originalImage,
+                'image' => $printParameters->visibility=='unchanged'?$model->originalImage:$model->blurredSmallImage,
                 'size' => 'medium',
-                'options' => ['class'=>'img-responsive', 'style'=>'page-break-before: always;', 'id' => 'picture-image-'.$model->id],
+                'options' => ['class'=>'img-responsive', 'style'=>$printParameters->visibility=='unchanged'?'page-break-before: always;':'', 'id' => 'picture-image-'.$model->id],
             ]
         )
         ?>
