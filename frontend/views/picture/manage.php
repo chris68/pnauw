@@ -125,7 +125,14 @@ $this->params['help'] = 'picture-manage';
                     <!-- Hidden Parameters -->
                     <?php
                         foreach((Yii::$app->getRequest()->get('s')??[]) as $key => $value) {
-                            echo Html::hiddenInput('s['.$key.']' , $value);
+                            if (is_array($value)) {
+                                // Handle array values correctly, only one level supported
+                                foreach($value as $value1) {
+                                    echo Html::hiddenInput('s['.$key.'][]' , $value1);
+                                }
+                            } else {
+                                echo Html::hiddenInput('s['.$key.']' , $value);
+                            }
                         }
                     ?>
                     <!-- Modal Footer -->
