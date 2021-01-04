@@ -33,8 +33,7 @@ SQL
     }
 
     /**
-     * Hide all pics not modified since the last 3 years
-     * Consolidate the larger formats to smaller ones (to small 1 year and to thumbnail 3 years after creation)
+     * Hide all pics not modified since the last 3 years and consolidate the larger formats to smaller ones (to small 1 year and to thumbnail 3 years after creation)
      */
     public function actionPurgePictures()
     {
@@ -93,6 +92,21 @@ SQL
 
             $command4 = $connection->createCommand(
 <<<SQL
+        update
+            tbl_picture p
+        set
+            original_image_id = medium_image_id
+        where
+            created_ts <= current_date - interval '3' month and
+            original_image_id != medium_image_id
+SQL
+            );
+
+            $count4 = $command4->execute();
+
+
+            $command5 = $connection->createCommand(
+<<<SQL
         delete from
             tbl_image i
         where
@@ -111,7 +125,7 @@ SQL
 SQL
             );
 
-            $count4 = $command4->execute();
+            $count5 = $command5->execute();
 
 
 
@@ -125,7 +139,8 @@ SQL
         $this->stdout("$count1 pictures not modified in the last 3 years sucessfully reset to visibility = 'private_hidden'\n", Console::FG_GREEN);
         $this->stdout("$count2 pictures created before 1 year sucessfully consolidated to size small\n", Console::FG_GREEN);
         $this->stdout("$count3 pictures created before 3 years sucessfully consolidated to size thumbnail\n", Console::FG_GREEN);
-        $this->stdout("$count4 images no longer necessary sucessfully deleted\n", Console::FG_GREEN);
+        $this->stdout("$count4 pictures created before 3 months sucessfully consolidated to size medium\n", Console::FG_GREEN);
+        $this->stdout("$count5 images no longer necessary sucessfully deleted\n", Console::FG_GREEN);
         return true;
     }
     
