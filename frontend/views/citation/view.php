@@ -72,23 +72,40 @@ $this->params['help'] = 'citation-crud';
     
                     <div class="modal-body">
                       <fieldset>
+                        <legend>Listenzusammenfassung</legend>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewlist]" id="p_l_show" value="show" <?=$model->type=='citation'?'checked':''?>>
+                            <label class="form-check-label" for="p_l_show">
+                              Zeigen
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[overviewlist]" id="p_l_none" value="none" <?=$model->type!='citation'?'checked':''?>>
+                            <label class="form-check-label" for="p_l_none">
+                              Keine
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <fieldset>
                         <legend>Übersichtskarte</legend>
                         <div class="form-group">
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_none" value="none">
-                            <label class="form-check-label" for="p_v_none">
+                            <label class="form-check-label" for="p_o_none">
                               Keine
                             </label>
                           </div>
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_before" value="before" <?=$model->type!='citation'?'checked':''?>>
-                            <label class="form-check-label" for="p_v_before">
+                            <label class="form-check-label" for="p_o_before">
                               Am Anfang
                             </label>
                           </div>
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="p[overviewmap]" id="p_o_after" value="after" <?=$model->type=='citation'?'checked':''?>>
-                            <label class="form-check-label" for="p_v_after">
+                            <label class="form-check-label" for="p_o_after">
                               Am Ende
                             </label>
                           </div>

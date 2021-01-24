@@ -16,7 +16,7 @@ PictureLocationmapAsset::register($this);
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     
     <h4>
-        <?= Html::encode($model->loc_formatted_addr.' ['.date_format(date_create($model->taken),'d.m.Y').'] ') ?>
+        <?= Html::encode($model->loc_formatted_addr.' ['.date_format(date_create($model->taken),'d.m.Y').' / #'.$model->id.'] ') ?>
         <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['picture/update','id'=>$model->id], ['class' => 'delete-before-printing', 'target' => '_blank'])):'')?> 
                     
     </h4>

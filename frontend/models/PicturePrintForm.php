@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
 class PicturePrintForm extends Model
 {
     public $overviewmap='none';
+    public $overviewlist='none';
     public $visibility='unchanged';
     
     /**
@@ -24,7 +25,7 @@ class PicturePrintForm extends Model
     public function rules()
     {
         return [
-            [    ['overviewmap', 'visibility', ],
+            [    ['overviewmap', 'visibility', 'overviewlist'],
                 'string',
             ],
         ];

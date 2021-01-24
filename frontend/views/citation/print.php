@@ -159,6 +159,42 @@ $printParameters->load(Yii::$app->request->get());
         Denn der Anzeiger macht die Sache ja meist nicht aus Spass, sondern eher aus Notwehr, weil es die offiziellen Stellen nicht machen!
     </p>
     <?php endif; ?>
+    <?php if ($printParameters->overviewlist == 'show'): ?>
+    <div style="page-break-before: always;"></div>
+    <h2>Übersicht der Vorfälle</h2>
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Maßnahme</th>
+                <th>Zeitpunkt</th>
+                <th>Ort</th>
+                <th>Vorfall</th>
+                <th><?=($model->type == 'citation')?'KFZ':''?></th>
+              </tr>
+            </thead>
+            <tbody>
+    <?php
+        /* var $pic frontend\models\Picture */
+        foreach ($model->getPictures()->all() as $pic) {
+    ?>
+                <tr>
+                  <td><?=$pic->id?></td>
+                  <td><?=$pic->action->name?></td>
+                  <td><?=($model->type == 'citation')?$pic->taken:date_format(date_create($pic->taken),'d.m.Y')?></td>
+                  <td><?=$pic->loc_formatted_addr?></td>
+                  <td><?=$pic->incident->name?></td>
+                  <td><?=$model->type == 'citation' && $printParameters->visibility=='unchanged'?$pic->vehicle_reg_plate:''?>
+                </tr>
+        
+    <?php
+        }
+    ?>
+            </tbody>
+        </table>                
+    </div>
+    <?php endif ?>
     <?php if ($printParameters->overviewmap == 'after'): ?>
     <div style="page-break-before: always;"></div>
     <h2>Übersichtskarte</h2>
