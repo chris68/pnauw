@@ -10,17 +10,7 @@ use kartik\markdown\Markdown;
 use frontend\models\PicturePrintForm;
 
 
-if ($model->type == 'citation') {
-    $this->title = 'Privatanzeige Gehwegparken';
-    $this->title .= ' - '.$model->name;
-}
-elseif ($model->type == 'complaint') {
-    $this->title = 'Beschwerde Gehwegparken';
-    $this->title .= ' - '.$model->name;
-}
-elseif ($model->type == 'empty') {
-    $this->title = $model->name;
-}
+$this->title = $model->name;
 
 $printParameters = new PicturePrintForm();
 $printParameters->load(Yii::$app->request->get());
@@ -162,38 +152,10 @@ $printParameters->load(Yii::$app->request->get());
     <?php if ($printParameters->overviewlist == 'show'): ?>
     <div style="page-break-before: always;"></div>
     <h2>Übersicht der Vorfälle</h2>
-    <div class="row">
-        <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Maßnahme</th>
-                <th>Zeitpunkt</th>
-                <th>Ort</th>
-                <th>Vorfall</th>
-                <th><?=($model->type == 'citation')?'KFZ':''?></th>
-              </tr>
-            </thead>
-            <tbody>
-    <?php
-        /* var $pic frontend\models\Picture */
-        foreach ($model->getPictures()->all() as $pic) {
-    ?>
-                <tr>
-                  <td><?=$pic->id?></td>
-                  <td><?=$pic->action->name?></td>
-                  <td><?=($model->type == 'citation')?$pic->taken:date_format(date_create($pic->taken),'d.m.Y')?></td>
-                  <td><?=$pic->loc_formatted_addr?></td>
-                  <td><?=$pic->incident->name?></td>
-                  <td><?=$model->type == 'citation' && $printParameters->visibility=='unchanged'?$pic->vehicle_reg_plate:''?>
-                </tr>
-        
-    <?php
-        }
-    ?>
-            </tbody>
-        </table>                
-    </div>
+    <?php echo $this->render('_overviewlist', [
+        'model' => $model,
+        'printParameters' => $printParameters,
+    ]) ?>
     <?php endif ?>
     <?php if ($printParameters->overviewmap == 'after'): ?>
     <div style="page-break-before: always;"></div>

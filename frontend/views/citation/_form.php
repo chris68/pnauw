@@ -31,6 +31,13 @@ use frontend\models\Citation;
             hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Kursiv gesetzte Textteile werden beim verschleierten Drucken durch einen Hinweis auf die Verschleierung ersetzt.') 
         ?>
         </fieldset>
+        <fieldset>
+        <legend>Empfänger</legend>
+        <?= $form->field($model, 'recipient_email')->hint('Geben Sie hier die Email des Empfängers an.') ?>
+        <?= $form->field($model, 'recipient_address')->textarea(['rows' => 5])->hint('Geben Sie hier die postalische Adresse des Empfängers an.') ?>
+        <?= $form->field($model, 'printout_url')->hint('Geben Sie hier die Freigabe-URL an, mit der man auf den Ausdruck kommt.') ?>
+
+        </fieldset>
     
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

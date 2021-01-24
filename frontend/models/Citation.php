@@ -10,6 +10,9 @@ namespace frontend\models;
  * @property string $name
  * @property string $type Either 'citation','complaint','empty'
  * @property string $description
+ * @property string $recipient_email
+ * @property string $recipient_address
+ * @property string $printout_url
  * @property string $created_ts
  * @property string $modified_ts
  * @property string $released_ts
@@ -57,7 +60,7 @@ class Citation extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'description', 'type', ], 'required'],
-            [['name', 'description', 'type', ], 'string']
+            [['name', 'description', 'type', 'recipient_email', 'recipient_address', 'printout_url'], 'string']
         ];
     }
 
@@ -71,6 +74,9 @@ class Citation extends \yii\db\ActiveRecord
             'owner_id' => 'Besitzer',
             'name' => 'Name',
             'description' => 'Zusatzinformationen',
+            'recipient_email' => 'Email des Empfängers',
+            'recipient_address' => 'Postadresse des Empfängers',
+            'printout_url' => 'Freigabe-URL des Ausdrucks',
             'type' => 'Typ/Vorlage',
             'created_ts' => 'Angelegt am (UTC)',
             'modified_ts' => 'Verändert am (UTC)',

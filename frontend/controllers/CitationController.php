@@ -29,7 +29,7 @@ class CitationController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'copy', 'delete', 'print'],
+                        'actions' => ['index', 'view', 'create', 'update', 'copy', 'delete', 'print', 'letter', 'qrcode'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -151,6 +151,34 @@ class CitationController extends Controller
     {
         $this->findModelOwn($id)->delete();
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Generates the qrcode for the url (to be used in an img url).
+     * @return mixed
+     */
+    public function actionQrcode($id)
+    {
+        $qrCode = (new \Da\QrCode\QrCode($this->findModelOwn($id)->printout_url))
+            ->setSize(150)
+            ->setMargin(5)
+            ->useForegroundColor(0, 0, 0);
+
+        header('Content-Type: '.$qrCode->getContentType());
+        echo $qrCode->writeString();
+    }
+
+    /**
+     * Prints a letter for a single Citation model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionLetter($id)
+    {
+        $this->layout = 'print';
+        return $this->render('letter', [
+            'model' => $this->findModelOwn($id),
+        ]);
     }
 
     /**

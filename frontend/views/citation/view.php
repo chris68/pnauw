@@ -41,6 +41,9 @@ $this->params['help'] = 'citation-crud';
                 'format' => 'raw',
                 'value' => Markdown::convert(Html::encode($model->description)),
             ],
+            'recipient_email',
+            'recipient_address:ntext',
+            'printout_url:url',
             'created_ts',
             'modified_ts',
             //'released_ts',
@@ -149,5 +152,21 @@ $this->params['help'] = 'citation-crud';
             </div>
         </div>
     </div>
-
+    | 
+    <?=Html::a('Anschreiben drucken (als Druckansicht darstellen)',['letter', 'id' => $model->id],['target' => '_blank']) ?>
+    | 
+    <?=Html::a(
+        'Email erzeugen',
+        'mailto:'.urlencode($model->recipient_email).'?'.
+            'subject='.urlencode($this->title).
+            '&body='.
+                'Sehr geehrte Damen und Herren%0A%0A'.
+                '<persönlicher Text>%0A%0A'.
+                'Das eigentliche Schreiben findet sich hinter folgenden Link: '.urlencode($model->printout_url).'%0A%0A'.
+                'Geben Sie diesen Link bitte nur an Empfänger weiter, die auch berechtigt sind, den Inhalt zu lesen, da der Link Lesezugriff auf das Dokument erteilt%0A%0A'.
+                'Mit freundlichen Grüßen%0A%0A%0A%0A'
+                
+        ,
+        ['target' => '_blank']
+    )?>
 </div>
