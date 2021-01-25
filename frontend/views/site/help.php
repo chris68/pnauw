@@ -376,6 +376,15 @@ $this->params['breadcrumbs'][] = $this->title;
         Das Verwalten von <a href='#citation'>Meldungen</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Meldungen sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
     </p>
     
+    <h3><a name="citation-print">Drucken und Versand von Meldungen</a></h2>
+    <p>
+        Sie können eine Meldung drucken, meist wird man es als PDF ausgeben und das PDF dann z.B. in Google Drive hochladen. Dort kann man sich einen Link
+        erzeugen, mit dem jeder Zugriff auf die Datei bekommt. Diese Link wiederrum kann man in der Meldung speichern und dann wird dieser beim Versand einer Email
+        und beim Drucken eines Anschreibens automatisch hinzugefügt. Damit kann man dann leicht die Detailinfos im Internet bereitstellen und nur ein bis zwei
+        Seiten ausgedruckt und unterschrieben an die Behörde schicken. Denn die meisten Behörden dürfen gewisse Sachen ja noch nicht ausschließlich digital 
+        akzeptieren und daher braucht es die gute alte Post und berittene Boten!
+    </p>
+    
     <h2><a name="general">Generelles</a></h2>
     <h3><a name="comments">Kommentare</a></h3>
     <p>

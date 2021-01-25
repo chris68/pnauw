@@ -24,18 +24,18 @@ $printParameters->visibility='unchanged';
         width: 100%;
     }
 </style>
-<div class="citation-print">
+<div class="citation-letter" style="padding-left:2em">
 
     <div class="alert alert-info alert-dismissable" style="margin-top: 10px">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         Sie können die Seite nun anpassen, die meisten Inhalte können Sie direkt im Editor ändern. Clicken Sie einfach auf die entsprechenden Stellen.<br><br>
-        Sie können hierbei die Texte anpassen, vor allem aber auch den Abstand der Adresse zum oberen Rand für das Adressfenster.<br><br>
+        Sie können hierbei die Texte anpassen, vor allem aber auch den Abstand der Adresse zum oberen Rand für das Adressfenster, falls es nicht passt.<br><br>
         Wenn Sie zufrieden sind, drucken Sie die Seite auf dem Drucker aus oder speichern Sie diese als PDF.  
         <br><br>
         <b><i>Sie müssen diese Box vor dem Drucken mit dem Kreuz rechts oben zumachen.</i></b>
     </div>    
 
-    <p contenteditable="true"><br><br><br><br></p>
+    <p contenteditable="true"><br><br><br><br><br><br><br><br><br></p>
     <p contenteditable="true"><?=Yii::$app->formatter->format($model->recipient_address,'ntext') ?></p>
 
     <p contenteditable="true"><br><br></p>

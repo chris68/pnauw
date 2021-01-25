@@ -33,9 +33,9 @@ use frontend\models\Citation;
         </fieldset>
         <fieldset>
         <legend>Empfänger</legend>
-        <?= $form->field($model, 'recipient_email')->hint('Geben Sie hier die Email des Empfängers an.') ?>
-        <?= $form->field($model, 'recipient_address')->textarea(['rows' => 5])->hint('Geben Sie hier die postalische Adresse des Empfängers an.') ?>
-        <?= $form->field($model, 'printout_url')->hint('Geben Sie hier die Freigabe-URL an, mit der man auf den Ausdruck kommt.') ?>
+        <?= $form->field($model, 'recipient_email')->hint('Geben Sie hier die Email(s) (Max Mustermann <max.mustermann@web.de>, ....) der/des Empfängers für die Emailerzeugung an.') ?>
+        <?= $form->field($model, 'recipient_address')->textarea(['rows' => 5])->hint('Geben Sie hier die postalische Adresse des Empfängers für das postalische Anschreiben an.') ?>
+        <?= $form->field($model, 'printout_url')->hint('Geben Sie hier die Freigabe-URL (z.B. von Google Drive) an, mit der man auf den Ausdruck kommt, den Sie dort hochgeladen haben.') ?>
 
         </fieldset>
     
