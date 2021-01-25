@@ -157,15 +157,14 @@ $this->params['help'] = 'citation-crud';
     | 
     <?=Html::a(
         'Email erzeugen',
-        'mailto:'.urlencode($model->recipient_email).'?'.
-            'subject='.urlencode($this->title).
-            '&body='.
-                'Sehr geehrte Damen und Herren%0A%0A'.
-                '<persönlicher Text>%0A%0A'.
-                'Das eigentliche Schreiben findet sich hinter folgenden Link: '.urlencode($model->printout_url).'%0A%0A'.
-                'Geben Sie diesen Link bitte nur an Empfänger weiter, die auch berechtigt sind, den Inhalt zu lesen, da der Link Lesezugriff auf das Dokument erteilt%0A%0A'.
-                'Mit freundlichen Grüßen%0A%0A%0A%0A'
-                
+        'mailto:'.rawurlencode($model->recipient_email).'?'.
+            'subject='.rawurlencode($this->title).
+            '&body='.rawurlencode(
+                "Sehr geehrte Damen und Herren\n\n".
+                "<persönlicher Text>\n\n".
+                "Das eigentliche Schreiben findet sich hinter folgenden Link: ".$model->printout_url."\n\n".
+                "Geben Sie diesen Link bitte nur an Empfänger weiter, die auch berechtigt sind, den Inhalt zu lesen, da der Link Lesezugriff auf das Dokument erteilt\n\n".
+                "Mit freundlichen Grüßen\n\n\n\n")
         ,
         ['target' => '_blank']
     )?>
