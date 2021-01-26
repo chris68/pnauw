@@ -13,6 +13,7 @@ class PicturePrintForm extends Model
     public $overviewmap='none';
     public $overviewlist='none';
     public $visibility='unchanged';
+    public $history='none';
     
     /**
      * @inheritdoc
@@ -25,7 +26,7 @@ class PicturePrintForm extends Model
     public function rules()
     {
         return [
-            [    ['overviewmap', 'visibility', 'overviewlist'],
+            [    ['overviewmap', 'visibility', 'overviewlist', 'history'],
                 'string',
             ],
         ];

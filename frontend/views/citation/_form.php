@@ -28,7 +28,7 @@ use frontend\models\Citation;
             [
                 'showExport' => false,
             ])->
-            hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Kursiv gesetzte Textteile werden beim verschleierten Drucken durch einen Hinweis auf die Verschleierung ersetzt.') 
+            hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Kursiv gesetzte Textteile werden beim verschleierten Drucken durch ##### ersetzt.') 
         ?>
         </fieldset>
         <fieldset>
@@ -36,9 +36,18 @@ use frontend\models\Citation;
         <?= $form->field($model, 'recipient_email')->hint('Geben Sie hier die Email(s) (Max Mustermann <max.mustermann@web.de>, ....) der/des Empfängers für die Emailerzeugung an.') ?>
         <?= $form->field($model, 'recipient_address')->textarea(['rows' => 5])->hint('Geben Sie hier die postalische Adresse des Empfängers für das postalische Anschreiben an.') ?>
         <?= $form->field($model, 'printout_url')->hint('Geben Sie hier die Freigabe-URL (z.B. von Google Drive) an, mit der man auf den Ausdruck kommt, den Sie dort hochgeladen haben.') ?>
-
         </fieldset>
     
+        <fieldset>
+        <legend>Verlauf</legend>
+        <?= $form->field($model, 'history')->widget('\kartik\markdown\MarkdownEditor', 
+            [
+                'showExport' => false,
+            ])->
+            hint('Geben Sie hier die Verlaufshistorie ein. Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren, Überschrift für Datum und dann Zitate für Mailinhalte haben sich bewährt. Kursiv gesetzte Textteile werden beim verschleierten Drucken durch ##### ersetzt.') 
+        ?>
+        </fieldset>
+
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? 'Anlegen' : 'Aktualisieren', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>

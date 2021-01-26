@@ -17,7 +17,7 @@ class m210124_190753_citation_recipient_data extends Migration
     public function safeDown()
     {
         $this->dropColumn('{{%citation}}', 'recipient_email');
-        $this->dropColumn('{{%citation}}', 'recipient_address', 'text not null default \'\'');
-        $this->dropColumn('{{%citation}}', 'printout_url', 'text not null default \'\'');
+        $this->dropColumn('{{%citation}}', 'recipient_address');
+        $this->dropColumn('{{%citation}}', 'printout_url');
     }
 }

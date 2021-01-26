@@ -45,6 +45,11 @@ $this->params['help'] = 'citation-crud';
             'recipient_email',
             'recipient_address:ntext',
             'printout_url:url',
+            [
+                'label' => $model->getAttributeLabel('history'),
+                'format' => 'raw',
+                'value' => HtmlPurifier::process(Markdown::convert($model->history)),
+            ],
             'created_ts',
             'modified_ts',
             //'released_ts',
@@ -79,14 +84,31 @@ $this->params['help'] = 'citation-crud';
                         <legend>Listenzusammenfassung</legend>
                         <div class="form-group">
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="p[overviewlist]" id="p_l_show" value="show" <?=$model->type=='citation'?'checked':''?>>
+                            <input class="form-check-input" type="radio" name="p[overviewlist]" id="p_l_show" value="show" checked>
                             <label class="form-check-label" for="p_l_show">
                               Zeigen
                             </label>
                           </div>
                           <div class="form-check">
-                            <input class="form-check-input" type="radio" name="p[overviewlist]" id="p_l_none" value="none" <?=$model->type!='citation'?'checked':''?>>
+                            <input class="form-check-input" type="radio" name="p[overviewlist]" id="p_l_none" value="none">
                             <label class="form-check-label" for="p_l_none">
+                              Keine
+                            </label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <fieldset>
+                        <legend>Historie</legend>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[history]" id="p_h_show" value="show">
+                            <label class="form-check-label" for="p_h_show">
+                              Zeigen
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="p[history]" id="p_h_none" value="none" checked>
+                            <label class="form-check-label" for="p_h_none">
                               Keine
                             </label>
                           </div>

@@ -373,7 +373,8 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <h3><a name="citation-crud">Verwalten von Meldungen (meist Anzeigen &amp; Beschwerden)</a></h2>
     <p>
-        Das Verwalten von <a href='#citation'>Meldungen</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Meldungen sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein.
+        Das Verwalten von <a href='#citation'>Meldungen</a> geschieht in einigen zusammenhängenden Masken, wo Sie ihre Meldungen sehen, neue anlegen, existierende bearbeiten und löschen können. Die Masken sollten eigentlich selbst erklärend sein. 
+        Sie können eine Historie anlegen, damit Sie wissen, was sie alles gemacht haben und diese auch bei Nichtumsetzung an weitergehende Stellen weitergeben können.
     </p>
     
     <h3><a name="citation-print">Drucken und Versand von Meldungen</a></h2>

@@ -16,12 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
         Version 2.5 (Januar 2021)
     </h3>
     <p>
-        Bessere Druckfunktionen von Meldungen und mit Empfängeradressen für Email und postalischen Versand mit Dokumentenlinks
+        Bessere Druckfunktionen von Meldungen und mit Empfängeradressen für Email und postalischen Versand mit Dokumentenlinks sowie einer Verlaufshistorie
     </p>
     <ul>
         <li>Drucken von Meldungen mit einer Übersicht</li>
         <li>Drucken von einem Anschreiben mit einem Link / QR-Code auf das eigentliche Dokument</li>
         <li>Erzeugung einer Email mit einem Link auf das eigentliche Dokument</li>
+        <li>Verlaufshistorie mit Verschleierung</li>
     </ul>
     <h3>
         Version 2.4 (November 2020)
