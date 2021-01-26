@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use yii\helpers\HtmlPurifier;
 use frontend\controllers\PictureController;
 use frontend\models\PictureSearch;
 use Imagick;
@@ -72,7 +73,7 @@ $this->params['help'] = 'flyer-show';
         }
     ?>
 
-    <?= Markdown::convert(Html::encode($model->description))?>
+    <?= HtmlPurifier::process(Markdown::convert($model->description))?>
     
     <div style="margin-top: 5px">
     <?= Html::a('Kontakt aufnehmen', ['contact','id'=>$model->id], ['target' => '_blank']) ?>

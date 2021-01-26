@@ -118,3 +118,10 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/*
+    Bootstrap renders blockquotes ridiculously large - we want them smaller...
+*/
+blockquote {
+    font-size: 10px;
+}

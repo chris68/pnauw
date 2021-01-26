@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use yii\helpers\HtmlPurifier;
 
 $this->title = Html::encode($model->name);
 $this->params['breadcrumbs'][] = ['label' => 'Meldungen', 'url' => ['index']];
@@ -39,7 +40,7 @@ $this->params['help'] = 'citation-crud';
             [
                 'label' => $model->getAttributeLabel('description'),
                 'format' => 'raw',
-                'value' => Markdown::convert(Html::encode($model->description)),
+                'value' => HtmlPurifier::process(Markdown::convert($model->description)),
             ],
             'recipient_email',
             'recipient_address:ntext',

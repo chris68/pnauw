@@ -7,6 +7,7 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use yii\helpers\HtmlPurifier;
 use frontend\models\PicturePrintForm;
 
 
@@ -73,7 +74,7 @@ $printParameters->load(Yii::$app->request->get());
     </p>
     <h2>Spezifische Angaben für die Beschwerde</h2>
     <?php endif; ?>
-    <?=Markdown::convert(Html::encode($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','(Passage wurde verschleiert)',$model->description)))?> 
+    <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','(Passage wurde verschleiert)',$model->description)))?> 
     <div style="page-break-before: always;"></div>
     
     <?php endif; ?>
@@ -125,7 +126,7 @@ $printParameters->load(Yii::$app->request->get());
         oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
     </p>
     <h2>Zeuge und weitere spezifische Angaben für die Anzeige</h2>
-    <p><?=Markdown::convert(Html::encode($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','(Passage wurde verschleiert)',$model->description)))?></p>
+    <p><?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','(Passage wurde verschleiert)',$model->description)))?></p>
     <h2>Generelle Erläuterungen</h2>
     <p>
         Unter Vorfall ist genau dokumentiert, wie der Anzeiger die Lage entschätzt. Wenn es dort heißt <b>Gehwegparken (mit Behinderung)</b>, 

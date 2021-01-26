@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use yii\helpers\HtmlPurifier;
 use frontend\controllers\PictureController;
 
 /* @var $this yii\web\View */
@@ -40,12 +41,12 @@ $this->params['help'] = 'flyer-crud';
             [
                 'label' => 'Beschreibung',
                 'format' => 'raw',
-                'value' => Markdown::convert(Html::encode($model->description)),
+                'value' => HtmlPurifier::process(Markdown::convert($model->description)),
             ],
             [
                 'label' => 'Zetteltext',
                 'format' => 'raw',
-                'value' => Markdown::convert(Html::encode($model->flyertext)),
+                'value' => HtmlPurifier::process(Markdown::convert($model->flyertext)),
             ],
             'secret',
             'running_from',

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use yii\helpers\HtmlPurifier;
 use frontend\controllers\PictureController;
 use Imagick;
 use ImagickDraw;
@@ -62,7 +63,7 @@ $this->params['help'] = 'campaign-show';
     <?= Html::a('Andere Zufallsbilder generieren', '') ?>
     </div>
     <?php Pjax::end(); ?>
-    <?= Markdown::convert(Html::encode($model->description))?>
+    <?= HtmlPurifier::process(Markdown::convert($model->description))?>
     
 </div>
 

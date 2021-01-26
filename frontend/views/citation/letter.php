@@ -6,7 +6,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
-use kartik\markdown\Markdown;
 use frontend\models\PicturePrintForm;
 
 

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use kartik\markdown\Markdown;
+use yii\helpers\HtmlPurifier;
 use frontend\controllers\PictureController;
 
 /* @var $this yii\web\View */
@@ -38,7 +39,7 @@ $this->params['help'] = 'campaign-crud';
             [
                 'label' => 'Beschreibung',
                 'format' => 'raw',
-                'value' => Markdown::convert(Html::encode($model->description)),
+                'value' => HtmlPurifier::process(Markdown::convert($model->description)),
             ],
             'running_from',
             'running_until',

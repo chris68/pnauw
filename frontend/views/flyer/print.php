@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use frontend\helpers\Assist;
 use kartik\markdown\Markdown;
+use yii\helpers\HtmlPurifier;
 
 ?>
 <style>
@@ -46,7 +47,7 @@ for ($p=0;$p<1;$p++) :
         :?>
         <div class="flyer">
             <div>
-                <?=Markdown::convert(Html::encode($model->flyertext))?>
+                <?=HtmlPurifier::process(Markdown::convert($model->flyertext))?>
             </div>
             <hr>
             <div>
