@@ -126,7 +126,7 @@ $printParameters->load(Yii::$app->request->get());
         oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
     </p>
     <h2>Zeuge und weitere spezifische Angaben für die Anzeige</h2>
-    <p><?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','&num;&num;&num;&num;&num;',$model->description)))?></p>
+    <p><?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace('/\*.*\*/i','&#35;&#35;&#35;&#35;&#35;',$model->description)))?></p>
     <h2>Generelle Erläuterungen</h2>
     <p>
         Unter Vorfall ist genau dokumentiert, wie der Anzeiger die Lage entschätzt. Wenn es dort heißt <b>Gehwegparken (mit Behinderung)</b>, 
@@ -170,6 +170,6 @@ $printParameters->load(Yii::$app->request->get());
     <?php if ($printParameters->overviewlist == 'show'): ?>
     <div style="page-break-before: always;"></div>
     <h2>Verlaufshistorie</h2>
-    <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->history:preg_replace('/\*.*\*/i','&num;&num;&num;&num;&num;',$model->history)))?> 
+    <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->history:preg_replace('/\*.*\*/i','&#35;&#35;&#35;&#35;&#35;',$model->history)))?> 
     <?php endif ?>
 </div>
