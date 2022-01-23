@@ -314,6 +314,8 @@ function excuteAlpr() {
 
                             var canvas = $("<canvas/>").get(0);
                             
+			    orientation = 0; // Quickfix - the new browsers seems to handle the orientation themselves and then the pics have been handled twice!
+				
                             if (orientation > 4 && orientation <= 8) {
                                 canvas.width = canvasSettings.height;
                                 canvas.height = canvasSettings.width;
