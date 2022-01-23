@@ -625,6 +625,11 @@ class Picture extends \yii\db\ActiveRecord
             list($date, $time) = explode(' ', $props['DateTimeOriginal']); // 2011:09:17 10:36:00'
             $date = str_replace(':', '-', $date);
             $this->taken = $date . ' ' . $time;
+        } else 
+        if (isset($props['DateTime'])) {
+            list($date, $time) = explode(' ', $props['DateTime']); // 2011:09:17 10:36:00'
+            $date = str_replace(':', '-', $date);
+            $this->taken = $date . ' ' . $time;
         } else {
             $this->taken = '1970-01-01 00:00:00.0000';
             $this->description = 'FEHLER: KEIN GÜLTIGES AUFNAHMEDATUM!';
