@@ -51,8 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </ul>
     <p>
         Dort kann sich jeder informieren, wie die rechtliche Lage aussieht ("<b>Verboten</b>, wenn nicht ausdrücklich durch Schild erlaubt!"), 
-        wann Gehwegparken eventuell toleriert werden kann ("Bei <b>echter</b> Parknot und dann mit <b>mindestens</b> 1,20 m Restbreite auf dem Gehweg") und 
-        wie teuer Verstöße sind ("Verwarnungsgeld von <b>20,- EUR bis 35,- EUR</b>").
+        wann Gehwegparken eventuell toleriert werden kann ("Bei <b>echter</b> Parknot und dann mit <b>mindestens</b> 1,50 m Restbreite auf dem Gehweg") und 
+        wie teuer Verstöße sind ("Verwarnungsgeld von <b>55,- EUR bis Bußgeld 80,- EUR</b>, sogar Punkte möglich, Abschleppen sowieso").
     </p>
     <p>
        Wir haben die Zusammenhänge zudem in unserem <?= Assist::extlink('Standardhinweiszettel "Parke nicht auf unseren Wegen"', 'https://parke-nicht-auf-unseren-wegen.de/f/pnauw') ?> zusammengefasst,
