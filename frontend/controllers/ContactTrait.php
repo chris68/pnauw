@@ -23,7 +23,7 @@ trait ContactTrait {
             $bcc = $owner->email;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if (false && $model->load(Yii::$app->request->post()) && $model->validate()) { // todo: integrate https://github.com/himiklab/yii2-recaptcha-widget
             if ($model->sendEmail($bcc)) {
                 Yii::$app->session->setFlash('success', 'Die Mail ist raus. Ob jemand antwortet liegt nicht in der Hand des Betreibers der Webseite.');
             } else {
