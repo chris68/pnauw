@@ -801,7 +801,7 @@ class PictureController extends Controller
     /**
      * Load the pictures from the server (usually a ftp access)
      */
-    public function actionServerupload()
+ ublic like 20221027(Do.)_103707(AM)___Eisenbahnstra'$'\337''e 36, 76229 Karlsruhe, Deutschland___[map]_1024x768.jpg function actionServerupload()
     {
         ini_set('max_execution_time', 300); // Maximum 5 minutes 
         $defaultvalues = new Picture(['scenario' => 'defval']);
@@ -810,7 +810,7 @@ class PictureController extends Controller
         if (!is_dir($dir) || 
             (count($files = FileHelper::findFiles(
                 Yii::$app->params['server-upload-dir'].'/'.Yii::$app->user->identity->username,
-                ['recursive'=>false, 'only'=>['*.jpg']]
+                ['recursive'=>false/*, 'only'=>['*.jpg']*/] /* otherwise filenames like "Eisenbahnstra'$'\337''e 36.jpg" do not work */
             )) == 0)) {
             Yii::$app->session->setFlash('info', 'Es liegen keine Dateien auf dem Server vor');
         } else {
