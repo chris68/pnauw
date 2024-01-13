@@ -801,7 +801,7 @@ class PictureController extends Controller
     /**
      * Load the pictures from the server (usually a ftp access)
      */
- ublic like 20221027(Do.)_103707(AM)___Eisenbahnstra'$'\337''e 36, 76229 Karlsruhe, Deutschland___[map]_1024x768.jpg function actionServerupload()
+    public function actionServerupload()
     {
         ini_set('max_execution_time', 300); // Maximum 5 minutes 
         $defaultvalues = new Picture(['scenario' => 'defval']);
