@@ -167,7 +167,7 @@ $printParameters->load(Yii::$app->request->get());
         </div>
     </div>
     <?php endif ?>
-    <?php if ($printParameters->overviewlist == 'show'): ?>
+    <?php if ($printParameters->history == 'show'): ?>
     <div style="page-break-before: always;"></div>
     <h2>Verlaufshistorie</h2>
     <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->history:preg_replace('/`.*`/i','&#35;&#35;&#35;&#35;&#35;',$model->history)))?> 
