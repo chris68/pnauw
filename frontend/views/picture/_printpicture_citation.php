@@ -16,7 +16,7 @@ PictureLocationmapAsset::register($this);
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     
     <h1>
-        <?=Html::encode(($printParameters->visibility=='unchanged'?$model->vehicle_reg_plate:'{'.substr(hash('md5',$model->vehicle_reg_plate),0,8).'}').' / '.date_format(date_create($model->taken),'d.m.Y').' / #'.$model->id)?>
+        <?=Html::encode(($printParameters->visibility=='unchanged'?$model->vehicle_reg_plate:'{Verschleierter Kennzeichen-Code:'.substr(hash('md5',$model->vehicle_reg_plate),0,8).'}').' / '.date_format(date_create($model->taken),'d.m.Y').' / #'.$model->id)?>
         <?=((yii::$app->user->can('isObjectOwner', array('model' => $model)))?('&nbsp;'.Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['picture/update','id'=>$model->id], ['class' => 'delete-before-printing', 'target' => '_blank'])):'')?>
             
     </h1>
@@ -29,7 +29,7 @@ PictureLocationmapAsset::register($this);
                 'attributes' => [
                     [
                         'label' => 'Aufgenommen am',
-                        'value' => $printParameters->visibility=='unchanged'?$model->taken:date_format(date_create($model->taken),'d.m.Y h').' Uhr (Uhrzeit stundengenau',
+                        'value' => $printParameters->visibility=='unchanged'?$model->taken:date_format(date_create($model->taken),'d.m.Y h').':##',
                     ],
                     [
                         'label' => 'Kennzeichen',
