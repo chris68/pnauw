@@ -33,7 +33,8 @@ PictureLocationmapAsset::register($this);
                     ],
                     [
                         'label' => 'Kennzeichen',
-                        'value' => $printParameters->visibility=='unchanged'?$model->vehicle_reg_plate:'',
+                        'value' => $printParameters->visibility=='unchanged'?Html::encode($model->vehicle_reg_plate):preg_replace_callback('/.*/i',function($m){return '<span style="width: 100px; background-color:black;">'.str_pad('', strlen($m[0]), '#').'</span>';},Html::encode($model->vehicle_reg_plate)),
+                        'format' => 'raw',
                     ],
                     [
                         'label' => 'Kennzeichen (Ausschnitt)',
