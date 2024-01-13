@@ -47,7 +47,7 @@ PictureLocationmapAsset::register($this);
                     [
                         'label' => 'Details zum Vorfall',
                         'format' => 'raw',
-                        'value' => $printParameters->visibility=='unchanged'?nl2br(Html::encode($model->citation_affix)):'',
+                        'value' => $printParameters->visibility=='unchanged'?nl2br(Html::encode($model->citation_affix)):preg_replace_callback('/`.*`/i',function($m){return '<span style="width: 100px; background-color:black;">'.str_pad('', strlen($m[0]), '#').'</span>';},nl2br(Html::encode($model->citation_affix)),
                     ],
                     'loc_formatted_addr',
                     [
