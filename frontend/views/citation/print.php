@@ -11,7 +11,7 @@ use yii\helpers\HtmlPurifier;
 use frontend\models\PicturePrintForm;
 
 
-$this->title = $model->name;
+$this->title = $model->name.$printParameters->visibility=='unchanged'?'':' [verschleiert]';
 
 $printParameters = new PicturePrintForm();
 $printParameters->load(Yii::$app->request->get());
