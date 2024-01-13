@@ -74,7 +74,7 @@ $printParameters->load(Yii::$app->request->get());
     </p>
     <h2>Spezifische Angaben für die Beschwerde</h2>
     <?php endif; ?>
-    <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace('/`.*`/i','<span style="width: 100px; background-color:black;"/>',$model->description)))?> 
+    <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace_callback('/`.*`/i',function($m){return '<span style="width: 100px; background-color:black;">'.str_pad('', strlen($m[0]), '#').'</span>';},$model->description)))?> 
     <div style="page-break-before: always;"></div>
     
     <?php endif; ?>
@@ -170,6 +170,6 @@ $printParameters->load(Yii::$app->request->get());
     <?php if ($printParameters->history == 'show'): ?>
     <div style="page-break-before: always;"></div>
     <h2>Verlaufshistorie</h2>
-    <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->history:preg_replace('/`.*`/i','<span style="width: 100px; background-color:black;"/>',$model->history)))?> 
+    <?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->history:preg_replace_callback('/`.*`/i',function($m){return '<span style="width: 100px; background-color:black;">'.str_pad('', strlen($m[0]), '#').'</span>';},$model->history)))?> 
     <?php endif ?>
 </div>
