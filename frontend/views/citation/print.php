@@ -14,7 +14,7 @@ use frontend\models\PicturePrintForm;
 $printParameters = new PicturePrintForm();
 $printParameters->load(Yii::$app->request->get());
 
-$this->title = $model->name.$printParameters->visibility=='unchanged'?'':' [verschleiert]';
+$this->title = $model->name.($printParameters->visibility=='unchanged'?'':' [verschleiert]');
 
 ?>
 <style>
