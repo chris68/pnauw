@@ -28,7 +28,7 @@ use frontend\models\PicturePrintForm;
                 <tr>
                   <td><?=$pic->id?></td>
                   <td><?=$pic->action->name?></td>
-                  <td><?=($model->type == 'citation')?$pic->taken:date_format(date_create($pic->taken),'d.m.Y')?></td>
+                  <td><?=($model->type == 'citation' && $printParameters->visibility=='unchanged')?$pic->taken:date_format(date_create($pic->taken),'d.m.Y')?></td>
                   <td><?=$pic->loc_formatted_addr?></td>
                   <td><?=$pic->incident->name?></td>
                   <td><?=$model->type == 'citation' && $printParameters->visibility=='unchanged'?$pic->vehicle_reg_plate:''?>
