@@ -45,7 +45,7 @@ use \common\models\User;
             <!-- A range field seems not to be reset upon a form reset; but what can we do? -->
             <?= Html::activeInput('range', $model, 'clip_size', ['id'=>'picture-clip-size', 'min' => 5, 'max' => 70, ]) ?>
             </div>
-            <?= $form->field($model,'citation_affix')->textarea(['rows' => 5, 'placeholder' => 'Hier können sie weitere Angaben für eine Meldung machen (Nicht öffentlich, nur für den Empfänger der Meldung; verschleichern via ``))']) ?>
+            <?= $form->field($model,'citation_affix')->textarea(['rows' => 5, 'placeholder' => 'Hier können sie weitere Angaben für eine Meldung machen (Nicht öffentlich, nur für den Empfänger der Meldung; verschleichern mit `Text`)']) ?>
         </div>
     </div>
     
