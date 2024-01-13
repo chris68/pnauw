@@ -126,7 +126,10 @@ $printParameters->load(Yii::$app->request->get());
         oder das Parkverhalten nicht tolerierbar ist, auch anzeigen. Was hiermit gerade geschieht.
     </p>
     <h2>Zeuge und weitere spezifische Angaben für die Anzeige</h2>
-    <p><?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace('/`.*`/i','<span style="width: 100px; background-color:black;"/>',$model->description)))?></p>
+    <p><?=HtmlPurifier::process(Markdown::convert($printParameters->visibility=='unchanged'?$model->description:preg_replace_callback('/`.*`/i',function($m){return('<span style="width: 100px; background-color:black;">'.str_pad('', strlen($m[0]), '#').'</span>')},$model->description)))?></p>
+preg_replace_callback('/\d+/', function($m){
+    return(str_pad('', 12 - strlen($m[0]), 0))
+    
     <h2>Generelle Erläuterungen</h2>
     <p>
         Unter Vorfall ist genau dokumentiert, wie der Anzeiger die Lage entschätzt. Wenn es dort heißt <b>Gehwegparken (mit Behinderung)</b>, 
