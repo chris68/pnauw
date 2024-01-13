@@ -29,7 +29,7 @@ PictureLocationmapAsset::register($this);
                 'attributes' => [
                     [
                         'label' => 'Aufgenommen am',
-                        'value' => $printParameters->visibility=='unchanged'?$model->taken:date_format(date_create($model->taken),'d.m.Y h'.' Uhr (Uhrzeit stundengenau'),
+                        'value' => $printParameters->visibility=='unchanged'?$model->taken:date_format(date_create($model->taken),'d.m.Y h').' Uhr (Uhrzeit stundengenau',
                     ],
                     [
                         'label' => 'Kennzeichen',
