@@ -28,7 +28,7 @@ use frontend\models\Citation;
             [
                 'showExport' => false,
             ])->
-            hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Kursiv gesetzte Textteile werden beim verschleierten Drucken durch ##### ersetzt.') 
+            hint('Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren. Als Inline Code (also `verschleierter Text`) gesetzte Textteile werden beim verschleierten Drucken durch ##### ersetzt.') 
         ?>
         </fieldset>
         <fieldset>
@@ -44,7 +44,7 @@ use frontend\models\Citation;
             [
                 'showExport' => false,
             ])->
-            hint('Geben Sie hier die Verlaufshistorie ein. Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren, Überschrift für Datum und dann Zitate für Mailinhalte haben sich bewährt. Kursiv gesetzte Textteile werden beim verschleierten Drucken durch ##### ersetzt.') 
+            hint('Geben Sie hier die Verlaufshistorie ein. Den Text können sie mit der '.Assist::help('Markdown Syntax', 'markdown-syntax').' formatieren, Überschrift für Datum und dann Zitate für Mailinhalte haben sich bewährt. Als Inline Code (also `verschleierter Text`) gesetzte Textteile werden beim verschleierten Drucken durch ##### ersetzt.') 
         ?>
         </fieldset>
 
