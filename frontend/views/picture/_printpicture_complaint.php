@@ -40,7 +40,7 @@ PictureLocationmapAsset::register($this);
         <p>
             <b><?= Html::encode($model->incident->name) ?> </b> 
         </p>
-        <p><?= $printParameters->visibility=='unchanged'?nl2br(Html::encode($model->citation_affix)):'' ?></p>
+        <p><?= $printParameters->visibility=='unchanged'?nl2br(Html::encode($model->citation_affix)):preg_replace_callback('/`.*`/i',function($m){return '<span style="width: 100px; background-color:black;">'.str_pad('', strlen($m[0]), '#').'</span>';},nl2br(Html::encode($model->citation_affix))) ?></p>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <?=
